@@ -1,22 +1,24 @@
 {
   "files": {
-    "main.css": "/bug-tracking-tools/static/css/main.9d5b29c0.chunk.css",
-    "main.js": "/bug-tracking-tools/static/js/main.5171313b.chunk.js",
-    "main.js.map": "/bug-tracking-tools/static/js/main.5171313b.chunk.js.map",
-    "runtime-main.js": "/bug-tracking-tools/static/js/runtime-main.a8041f46.js",
-    "runtime-main.js.map": "/bug-tracking-tools/static/js/runtime-main.a8041f46.js.map",
-    "static/js/2.a49b4c61.chunk.js": "/bug-tracking-tools/static/js/2.a49b4c61.chunk.js",
-    "static/js/2.a49b4c61.chunk.js.map": "/bug-tracking-tools/static/js/2.a49b4c61.chunk.js.map",
-    "static/js/3.e8ee5786.chunk.js": "/bug-tracking-tools/static/js/3.e8ee5786.chunk.js",
-    "static/js/3.e8ee5786.chunk.js.map": "/bug-tracking-tools/static/js/3.e8ee5786.chunk.js.map",
+    "main.css": "/bug-tracking-tools/static/css/main.c3763554.chunk.css",
+    "main.js": "/bug-tracking-tools/static/js/main.8135851a.chunk.js",
+    "main.js.map": "/bug-tracking-tools/static/js/main.8135851a.chunk.js.map",
+    "runtime-main.js": "/bug-tracking-tools/static/js/runtime-main.5c4c1d14.js",
+    "runtime-main.js.map": "/bug-tracking-tools/static/js/runtime-main.5c4c1d14.js.map",
+    "static/js/2.12a1ae52.chunk.js": "/bug-tracking-tools/static/js/2.12a1ae52.chunk.js",
+    "static/js/2.12a1ae52.chunk.js.map": "/bug-tracking-tools/static/js/2.12a1ae52.chunk.js.map",
+    "static/js/3.a5b1d131.chunk.js": "/bug-tracking-tools/static/js/3.a5b1d131.chunk.js",
+    "static/js/3.a5b1d131.chunk.js.map": "/bug-tracking-tools/static/js/3.a5b1d131.chunk.js.map",
     "index.html": "/bug-tracking-tools/index.html",
-    "static/css/main.9d5b29c0.chunk.css.map": "/bug-tracking-tools/static/css/main.9d5b29c0.chunk.css.map",
-    "static/js/2.a49b4c61.chunk.js.LICENSE.txt": "/bug-tracking-tools/static/js/2.a49b4c61.chunk.js.LICENSE.txt"
+    "static/css/main.c3763554.chunk.css.map": "/bug-tracking-tools/static/css/main.c3763554.chunk.css.map",
+    "static/js/2.12a1ae52.chunk.js.LICENSE.txt": "/bug-tracking-tools/static/js/2.12a1ae52.chunk.js.LICENSE.txt",
+    "static/media/home-img.eb30f06b.jpg": "/bug-tracking-tools/static/media/home-img.eb30f06b.jpg",
+    "static/media/user_register.ec5eae11.jpg": "/bug-tracking-tools/static/media/user_register.ec5eae11.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.a8041f46.js",
-    "static/js/2.a49b4c61.chunk.js",
-    "static/css/main.9d5b29c0.chunk.css",
-    "static/js/main.5171313b.chunk.js"
+    "static/js/runtime-main.5c4c1d14.js",
+    "static/js/2.12a1ae52.chunk.js",
+    "static/css/main.c3763554.chunk.css",
+    "static/js/main.8135851a.chunk.js"
   ]
 }
