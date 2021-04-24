@@ -1,12 +1,23 @@
 import "./App.css";
-import btt_logo_img from "./images/btt-brand.png";
+import { Switch, Route } from "react-router-dom";
+import Header from "./views/common/Header";
+import Home from "./views/common/Home";
+import Login from "./views/common/Login";
+import Registration from "./views/common/Registration";
+import Faq from "./views/misc/Faq";
+import About from "./views/misc/About";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Bug tracking Tools</h1>
-      <h4>More Code More Bug</h4>
-      <img src={btt_logo_img} alt="btt-logo" />
+    <div>
+      <Header />
+      <Switch>
+        <Route path="/about" component={About} exact />
+        <Route path="/faq" component={Faq} />
+        <Route path="/login" component={Login} />
+        <Route path="/registration" component={Registration} />
+        <Route path="/" component={Home} />
+      </Switch>
     </div>
   );
 }

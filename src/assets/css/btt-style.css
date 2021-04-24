@@ -1,0 +1,315 @@
+.nav {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  background-color: rgb(85, 81, 81);
+  margin-bottom: 10px;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: hsl(0, 90%, 10%);
+  font-size: 19px;
+}
+
+.navbar li {
+  height: 3em;
+  float: left;
+}
+.navbar li:hover {
+  background-color: hsl(345, 91%, 37%);
+  /* rgb(211, 131, 11); */
+  font-size: 20px;
+}
+
+.navbar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.welcome,
+.about,
+.faq {
+  height: 500px;
+  margin: auto;
+  width: 60%;
+  text-align: center;
+  padding: 15px 15px 15px 15px;
+}
+.welcome {
+  width: 50%;
+}
+.about,
+.faq {
+  text-align: justify;
+  font-size: 18px;
+}
+.about_image {
+  float: left;
+  padding-right: 15px;
+}
+.welcome_image {
+  margin-top: 10px;
+  width: 100%;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+}
+.active {
+  background-color: hsl(10, 90%, 40%);
+  /* rgb(255, 153, 0); */
+}
+
+.login-outer-box {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 80px 0px 80px 0px;
+  border: rgb(211, 131, 11) solid 1px;
+  width: 50%;
+  margin: auto;
+  margin-top: 50px;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+}
+.login-label,
+.reg-label {
+  color: rgb(255, 153, 0);
+  font-size: 30px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  margin: 0px;
+  padding-bottom: 35px;
+}
+.reg-label {
+  margin-top: 10px;
+}
+.login-username-input {
+  width: 100%;
+  padding: 15px 15px;
+  margin-bottom: 0px;
+  display: inline-block;
+  border: 1px solid rgb(211, 131, 11);
+  border-radius: 3px;
+  box-sizing: border-box;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
+}
+.login-password-input {
+  width: 100%;
+  padding: 15px 15px;
+  margin-top: 0px;
+  display: inline-block;
+  border: 1px solid rgb(211, 131, 11);
+  border-radius: 3px;
+  box-sizing: border-box;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
+}
+.login-username-input:focus,
+.login-password-input:focus {
+  background-color: rgb(224, 240, 246);
+}
+.login-box {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid rgb(211, 131, 11);
+  width: 400px;
+  background-color: rgb(246, 242, 237);
+}
+.login-btn,
+.register {
+  background-color: rgb(255, 153, 0);
+  color: ivory;
+  font-size: 25px;
+  align-self: flex-end;
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-color: rgb(235, 234, 200);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+}
+.login-btn:hover,
+.register:hover {
+  cursor: pointer;
+  background-color: rgb(211, 131, 25);
+  color: rgb(255, 255, 255);
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
+  font-size: 26px;
+}
+.register {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 60%;
+}
+/* .register-btn-col{
+  text-align: center  ;
+} */
+.login-error,
+.login-success {
+  font-size: 14px;
+  color: red;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.login-success {
+  color: green;
+  font-size: 20px;
+  font-weight: bold;
+}
+.error-password-input {
+  border-bottom: 5px solid red;
+}
+.fa-info-circle {
+  margin-top: 10px;
+  color: grey;
+}
+
+.terms-info {
+  padding-left: 4px;
+  font-size: 12px;
+  font-family: "Lucida Sans", sans-serif;
+}
+.registration_main {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border: rgb(211, 131, 11) solid 1px;
+  width: 50%;
+  margin: auto;
+  margin-top: 30px;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+}
+.registration_table {
+  padding: 0px 10px 0px 10px;
+  width: 100%;
+}
+.registration_table input[type="text"],
+.registration_table input[type="password"],
+.registration_table input[type="tel"],
+.registration_table select {
+  width: 100%;
+  height: 30px;
+  padding: 0px 0px 0px 10px;
+  border-radius: 3px;
+  border: grey solid 0.5px;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+  margin-top: 3px;
+}
+.registration_table select {
+  width: 70%;
+  height: 35px;
+}
+
+.reg-img {
+  margin-top: 20px;
+}
+.del-img {
+  width: 3em;
+  height: 3em;
+}
+.create-account {
+  text-align: center;
+  margin-top: 10px;
+}
+.or-label {
+  margin-top: 10px;
+  text-align: center;
+  color: grey;
+}
+.user-dashboard {
+  width: 99%;
+  margin: auto;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+}
+.user-dashboard ul {
+  list-style-type: none;
+  margin-top: 30px;
+  padding: 10px;
+  overflow: hidden;
+  font-size: 15px;
+  background-color: rgb(104, 5, 5);
+  /* rgb(255, 153, 0); */
+}
+.user-dashboard ul li {
+  float: left;
+  padding: 10px;
+  text-decoration: none;
+}
+.user-dashboard-label {
+  color: rgb(255, 255, 255);
+  font-size: 19px;
+  cursor: pointer;
+}
+.dashboard-details {
+  width: 100%;
+  margin: auto;
+  margin-top: 10px;
+}
+.insert-status-label {
+  color: rgb(107, 204, 10);
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.user-table {
+  padding: 2px;
+  width: 100%;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.user-table th,
+.user-table td {
+  max-width: 200px;
+  word-wrap: break-word;
+}
+.user-table th {
+  border: 0.3px solid lightgrey;
+  text-align: left;
+  padding: 2px;
+  background-color: rgb(199, 198, 198);
+  color: white;
+}
+.user-table td {
+  border: 0.3px solid lightgrey;
+  text-align: left;
+  padding: 2px;
+}
+.fetch-by-id-outer {
+  margin: 20px;
+}
+.fetch-by-id-text {
+  height: 35px;
+  padding: 15px 15px;
+  display: inline-block;
+  border: 1px solid rgb(211, 131, 11);
+  border-radius: 3px;
+  box-sizing: border-box;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
+}
+.fetch-by-id-text:focus {
+  background-color: lightcyan;
+}
+.fetch-by-id-btn {
+  background-color: rgb(255, 153, 0);
+  color: ivory;
+  font-size: 17px;
+  align-self: flex-end;
+  border: none;
+  border-radius: 3px;
+  width: 80px;
+  height: 35px;
+  margin-left: 10px;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
+}
+.fetch-by-id-btn:hover {
+  cursor: pointer;
+  background-color: rgb(211, 131, 25);
+  color: rgb(255, 255, 255);
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
+  font-size: 18px;
+}
