@@ -103,7 +103,7 @@ const Registration = () => {
               />
             </td>
             <td>
-              <h3 className="reg-label">REGISTRATION FORM</h3>
+              <h3 className="reg-label">USER REGISTRATION FORM</h3>
             </td>
           </tr>
           <tr>
@@ -125,7 +125,7 @@ const Registration = () => {
               <input
                 type="text"
                 placeholder="First Name"
-                required={true}
+                required
                 autoComplete="off"
                 name="firstName"
                 value={input.firstName}
@@ -141,7 +141,7 @@ const Registration = () => {
               <input
                 type="text"
                 placeholder="Last Name"
-                required={true}
+                required
                 autoComplete="off"
                 name="lastName"
                 value={input.lastName}
@@ -157,7 +157,7 @@ const Registration = () => {
               <input
                 type="text"
                 placeholder="Username"
-                required={true}
+                required
                 autoComplete="off"
                 name="userName"
                 value={input.userName}
@@ -173,7 +173,7 @@ const Registration = () => {
               <input
                 type="password"
                 placeholder="Password"
-                required={true}
+                required
                 autoComplete="off"
                 name="password"
                 value={input.password}
@@ -190,7 +190,7 @@ const Registration = () => {
                 type="text"
                 name="address1"
                 value={input.address1}
-                required={true}
+                required
                 autoComplete="off"
                 onChange={handleChange}
               />
@@ -205,7 +205,7 @@ const Registration = () => {
                 type="text"
                 name="address2"
                 value={input.address2}
-                required={true}
+                required
                 autoComplete="off"
                 onChange={handleChange}
               />
@@ -220,7 +220,7 @@ const Registration = () => {
                 type="text"
                 name="city"
                 value={input.city}
-                required={true}
+                required
                 autoComplete="off"
                 onChange={handleChange}
               />
@@ -273,22 +273,7 @@ const Registration = () => {
                 type="text"
                 name="zip"
                 value={input.zip}
-                required={true}
-                autoComplete="off"
-                onChange={handleChange}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>Upload Photo</label>
-            </td>
-            <td>
-              <input
-                type="file"
-                name="photo"
-                value={input.photo}
-                required={true}
+                required
                 autoComplete="off"
                 onChange={handleChange}
               />
@@ -303,7 +288,7 @@ const Registration = () => {
                 type="text"
                 name="email"
                 value={input.email}
-                required={true}
+                required
                 autoComplete="off"
                 onChange={handleChange}
               />
@@ -319,7 +304,22 @@ const Registration = () => {
                 name="mobile"
                 value={input.mobile}
                 placeholder="+91"
-                required={true}
+                required
+                autoComplete="off"
+                onChange={handleChange}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>Upload Photo</label>
+            </td>
+            <td>
+              <input
+                type="file"
+                name="photo"
+                value={input.photo}
+                required
                 autoComplete="off"
                 onChange={handleChange}
               />

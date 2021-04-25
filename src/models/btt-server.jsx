@@ -5,9 +5,12 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const api = express();
 const mongoClient = require("mongodb").MongoClient;
-// const DATABASE_NAME = "btt";
-// const COLLECTION_NAME = "user_details";
-// const DATABASE_URL = "mongodb://localhost:27017";
+const PORT = process.env.REACT_APP_PORT || 3000;
+const DATABASE_NAME = process.env.REACT_APP_DATABASE_NAME || "btt";
+const COLLECTION_NAME = process.env.REACT_APP_COLLECTION_NAME || "user_details";
+const LOCAL_DATABASE_URL =
+  process.env.REACT_APP_LOCAL_DATABASE_URL || "mongodb://localhost:27017";
+
 const cors = require("cors");
 // const bcrypt = require("bcrypt");
 api.use(cors());
@@ -57,55 +60,54 @@ api.get("/btt", (request, response) => {
 });
 
 // C[R]UD := [R]EAD => GET(ONE) - byId
-// api.get("/btt/:id", (request, response) => {
-//   var targetId = parseInt(request.params.id);
-//   collection.findOne({ userId: targetId }, (err, result) => {
-//     if (err) {
-//       return response.status(500).send(err);
-//     }
-//     response.send(result);
-//   });
-// });
+api.get("/btt/:id", (request, response) => {
+  var targetId = parseInt(request.params.id);
+  collection.findOne({ userId: targetId }, (err, result) => {
+    if (err) {
+      return response.status(500).send(err);
+    }
+    response.send(result);
+  });
+});
 
 // C[R]UD := [R]EAD => GET(ALL) - byName
-// api.get("/bttUserByName/:name", (request, response) => {
-//   var targetName = request.params.name;
-//   collection.find({ userName: targetName }).toArray((err, result) => {
-//     if (err) {
-//       return response.status(500).send(err);
-//     }
-//     response.send(result);
-//   });
-// });
+api.get("/bttUserByName/:name", (request, response) => {
+  var targetName = request.params.name;
+  collection.find({ userName: targetName }).toArray((err, result) => {
+    if (err) {
+      return response.status(500).send(err);
+    }
+    response.send(result);
+  });
+});
 
 // CR[U]D := [U]PDATE => PUT - ONE
-// api.put("/btt/:id", (request, response) => {
-//   var targetId = { userId: parseInt(request.params.id) };
-//   var toBeUpdated = {
-//     $set: {
-//       userName: request.body.userName,
-//       password: request.body.password,
-//       firstName: request.body.firstName,
-//       lastName: request.body.lastName,
-//       address1: request.body.address1,
-//       address2: request.body.address2,
-//       city: request.body.city,
-//       state: request.body.state,
-//       zip: request.body.zip,
-//       photo: request.body.photo,
-//       email: request.body.email,
-//       mobile: request.body.mobile,
-//       moreInfo: request.body.moreInfo,
-//     },
-//   };
-//   collection.updateOne(targetId, toBeUpdated, (err, result) => {
-//     if (err) {
-//       return response.status(500).send(err);
-//     }
-//     console.log("Record is updated!");
-//     response.send(result);
-//   });
-// });
+api.put("/btt/:id", (request, response) => {
+  var targetId = { userId: parseInt(request.params.id) };
+  var toBeUpdated = {
+    $set: {
+      userName: request.body.userName,
+      password: request.body.password,
+      firstName: request.body.firstName,
+      lastName: request.body.lastName,
+      address1: request.body.address1,
+      address2: request.body.address2,
+      city: request.body.city,
+      state: request.body.state,
+      zip: request.body.zip,
+      photo: request.body.photo,
+      email: request.body.email,
+      mobile: request.body.mobile,
+    },
+  };
+  collection.updateOne(targetId, toBeUpdated, (err, result) => {
+    if (err) {
+      return response.status(500).send(err);
+    }
+    console.log("Record is updated!");
+    response.send(result);
+  });
+});
 
 // CRU[D] := [D]ELETE - DELETE - ONE
 // api.delete("/btt/:id", (request, response) => {
@@ -123,11 +125,6 @@ api.get("/btt", (request, response) => {
 
 // Setting server Port and establishing Mongo database connection
 
-const PORT = process.env.PORT || 3000;
-const DATABASE_NAME = process.env.DATABASE_NAME || "btt";
-const COLLECTION_NAME = process.env.COLLECTION_NAME || "user_details";
-const LOCAL_DATABASE_URL =
-  process.env.LOCAL_DATABASE_URL || "mongodb://localhost:27017";
 console.log("PORT: " + PORT);
 console.log("DATABASE_NAME: " + DATABASE_NAME);
 console.log("COLLECTION_NAME: " + COLLECTION_NAME);

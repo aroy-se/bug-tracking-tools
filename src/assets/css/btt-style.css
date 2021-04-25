@@ -12,7 +12,7 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: hsl(0, 90%, 10%);
+  background-color: hsl(0, 90%, 12%);
   font-size: 19px;
 }
 
@@ -22,8 +22,6 @@
 }
 .navbar li:hover {
   background-color: hsl(345, 91%, 37%);
-  /* rgb(211, 131, 11); */
-  font-size: 20px;
 }
 
 .navbar li a {
@@ -61,7 +59,6 @@
 }
 .active {
   background-color: hsl(10, 90%, 40%);
-  /* rgb(255, 153, 0); */
 }
 
 .login-outer-box {
@@ -69,15 +66,15 @@
   justify-content: center;
   align-content: center;
   padding: 80px 0px 80px 0px;
-  border: rgb(211, 131, 11) solid 1px;
-  width: 50%;
+  border: hsl(345, 91%, 37%) solid 1px;
+  width: 30%;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 80px;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
 }
 .login-label,
 .reg-label {
-  color: rgb(255, 153, 0);
+  color: hsl(345, 91%, 37%);
   font-size: 30px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
@@ -92,7 +89,7 @@
   padding: 15px 15px;
   margin-bottom: 0px;
   display: inline-block;
-  border: 1px solid rgb(211, 131, 11);
+  border: 1px solid hsl(345, 91%, 37%);
   border-radius: 3px;
   box-sizing: border-box;
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
@@ -102,7 +99,7 @@
   padding: 15px 15px;
   margin-top: 0px;
   display: inline-block;
-  border: 1px solid rgb(211, 131, 11);
+  border: 1px solid hsl(345, 91%, 37%);
   border-radius: 3px;
   box-sizing: border-box;
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
@@ -115,13 +112,13 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  border: 1px solid rgb(211, 131, 11);
+  border: 1px solid hsl(345, 91%, 37%);
   width: 400px;
   background-color: rgb(246, 242, 237);
 }
 .login-btn,
 .register {
-  background-color: rgb(255, 153, 0);
+  background-color: hsl(345, 91%, 37%);
   color: ivory;
   font-size: 25px;
   align-self: flex-end;
@@ -133,23 +130,23 @@
   margin-bottom: 10px;
   border-color: rgb(235, 234, 200);
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+  height: 2em;
 }
 .login-btn:hover,
 .register:hover {
   cursor: pointer;
-  background-color: rgb(211, 131, 25);
+  background-color: hsl(345, 91%, 46%);
   color: rgb(255, 255, 255);
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
   font-size: 26px;
 }
 .register {
-  margin-top: 30px;
-  margin-bottom: 30px;
-  width: 60%;
+  margin: 30px 0px 0px 0px;
+  height: 2.5em;
 }
-/* .register-btn-col{
-  text-align: center  ;
-} */
+.register-btn-col {
+  text-align: right;
+}
 .login-error,
 .login-success {
   font-size: 14px;
@@ -176,17 +173,14 @@
   font-family: "Lucida Sans", sans-serif;
 }
 .registration_main {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  border: rgb(211, 131, 11) solid 1px;
-  width: 50%;
+  border: 1px solid hsl(345, 91%, 37%);
+  width: 40%;
   margin: auto;
   margin-top: 30px;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
 }
 .registration_table {
-  padding: 0px 10px 0px 10px;
+  padding: 5%;
   width: 100%;
 }
 .registration_table input[type="text"],
@@ -195,19 +189,26 @@
 .registration_table select {
   width: 100%;
   height: 30px;
-  padding: 0px 0px 0px 10px;
+  padding: 0px 0px 0px 5px;
   border-radius: 3px;
   border: grey solid 0.5px;
-  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
   margin-top: 3px;
 }
 .registration_table select {
-  width: 70%;
+  width: 50%;
   height: 35px;
 }
-
+.registration_table input[name="userId"] {
+  width: 50%;
+  height: 3em;
+  margin-right: 0;
+  padding-right: 0;
+}
 .reg-img {
   margin-top: 20px;
+  height: 5em;
+  width: 5em;
 }
 .del-img {
   width: 3em;
@@ -234,8 +235,7 @@
   padding: 10px;
   overflow: hidden;
   font-size: 15px;
-  background-color: rgb(104, 5, 5);
-  /* rgb(255, 153, 0); */
+  background-color: hsl(330, 1%, 38%);
 }
 .user-dashboard ul li {
   float: left;
@@ -248,8 +248,6 @@
   cursor: pointer;
 }
 .dashboard-details {
-  width: 100%;
-  margin: auto;
   margin-top: 10px;
 }
 .insert-status-label {
@@ -261,6 +259,7 @@
   width: 100%;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  border: 0.3px solid hsl(330, 1%, 64%);
 }
 .user-table th,
 .user-table td {
@@ -268,16 +267,17 @@
   word-wrap: break-word;
 }
 .user-table th {
-  border: 0.3px solid lightgrey;
+  border: 0.3px solid hsl(330, 1%, 38%);
   text-align: left;
-  padding: 2px;
-  background-color: rgb(199, 198, 198);
+  padding: 0.5em;
+  height: 3em;
+  background-color: hsl(330, 1%, 38%);
   color: white;
 }
 .user-table td {
-  border: 0.3px solid lightgrey;
+  border: 0.3px solid hsl(330, 1%, 64%);
   text-align: left;
-  padding: 2px;
+  padding: 0.2em;
 }
 .fetch-by-id-outer {
   margin: 20px;
@@ -286,7 +286,7 @@
   height: 35px;
   padding: 15px 15px;
   display: inline-block;
-  border: 1px solid rgb(211, 131, 11);
+  border: 1px solid hsl(345, 91%, 37%);
   border-radius: 3px;
   box-sizing: border-box;
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
@@ -294,8 +294,9 @@
 .fetch-by-id-text:focus {
   background-color: lightcyan;
 }
-.fetch-by-id-btn {
-  background-color: rgb(255, 153, 0);
+.fetch-by-id-btn,
+.fetch-n-update-by-id-btn {
+  background-color: hsl(345, 91%, 37%);
   color: ivory;
   font-size: 17px;
   align-self: flex-end;
@@ -304,12 +305,17 @@
   width: 80px;
   height: 35px;
   margin-left: 10px;
-  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.5);
 }
-.fetch-by-id-btn:hover {
+.fetch-by-id-btn:hover,
+.fetch-n-update-by-id-btn:hover {
   cursor: pointer;
-  background-color: rgb(211, 131, 25);
+  background-color: hsl(345, 91%, 45%);
   color: rgb(255, 255, 255);
-  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
-  font-size: 18px;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.5);
+}
+.fetch-n-update-by-id-btn {
+  width: 5em;
+  height: 2.5em;
+  margin-right: 0;
 }

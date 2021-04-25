@@ -4,6 +4,7 @@ import Header from "./views/common/Header";
 import Home from "./views/common/Home";
 import Login from "./views/common/Login";
 import Registration from "./views/common/Registration";
+import UserDashboard from "./views/users/UserDashboard";
 import Faq from "./views/misc/Faq";
 import About from "./views/misc/About";
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/faq" component={Faq} />
         <Route path="/login" component={Login} />
         <Route path="/registration" component={Registration} />
+        <Route path="/dashboard" component={UserDashboard} />
         <Route path="/" component={Home} />
       </Switch>
     </div>
