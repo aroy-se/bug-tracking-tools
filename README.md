@@ -12,13 +12,13 @@ Team Size: 4
 -------------
 Team Members:
 
-Afroze Khan	- pattanafroze.khan@altran.com
+Afroze Khan
 
-Elangovan Perumalsamy	- elangovan.perumalsamy@altran.com
+Elangovan Perumalsamy
 
-Seela Balaji	- seela.balaji@aricent.com	
+Seela Balaji	
 
-Abhijit Roy - abhijit2.roy@aricent.com
+Abhijit Roy
 	
 	
 
