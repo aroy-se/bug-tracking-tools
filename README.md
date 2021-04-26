@@ -11,10 +11,15 @@ Other Skills:  GIT, AGILE
 Team Size: 4
 -------------
 Team Members:
+
 Afroze Khan	- pattanafroze.khan@altran.com
-Elangovan Perumalsamy	- elangovan.perumalsamy@altran.com	
+
+Elangovan Perumalsamy	- elangovan.perumalsamy@altran.com
+
 Seela Balaji	- seela.balaji@aricent.com	
+
 Abhijit Roy - abhijit2.roy@aricent.com
+	
 	
 
 GIT Details
