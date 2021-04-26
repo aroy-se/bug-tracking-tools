@@ -27,5 +27,7 @@ GIT Details
 Repository Name: bug-tracking-tools
 Link: https://github.com/aroy-se/bug-tracking-tools
 
-For Git setup follow the wiki below.
-Wiki: https://github.com/aroy-se/bug-tracking-tools/wiki
+WIKI
+-----
+Git wiki: https://github.com/aroy-se/bug-tracking-tools/wiki/Git-Setup-Wiki
+Architecture wiki: https://github.com/aroy-se/bug-tracking-tools/wiki/Architecture-of-Bugs-Tracking-Tools
