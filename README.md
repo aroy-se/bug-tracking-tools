@@ -24,8 +24,8 @@ Abhijit Roy - abhijit2.roy@aricent.com
 
 GIT Details
 -------------
-Repository Name:= bug-tracking-tools
+Repository Name: bug-tracking-tools
 Link: https://github.com/aroy-se/bug-tracking-tools
 
 For Git setup follow the wiki below.
-Wiki: 
+Wiki: https://github.com/aroy-se/bug-tracking-tools/wiki
