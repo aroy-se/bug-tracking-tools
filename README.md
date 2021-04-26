@@ -3,7 +3,9 @@
 Project Details
 ---------------
 Project Name:  BTT - Bug Tracking Tools
+
 Required Skills:  HTML, CSS, JAVASCRIPT, REACTJS, EXPRESS, NODEJS, MONGODB
+
 Other Skills:  GIT, AGILE
 
 Team Size: 4
