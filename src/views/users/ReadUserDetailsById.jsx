@@ -34,7 +34,7 @@ const ReadUserDetailsById = () => {
           type="text"
           className="fetch-by-id-text"
           placeholder="User ID"
-          required={true}
+          required
           autoComplete="off"
           name="userId"
           value={input.userId}

@@ -18,7 +18,6 @@ const DeleteUserDetails = () => {
     photo: "",
     email: "",
     mobile: "",
-    // language:"",
     moreInfo: "",
   });
 
@@ -36,32 +35,12 @@ const DeleteUserDetails = () => {
     event.preventDefault();
     const deleteAnUser = {
       userId: input.userId,
-      // userName: input.userName,
-      // password: input.password,
-      // firstName: input.firstName,
-      // lastName: input.lastName,
-      // address1: input.address1,
-      // address2: input.address2,
-      // city: input.city,
-      // state: input.state,
-      // zip: input.zip,
-      // photo: input.photo,
-      // email: input.email,
-      // mobile: input.mobile,
-      // language:input.language,
-      // moreInfo: input.moreInfo,
     };
     deleteUserDetails(deleteAnUser);
-    // setInput.value = "";
   }
   var deleteUserDetails = (userData) => {
     const parameters = {
       method: "DELETE",
-      // headers: {
-      //   "Access-Control-Allow-Origin": "*",
-      //   "Content-Type": "application/json",
-      // },
-      // body: JSON.stringify(userData),
     };
     console.log(Constants.URL + input.userId);
     fetch(Constants.URL + parseInt(input.userId), parameters)
@@ -71,58 +50,56 @@ const DeleteUserDetails = () => {
       });
   };
   return (
-    // <div className="dashboard-details">
-    <div className="registration_main" border="0">
-      <form>
-        <table className="registration_table">
-          <tr>
-            <td></td>
-            <td>
-              <p className="reg-label">DELETE RECORD</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>USER ID</label>
-            </td>
-            <td>
-              <input
-                type="text"
-                placeholder="User ID"
-                required={true}
-                autoComplete="off"
-                name="userId"
-                value={input.userId}
-                onChange={handleChange}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <label className="insert-status-label" onChange={handleChange}>
-                {success && "The record has been deleted successfully!"}
-              </label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label></label>
-            </td>
-            <td className="register-btn-col">
-              <input
-                type="submit"
-                className="register"
-                name="submit"
-                value="DELETE"
-                onClick={handleSubmit}
-              />
-            </td>
-          </tr>
-        </table>
-      </form>
+    <div className="container" border="0">
+      <div class="row mt-5">
+        <div class="col-xl-3"></div>
+        <div class="col-xl-6">
+          <div class="card">
+            <div class="card-header text-danger">
+              <h5>DELETE A USER RECORD</h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="form-group">
+                    <label>User Id</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter to-be-deleted User Id"
+                      name="userId"
+                      value={input.userId}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  {/* delete message */}
+                  <label
+                    className="insert-status-label"
+                    onChange={handleChange}
+                  >
+                    {success && "The record has been deleted successfully!"}
+                  </label>
+                </div>
+              </div>
+              <div className="row">
+                <div class="col-xl-12">
+                  <div class="form-group">
+                    <input
+                      type="submit"
+                      className="btn btn-danger btn-lg btn-block register#"
+                      name="submit"
+                      value="DELETE"
+                      onClick={handleSubmit}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3"></div>
+      </div>
     </div>
-    //  </div>
   );
 };
 

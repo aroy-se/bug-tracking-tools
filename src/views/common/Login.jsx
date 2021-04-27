@@ -75,11 +75,24 @@ class Login extends Component {
           {error && (
             <p className="login-error">Invalid Username and/or Password.</p>
           )}
-          <i class="fa fa-info-circle" aria-hidden="true">
+          {/* <i class="fa fa-info-circle" aria-hidden="true">
             <span className="terms-info">
               By logging in, you agree to the <a href="">Terms of Service.</a>
             </span>
-          </i>
+          </i> */}
+          <div class="custom-control custom-checkbox mt-2">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="remember-me"
+            />
+            <label
+              class="custom-control-label font-weight-lighter"
+              for="remember-me"
+            >
+              Remember me
+            </label>
+          </div>
           <button className="login-btn" onClick={this.checkLogin}>
             LOGIN
           </button>

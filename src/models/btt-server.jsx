@@ -7,7 +7,10 @@ const api = express();
 const mongoClient = require("mongodb").MongoClient;
 const PORT = process.env.REACT_APP_PORT || 3000;
 const DATABASE_NAME = process.env.REACT_APP_DATABASE_NAME || "btt";
-const COLLECTION_NAME = process.env.REACT_APP_COLLECTION_NAME || "user_details";
+const USER_COLLECTION_NAME =
+  process.env.REACT_APP_USER_COLLECTION_NAME || "user_details";
+const BUG_COLLECTION_NAME =
+  process.env.REACT_APP_BUG_COLLECTION_NAME || "bug_details";
 const LOCAL_DATABASE_URL =
   process.env.REACT_APP_LOCAL_DATABASE_URL || "mongodb://localhost:27017";
 
@@ -16,12 +19,61 @@ const cors = require("cors");
 api.use(cors());
 api.use(express.json());
 // Global variable
-var database, collection;
+var database, userCollection, bugCollection;
 
+// ---------------------------------------------------------
+// To Create a Bug/Defect
+// [C]RUD := [C]REATE => POST(ONE)
+api.post("/btt/bug", (request, response) => {
+  var toBeInsertedData = request.body;
+  bugCollection.insertOne(toBeInsertedData, (err, result) => {
+    if (err) {
+      return response.status(500).send(err);
+    }
+    response.send(result);
+  });
+});
+// TO Fetch all the bugs
+// C[R]UD := [R]EAD => GET(ALL)
+api.get("/btt/bug", (request, response) => {
+  bugCollection.find({}).toArray((err, result) => {
+    if (err) {
+      return response.status(500).send(err);
+    }
+    response.send(result);
+  });
+});
+
+// To Fetch a Bug by bug-Id
+// C[R]UD := [R]EAD => GET(ONE) - byId
+api.get("/btt/bug/:id", (request, response) => {
+  var targetId = parseInt(request.params.id);
+  bugCollection.findOne({ bugId: targetId }, (err, result) => {
+    if (err) {
+      return response.status(500).send(err);
+    }
+    response.send(result);
+  });
+});
+
+// To fetch all bugs By Name
+// C[R]UD := [R]EAD => GET(ALL) - byName
+api.get("/btt/bugByTitle/:name", (request, response) => {
+  var targetName = request.params.name;
+  bugCollection.find({ bugTitle: targetName }).toArray((err, result) => {
+    if (err) {
+      return response.status(500).send(err);
+    }
+    response.send(result);
+  });
+});
+
+// ---------------------------------------------------------
+// For User
 // [C]RUD := [C]REATE => POST(ONE)
 api.post("/btt", (request, response) => {
   var toBeInsertedData = request.body;
-  collection.insertOne(toBeInsertedData, (err, result) => {
+  userCollection.insertOne(toBeInsertedData, (err, result) => {
     if (err) {
       return response.status(500).send(err);
     }
@@ -40,7 +92,7 @@ api.post("/btt", (request, response) => {
 //       userName: request.body.userName,
 //       password: hashedPassword,
 //     };
-//     collection.insertOne(toBeInsertedData, (err, result) => {
+//     userCollection.insertOne(toBeInsertedData, (err, result) => {
 //       if (err) {
 //         return response.status(500).send(err);
 //       }
@@ -51,7 +103,7 @@ api.post("/btt", (request, response) => {
 
 // C[R]UD := [R]EAD => GET(ALL)
 api.get("/btt", (request, response) => {
-  collection.find({}).toArray((err, result) => {
+  userCollection.find({}).toArray((err, result) => {
     if (err) {
       return response.status(500).send(err);
     }
@@ -62,7 +114,7 @@ api.get("/btt", (request, response) => {
 // C[R]UD := [R]EAD => GET(ONE) - byId
 api.get("/btt/:id", (request, response) => {
   var targetId = parseInt(request.params.id);
-  collection.findOne({ userId: targetId }, (err, result) => {
+  userCollection.findOne({ userId: targetId }, (err, result) => {
     if (err) {
       return response.status(500).send(err);
     }
@@ -73,7 +125,7 @@ api.get("/btt/:id", (request, response) => {
 // C[R]UD := [R]EAD => GET(ALL) - byName
 api.get("/bttUserByName/:name", (request, response) => {
   var targetName = request.params.name;
-  collection.find({ userName: targetName }).toArray((err, result) => {
+  userCollection.find({ userName: targetName }).toArray((err, result) => {
     if (err) {
       return response.status(500).send(err);
     }
@@ -100,7 +152,7 @@ api.put("/btt/:id", (request, response) => {
       mobile: request.body.mobile,
     },
   };
-  collection.updateOne(targetId, toBeUpdated, (err, result) => {
+  userCollection.updateOne(targetId, toBeUpdated, (err, result) => {
     if (err) {
       return response.status(500).send(err);
     }
@@ -110,25 +162,25 @@ api.put("/btt/:id", (request, response) => {
 });
 
 // CRU[D] := [D]ELETE - DELETE - ONE
-// api.delete("/btt/:id", (request, response) => {
-//   var targetDelete = parseInt(request.params.id);
-//   collection.deleteOne({ userId: targetDelete }, (err, result) => {
-//     if (err) {
-//       return response.status(500).send(err);
-//     }
-//     response.send({
-//       message: `The record[user_id:${targetDelete}] has beeen deleted successfully!`,
-//       result,
-//     });
-//   });
-// });
+api.delete("/btt/:id", (request, response) => {
+  var targetDelete = parseInt(request.params.id);
+  userCollection.deleteOne({ userId: targetDelete }, (err, result) => {
+    if (err) {
+      return response.status(500).send(err);
+    }
+    response.send({
+      message: `The record[user_id:${targetDelete}] has beeen deleted successfully!`,
+      result,
+    });
+  });
+});
 
 // Setting server Port and establishing Mongo database connection
-
+console.log("LOCAL DATABASE URL: " + LOCAL_DATABASE_URL);
 console.log("PORT: " + PORT);
-console.log("DATABASE_NAME: " + DATABASE_NAME);
-console.log("COLLECTION_NAME: " + COLLECTION_NAME);
-console.log("LOCAL_DATABASE_URL: " + LOCAL_DATABASE_URL);
+console.log("DATABASE NAME: " + DATABASE_NAME);
+console.log("USER COLLECTION NAME: " + USER_COLLECTION_NAME);
+console.log("BUG COLLECTION NAME: " + BUG_COLLECTION_NAME);
 
 api.listen(PORT, () => {
   mongoClient.connect(LOCAL_DATABASE_URL, (err, client) => {
@@ -136,7 +188,8 @@ api.listen(PORT, () => {
       throw err;
     }
     database = client.db(DATABASE_NAME);
-    collection = database.collection(COLLECTION_NAME);
+    userCollection = database.collection(USER_COLLECTION_NAME);
+    bugCollection = database.collection(BUG_COLLECTION_NAME);
     console.log(
       `The BTT server is running on port ${PORT}...\nThe Database Connection is established successfully!!!`
     );

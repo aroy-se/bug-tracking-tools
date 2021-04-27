@@ -4,9 +4,9 @@ import "../../assets/css/btt-style.css";
 
 const Header = () => {
   return (
-    <div className="nav">
+    <div className="btt-nav">
       <header>
-        <ul className="navbar">
+        <ul className="btt-navbar">
           <li className="active">
             <Link to="/" className="navlink">
               Home
@@ -25,7 +25,7 @@ const Header = () => {
             <Link to="/registration">Registration</Link>
           </li>
           <li style={{ float: "right" }}>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/dashboard">User Dashboard</Link>
           </li>
         </ul>
       </header>

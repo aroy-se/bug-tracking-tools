@@ -1,4 +1,5 @@
 import "./App.css";
+
 import { Switch, Route } from "react-router-dom";
 import Header from "./views/common/Header";
 import Home from "./views/common/Home";
@@ -10,7 +11,7 @@ import About from "./views/misc/About";
 
 function App() {
   return (
-    <div>
+    <div className="container-fluid">
       <Header />
       <Switch>
         <Route path="/about" component={About} exact />
