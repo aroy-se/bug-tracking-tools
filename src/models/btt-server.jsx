@@ -56,16 +56,29 @@ api.get("/btt/bug/:id", (request, response) => {
   });
 });
 
-// To fetch all bugs By Name
+// To fetch all bugs By Name without regex
 // C[R]UD := [R]EAD => GET(ALL) - byName
+// api.get("/btt/bugByTitle/:name", (request, response) => {
+//   var targetName = request.params.name;
+//   bugCollection.find({ bugTitle: targetName }).toArray((err, result) => {
+//     if (err) {
+//       return response.status(500).send(err);
+//     }
+//     response.send(result);
+//   });
+// });
+
+// To fetch all bugs By Title with regex
 api.get("/btt/bugByTitle/:name", (request, response) => {
   var targetName = request.params.name;
-  bugCollection.find({ bugTitle: targetName }).toArray((err, result) => {
-    if (err) {
-      return response.status(500).send(err);
-    }
-    response.send(result);
-  });
+  bugCollection
+    .find({ bugTitle: { $regex: targetName, $options: "i" } })
+    .toArray((err, result) => {
+      if (err) {
+        return response.status(500).send(err);
+      }
+      response.send(result);
+    });
 });
 
 // ---------------------------------------------------------

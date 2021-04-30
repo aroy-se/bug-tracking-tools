@@ -89,7 +89,7 @@ const Registration = () => {
   };
   return (
     // <!-- START - Tag <div> for Main HTML body (Registration Details) -->
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5">
       {/* Main single row */}
       <div class="row">
         <div class="col-xl-12">
@@ -344,7 +344,7 @@ const Registration = () => {
                                 onChange={handleChange}
                               />
                               <label class="custom-file-label" for="attachment">
-                                Choose photo
+                                {input.photo}
                               </label>
                             </div>
                           </div>

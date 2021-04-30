@@ -25,7 +25,10 @@ const Header = () => {
             <Link to="/registration">Registration</Link>
           </li>
           <li style={{ float: "right" }}>
-            <Link to="/dashboard">User Dashboard</Link>
+            <Link to="/userDashboard">User Dashboard</Link>
+          </li>
+          <li style={{ float: "right" }}>
+            <Link to="/bugDashboard">Bug Dashboard</Link>
           </li>
         </ul>
       </header>

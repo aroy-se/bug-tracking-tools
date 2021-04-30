@@ -11,7 +11,7 @@ const Home = () => {
         {/* r1c2 - Home image box */}
         <div className="col-xl-8">
           <div className="row">
-            <div className="col-xl-6 pl-0 pt-0">
+            <div className="col-xl-7 pl-0 pt-0">
               <div class="card border-0">
                 <div class="card-body">
                   <img
@@ -23,11 +23,14 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="col-xl-6">
+            <div className="col-xl-5">
               {/* Bug search box */}
               <div class="card border">
                 <div class="card-header">
-                  <h4 class="card-title">Bug Search</h4>
+                  <i class="fa fa-bug text-danger" aria-hidden="true">
+                    <span className="lead text-danger"> Bug Search</span>
+                  </i>
+                  {/* <h4 class="card-title">Bug Search</h4> */}
                 </div>
                 <div class="card-body">
                   {/* Search Bug Component */}
@@ -51,7 +54,7 @@ const Home = () => {
             </div>
             <div class="card-body">
               <h6 class="card-title">Report a Bug</h6>
-              <p class="card-text">
+              <p class="card-text font-weight-lighter">
                 If you discover an issue with our Product, please start by
                 searching the Bug Database to find out if that issue has been
                 reported and fixed already. Once you confirm that the issue you
@@ -68,7 +71,7 @@ const Home = () => {
               </a>
               <hr></hr>
               <h6 class="card-title">Suggest An Enhancement</h6>
-              <p class="card-text">
+              <p class="card-text font-weight-lighter">
                 If you have a suggestion for a small change to an existing API
                 or the way in which ou product behaves, please propose it here.
                 Please note that the Bug Database is not the venue to propose
@@ -79,7 +82,7 @@ const Home = () => {
               </a>
               <hr></hr>
               <h6 class="card-title">Request a new Feature</h6>
-              <p class="card-text">
+              <p class="card-text font-weight-lighter">
                 If you have a suggestion for a new feature to an existing API or
                 the way in which ou product behaves, please propose it here.
                 Please note that the Bug Database is not the venue to propose
@@ -90,7 +93,7 @@ const Home = () => {
               </a>
               <hr></hr>
               <h6 class="card-title">Frequently asked Questions</h6>
-              <p class="card-text">
+              <p class="card-text font-weight-lighter">
                 Refer to the Bug Submission FAQ's to answer questions you have
                 related to the Bug Database and the Bug Submission Process.
               </p>
