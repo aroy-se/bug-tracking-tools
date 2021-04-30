@@ -37,7 +37,7 @@ class BugList extends Component {
   }
   // fetch the bug by bug Id
   handleFetchBug(event) {
-    document.getElementById("bugSearchInputText").value = "";
+    var input = document.getElementById("bugSearchInputText").value;
     event.preventDefault();
     if (this.state.bugId === "") {
       alert("The Field should not be empty!");
@@ -55,12 +55,14 @@ class BugList extends Component {
         this.setState({ bugDetails: new Array(data) });
       })
       .catch(() => {
-        alert(`The Bug Id,${this.state.bugId} does not exist in our database`);
+        alert(`The Bug Id=[${input}] does not exist in our database`);
       });
+    // reset text input
+    document.getElementById("bugSearchInputText").value = "";
   }
   // fetch all the bug with same type bugs by bug title
   handleFetchBugs(event) {
-    document.getElementById("bugSearchInputText").value = "";
+    var input = document.getElementById("bugSearchInputText").value;
     event.preventDefault();
     if (this.state.bugTitle === "") {
       //   alert("The field should not be Empty!");
@@ -83,10 +85,9 @@ class BugList extends Component {
         this.setState({ bugDetails: data });
       })
       .catch(() => {
-        alert(
-          `The Bug Title,"${this.state.bugTitle}" does not exist in our database`
-        );
+        alert(`The Bug Title,"${input}" does not exist in our database`);
       });
+    document.getElementById("bugSearchInputText").value = "";
   }
   render() {
     return (

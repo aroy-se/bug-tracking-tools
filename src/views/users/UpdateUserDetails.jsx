@@ -443,10 +443,10 @@ const UpdateUserDetails = () => {
                     type="button"
                     className="btn btn-danger btn-lg btn-block"
                     name="submit"
-                    value="REGISTER"
+                    value="UPDATE"
                     onClick={handleSubmit}
                   >
-                    REGISTER
+                    UPDATE
                   </button>
                 </div>
                 <div class="col-xl-3"></div>

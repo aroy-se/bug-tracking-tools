@@ -42,7 +42,7 @@ const BugDashboard = () => {
               </label>
             </Link>
           </li> */}
-          <li>
+          {/* <li>
             <Link to="/updateBugDetails">
               <label className="user-dashboard-label">Update Details</label>
             </Link>
@@ -51,7 +51,7 @@ const BugDashboard = () => {
             <Link to="/deleteBugDetails">
               <label className="user-dashboard-label">Delete Details</label>
             </Link>
-          </li>
+          </li> */}
         </ul>
         <Switch>
           <Route path="/createBugDetails" component={CreateBugDetails}></Route>
@@ -65,8 +65,8 @@ const BugDashboard = () => {
             path="/fetchBugDetailsByName"
             component={FetchBugDetailsByName}
           ></Route> */}
-          <Route path="/updateBugDetails" component={UpdateBugDetails}></Route>
-          <Route path="/deleteBugDetails" component={DeleteBugDetails}></Route>
+          {/* <Route path="/updateBugDetails" component={UpdateBugDetails}></Route>
+          <Route path="/deleteBugDetails" component={DeleteBugDetails}></Route> */}
         </Switch>
       </div>
     </BrowserRouter>
