@@ -5,8 +5,8 @@ import BugList from "./BugList";
 import FetchBugDetails from "./FetchBugDetails";
 import FetchBugDetailsById from "./FetchBugDetailsById";
 // import FetchBugDetailsByName from "./FetchBugDetailsByName";
-import UpdateBugDetails from "./UpdateBugDetails";
-import DeleteBugDetails from "./DeleteBugDetails";
+// import UpdateBugDetails from "./UpdateBugDetails";
+// import DeleteBugDetails from "./DeleteBugDetails";
 
 const BugDashboard = () => {
   return (

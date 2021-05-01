@@ -1,109 +1,75 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import * as Constants from "../../utility/Constants";
 
-const SearchBug = () => {
-  const [input, setInput] = useState({
-    bugId: "",
-    bugTitle: "",
-  });
-  const [bugDetails, setBugDetails] = useState([]);
-  const [bugCount, setBugCount] = useState(0);
-
-  // Handle function
-  function handleChange(event) {
-    setBugCount(0);
-    const { name, value } = event.target;
-    setInput((prevInput) => {
-      return {
-        ...prevInput,
-        [name]: value,
-      };
-    });
-  }
-  function handleSearchByBugId(event) {
-    event.preventDefault();
-    fetch(Constants.BUG_URL + parseInt(input.bugId))
-      .then((response) => response.json())
-      .then((data) => {
-        setBugDetails((bugDetails) => [...bugDetails, data]);
-        var count = 0;
-        bugDetails.map((i) => {
-          count = count + 1;
-        });
-        setBugCount(count);
-      });
-    input.bugId = "";
+class SearchBug extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { bugDetails: [], bugId: "", bugTitle: "" };
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  function handleSearchByBugTitle(event) {
-    event.preventDefault();
-    // setBugCount(0);
-    fetch(Constants.BUG_BY_TITLE_URL + input.bugTitle)
-      .then((response) => response.json())
-      .then((data) => {
-        setBugDetails((bugDetails) => [...bugDetails, data]);
-        setBugCount(data.length);
-      });
+  // Input handle function
+  handleChange(event) {
+    if (isNaN(event.target.value)) {
+      this.setState({ bugTitle: event.target.value });
+    } else {
+      this.setState({ bugId: event.target.value });
+    }
   }
-  return (
-    <div>
-      {/* Search bug by bug-id */}
-      <div class="input-group mt-2">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Search by Bug-ID"
-          required
-          autoComplete="off"
-          name="bugId"
-          value={input.bugId}
-          onChange={handleChange}
-        />
-        <div class="input-group-append">
-          <button
-            class="btn btn-danger"
-            name="submit"
-            type="button"
-            onClick={handleSearchByBugId}
-          >
-            Search
-          </button>
-        </div>
-      </div>
 
-      {/* Search by bug title */}
-      <div class="input-group mt-2">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Search by Bug-Title"
-          required
-          autoComplete="off"
-          name="bugTitle"
-          value={input.bugTitle}
-          onChange={handleChange}
-        />
-        <div class="input-group-append">
-          <button
-            class="btn btn-danger"
-            type="button"
-            name="submit"
-            onClick={handleSearchByBugTitle}
-          >
-            Search
-          </button>
-        </div>
-      </div>
+  render() {
+    return (
       <div>
-        <span class="badge badge-pill badge-primary pb-1 mt-2">
-          {bugCount !== 0
-            ? "Found " + bugCount + (bugCount > 1 ? " items" : " item")
-            : "No result found"}
+        {/* Search engine for bug */}
+        <div class="input-group mt-2 shadow">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search bug by bug-id/title"
+            required
+            autoComplete="off"
+            name="bugSearchInputText"
+            id="bugSearchInputText"
+            onChange={this.handleChange}
+          />
+          <div class="input-group-append">
+            <Link
+              class="btn btn-warning text-danger font-weight-bold"
+              to={{
+                pathname: `/bugList`,
+                state: {
+                  searchInputText:
+                    this.state.bugId !== ""
+                      ? this.state.bugId
+                      : this.state.bugTitle,
+                },
+              }}
+            >
+              Search
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+    // For testing purpose
+    {
+      /* <div>
+        <span class="">
+          {bugCount !== 0 ? (
+            <span class="badge badge-pill badge-success pb-1 mt-2 shadow">
+              {"Found " + bugCount + (bugCount > 1 ? " items" : " item")}
+            </span>
+          ) : (
+            <span class="badge badge-pill badge-secondary pb-1 mt-2 shadow">
+              No result found
+            </span>
+          )}
           {}
         </span>
-      </div>
-    </div>
-  );
-};
+      </div> */
+    }
+  }
+}
 
 export default SearchBug;

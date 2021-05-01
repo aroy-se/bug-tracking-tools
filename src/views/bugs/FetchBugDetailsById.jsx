@@ -50,7 +50,7 @@ class FetchBugDetailsById extends Component {
         this.setState({ bugData: data });
       })
       .catch(() => {
-        alert(`The Bug Id,${this.state.bugId} does not exist in our database`);
+        alert(`The Bug Id: ${this.state.bugId} does not exist in our database`);
       });
   }
   render() {

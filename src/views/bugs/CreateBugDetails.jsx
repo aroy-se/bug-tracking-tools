@@ -137,7 +137,7 @@ const CreateBugDetails = () => {
       });
   };
   return (
-    <div className="container p-0 ">
+    <div className="container p-0 pt-5">
       <div class="row">
         <div class="col-xl-12 p-0 ">
           <div class="card">

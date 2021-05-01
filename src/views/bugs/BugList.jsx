@@ -7,16 +7,63 @@ class BugList extends Component {
     super(props);
     this.state = { bugDetails: [], bugId: "", bugTitle: "" };
     this.handleChange = this.handleChange.bind(this);
+    this.fetchDatafromDatabase = this.fetchDatafromDatabase.bind(this);
     this.controllerHandleSearch = this.controllerHandleSearch.bind(this);
     this.handleFetchBug = this.handleFetchBug.bind(this);
     this.handleFetchBugs = this.handleFetchBugs.bind(this);
   }
+  //  React Life cycle method
   componentDidMount() {
-    fetch(Constants.BUG_URL)
+    const { searchInputText } = this.props.history.location.state;
+    var target_url = Constants.BUG_URL;
+    var catch_err_msg = "";
+    if (searchInputText === "") {
+      // Calling whole bug list
+      this.fetchDatafromDatabase(target_url, false, catch_err_msg);
+    } else if (isNaN(searchInputText)) {
+      // fetch data by bug title
+      target_url = Constants.BUG_BY_TITLE_URL + searchInputText;
+      catch_err_msg = searchInputText;
+      this.fetchDatafromDatabase(target_url, false, catch_err_msg);
+    } else {
+      // fetch data by bug id
+      target_url = Constants.BUG_URL + parseInt(searchInputText);
+      catch_err_msg = searchInputText;
+      this.fetchDatafromDatabase(target_url, true, catch_err_msg);
+    }
+  }
+  /**
+   * To fetch data
+   * arg1- var(string):: db url
+   * arg2- boolean:: wrap the data inside an array
+   * arg3- var(string):: error-catch message
+   */
+  fetchDatafromDatabase(url, wrapArray, catch_err_msg) {
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ bugDetails: data });
-      });
+        if (wrapArray === true) {
+          this.setState({ bugDetails: new Array(data) });
+        } else {
+          this.setState({ bugDetails: data });
+        }
+      })
+      .catch(
+        catch_err_msg === ""
+          ? (error) => console.log(error)
+          : () => {
+              alert(
+                `The search input, ${catch_err_msg} does not exist in our database`
+              );
+            }
+      );
+    return;
   }
   // Input handle function
   handleChange(event) {
@@ -37,61 +84,33 @@ class BugList extends Component {
   }
   // fetch the bug by bug Id
   handleFetchBug(event) {
-    var input = document.getElementById("bugSearchInputText").value;
+    var searchInputText = document.getElementById("bugSearchInputText").value;
     event.preventDefault();
-    if (this.state.bugId === "") {
-      alert("The Field should not be empty!");
-      return;
-    }
-    fetch(Constants.BUG_URL + parseInt(this.state.bugId))
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response;
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ bugDetails: new Array(data) });
-      })
-      .catch(() => {
-        alert(`The Bug Id=[${input}] does not exist in our database`);
-      });
-    // reset text input
+    const target_url = Constants.BUG_URL + parseInt(searchInputText);
+    const catch_err_msg = searchInputText;
+    this.fetchDatafromDatabase(target_url, true, catch_err_msg);
+    // reset search-text input
     document.getElementById("bugSearchInputText").value = "";
   }
   // fetch all the bug with same type bugs by bug title
   handleFetchBugs(event) {
-    var input = document.getElementById("bugSearchInputText").value;
     event.preventDefault();
-    if (this.state.bugTitle === "") {
-      //   alert("The field should not be Empty!");
-      fetch(Constants.BUG_URL)
-        .then((response) => response.json())
-        .then((data) => {
-          this.setState({ bugDetails: data });
-        });
-      return;
+    var searchInputText = document.getElementById("bugSearchInputText").value;
+    let target_url = Constants.BUG_URL;
+    const catch_err_msg = searchInputText;
+
+    if (searchInputText === "") {
+      // Calling whole bug list
+      this.fetchDatafromDatabase(target_url, false, catch_err_msg);
+    } else {
+      target_url = Constants.BUG_BY_TITLE_URL + searchInputText;
+      this.fetchDatafromDatabase(target_url, false, catch_err_msg);
     }
-    fetch(Constants.BUG_BY_TITLE_URL + this.state.bugTitle)
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response;
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ bugDetails: data });
-      })
-      .catch(() => {
-        alert(`The Bug Title,"${input}" does not exist in our database`);
-      });
     document.getElementById("bugSearchInputText").value = "";
   }
   render() {
     return (
-      <div className="container-fluid mb-3">
+      <div className="container-fluid mt-5 mb-3">
         <div className="row">
           <div className="col-xl-12 mb-3">
             <div class="card">
@@ -101,18 +120,19 @@ class BugList extends Component {
                     <span className="lead text-danger"> Bug List</span>
                   </i>
 
-                  {/* SEARCH BY Bug Title */}
+                  {/* Bug SEARCH ENGINE */}
                   <div class="form-group">
                     <div class="input-group">
                       <input
                         type="text"
-                        placeholder="Search bug/s"
+                        placeholder="Search bug by bug-id/title"
                         required
                         autoComplete="off"
                         className="form-control shadow-sm"
                         name="bugSearchInputText"
                         id="bugSearchInputText"
                         onChange={this.handleChange}
+                        style={{ width: 500 }}
                       />
                       <div class="input-group-append">
                         <button
@@ -141,19 +161,22 @@ class BugList extends Component {
                         },
                       }}
                     >
+                      <span class="mb-1 font-weight-normal text-info">
+                        {bug.issueType === "Bug" ? (
+                          <span className="text-danger">
+                            {" "}
+                            Bug ID #{bug.bugId}
+                          </span>
+                        ) : (
+                          <span className="text-primary">
+                            {" "}
+                            Bug ID #{bug.bugId}
+                          </span>
+                        )}
+                      </span>
                       <div class="d-flex w-100 justify-content-between">
-                        <span class="mb-1 font-weight-normal text-info">
-                          {bug.issueType === "Bug" ? (
-                            <span className="text-danger">
-                              {" "}
-                              Bug ID #{bug.bugId}
-                            </span>
-                          ) : (
-                            <span className="text-primary">
-                              {" "}
-                              Bug ID #{bug.bugId}
-                            </span>
-                          )}
+                        <span class="mb-1 lead text-secondary">
+                          {bug.bugTitle}
                         </span>
                         <small class="text-secondary font-weight-light">
                           <span className="badge badge-pill badge-light">
@@ -163,9 +186,8 @@ class BugList extends Component {
                             {bug.createdTime}
                           </span>
                         </small>
+                        {/* <small>{bug.bugDesc}</small> */}
                       </div>
-                      <p class="mb-1 lead text-secondary">{bug.bugTitle}</p>
-                      {/* <small>{bug.bugDesc}</small> */}
                     </Link>
                   </div>
                 ))}
