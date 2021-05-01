@@ -5,6 +5,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import SplitButton from "react-bootstrap/SplitButton";
 import brand_img from "../../assets/images/bug64.jpg";
 import "../../assets/css/btt-style.css";
+import SearchBug from "../bugs/SearchBug";
 
 class Header extends Component {
   logoutHandler = (e) => {
@@ -14,18 +15,6 @@ class Header extends Component {
     return (
       <div className="">
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg">
-          {/* <a className="navbar-brand font-weight-bold text-danger" href="#"> */}
-          <Link to="/" className="navbar-brand font-weight-bold text-danger">
-            <img
-              src={brand_img}
-              width="30"
-              height="30"
-              class="d-inline-block align-top"
-              alt="btt-brand"
-            />{" "}
-            Bug Tracking Tools
-          </Link>
-          {/* </a> */}
           <button
             class="navbar-toggler"
             type="button"
@@ -39,13 +28,31 @@ class Header extends Component {
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="form-inline my-lg-0 ml-auto">
+            <form class="form-inline d-flex justify-content-between w-100">
+              <ul class="navbar-nav ">
+                <li>
+                  <Link
+                    to="/"
+                    className="navbar-brand font-weight-bold text-danger"
+                  >
+                    <img
+                      src={brand_img}
+                      width="30"
+                      height="30"
+                      class="d-inline-block align-top"
+                      alt="btt-brand"
+                    />{" "}
+                    Bug Tracking Tools
+                  </Link>
+                </li>
+              </ul>
               <ul class="navbar-nav ">
                 {/* Bug SEARCH ENGINE */}
-                {/* <li class="nav-item">
+                <li class="nav-item border-1">
                   <div class="form-group mr-2">
                     <div class="input-group">
-                      <input
+                      <SearchBug />
+                      {/* <input
                         type="text"
                         placeholder="Bug search engine"
                         required
@@ -65,10 +72,13 @@ class Header extends Component {
                         >
                           Search
                         </button>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
-                </li> */}
+                </li>
+              </ul>
+              {/* <form class="form-inline my-lg-0 ml-auto"> */}
+              <ul class="navbar-nav ">
                 <li class="nav-item">
                   <div class="nav-item">
                     {/* <a class="nav-link text-secondary" href="#"> */}
@@ -119,19 +129,20 @@ class Header extends Component {
                                 href="#"
                                 onClick={(e) => this.logoutHandler(e)}
                               >
+                                {" "}
                                 Logout
                               </a>
                             </i>
                           </Dropdown.Item>
                           <Dropdown.Divider />
                           <Dropdown.Item eventKey="3">
-                            <Link to="/userDashboard" class="text-info">
-                              User Dashboard
+                            <Link to="/userDashboard" class="text-secondary">
+                              <i class="fas fa-users"> User Dashboard</i>
                             </Link>
                           </Dropdown.Item>
                           <Dropdown.Item eventKey="3">
-                            <Link to="/bugDashboard" class="text-danger">
-                              Bug Dashboard
+                            <Link to="/bugDashboard" class="text-secondary">
+                              <i class="fas fa-bug"> Bug Dashboard</i>
                             </Link>
                           </Dropdown.Item>
                           <Dropdown.Divider />

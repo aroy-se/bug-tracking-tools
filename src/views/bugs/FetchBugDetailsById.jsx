@@ -161,7 +161,9 @@ class FetchBugDetailsById extends Component {
                           {/* bug-type */}
                           <tr>
                             <td>
-                              <span class="">Bug Type</span>
+                              <span className="badge badge-light">
+                                Bug Type
+                              </span>
                             </td>
                             <td>
                               {this.state.bugData.issueType === "Bug" ? (
@@ -182,7 +184,9 @@ class FetchBugDetailsById extends Component {
                           {/* - Affected Component: Component n Sub-component */}
                           <tr>
                             <td>
-                              <span class="">Component</span>
+                              <span className="badge badge-light">
+                                Component
+                              </span>
                             </td>
                             <td>
                               <span class="font-weight-light">
@@ -193,7 +197,9 @@ class FetchBugDetailsById extends Component {
                           {/* - Reporting version (On issue version issue is occurring) */}
                           <tr>
                             <td>
-                              <span class="">Reporting Version</span>
+                              <span className="badge badge-light">
+                                Reporting Version
+                              </span>
                             </td>
                             <td>
                               <span class="font-weight-light">
@@ -204,7 +210,9 @@ class FetchBugDetailsById extends Component {
                           {/* - OS: Win/Mac/Lin */}
                           <tr>
                             <td>
-                              <span class="">Operating System</span>
+                              <span className="badge badge-light">
+                                Operating System
+                              </span>
                             </td>
                             <td>
                               {this.state.bugData.os === "MacOS" ? (
@@ -237,7 +245,9 @@ class FetchBugDetailsById extends Component {
                           {/* Bug-sub-type: Crash/Others */}
                           <tr>
                             <td>
-                              <span class="">Bug Sub-Type</span>
+                              <span className="badge badge-light">
+                                Bug Sub-Type
+                              </span>
                             </td>
                             <td>
                               {this.state.bugData.issueSubType === "Crash" ? (
@@ -254,7 +264,9 @@ class FetchBugDetailsById extends Component {
                           {/* Sub-component */}
                           <tr>
                             <td>
-                              <span class="">Sub-Component</span>
+                              <span className="badge badge-light">
+                                Sub-Component
+                              </span>
                             </td>
                             <td>
                               {/* <label>{this.state.bugData.subComponent}</label> */}
@@ -264,7 +276,9 @@ class FetchBugDetailsById extends Component {
                           {/* - Reporting version (On issue version issue is occurring) */}
                           <tr>
                             <td>
-                              <span class="">Regression Version</span>
+                              <span className="badge badge-light">
+                                Regression Version
+                              </span>
                             </td>
                             <td>
                               <span class="font-weight-light">
@@ -275,7 +289,7 @@ class FetchBugDetailsById extends Component {
                           {/* Browser : Google Chrome/Mozilla Firefox/Microsoft Edge/Apple Safari */}
                           <tr>
                             <td>
-                              <span class="">Browser</span>
+                              <span className="badge badge-light">Browser</span>
                             </td>
                             <td>
                               {this.state.bugData.browser ===
@@ -321,7 +335,9 @@ class FetchBugDetailsById extends Component {
                           {/* Severity : Rarely/Intermittently/Always */}
                           <tr>
                             <td>
-                              <span class="">Severity</span>
+                              <span className="badge badge-light">
+                                Severity
+                              </span>
                             </td>
                             <td>
                               {this.state.bugData.severity === "Rarely" ? (
@@ -347,7 +363,7 @@ class FetchBugDetailsById extends Component {
                           {/* Bug-state: New/WIP/TIP/Fixed/Rejected/Duplicate */}
                           <tr>
                             <td>
-                              <span class="">State</span>
+                              <span className="badge badge-light">State</span>
                             </td>
                             <td>
                               {this.state.bugData.state === "New" ? (
@@ -389,7 +405,9 @@ class FetchBugDetailsById extends Component {
                           {/* - Bug status: Unresolved/Assigned/Open/Reopen/Closed */}
                           <tr>
                             <td>
-                              <span class="">Resolution</span>
+                              <span className="badge badge-light">
+                                Resolution
+                              </span>
                             </td>
                             <td>
                               {this.state.bugData.resolution ===
@@ -426,7 +444,9 @@ class FetchBugDetailsById extends Component {
                           {/* - Priority */}
                           <tr>
                             <td>
-                              <span class="">Priority</span>
+                              <span className="badge badge-light">
+                                Priority
+                              </span>
                             </td>
                             <td>
                               {/* <span class="font-weight-light">P4-Normal</span> */}
@@ -469,7 +489,7 @@ class FetchBugDetailsById extends Component {
                     <div className="col-xl-12 border mt-2">
                       <div className="row">
                         <div className="col-xl-3 pt-1 pb-2 pl-1">
-                          <span class="badge badge-warning text-secondary font-weight-bold">
+                          <span className="badge badge-light text-danger">
                             Duplicate/Similar Bug/s:
                           </span>
                         </div>
@@ -495,7 +515,11 @@ class FetchBugDetailsById extends Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6 class="">Bug Title</h6>
+                                <h6 class="">
+                                  <span class="">
+                                    Bug Title
+                                  </span>
+                                </h6>
                                 <label class="font-weight-light">
                                   {this.state.bugData.bugTitle}
                                 </label>
@@ -506,7 +530,11 @@ class FetchBugDetailsById extends Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6 class="">Bug Description</h6>
+                                <h6 class="">
+                                  <span class="">
+                                    Bug Description
+                                  </span>
+                                </h6>
                                 <span class="font-weight-light">
                                   {this.state.bugData.bugDesc}
                                 </span>
@@ -517,9 +545,17 @@ class FetchBugDetailsById extends Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6 class="">Reproducible Steps</h6>
+                                <h6 class="">
+                                  <span class="">
+                                    Reproducible Steps
+                                  </span>
+                                </h6>
                                 <span class="font-weight-light">
-                                  {this.state.bugData.reproducibleSteps}
+                                  {/* <pre> */}
+                                    {
+                                    this.state.bugData.reproducibleSteps
+                                    }
+                                  {/* </pre> */}
                                 </span>
                               </div>
                             </td>
@@ -528,7 +564,11 @@ class FetchBugDetailsById extends Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6 class="">Expected Output</h6>
+                                <h6 class="">
+                                  <span class="">
+                                    Expected Output
+                                  </span>
+                                </h6>
                                 <span class="font-weight-light">
                                   {this.state.bugData.expectedOutput}
                                 </span>
@@ -539,7 +579,11 @@ class FetchBugDetailsById extends Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6 class="">Actual Output</h6>
+                                <h6 class="">
+                                  <span class="">
+                                    Actual Output
+                                  </span>
+                                </h6>
                                 <span class="font-weight-light">
                                   {this.state.bugData.actualOutput}
                                 </span>
@@ -551,10 +595,14 @@ class FetchBugDetailsById extends Component {
                             <td>
                               <div class="form-group">
                                 <h6 class="">
-                                  Source code / Test case / Stacktrace
+                                  <span class="">
+                                    Source code / Test case / Stacktrace
+                                  </span>
                                 </h6>
                                 <span class="font-weight-light">
-                                  {this.state.bugData.sourceCode}
+                                  <code>
+                                    {this.state.bugData.sourceCode}
+                                    </code>
                                 </span>
                               </div>
                             </td>
@@ -563,7 +611,11 @@ class FetchBugDetailsById extends Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6 class="">Workaround</h6>
+                                <h6 class="">
+                                  <span class="">
+                                    Workaround
+                                  </span>
+                                </h6>
                                 <span class="font-weight-light">
                                   {this.state.bugData.workaround}
                                 </span>
@@ -574,7 +626,11 @@ class FetchBugDetailsById extends Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6 class="">Comments</h6>
+                                <h6 class="">
+                                  <span class="">
+                                    Comments
+                                  </span>
+                                </h6>
                                 <span class="font-weight-light">
                                   {this.state.bugData.comments === ""
                                     ? this.state.bugData.comments

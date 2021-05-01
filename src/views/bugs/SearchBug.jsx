@@ -8,7 +8,6 @@ class SearchBug extends Component {
     this.state = { bugDetails: [], bugId: "", bugTitle: "" };
     this.handleChange = this.handleChange.bind(this);
   }
-
   // Input handle function
   handleChange(event) {
     if (isNaN(event.target.value)) {
@@ -17,12 +16,11 @@ class SearchBug extends Component {
       this.setState({ bugId: event.target.value });
     }
   }
-
   render() {
     return (
       <div>
         {/* Search engine for bug */}
-        <div class="input-group mt-2 shadow">
+        <div class="input-group">
           <input
             type="text"
             class="form-control"
@@ -32,10 +30,12 @@ class SearchBug extends Component {
             name="bugSearchInputText"
             id="bugSearchInputText"
             onChange={this.handleChange}
+            style={{ width: 500 }}
           />
           <div class="input-group-append">
             <Link
-              class="btn btn-warning text-danger font-weight-bold"
+              class="btn btn-danger font-weight-bold"
+              // onClick={this.controllerHandleSearch}
               to={{
                 pathname: `/bugList`,
                 state: {

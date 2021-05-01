@@ -5,7 +5,12 @@ import * as Constants from "../../utility/Constants";
 class BugList extends Component {
   constructor(props) {
     super(props);
-    this.state = { bugDetails: [], bugId: "", bugTitle: "" };
+    this.state = {
+      bugDetails: [],
+      bugId: "",
+      bugTitle: "",
+      searchValue: "",
+    };
     this.handleChange = this.handleChange.bind(this);
     this.fetchDatafromDatabase = this.fetchDatafromDatabase.bind(this);
     this.controllerHandleSearch = this.controllerHandleSearch.bind(this);
@@ -14,24 +19,54 @@ class BugList extends Component {
   }
   //  React Life cycle method
   componentDidMount() {
-    const { searchInputText } = this.props.history.location.state;
+    // const { searchInputText } = this.props.history.location.state;
+    const searchInput = this.state.searchValue;
     var target_url = Constants.BUG_URL;
     var catch_err_msg = "";
-    if (searchInputText === "") {
+    if (searchInput === "") {
       // Calling whole bug list
       this.fetchDatafromDatabase(target_url, false, catch_err_msg);
-    } else if (isNaN(searchInputText)) {
+    } else if (isNaN(searchInput)) {
       // fetch data by bug title
-      target_url = Constants.BUG_BY_TITLE_URL + searchInputText;
-      catch_err_msg = searchInputText;
+      target_url = Constants.BUG_BY_TITLE_URL + searchInput;
+      catch_err_msg = searchInput;
       this.fetchDatafromDatabase(target_url, false, catch_err_msg);
     } else {
       // fetch data by bug id
-      target_url = Constants.BUG_URL + parseInt(searchInputText);
-      catch_err_msg = searchInputText;
+      target_url = Constants.BUG_URL + parseInt(searchInput);
+      catch_err_msg = searchInput;
       this.fetchDatafromDatabase(target_url, true, catch_err_msg);
     }
   }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      this.setState({
+        searchValue: this.props.location.state.searchInputText,
+      });
+      const searchInput = this.state.searchValue;
+      var target_url = Constants.BUG_URL;
+      var catch_err_msg = "";
+      if (searchInput === "") {
+        // Calling whole bug list
+        this.fetchDatafromDatabase(target_url, false, catch_err_msg);
+      } else if (isNaN(searchInput)) {
+        // fetch data by bug title
+        target_url = Constants.BUG_BY_TITLE_URL + searchInput;
+        catch_err_msg = searchInput;
+        this.fetchDatafromDatabase(target_url, false, catch_err_msg);
+      } else {
+        // fetch data by bug id
+        target_url = Constants.BUG_URL + parseInt(searchInput);
+        catch_err_msg = searchInput;
+        this.fetchDatafromDatabase(target_url, true, catch_err_msg);
+      }
+      this.setState({
+        searchValue: "",
+      });
+    }
+  }
+
   /**
    * To fetch data
    * arg1- var(string):: db url
@@ -119,34 +154,6 @@ class BugList extends Component {
                   <i class="fa fa-bug text-danger" aria-hidden="true">
                     <span className="lead text-danger"> Bug List</span>
                   </i>
-
-                  {/* Bug SEARCH ENGINE */}
-                  <div class="form-group">
-                    <div class="input-group">
-                      <input
-                        type="text"
-                        placeholder="Search bug by bug-id/title"
-                        required
-                        autoComplete="off"
-                        className="form-control shadow-sm"
-                        name="bugSearchInputText"
-                        id="bugSearchInputText"
-                        onChange={this.handleChange}
-                        style={{ width: 500 }}
-                      />
-                      <div class="input-group-append">
-                        <button
-                          type="button"
-                          name="fetch"
-                          className="btn btn-danger"
-                          value="Search"
-                          onClick={this.controllerHandleSearch}
-                        >
-                          Search
-                        </button>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
               <div class="card-body">
@@ -163,19 +170,22 @@ class BugList extends Component {
                     >
                       <span class="mb-1 font-weight-normal text-info">
                         {bug.issueType === "Bug" ? (
-                          <span className="text-danger">
+                          <span className="badge badge-light text-danger">
                             {" "}
                             Bug ID #{bug.bugId}
                           </span>
                         ) : (
-                          <span className="text-primary">
+                          <span className="badge badge-light text-primary">
                             {" "}
                             Bug ID #{bug.bugId}
                           </span>
                         )}
                       </span>
                       <div class="d-flex w-100 justify-content-between">
-                        <span class="mb-1 lead text-secondary">
+                        <span class="mb-1 font-weight-light text-secondary">
+                          <span className="badge badge-light text-secondary">
+                            Bug Title:
+                          </span>{" "}
                           {bug.bugTitle}
                         </span>
                         <small class="text-secondary font-weight-light">

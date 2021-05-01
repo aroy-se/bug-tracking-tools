@@ -3,7 +3,7 @@ import about_img from "../../assets/images/btt-brand.jpg";
 
 const About = () => {
   return (
-    <div className="container about text-secondary font-weight-lighter mt-5">
+    <div className="container text-secondary font-weight-lighter mt-5 shadow-lg">
       <p>
         <small className="text-muted font-weight-lighter">
           <span>

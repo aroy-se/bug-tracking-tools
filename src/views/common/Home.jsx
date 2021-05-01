@@ -18,12 +18,11 @@ const Home = () => {
         <div className="col-xl-8">
           <div class="card mb-0 shadow border-0">
             <img class="card-img-top" src={home_bg_img} alt="Card image cap" />
-            <div class="card-img-overlay">
+            {/* <div class="card-img-overlay">
               <div class="card-body">
-                {/* Calling Search Bug Component */}
                 <SearchBug />
               </div>
-            </div>
+            </div> */}
             <div class="card-body">
               <h5 class="card-title Blockquote">BTT - Bug Tracking Tools</h5>
               <p class="card-text font-weight-lighter">
@@ -31,6 +30,11 @@ const Home = () => {
                 Development POC-G1 team, used for bug tracking and project
                 management.
               </p>
+              <footer class="blockquote-footer float-right">
+                <small class="text-muted">
+                  Upcoming release BTT-v2021.06 will be released on 13-May-2021
+                </small>
+              </footer>
             </div>
           </div>
         </div>
