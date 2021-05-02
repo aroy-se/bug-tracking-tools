@@ -10,12 +10,21 @@ class SearchBug extends Component {
   }
   // Input handle function
   handleChange(event) {
-    if (isNaN(event.target.value)) {
-      this.setState({ bugTitle: event.target.value });
-    } else {
-      this.setState({ bugId: event.target.value });
+    if(event.target.value===""){
+      this.setState({ bugTitle: "" });
+      this.setState({ bugId: "" });
+    }
+    else{
+      if (isNaN(event.target.value)) {
+        console.log("title onchange["+event.target.value+"]data");
+        this.setState({ bugTitle: event.target.value });
+      } else {
+        console.log("id onchange["+event.target.value+"]data");
+        this.setState({ bugId: event.target.value });
+      }
     }
   }
+
   render() {
     return (
       <div>
@@ -35,7 +44,6 @@ class SearchBug extends Component {
           <div class="input-group-append">
             <Link
               class="btn btn-danger font-weight-bold"
-              // onClick={this.controllerHandleSearch}
               to={{
                 pathname: `/bugList`,
                 state: {

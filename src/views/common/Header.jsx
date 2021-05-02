@@ -14,9 +14,9 @@ class Header extends Component {
   render() {
     return (
       <div className="">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-lg">
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -24,12 +24,11 @@ class Header extends Component {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="form-inline d-flex justify-content-between w-100">
-              <ul class="navbar-nav ">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <form className="form-inline d-flex justify-content-between w-100">
+              <ul className="navbar-nav ">
                 <li>
                   <Link
                     to="/"
@@ -39,65 +38,39 @@ class Header extends Component {
                       src={brand_img}
                       width="30"
                       height="30"
-                      class="d-inline-block align-top"
+                      className="d-inline-block align-top"
                       alt="btt-brand"
                     />{" "}
                     Bug Tracking Tools
                   </Link>
                 </li>
               </ul>
-              <ul class="navbar-nav ">
-                {/* Bug SEARCH ENGINE */}
-                <li class="nav-item border-1">
-                  <div class="form-group mr-2">
-                    <div class="input-group">
+              <ul className="navbar-nav ">
+                <li className="nav-item border-1">
+                  <div className="form-group mr-2">
+                    <div className="input-group">
+                      {/* Bug SEARCH ENGINE */}
                       <SearchBug />
-                      {/* <input
-                        type="text"
-                        placeholder="Bug search engine"
-                        required
-                        autoComplete="off"
-                        className="form-control shadow-sm"
-                        name="bugSearchInputText"
-                        id="bugSearchInputText"
-                        // onChange={this.handleChange}
-                      />
-                      <div class="input-group-append">
-                        <button
-                          type="button"
-                          name="fetch"
-                          className="btn btn-danger"
-                          value="Search"
-                          // onClick={this.controllerHandleSearch}
-                        >
-                          Search
-                        </button>
-                      </div> */}
                     </div>
                   </div>
                 </li>
               </ul>
-              {/* <form class="form-inline my-lg-0 ml-auto"> */}
-              <ul class="navbar-nav ">
-                <li class="nav-item">
-                  <div class="nav-item">
-                    {/* <a class="nav-link text-secondary" href="#"> */}
-                    <Link class="nav-link text-danger" to="/faq">
+              <ul className="navbar-nav ">
+                <li className="nav-item">
+                  <div className="nav-item">
+                    <Link className="nav-link text-danger" to="/faq">
                       FAQ
                     </Link>
-                    {/* </a> */}
                   </div>
                 </li>
-                <li class="nav-item">
-                  <div class="nav-item">
-                    {/* <a class="nav-link text-secondary" href="#"> */}
-                    <Link to="/about" class="nav-link text-danger">
+                <li className="nav-item">
+                  <div className="nav-item">
+                    <Link to="/about" className="nav-link text-danger">
                       About
                     </Link>
-                    {/* </a> */}
                   </div>
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                   <div>
                     <>
                       {
@@ -109,23 +82,23 @@ class Header extends Component {
                           size=""
                         >
                           <Dropdown.Item eventKey="1">
-                            <i class="fas fa-user-circle text-info">
+                            <i className="fas fa-user-circle text-info">
                               {" "}
                               User Profile
                             </i>
                           </Dropdown.Item>
                           <Dropdown.Item eventKey="2">
-                            <i class="fas fa-sign-in-alt text-secondary">
-                              <Link to="/login" class="text-secondary">
+                            <i className="fas fa-sign-in-alt text-secondary">
+                              <Link to="/login" className="text-secondary">
                                 {" "}
                                 Login
                               </Link>
                             </i>
                           </Dropdown.Item>
                           <Dropdown.Item eventKey="3">
-                            <i class="fas fa-sign-out-alt text-secondary">
+                            <i className="fas fa-sign-out-alt text-secondary">
                               <a
-                                class="text-secondary"
+                                className="text-secondary"
                                 href="#"
                                 onClick={(e) => this.logoutHandler(e)}
                               >
@@ -136,21 +109,24 @@ class Header extends Component {
                           </Dropdown.Item>
                           <Dropdown.Divider />
                           <Dropdown.Item eventKey="3">
-                            <Link to="/userDashboard" class="text-secondary">
-                              <i class="fas fa-users"> User Dashboard</i>
+                            <Link
+                              to="/userDashboard"
+                              className="text-secondary"
+                            >
+                              <i className="fas fa-users"> User Dashboard</i>
                             </Link>
                           </Dropdown.Item>
                           <Dropdown.Item eventKey="3">
-                            <Link to="/bugDashboard" class="text-secondary">
-                              <i class="fas fa-bug"> Bug Dashboard</i>
+                            <Link to="/bugDashboard" className="text-secondary">
+                              <i className="fas fa-bug"> Bug Dashboard</i>
                             </Link>
                           </Dropdown.Item>
                           <Dropdown.Divider />
                           <Dropdown.Item eventKey="4" className="">
                             <span className="badge badge-primary text-monospace p-2">
-                              <i class="fas fa-user-plus">
+                              <i className="fas fa-user-plus">
                                 {" "}
-                                <Link to="/registration" class="text-light">
+                                <Link to="/registration" className="text-light">
                                   Registration
                                 </Link>
                               </i>

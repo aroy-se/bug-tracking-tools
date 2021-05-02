@@ -10,61 +10,57 @@ class BugList extends Component {
       bugId: "",
       bugTitle: "",
       searchValue: "",
+      searchInputText:"",
     };
-    this.handleChange = this.handleChange.bind(this);
     this.fetchDatafromDatabase = this.fetchDatafromDatabase.bind(this);
-    this.controllerHandleSearch = this.controllerHandleSearch.bind(this);
-    this.handleFetchBug = this.handleFetchBug.bind(this);
-    this.handleFetchBugs = this.handleFetchBugs.bind(this);
   }
   //  React Life cycle method
   componentDidMount() {
-    // const { searchInputText } = this.props.history.location.state;
-    const searchInput = this.state.searchValue;
+    const { searchInputText } = this.props.history.location.state;
+    this.setState({searchValue: searchInputText})
     var target_url = Constants.BUG_URL;
     var catch_err_msg = "";
-    if (searchInput === "") {
+    if (searchInputText === "") {
       // Calling whole bug list
       this.fetchDatafromDatabase(target_url, false, catch_err_msg);
-    } else if (isNaN(searchInput)) {
+    } else if (isNaN(searchInputText)) {
       // fetch data by bug title
-      target_url = Constants.BUG_BY_TITLE_URL + searchInput;
-      catch_err_msg = searchInput;
+      target_url = Constants.BUG_BY_TITLE_URL + searchInputText;
+      catch_err_msg = searchInputText;
       this.fetchDatafromDatabase(target_url, false, catch_err_msg);
     } else {
       // fetch data by bug id
-      target_url = Constants.BUG_URL + parseInt(searchInput);
-      catch_err_msg = searchInput;
+      target_url = Constants.BUG_URL + parseInt(searchInputText);
+      catch_err_msg = searchInputText;
       this.fetchDatafromDatabase(target_url, true, catch_err_msg);
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.location !== prevProps.location) {
+    const { searchInputText } = this.props.history.location.state;
+      if(this.state.searchValue !== searchInputText){
       this.setState({
-        searchValue: this.props.location.state.searchInputText,
+        searchValue: searchInputText,
       });
-      const searchInput = this.state.searchValue;
       var target_url = Constants.BUG_URL;
       var catch_err_msg = "";
-      if (searchInput === "") {
+      if (searchInputText === "") {
         // Calling whole bug list
         this.fetchDatafromDatabase(target_url, false, catch_err_msg);
-      } else if (isNaN(searchInput)) {
+      } else if (isNaN(searchInputText)) {
         // fetch data by bug title
-        target_url = Constants.BUG_BY_TITLE_URL + searchInput;
-        catch_err_msg = searchInput;
+        target_url = Constants.BUG_BY_TITLE_URL + searchInputText;
+        catch_err_msg = searchInputText;
         this.fetchDatafromDatabase(target_url, false, catch_err_msg);
       } else {
         // fetch data by bug id
-        target_url = Constants.BUG_URL + parseInt(searchInput);
-        catch_err_msg = searchInput;
+        target_url = Constants.BUG_URL + parseInt(searchInputText);
+        catch_err_msg = searchInputText;
         this.fetchDatafromDatabase(target_url, true, catch_err_msg);
       }
-      this.setState({
-        searchValue: "",
-      });
+      // window.location.href = window.location.href;
     }
+    console.log("--END--componentDidUpdate searchValue=>"+this.state.searchValue);
   }
 
   /**
@@ -100,49 +96,7 @@ class BugList extends Component {
       );
     return;
   }
-  // Input handle function
-  handleChange(event) {
-    if (isNaN(event.target.value)) {
-      this.setState({ bugTitle: event.target.value });
-    } else {
-      this.setState({ bugId: event.target.value });
-    }
-  }
-  // Controller for Search (fetch by BugID or BugTitle)
-  controllerHandleSearch(event) {
-    this.setState({ bugId: "", bugTitle: "" });
-    if (this.state.bugId !== "") {
-      this.handleFetchBug(event);
-    } else {
-      this.handleFetchBugs(event);
-    }
-  }
-  // fetch the bug by bug Id
-  handleFetchBug(event) {
-    var searchInputText = document.getElementById("bugSearchInputText").value;
-    event.preventDefault();
-    const target_url = Constants.BUG_URL + parseInt(searchInputText);
-    const catch_err_msg = searchInputText;
-    this.fetchDatafromDatabase(target_url, true, catch_err_msg);
-    // reset search-text input
-    document.getElementById("bugSearchInputText").value = "";
-  }
-  // fetch all the bug with same type bugs by bug title
-  handleFetchBugs(event) {
-    event.preventDefault();
-    var searchInputText = document.getElementById("bugSearchInputText").value;
-    let target_url = Constants.BUG_URL;
-    const catch_err_msg = searchInputText;
 
-    if (searchInputText === "") {
-      // Calling whole bug list
-      this.fetchDatafromDatabase(target_url, false, catch_err_msg);
-    } else {
-      target_url = Constants.BUG_BY_TITLE_URL + searchInputText;
-      this.fetchDatafromDatabase(target_url, false, catch_err_msg);
-    }
-    document.getElementById("bugSearchInputText").value = "";
-  }
   render() {
     return (
       <div className="container-fluid mt-5 mb-3">
@@ -158,7 +112,7 @@ class BugList extends Component {
               </div>
               <div class="card-body">
                 {this.state.bugDetails.map((bug, index) => (
-                  <div className="list-group p-1">
+                  <div className="list-group p-1" key={index}>
                     <Link
                       class="list-group-item list-group-item-action flex-column align-items-start"
                       to={{
