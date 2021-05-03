@@ -241,13 +241,13 @@ const UpdateBugDetails = () => {
                   className="custom-select shadow-sm form-control m-2"
                   name="assignee"
                   id="assignee"
-                  value={bugData.assignee}
+                  value={input.assignee}
                   onChange={handleChange}
                 >
                   <option>Set Assignee</option>
-                  <option>Seela Balaji</option>
                   <option>Elangovan Perumalsamy</option>
-                  <option>Afroz</option>
+                  <option>Afroz Khan</option>
+                  <option>Seela Balaji</option>
                   <option>Abhijit Roy</option>
                 </select>
               )}
@@ -879,7 +879,7 @@ const UpdateBugDetails = () => {
                                   {bugData.priority}
                                 </span>
                               ) : bugData.priority === "P2-High" ? (
-                                <span class="badge badge-warning font-weight-bold">
+                                <span class="badge badge-warning text-danger font-weight-bold">
                                   {" "}
                                   {bugData.priority}
                                 </span>
