@@ -5,6 +5,8 @@ import bug_img from "../../assets/images/bug64.jpg";
 const CreateBugDetails = () => {
   // To show status message after successful insertion
   const [success, setSuccess] = useState(false);
+  // const [acceptCheck, setAcceptCheck] = useState(false);
+
   const initialState = {
     issueType: "Bug",
     component: "",
@@ -140,7 +142,7 @@ const CreateBugDetails = () => {
     <div className="container p-0 pt-5">
       <div class="row">
         <div class="col-xl-12 p-0 ">
-          <div class="card">
+          <div class="card shadow">
             <div class="card-header text-danger form-inline d-flex justify-content-between">
               <h4>REPORT A BUG</h4>
               <img
@@ -223,7 +225,6 @@ const CreateBugDetails = () => {
                               <option>BTT-v2020.09</option>
                               <option>BTT-v2020.12</option>
                               <option>BTT-v2021.03</option>
-                              <option>BTT-v2021.06</option>
                             </select>
                           </td>
                         </tr>
@@ -265,7 +266,7 @@ const CreateBugDetails = () => {
                               name="issueSubType"
                               id="issueSubType1"
                               className="m-2"
-                              value="crash"
+                              value="Crash"
                               onChange={handleChange}
                             />
                             <label for="issueSubType1">Crash</label>
@@ -274,7 +275,7 @@ const CreateBugDetails = () => {
                               name="issueSubType"
                               id="issueSubType2"
                               className="m-2"
-                              value="others"
+                              value="Others"
                               onChange={handleChange}
                               defaultChecked
                             />
@@ -319,8 +320,6 @@ const CreateBugDetails = () => {
                               <option>BTT-v2020.06</option>
                               <option>BTT-v2020.09</option>
                               <option>BTT-v2020.12</option>
-                              <option>BTT-v2021.03</option>
-                              <option>BTT-v2021.06</option>
                             </select>
                           </td>
                         </tr>
@@ -502,7 +501,7 @@ const CreateBugDetails = () => {
                 </div>
                 <div class="row">
                   <div class="col-xl-12">
-                    <div class="card">
+                    <div class="card shadow-sm">
                       <div class="card-header pt-1 pb-1 text-info">
                         <h5>Submitter Info.</h5>
                       </div>
@@ -575,6 +574,7 @@ const CreateBugDetails = () => {
                       type="checkbox"
                       class="custom-control-input"
                       id="acceptReport"
+                      // value={setAcceptCheck(!acceptCheck)}
                     />
                     <label
                       class="custom-control-label font-italic font-weight-normal text-secondary"
@@ -603,8 +603,9 @@ const CreateBugDetails = () => {
                       className="btn btn-danger btn-lg btn-block"
                       name="submit"
                       onClick={handleReportBug}
+                      // disabled={acceptCheck}
                     >
-                      SUBMIT THE REPORT
+                      SUBMIT REPORT
                     </button>
                   </div>
                   <div class="col-xl-3"></div>

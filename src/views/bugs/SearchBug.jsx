@@ -10,16 +10,13 @@ class SearchBug extends Component {
   }
   // Input handle function
   handleChange(event) {
-    if(event.target.value===""){
+    if (event.target.value === "") {
       this.setState({ bugTitle: "" });
       this.setState({ bugId: "" });
-    }
-    else{
+    } else {
       if (isNaN(event.target.value)) {
-        console.log("title onchange["+event.target.value+"]data");
         this.setState({ bugTitle: event.target.value });
       } else {
-        console.log("id onchange["+event.target.value+"]data");
         this.setState({ bugId: event.target.value });
       }
     }

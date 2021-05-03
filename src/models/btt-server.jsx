@@ -81,6 +81,50 @@ api.get("/btt/bugByTitle/:name", (request, response) => {
     });
 });
 
+// Update a bug by bug-id
+// CR[U]D := [U]PDATE => PUT - ONE
+api.put("/btt/bug/:id", (request, response) => {
+  var targetId = { bugId: parseInt(request.params.id) };
+  var toBeUpdated = {
+    $set: {
+      issueType: request.body.issueType,
+      component: request.body.component,
+      reportVersion: request.body.reportVersion,
+      os: request.body.os,
+      issueSubType: request.body.issueSubType,
+      severity: request.body.severity,
+      regressionVersion: request.body.regressionVersion,
+      browser: request.body.browser,
+      bugTitle: request.body.bugTitle,
+      bugDesc: request.body.bugDesc,
+      reproducibleSteps: request.body.reproducibleSteps,
+      expectedOutput: request.body.expectedOutput,
+      actualOutput: request.body.actualOutput,
+      sourceCode: request.body.sourceCode,
+      attachment: request.body.attachment,
+      workaround: request.body.workaround,
+      // submitterName: request.body.submitterName,
+      // submitterEmail: request.body.submitterEmail,
+      // submitterCompany: request.body.submitterCompany,
+      assignee: request.body.assignee,
+      eta: request.body.eta,
+      fixVersion: request.body.fixVersion,
+      resolution: request.body.resolution,
+      state: request.body.state,
+      priority: request.body.priority,
+    },
+  };
+  bugCollection.updateOne(targetId, toBeUpdated, (err, result) => {
+    if (err) {
+      return response.status(500).send(err);
+    }
+    console.log("Record is updated!");
+    response.send(result);
+  });
+});
+
+// ---------------------------------------------------------
+// End of bug details
 // ---------------------------------------------------------
 // For User
 // [C]RUD := [C]REATE => POST(ONE)

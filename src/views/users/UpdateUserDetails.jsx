@@ -70,10 +70,9 @@ const UpdateUserDetails = () => {
         });
       });
   }
-  // function setText(user) {}
   function handleSubmit(event) {
     event.preventDefault();
-    const newUser = {
+    const userUpdateObject = {
       userId: input.userId,
       userName: input.userName,
       password: input.password,
@@ -88,8 +87,8 @@ const UpdateUserDetails = () => {
       email: input.email,
       mobile: input.mobile,
     };
-    saveUserDetails(newUser);
-    // resetting the form fields after successful insertion
+    saveUserDetails(userUpdateObject);
+    // resetting the form fields after successful updation
     setInput((prevState) => {
       return {
         ...prevState,
