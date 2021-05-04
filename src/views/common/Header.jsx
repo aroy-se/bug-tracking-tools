@@ -83,8 +83,9 @@ class Header extends Component {
                         >
                           <Dropdown.Item eventKey="1">
                             <i className="fas fa-user-circle text-info">
-                              {" "}
-                              User Profile
+                              <Link to="/userProfile" className="nav-link">
+                                User Profile
+                              </Link>
                             </i>
                           </Dropdown.Item>
                           <Dropdown.Item eventKey="2">

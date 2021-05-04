@@ -18,11 +18,11 @@ const BugDashboard = () => {
               <label className="user-dashboard-label">Insert Details</label>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/bugList">
               <label className="user-dashboard-label">Bug List</label>
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/fetchBugDetails">
               <label className="user-dashboard-label">Fetch Details</label>

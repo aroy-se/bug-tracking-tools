@@ -23,3 +23,7 @@ const BUG_PATH = process.env.REACT_APP_BUG_PATH; // bug
 const BUG_BY_TITLE = process.env.REACT_APP_SEARCH_BUG_BY_TITLE; // bugByTitle
 export const BUG_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${BUG_PATH}/`;
 export const BUG_BY_TITLE_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${BUG_BY_TITLE}/`;
+
+// Constatnt for new feature request
+const FEATURE_REQUEST_PATH = process.env.REACT_APP_NEW_FEATURE_REQUEST_PATH; // newFeatureRequest
+export const NEW_FEATURE_REQUEST_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${FEATURE_REQUEST_PATH}/`;

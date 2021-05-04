@@ -6,8 +6,6 @@ import enhancement_img from "../../assets/images/enhancement_home_img.jpg";
 import new_feature_img from "../../assets/images/new_feature_home_img.jpg";
 import faq_img from "../../assets/images/faq_home_img.jpg";
 
-import SearchBug from "../bugs/SearchBug";
-
 const Home = () => {
   return (
     <div class="container-fluid mt-5">
@@ -107,9 +105,12 @@ const Home = () => {
                     to propose large changes to our Product.
                   </p>
                   {/* @TODO - ToBeImplemented */}
-                  <a href="#!" class="btn btn-sm btn-outline-info">
+                  <Link to="/newFeature" class="btn btn-sm btn-outline-info">
                     New Feature
-                  </a>
+                  </Link>
+                  {/* <a href="#!" class="btn btn-sm btn-outline-info">
+                    New Feature
+                  </a> */}
                 </div>
               </div>
               <div class="card pt-3 border-top-0 border-right-0 border-bottom-0">

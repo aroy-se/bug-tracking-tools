@@ -5,6 +5,7 @@ import bug_img from "../../assets/images/bug64.jpg";
 const CreateBugDetails = () => {
   // To show status message after successful insertion
   const [success, setSuccess] = useState(false);
+  const [id, setId] = useState("");
   // const [acceptCheck, setAcceptCheck] = useState(false);
 
   const initialState = {
@@ -86,6 +87,7 @@ const CreateBugDetails = () => {
       submitterEmail: input.submitterEmail,
       submitterCompany: input.submitterCompany,
     };
+    setId(newBug);
     saveBugDetails(newBug);
     // resetting the form fields after successful insertion
     setInput((prevState) => {
@@ -594,7 +596,7 @@ const CreateBugDetails = () => {
                           className="alert alert-success p-0 d-flex justify-content-center"
                           role="alert"
                         >
-                          Your Bug has been registered successfully!
+                          Your Bug(ID={id}) has been registered successfully!
                         </label>
                       )}
                     </span>

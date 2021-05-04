@@ -11,6 +11,9 @@ const USER_COLLECTION_NAME =
   process.env.REACT_APP_USER_COLLECTION_NAME || "user_details";
 const BUG_COLLECTION_NAME =
   process.env.REACT_APP_BUG_COLLECTION_NAME || "bug_details";
+const NEW_FEATURE_REQUEST_COLLECTION_NAME =
+  process.env.REACT_APP_NEW_FEATURE_REQUEST_COLLECTION_NAME ||
+  "new_feature_request_details";
 const LOCAL_DATABASE_URL =
   process.env.REACT_APP_LOCAL_DATABASE_URL || "mongodb://localhost:27017";
 
@@ -27,7 +30,19 @@ const cors = require("cors");
 api.use(cors());
 api.use(express.json());
 // Global variable
-var database, userCollection, bugCollection;
+var database, userCollection, bugCollection, newFeatureRequestCollection;
+// ---------------------------------------------------------
+// To Create a new Feature request
+// [C]RUD := [C]REATE => POST(ONE)
+api.post("/btt/newFeatureRequest", (request, response) => {
+  var toBeInsertedData = request.body;
+  newFeatureRequestCollection.insertOne(toBeInsertedData, (err, result) => {
+    if (err) {
+      return response.status(500).send(err);
+    }
+    response.send(result);
+  });
+});
 
 // ---------------------------------------------------------
 // To Create a Bug/Defect
@@ -246,6 +261,9 @@ console.log("PORT: " + PORT);
 console.log("DATABASE NAME: " + DATABASE_NAME);
 console.log("USER COLLECTION NAME: " + USER_COLLECTION_NAME);
 console.log("BUG COLLECTION NAME: " + BUG_COLLECTION_NAME);
+console.log(
+  "New Feature Request COLLECTION NAME: " + NEW_FEATURE_REQUEST_COLLECTION_NAME
+);
 console.log("MONGODB ATLAS URL: " + MONGODB_ATLAS_DATABASE_URL);
 api.listen(PORT, () => {
   // mongoClient.connect(LOCAL_DATABASE_URL, (err, client) => {
@@ -256,6 +274,9 @@ api.listen(PORT, () => {
     database = client.db(DATABASE_NAME);
     userCollection = database.collection(USER_COLLECTION_NAME);
     bugCollection = database.collection(BUG_COLLECTION_NAME);
+    newFeatureRequestCollection = database.collection(
+      NEW_FEATURE_REQUEST_COLLECTION_NAME
+    );
     console.log(
       `The BTT server is running on port ${PORT}...\nThe Database Connection is established successfully!!!`
     );

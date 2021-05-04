@@ -5,6 +5,7 @@ import * as Constants from "../../utility/Constants";
 const Registration = () => {
   // To show status message after successful insertion
   const [success, setSuccess] = useState(false);
+  const [id, setId] = useState("");
   const initialState = {
     userName: "",
     password: "",
@@ -51,6 +52,11 @@ const Registration = () => {
       email: input.email,
       mobile: input.mobile,
     };
+    setId(newUser);
+    // to get the data upto the root App
+    // setUserDetails(newUser);
+
+    // save the data intodatabase
     saveUserDetails(newUser);
     // resetting the form fields after successful insertion
     setInput((prevState) => {
@@ -364,7 +370,7 @@ const Registration = () => {
                         className="alert alert-success p-0 d-flex justify-content-center"
                         role="alert"
                       >
-                        The Record has been updated successfully!
+                        The User(ID={id}) has been registered successfully!
                       </label>
                     )}
                   </span>

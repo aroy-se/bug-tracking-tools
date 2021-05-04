@@ -10,14 +10,14 @@ class BugList extends Component {
       bugId: "",
       bugTitle: "",
       searchValue: "",
-      searchInputText:"",
+      searchInputText: "",
     };
     this.fetchDatafromDatabase = this.fetchDatafromDatabase.bind(this);
   }
   //  React Life cycle method
   componentDidMount() {
     const { searchInputText } = this.props.history.location.state;
-    this.setState({searchValue: searchInputText})
+    this.setState({ searchValue: searchInputText });
     var target_url = Constants.BUG_URL;
     var catch_err_msg = "";
     if (searchInputText === "") {
@@ -38,7 +38,7 @@ class BugList extends Component {
 
   componentDidUpdate(prevProps) {
     const { searchInputText } = this.props.history.location.state;
-      if(this.state.searchValue !== searchInputText){
+    if (this.state.searchValue !== searchInputText) {
       this.setState({
         searchValue: searchInputText,
       });
@@ -60,7 +60,6 @@ class BugList extends Component {
       }
       // window.location.href = window.location.href;
     }
-    console.log("--END--componentDidUpdate searchValue=>"+this.state.searchValue);
   }
 
   /**
