@@ -13,6 +13,9 @@ const BUG_COLLECTION_NAME =
   process.env.REACT_APP_BUG_COLLECTION_NAME || "bug_details";
 const LOCAL_DATABASE_URL =
   process.env.REACT_APP_LOCAL_DATABASE_URL || "mongodb://localhost:27017";
+const MONGODB_ATLAS_DATABASE_URL =
+  process.env.REACT_APP_MONGODB_ATLAS_DATABASE_URL ||
+  "mongodb+srv://aroy:admin@cluster0.bbylg.mongodb.net/btt";
 
 const cors = require("cors");
 // const bcrypt = require("bcrypt");
@@ -240,7 +243,8 @@ console.log("USER COLLECTION NAME: " + USER_COLLECTION_NAME);
 console.log("BUG COLLECTION NAME: " + BUG_COLLECTION_NAME);
 
 api.listen(PORT, () => {
-  mongoClient.connect(LOCAL_DATABASE_URL, (err, client) => {
+  // mongoClient.connect(LOCAL_DATABASE_URL, (err, client) => {
+  mongoClient.connect(MONGODB_ATLAS_DATABASE_URL, (err, client) => {
     if (err) {
       throw err;
     }

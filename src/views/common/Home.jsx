@@ -64,7 +64,7 @@ const Home = () => {
                   </p>
                   <Link
                     to="/createBugDetails"
-                    class="btn btn-sm btn-outline-primary"
+                    class="btn btn-sm btn-outline-danger"
                   >
                     Report a Bug
                   </Link>
@@ -107,7 +107,7 @@ const Home = () => {
                     to propose large changes to our Product.
                   </p>
                   {/* @TODO - ToBeImplemented */}
-                  <a href="#!" class="btn btn-sm btn-outline-primary">
+                  <a href="#!" class="btn btn-sm btn-outline-info">
                     New Feature
                   </a>
                 </div>
@@ -121,12 +121,12 @@ const Home = () => {
                     have related to the Bug Database and the Bug Submission
                     Process.
                   </p>
-                  <a
-                    href="#!"
-                    class="btn btn-sm p-0 pl-1 pr-1 btn-outline-primary"
+                  <Link
+                    to="/faq"
+                    class="btn btn-sm p-0 pl-1 pr-1 btn-outline-secondary"
                   >
                     FAQ Page
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

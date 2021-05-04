@@ -93,36 +93,37 @@ const UpdateBugDetails = () => {
     console.log(bugUpdateObject);
     saveBugDetails(bugUpdateObject);
     // resetting the form fields after successful updatation
-    // setInput((prevState) => {
-    //   return {
-    //     ...prevState,
-    //     issueType: "",
-    //     component: "",
-    //     reportVersion: "",
-    //     os: "",
-    //     issueSubType: "",
-    //     severity: "",
-    //     regressionVersion: "",
-    //     browser: "",
-    //     bugTitle: "",
-    //     bugDesc: "",
-    //     reproducibleSteps: "",
-    //     expectedOutput: "",
-    //     actualOutput: "",
-    //     sourceCode: "",
-    //     attachment: "",
-    //     workaround: "",
-    //     assignee: "",
-    //     eta: "",
-    //     fixVersion: "",
-    //     resolution: "",
-    //     state: "",
-    //     priority: "",
-    //     submitterName: "",
-    //     submitterEmail: "",
-    //     submitterCompany: "",
-    //   };
-    // });
+    setInput((prevState) => {
+      return {
+        ...prevState,
+        issueType: "",
+        component: "",
+        reportVersion: "",
+        os: "",
+        issueSubType: "",
+        severity: "",
+        regressionVersion: "",
+        browser: "",
+        bugTitle: "",
+        bugDesc: "",
+        reproducibleSteps: "",
+        expectedOutput: "",
+        actualOutput: "",
+        sourceCode: "",
+        attachment: "",
+        workaround: "",
+        assignee: "",
+        eta: "",
+        fixVersion: "",
+        resolution: "",
+        state: "",
+        priority: "",
+        submitterName: "",
+        submitterEmail: "",
+        submitterCompany: "",
+      };
+    });
+    document.getElementById("bugIdInputText").value = "";
   }
   // To save the bug object
   function saveBugDetails(bugUpdateObject) {
@@ -305,7 +306,7 @@ const UpdateBugDetails = () => {
                     className="custom-select shadow-sm form-control"
                     name="fixVersion"
                     id="fixVersion"
-                    value={bugData.fixVersion}
+                    value={input.fixVersion}
                     onChange={handleChange}
                   >
                     <option selected>Set fix Version</option>
@@ -1201,7 +1202,8 @@ const UpdateBugDetails = () => {
                           className="alert alert-success p-0 d-flex justify-content-center"
                           role="alert"
                         >
-                          The Bug,{input.bugId} has been updated successfully!
+                          The Bug-Id={input.bugId} has been updated
+                          successfully!
                         </label>
                       )}
                     </span>
