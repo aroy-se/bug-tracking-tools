@@ -23,7 +23,7 @@ class UserProfile extends React.Component {
           <div className="col-xl-3"></div>
           <div className="col-xl-6">
             <div class="card shadow">
-              <div class="card-header lead bg-danger text-light">
+              <div class="card-header lead bg-danger text-light shadow">
                 User Profile
               </div>
               <div className="card-body text-center">
@@ -31,6 +31,7 @@ class UserProfile extends React.Component {
                   src={user_profile_img}
                   alt="Card image"
                   style={{ width: 200, height: 200 }}
+                  className="shadow"
                 />
               </div>
               <div class="card-body text-center">

@@ -129,7 +129,7 @@ const UpdateUserDetails = () => {
       <div class="row">
         <div class="col-xl-12">
           <div class="card shadow">
-            <div class="card-header text-danger">
+            <div class="card-header text-danger shadow-sm">
               <h4 className="lead font-weight-bold">UPDATE USER DETAILS</h4>
             </div>
             <div class="card-body">
@@ -150,13 +150,13 @@ const UpdateUserDetails = () => {
                         <td>
                           <div class="form-group">
                             <h6>User ID</h6>
-                            <div class="input-group  shadow">
+                            <div class="input-group shadow-lg">
                               <input
                                 type="text"
-                                placeholder="Provide User ID to update details"
+                                placeholder="Provide a User ID to update the user details"
                                 required
                                 autoComplete="off"
-                                className="form-control fetch-n-update-by-id-text shadow-sm"
+                                className="form-control fetch-n-update-by-id-text"
                                 name="userId"
                                 value={input.userId}
                                 onChange={handleChange}

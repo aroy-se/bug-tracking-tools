@@ -56,7 +56,7 @@ const DeleteUserDetails = () => {
         <div class="col-xl-3"></div>
         <div class="col-xl-6">
           <div class="card shadow mb-5">
-            <div class="card-header text-danger">
+            <div class="card-header text-danger shadow bg-danger text-light">
               <h5>DELETE A USER RECORD</h5>
             </div>
             <div class="card-body">
@@ -66,7 +66,7 @@ const DeleteUserDetails = () => {
                     <label>User Id</label>
                     <input
                       type="text"
-                      class="form-control"
+                      class="form-control shadow-sm"
                       placeholder="Provide a User ID"
                       name="userId"
                       value={input.userId}
@@ -87,7 +87,7 @@ const DeleteUserDetails = () => {
                   <div class="form-group">
                     <input
                       type="submit"
-                      className="btn btn-danger btn-lg btn-block register#"
+                      className="btn btn-danger btn-lg btn-block shadow register#"
                       name="submit"
                       value="DELETE"
                       onClick={handleSubmit}

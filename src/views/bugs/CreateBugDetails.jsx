@@ -143,9 +143,9 @@ const CreateBugDetails = () => {
   return (
     <div className="container p-0 pt-5">
       <div class="row">
-        <div class="col-xl-12 p-0 ">
+        <div class="col-xl-12 p-0 mb-5">
           <div class="card shadow">
-            <div class="card-header text-danger form-inline d-flex justify-content-between">
+            <div class="card-header text-danger form-inline d-flex justify-content-between shadow-sm">
               <h4>REPORT A BUG</h4>
               <img
                 src={bug_img}

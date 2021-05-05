@@ -16,7 +16,11 @@ const Home = () => {
         {/* r1c2 - Home image box */}
         <div className="col-xl-8">
           <div class="card mb-0 shadow border-0">
-            <img class="card-img-top" src={home_bg_img} alt="Card image cap" />
+            <img
+              class="card-img-top shadow"
+              src={home_bg_img}
+              alt="Card image cap"
+            />
             <div class="card-img-overlay text-right">
               {/* <img src={bug64} alt="" className="" /> */}
             </div>
@@ -61,7 +65,7 @@ const Home = () => {
                   </p>
                   <Link
                     to="/createBugDetails"
-                    class="btn btn-sm btn-outline-danger"
+                    class="btn btn-sm btn-outline-danger shadow"
                   >
                     Report a Bug
                   </Link>
@@ -83,7 +87,7 @@ const Home = () => {
                   </p>
                   <Link
                     to="/createBugDetails"
-                    class="btn btn-sm btn-outline-primary"
+                    class="btn btn-sm btn-outline-primary shadow"
                   >
                     Enhancement
                   </Link>
@@ -103,13 +107,12 @@ const Home = () => {
                     it here. Please note that the Bug Database is not the venue
                     to propose large changes to our Product.
                   </p>
-                  {/* @TODO - ToBeImplemented */}
-                  <Link to="/newFeature" class="btn btn-sm btn-outline-info">
+                  <Link
+                    to="/newFeature"
+                    class="btn btn-sm btn-outline-info shadow"
+                  >
                     New Feature
                   </Link>
-                  {/* <a href="#!" class="btn btn-sm btn-outline-info">
-                    New Feature
-                  </a> */}
                 </div>
               </div>
               <div class="card pt-3 border-top-0 border-right-0 border-bottom-0">
@@ -123,7 +126,7 @@ const Home = () => {
                   </p>
                   <Link
                     to="/faq"
-                    class="btn btn-sm p-0 pl-1 pr-1 btn-outline-secondary"
+                    class="btn btn-sm p-0 pl-1 pr-1 btn-outline-secondary shadow"
                   >
                     FAQ Page
                   </Link>

@@ -2,7 +2,7 @@ import React from "react";
 
 const About = () => {
   return (
-    <div className="container mt-5 ">
+    <div className="container mt-5 mb-5">
       <div class="card shadow-lg">
         <div class="card-header text-danger">
           <h5>Frequently Asked Questions</h5>

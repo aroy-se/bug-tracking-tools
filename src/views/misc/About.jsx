@@ -3,7 +3,7 @@ import about_img from "../../assets/images/btt-brand.jpg";
 
 const About = () => {
   return (
-    <div className="container text-secondary font-weight-lighter mt-5 shadow-lg">
+    <div className="container text-secondary font-weight-lighter mt-5 mb-5 shadow-lg">
       <p>
         <small className="text-muted font-weight-lighter">
           <span>
@@ -19,7 +19,7 @@ const About = () => {
           development projects. It may be regarded as a type of issue tracking
           system. Many bug tracking systems, such as those used by most
           open-source software projects, allow end-users to enter bug reports
-          directly.[1] Other systems are used only internally in a company or
+          directly. Other systems are used only internally in a company or
           organization doing software development. Typically bug tracking
           systems are integrated with other project management software. A bug
           tracking system is usually a necessary component of a professional
@@ -34,7 +34,7 @@ const About = () => {
           facts about known bugs. Facts may include the time a bug was reported,
           its severity, the erroneous program behavior, and details on how to
           reproduce the bug; as well as the identity of the person who reported
-          it and any programmers who may be working on fixing it.[3] Typical bug
+          it and any programmers who may be working on fixing it. Typical bug
           tracking systems support the concept of the life cycle for a bug which
           is tracked through the status assigned to the bug. A bug tracking
           system should allow administrators to configure permissions based on
@@ -45,7 +45,7 @@ const About = () => {
           programmers, when new records are added or the status changes. It is
           possible to perform automated diagnosis based on the content of the
           bug report. For instance, one can do automated detection of bug
-          duplicates[4] or automatic bug fixing.[5]
+          duplicates or automatic bug fixing.
         </small>
       </p>
       <p>
@@ -86,15 +86,15 @@ const About = () => {
           Some bug trackers are designed to be used with distributed revision
           control software. These distributed bug trackers allow bug reports to
           be conveniently read, added to the database or updated while a
-          developer is offline.[6] Fossil and Veracity both include distributed
-          bug trackers. Recently, commercial bug tracking systems have also
-          begun to integrate with distributed version control. FogBugz, for
-          example, enables this functionality via the source-control tool,
-          Kiln.[7] Although wikis and bug tracking systems are conventionally
-          viewed as distinct types of software, ikiwiki can also be used as a
-          distributed bug tracker. It can manage documents and code as well, in
-          an integrated distributed manner. However, its query functionality is
-          not as advanced or as user-friendly as some other, non-distributed bug
+          developer is offline. Fossil and Veracity both include distributed bug
+          trackers. Recently, commercial bug tracking systems have also begun to
+          integrate with distributed version control. FogBugz, for example,
+          enables this functionality via the source-control tool, Kiln. Although
+          wikis and bug tracking systems are conventionally viewed as distinct
+          types of software, ikiwiki can also be used as a distributed bug
+          tracker. It can manage documents and code as well, in an integrated
+          distributed manner. However, its query functionality is not as
+          advanced or as user-friendly as some other, non-distributed bug
           trackers such as Bugzilla.[8] Similar statements can be made about
           org-mode, although it is not wiki software as such.
         </small>

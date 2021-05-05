@@ -100,7 +100,7 @@ const Registration = () => {
       <div class="row">
         <div class="col-xl-12">
           <div class="card shadow">
-            <div class="card-header text-danger">
+            <div class="card-header text-danger shadow-sm">
               <i class="fas fa-user-plus">
                 <span className=" text-danger lead">
                   {" "}
@@ -381,7 +381,7 @@ const Registration = () => {
                   </span>
                   <button
                     type="button"
-                    className="btn btn-danger btn-lg btn-block"
+                    className="btn btn-danger btn-lg btn-block shadow"
                     name="submit"
                     value="REGISTER"
                     onClick={handleSubmit}

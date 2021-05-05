@@ -214,12 +214,12 @@ const UpdateBugDetails = () => {
   return (
     <div className="container-fluid mt-5">
       {/* End of search bug id box */}
-      <div class="row">
+      <div class="row mb-5">
         {/* col-1 */}
         {/* Issue resolver info */}
         <div class="col-xl-2 pr-0 pl-1">
           <div class="card shadow">
-            <span class="blockquote card-header">
+            <span class="blockquote card-header shadow-sm">
               <i class="fa fa-bug text-danger" aria-hidden="true">
                 <span className="lead text-info"> Bug Resolution Info</span>
               </i>
@@ -321,9 +321,9 @@ const UpdateBugDetails = () => {
         </div>
         {/* </div> */}
         {/* col-2 */}
-        <div class="col-xl-8">
+        <div class="col-xl-8 mb-5">
           <div class="card shadow">
-            <div class="card-header text-danger form-inline d-flex justify-content-between p-2">
+            <div class="card-header text-danger form-inline d-flex justify-content-between p-2 shadow-sm">
               <div>
                 <h4 className="bugIdLabel">Bug-ID: #{bugData.bugId}</h4>
               </div>
@@ -1228,7 +1228,9 @@ const UpdateBugDetails = () => {
         {/* Submitter info */}
         <div class="col-xl-2 pl-0 pr-1">
           <div class="card shadow">
-            <span class="blockquote card-header text-info">Submitter Info</span>
+            <span class="blockquote card-header text-info shadow-sm">
+              Submitter Info
+            </span>
             <div class="card-body">
               <i class="far fa-user text-secondary" aria-hidden="true">
                 <span class="text-monospace card-title text-secondary">

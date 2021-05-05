@@ -29,7 +29,7 @@ class SearchBug extends Component {
         <div class="input-group">
           <input
             type="text"
-            class="form-control"
+            className="form-control shadow-sm"
             placeholder="Search bug by bug-id/title"
             required
             autoComplete="off"
@@ -40,7 +40,7 @@ class SearchBug extends Component {
           />
           <div class="input-group-append">
             <Link
-              class="btn btn-danger font-weight-bold"
+              class="btn btn-danger font-weight-bold shadow-sm"
               to={{
                 pathname: `/bugList`,
                 state: {

@@ -52,7 +52,7 @@ class Login extends Component {
           <div className="col-xl-3"></div>
           <div className="col-xl-5">
             <div class="card shadow border-danger">
-              <span class="card-header ">
+              <span class="card-header shadow-sm mb-2">
                 <i class="fas fa-sign-in-alt text-danger">
                   {" "}
                   <span className="lead text-danger">USER LOGIN</span>
@@ -60,7 +60,7 @@ class Login extends Component {
               </span>
               <div class="card-body">
                 <input
-                  className="login-username-input mb-2 mt-3"
+                  className="login-username-input mb-3 mt-3"
                   id="userName"
                   type="text"
                   placeholder="Username"

@@ -68,7 +68,7 @@ const NewFeature = () => {
         <div className="col-xl-2"></div>
         <div className="col-xl-8">
           <div class="card shadow">
-            <div class="card-header bg-info text-light">
+            <div class="card-header bg-info text-light shadow">
               <span className="lead">New Feature Request</span>
             </div>
             <div class="card-body">
@@ -77,7 +77,7 @@ const NewFeature = () => {
                   <label for="formGroupExampleInput">Feature Title</label>
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control shadow-sm"
                     id="formGroupExampleInput"
                     placeholder="Feature Title"
                     name="featureTitle"
@@ -91,7 +91,7 @@ const NewFeature = () => {
                   </label>
                   <textarea
                     type="textarea"
-                    class="form-control"
+                    class="form-control shadow-sm"
                     name="featureDesc"
                     value={input.featureDesc}
                     onChange={handleChange}
@@ -112,7 +112,7 @@ const NewFeature = () => {
                             <label>Submitter Name</label>
                             <input
                               type="text"
-                              class="form-control"
+                              class="form-control shadow-sm"
                               name="submitterName"
                               value={input.submitterName}
                               onChange={handleChange}
@@ -126,7 +126,7 @@ const NewFeature = () => {
                             <input
                               type="text"
                               class="form-control"
-                              name="submitterEmail"
+                              name="submitterEmail shadow-sm"
                               value={input.submitterEmail}
                               onChange={handleChange}
                               placeholder="Email ID"
@@ -139,7 +139,7 @@ const NewFeature = () => {
                             <input
                               type="text"
                               class="form-control"
-                              name="submitterCompany"
+                              name="submitterCompany shadow-sm"
                               value={input.submitterCompany}
                               onChange={handleChange}
                               placeholder="Company Name"
