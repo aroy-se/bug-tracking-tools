@@ -87,7 +87,7 @@ const CreateBugDetails = () => {
       submitterEmail: input.submitterEmail,
       submitterCompany: input.submitterCompany,
     };
-    setId(newBug);
+    setId(newBug.bugId);
     saveBugDetails(newBug);
     // resetting the form fields after successful insertion
     setInput((prevState) => {
