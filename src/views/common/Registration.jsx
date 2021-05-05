@@ -52,7 +52,7 @@ const Registration = () => {
       email: input.email,
       mobile: input.mobile,
     };
-    setId(newUser);
+    setId(newUser.userId);
     // to get the data upto the root App
     // setUserDetails(newUser);
 
@@ -249,7 +249,7 @@ const Registration = () => {
                           <div class="form-group">
                             <h6>Password</h6>
                             <input
-                              type="text"
+                              type="password"
                               className="user-password shadow-sm form-control"
                               required
                               autoComplete="off"
