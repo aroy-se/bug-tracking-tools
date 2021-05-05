@@ -94,13 +94,13 @@ class Login extends Component {
                     id="remember-me"
                   />
                   <label
-                    class="custom-control-label font-weight-lighter"
+                    class="custom-control-label font-weight-lighter mb-2"
                     for="remember-me"
                   >
                     Remember me
                   </label>
                 </div>
-                <button className="login-btn" onClick={this.checkLogin}>
+                <button className="login-btn mb-3" onClick={this.checkLogin}>
                   LOGIN
                 </button>
                 <div className="or-label">
