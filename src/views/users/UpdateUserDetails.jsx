@@ -128,9 +128,9 @@ const UpdateUserDetails = () => {
       {/* Main single row */}
       <div class="row">
         <div class="col-xl-12">
-          <div class="card">
+          <div class="card shadow">
             <div class="card-header text-danger">
-              <h4>UPDATE USER DETAILS</h4>
+              <h4 className="lead font-weight-bold">UPDATE USER DETAILS</h4>
             </div>
             <div class="card-body">
               {/* 1st col */}
@@ -150,7 +150,7 @@ const UpdateUserDetails = () => {
                         <td>
                           <div class="form-group">
                             <h6>User ID</h6>
-                            <div class="input-group">
+                            <div class="input-group  shadow">
                               <input
                                 type="text"
                                 placeholder="Provide User ID to update details"
@@ -434,13 +434,14 @@ const UpdateUserDetails = () => {
                         className="alert alert-success p-0 d-flex justify-content-center"
                         role="alert"
                       >
-                        The Record has been updated successfully!
+                        The UserId={input.userId} has been updated successfully!
+                        successfully!
                       </label>
                     )}
                   </span>
                   <button
                     type="button"
-                    className="btn btn-danger btn-lg btn-block"
+                    className="btn btn-danger btn-lg btn-block shadow"
                     name="submit"
                     value="UPDATE"
                     onClick={handleSubmit}

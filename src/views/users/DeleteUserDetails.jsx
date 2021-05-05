@@ -48,13 +48,14 @@ const DeleteUserDetails = () => {
       .then(() => {
         setSuccess(true);
       });
+    setInput({ userId: "" });
   };
   return (
     <div className="container" border="0">
       <div class="row mt-5">
         <div class="col-xl-3"></div>
         <div class="col-xl-6">
-          <div class="card">
+          <div class="card shadow mb-5">
             <div class="card-header text-danger">
               <h5>DELETE A USER RECORD</h5>
             </div>
@@ -66,7 +67,7 @@ const DeleteUserDetails = () => {
                     <input
                       type="text"
                       class="form-control"
-                      placeholder="Enter to-be-deleted User Id"
+                      placeholder="Provide a User ID"
                       name="userId"
                       value={input.userId}
                       onChange={handleChange}

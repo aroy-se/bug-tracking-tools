@@ -167,10 +167,9 @@ const NewFeature = () => {
                   </span>
                   <button
                     type="button"
-                    className="btn btn-danger btn-lg btn-block"
+                    className="btn btn-danger btn-lg btn-block shadow mb-2"
                     name="submit"
                     onClick={handleNewFeatureRequest}
-                    // disabled={acceptCheck}
                   >
                     NEW FEATURE REQUEST
                   </button>

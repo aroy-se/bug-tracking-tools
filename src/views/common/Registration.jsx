@@ -99,9 +99,14 @@ const Registration = () => {
       {/* Main single row */}
       <div class="row">
         <div class="col-xl-12">
-          <div class="card">
+          <div class="card shadow">
             <div class="card-header text-danger">
-              <h4>USER REGISTRATION FORM</h4>
+              <i class="fas fa-user-plus">
+                <span className=" text-danger lead">
+                  {" "}
+                  USER REGISTRATION FORM
+                </span>
+              </i>
             </div>
             <div class="card-body">
               <div class="row">
