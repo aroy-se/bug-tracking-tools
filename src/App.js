@@ -13,6 +13,7 @@ import CreateBugDetails from "./views/bugs/CreateBugDetails";
 import NewFeature from "./views/bugs/NewFeature";
 import BugList from "./views/bugs/BugList";
 import FetchBugDetailsById from "./views/bugs/FetchBugDetailsById";
+import UpdateBugDetails from "./views/bugs/UpdateBugDetails";
 import Faq from "./views/misc/Faq";
 import About from "./views/misc/About";
 
@@ -40,6 +41,7 @@ function App() {
         <Route path="/newFeature" component={NewFeature} />
         <Route path="/bugList" component={BugList} />
         <Route path="/fetchBugDetailsById" component={FetchBugDetailsById} />
+        <Route path="/updateBugDetails" component={UpdateBugDetails} />
         <Route path="/" component={Home} />
       </Switch>
     </div>

@@ -77,7 +77,7 @@ const Home = () => {
                   <h5 class="card-title">Enhancement</h5>
                   <p class="card-text text-justify font-weight-lighter">
                     If you have a suggestion for a small change to an existing
-                    API or the way in which ou product behaves, please propose
+                    API or the way in which our product behaves, please propose
                     it here. Please note that the Bug Database is not the venue
                     to propose large changes to our Product.
                   </p>

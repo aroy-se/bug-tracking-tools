@@ -77,42 +77,37 @@ class Header extends Component {
                         <SplitButton
                           key="Info"
                           id={`dropdown-split-variants-Info`}
-                          title="UserName"
+                          title="Anonymous User"
                           variant="light"
                           size=""
                         >
                           <Dropdown.Item eventKey="1">
-                            <i className="fas fa-user-circle text-info">
-                              <Link to="/userProfile" className="text-info">
+                            <Link to="/userProfile" className="text-info">
+                              <i className="fas fa-user-circle text-info">
                                 {" "}
                                 User Profile
-                              </Link>
-                            </i>
-                            {/* <i className="fas fa-user-circle text-info">
-                              <Link to="/userProfile" className="nav-link">
-                                User Profile
-                              </Link>
-                            </i> */}
+                              </i>
+                            </Link>
                           </Dropdown.Item>
                           <Dropdown.Item eventKey="2">
-                            <i className="fas fa-sign-in-alt text-secondary">
-                              <Link to="/login" className="text-secondary">
+                            <Link to="/login" className="text-secondary">
+                              <i className="fas fa-sign-in-alt text-secondary">
                                 {" "}
                                 Login
-                              </Link>
-                            </i>
+                              </i>
+                            </Link>
                           </Dropdown.Item>
                           <Dropdown.Item eventKey="3">
-                            <i className="fas fa-sign-out-alt text-secondary">
-                              <a
-                                className="text-secondary"
-                                href="#"
-                                onClick={(e) => this.logoutHandler(e)}
-                              >
+                            <a
+                              className="text-secondary"
+                              href="#"
+                              onClick={(e) => this.logoutHandler(e)}
+                            >
+                              <i className="fas fa-sign-out-alt text-secondary">
                                 {" "}
                                 Logout
-                              </a>
-                            </i>
+                              </i>
+                            </a>
                           </Dropdown.Item>
                           <Dropdown.Divider />
                           <Dropdown.Item eventKey="3">
@@ -131,12 +126,14 @@ class Header extends Component {
                           <Dropdown.Divider />
                           <Dropdown.Item eventKey="4" className="">
                             <span className="badge badge-primary text-monospace p-2">
-                              <i className="fas fa-user-plus">
-                                {" "}
-                                <Link to="/registration" className="text-light">
-                                  Registration
-                                </Link>
-                              </i>
+                              {" "}
+                              <Link to="/registration" className="text-light">
+                                <i className="fas fa-user-plus">
+                                  <span className="font-weight-bold pl-5 pr-5">
+                                    REGISTRATION
+                                  </span>
+                                </i>
+                              </Link>
                             </span>
                           </Dropdown.Item>
                         </SplitButton>

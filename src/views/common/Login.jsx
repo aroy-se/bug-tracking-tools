@@ -51,7 +51,7 @@ class Login extends Component {
         <div className="row">
           <div className="col-xl-3"></div>
           <div className="col-xl-5">
-            <div class="card shadow">
+            <div class="card shadow border-danger">
               <span class="card-header ">
                 <i class="fas fa-sign-in-alt text-danger">
                   {" "}
@@ -111,7 +111,11 @@ class Login extends Component {
                   </label>
                 </div>
                 <div className="create-account">
-                  <Link to="/registration">Create Account</Link>
+                  <Link to="/registration">
+                    <span className="text-primary badge badge-light">
+                      <u>Create Account</u>
+                    </span>
+                  </Link>
                 </div>
               </div>
             </div>
