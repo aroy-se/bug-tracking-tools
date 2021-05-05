@@ -31,4 +31,4 @@ WIKI
 -----
 Git wiki: https://github.com/aroy-se/bug-tracking-tools/wiki/Git-Setup-Wiki
 
-Architecture wiki: https://github.com/aroy-se/bug-tracking-tools/wiki/Architecture-of-Bugs-Tracking-Tools
+Structure wiki: https://github.com/aroy-se/bug-tracking-tools/wiki/Structure-of-Bugs-Tracking-Tools
