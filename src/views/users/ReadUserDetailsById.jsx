@@ -24,6 +24,8 @@ const ReadUserDetailsById = () => {
       .then((data) => {
         setUserDetails((userDetails) => [...userDetails, data]);
       });
+    // finally reset the array
+    setUserDetails([]);
   }
 
   return (

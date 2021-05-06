@@ -110,7 +110,12 @@ class Header extends Component {
                             </a>
                           </Dropdown.Item>
                           <Dropdown.Divider />
-                          <Dropdown.Item eventKey="3">
+                          <Dropdown.Item eventKey="4">
+                            <Link to="/adminPanel" className="text-secondary">
+                              <i class="fas fa-user-cog"> Admin Panel</i>
+                            </Link>
+                          </Dropdown.Item>
+                          <Dropdown.Item eventKey="5">
                             <Link
                               to="/userDashboard"
                               className="text-secondary"
@@ -118,13 +123,13 @@ class Header extends Component {
                               <i className="fas fa-users"> User Dashboard</i>
                             </Link>
                           </Dropdown.Item>
-                          <Dropdown.Item eventKey="3">
+                          <Dropdown.Item eventKey="6">
                             <Link to="/bugDashboard" className="text-secondary">
                               <i className="fas fa-bug"> Bug Dashboard</i>
                             </Link>
                           </Dropdown.Item>
                           <Dropdown.Divider />
-                          <Dropdown.Item eventKey="4" className="">
+                          <Dropdown.Item eventKey="7" className="">
                             <span className="badge badge-primary text-monospace p-2">
                               {" "}
                               <Link to="/registration" className="text-light">

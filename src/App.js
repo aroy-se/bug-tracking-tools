@@ -16,6 +16,7 @@ import FetchBugDetailsById from "./views/bugs/FetchBugDetailsById";
 import UpdateBugDetails from "./views/bugs/UpdateBugDetails";
 import Faq from "./views/misc/Faq";
 import About from "./views/misc/About";
+import AdminPanel from "./views/users/AdminPanel";
 
 function App() {
   const [userDetails, setUserDetails] = useState("");
@@ -35,6 +36,7 @@ function App() {
           path="/userProfile"
           component={() => <UserProfile userDetails={userDetails} />}
         />
+        <Route path="/adminPanel" component={AdminPanel} />
         <Route path="/userDashboard" component={UserDashboard} />
         <Route path="/bugDashboard" component={BugDashboard} />
         <Route path="/createBugDetails" component={CreateBugDetails} />

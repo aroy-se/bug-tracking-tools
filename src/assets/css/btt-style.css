@@ -329,3 +329,11 @@
   height: 2.5em;
   margin-right: 0;
 }
+.component-table-responsive {
+  position: relative;
+  height: 200px;
+  overflow: auto;
+}
+.table-wrapper-scroll-y {
+  display: block;
+}

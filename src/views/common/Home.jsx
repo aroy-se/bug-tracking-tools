@@ -33,7 +33,9 @@ const Home = () => {
               </p>
               <footer class="blockquote-footer float-right">
                 <small class="text-muted">
-                  Upcoming release BTT-v2021.06 will be released on 13-May-2021
+                  Upcoming release{" "}
+                  <span className="text-danger">BTT-v2021.06</span> will be
+                  released on <span className="text-danger">13-May-2021</span>
                 </small>
               </footer>
             </div>

@@ -11,6 +11,8 @@ const USER_COLLECTION_NAME =
   process.env.REACT_APP_USER_COLLECTION_NAME || "user_details";
 const BUG_COLLECTION_NAME =
   process.env.REACT_APP_BUG_COLLECTION_NAME || "bug_details";
+const COMPONENT_COLLECTION_NAME =
+  process.env.REACT_APP_COMPONENT_COLLECTION_NAME || "component_details";
 const NEW_FEATURE_REQUEST_COLLECTION_NAME =
   process.env.REACT_APP_NEW_FEATURE_REQUEST_COLLECTION_NAME ||
   "new_feature_request_details";
@@ -30,7 +32,79 @@ const cors = require("cors");
 api.use(cors());
 api.use(express.json());
 // Global variable
-var database, userCollection, bugCollection, newFeatureRequestCollection;
+var database,
+  userCollection,
+  bugCollection,
+  newFeatureRequestCollection,
+  componentCollection;
+// ---------------------------------------------------------
+// COMPONENT
+// ---------------------------------------------------------
+// [C]RUD := [C]REATE => POST(ONE)
+api.post("/btt/component", (request, response) => {
+  var toBeInsertedData = request.body;
+  componentCollection.insertOne(toBeInsertedData, (err, result) => {
+    if (err) {
+      return response.status(500).send(err);
+    }
+    response.send(result);
+  });
+});
+
+// TO Fetch all the components
+// C[R]UD := [R]EAD => GET(ALL)
+api.get("/btt/component", (request, response) => {
+  componentCollection.find({}).toArray((err, result) => {
+    if (err) {
+      return response.status(500).send(err);
+    }
+    response.send(result);
+  });
+});
+
+// To fetch all components By component name with regex
+api.get("/btt/componentByName/:name", (request, response) => {
+  var targetName = request.params.name;
+  componentCollection
+    .find({ componentName: { $regex: targetName, $options: "i" } })
+    .toArray((err, result) => {
+      if (err) {
+        return response.status(500).send(err);
+      }
+      response.send(result);
+    });
+});
+// To Fetch a component by component-Id
+// C[R]UD := [R]EAD => GET(ONE) - byId
+api.get("/btt/component/:id", (request, response) => {
+  var targetId = parseInt(request.params.id);
+  componentCollection.findOne({ componentId: targetId }, (err, result) => {
+    if (err) {
+      return response.status(500).send(err);
+    }
+    response.send(result);
+  });
+});
+// Update a Component by component-id
+// CR[U]D := [U]PDATE => PUT - ONE
+api.put("/btt/component/:id", (request, response) => {
+  var targetId = { componentId: parseInt(request.params.id) };
+  var toBeUpdated = {
+    $set: {
+      componentName: request.body.componentName,
+    },
+  };
+  componentCollection.updateOne(targetId, toBeUpdated, (err, result) => {
+    if (err) {
+      return response.status(500).send(err);
+    }
+    console.log("Record is updated!");
+    response.send(result);
+  });
+});
+
+// ---------------------------------------------------------
+// NEW FEATURE
 // ---------------------------------------------------------
 // To Create a new Feature request
 // [C]RUD := [C]REATE => POST(ONE)
@@ -147,8 +221,28 @@ api.put("/btt/bug/:id", (request, response) => {
 });
 
 // ---------------------------------------------------------
-// End of bug details
+// USER ROLE
 // ---------------------------------------------------------
+
+//UPDATE USER ROLE
+// CR[U]D := [U]PDATE => PUT - ONE
+api.put("/btt/userRole/:id", (request, response) => {
+  var targetId = { userId: parseInt(request.params.id) };
+  var toBeUpdated = {
+    $set: {
+      role: request.body.role,
+    },
+  };
+  userCollection.updateOne(targetId, toBeUpdated, (err, result) => {
+    if (err) {
+      return response.status(500).send(err);
+    }
+    console.log("Record is updated!");
+    response.send(result);
+  });
+});
+//------------------------------------------------------------
+
 // For User
 // [C]RUD := [C]REATE => POST(ONE)
 api.post("/btt", (request, response) => {
@@ -257,14 +351,16 @@ api.delete("/btt/:id", (request, response) => {
 
 // Setting server Port and establishing Mongo database connection
 console.log("LOCAL DATABASE URL: " + LOCAL_DATABASE_URL);
+console.log("MONGODB ATLAS URL: " + MONGODB_ATLAS_DATABASE_URL);
 console.log("PORT: " + PORT);
 console.log("DATABASE NAME: " + DATABASE_NAME);
 console.log("USER COLLECTION NAME: " + USER_COLLECTION_NAME);
 console.log("BUG COLLECTION NAME: " + BUG_COLLECTION_NAME);
+console.log("COMPONENT COLLECTION NAME: " + COMPONENT_COLLECTION_NAME);
 console.log(
-  "New Feature Request COLLECTION NAME: " + NEW_FEATURE_REQUEST_COLLECTION_NAME
+  "NEW FEATURE REQUEST COLLECTION NAME: " + NEW_FEATURE_REQUEST_COLLECTION_NAME
 );
-console.log("MONGODB ATLAS URL: " + MONGODB_ATLAS_DATABASE_URL);
+
 api.listen(PORT, () => {
   // mongoClient.connect(LOCAL_DATABASE_URL, (err, client) => {
   mongoClient.connect(MONGODB_ATLAS_DATABASE_URL, (err, client) => {
@@ -274,6 +370,7 @@ api.listen(PORT, () => {
     database = client.db(DATABASE_NAME);
     userCollection = database.collection(USER_COLLECTION_NAME);
     bugCollection = database.collection(BUG_COLLECTION_NAME);
+    componentCollection = database.collection(COMPONENT_COLLECTION_NAME);
     newFeatureRequestCollection = database.collection(
       NEW_FEATURE_REQUEST_COLLECTION_NAME
     );

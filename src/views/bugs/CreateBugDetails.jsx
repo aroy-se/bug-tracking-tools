@@ -163,7 +163,7 @@ const CreateBugDetails = () => {
                         {/* bug-type */}
                         <tr>
                           <td>
-                            <h6>Bug Type</h6>
+                            <h6>Issue Type</h6>
                           </td>
                           <td>
                             <input
@@ -260,7 +260,7 @@ const CreateBugDetails = () => {
                         {/* Bug-sub-type */}
                         <tr>
                           <td>
-                            <h6>Bug Sub-Type</h6>
+                            <h6>Issue Sub-Type</h6>
                           </td>
                           <td>
                             <input
