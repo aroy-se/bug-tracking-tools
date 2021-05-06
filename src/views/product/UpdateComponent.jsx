@@ -23,7 +23,7 @@ const UpdateComponent = () => {
 
   function handleUpdateComponentSubmit(event) {
     event.preventDefault();
-    if (input.componentName == "") {
+    if (input.componentName === "") {
       alert("Component-Name field should not be empty!");
       return;
     }
@@ -58,7 +58,7 @@ const UpdateComponent = () => {
   };
   function handleFetchById(event) {
     event.preventDefault();
-    if (input.componentId == "") {
+    if (input.componentId === "") {
       alert("Component-Id field should not be empty!");
       return;
     }

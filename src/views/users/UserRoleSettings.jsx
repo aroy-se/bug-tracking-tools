@@ -27,11 +27,11 @@ const UserRoleSettings = () => {
   function handleUserRoleSubmit(event) {
     event.preventDefault();
     console.log(input.role + "..." + input.newRole);
-    if (input.newRole == "") {
+    if (input.newRole === "") {
       alert(`Please select a role for the User, ${input.userName}!`);
       return;
     }
-    if (input.role == input.newRole) {
+    if (input.role === input.newRole) {
       alert("Selected and the existing role, both are same!");
       return;
     }
@@ -70,7 +70,7 @@ const UserRoleSettings = () => {
   };
   function handleFetchById(event) {
     event.preventDefault();
-    if (input.userId == "") {
+    if (input.userId === "") {
       alert("User-ID field should not be empty!");
       return;
     }

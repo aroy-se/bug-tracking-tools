@@ -21,6 +21,12 @@ class BugList extends Component {
     var target_url = Constants.BUG_URL;
     var catch_err_msg = "";
     if (searchInputText === "") {
+      if (window.confirm("Do you really want to fetch all the Bugs?")) {
+        // Fetch All!
+      } else {
+        // Do nothing!
+        return;
+      }
       // Calling whole bug list
       this.fetchDatafromDatabase(target_url, false, catch_err_msg);
     } else if (isNaN(searchInputText)) {
@@ -45,6 +51,12 @@ class BugList extends Component {
       var target_url = Constants.BUG_URL;
       var catch_err_msg = "";
       if (searchInputText === "") {
+        if (window.confirm("Do you really want to fetch all the Bugs?")) {
+          // Fetch All!
+        } else {
+          // Do nothing!
+          return;
+        }
         // Calling whole bug list
         this.fetchDatafromDatabase(target_url, false, catch_err_msg);
       } else if (isNaN(searchInputText)) {

@@ -23,8 +23,7 @@ const CreateComponent = () => {
 
   var handlenSubmitNewComponent = (event) => {
     event.preventDefault();
-    console.log("input.productName::::::::::: " + input.productName);
-    if (input.productName == "") {
+    if (input.productName === "") {
       alert("Please choose a Product Name");
       return;
     }

@@ -16,6 +16,12 @@ class ViewComponent extends Component {
   }
   handleFetchComponent(event) {
     event.preventDefault();
+    if (window.confirm("Do you want to fetch all the components?")) {
+      // Fetch all!
+    } else {
+      // Do nothing!
+      return;
+    }
     let URL = Constants.COMPONENT_URL;
     if (this.state.componentName !== "") {
       URL = Constants.COMPONENT_BY_NAME_URL + this.state.componentName;
@@ -56,7 +62,6 @@ class ViewComponent extends Component {
               <input
                 type="text"
                 class="form-control"
-                placeholder=""
                 aria-label=""
                 aria-describedby="basic-addon1"
                 placeholder="Provide component name"
