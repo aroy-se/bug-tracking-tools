@@ -1,4 +1,5 @@
 import React from "react";
+import $ from "jquery";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import CreateUserDetails from "./CreateUserDetails";
 import ReadUserDetails from "./ReadUserDetails";
@@ -6,72 +7,84 @@ import ReadUserDetailsById from "./ReadUserDetailsById";
 import ReadUserDetailsByName from "./ReadUserDetailsByName";
 import UpdateUserDetails from "./UpdateUserDetails";
 import DeleteUserDetails from "./DeleteUserDetails";
+import ViewUserDetails from "./ViewUserDetails";
 
-const UserDashboard = () => {
-  return (
-    <BrowserRouter>
-      <div className="user-dashboard">
-        <ul>
-          <li>
-            <Link to="/createUserDetails">
-              <label className="user-dashboard-label">Insert Details</label>
-            </Link>
-          </li>
-          <li>
-            <Link to="/readUserDetails">
-              <label className="user-dashboard-label">Fetch Details</label>
-            </Link>
-          </li>
-          <li>
-            <Link to="/readUserDetailsById">
-              <label className="user-dashboard-label">
-                Fetch Details by User Id
-              </label>
-            </Link>
-          </li>
-          <li>
-            <Link to="/readUserDetailsByName">
-              <label className="user-dashboard-label">
-                Fetch Details by User Name
-              </label>
-            </Link>
-          </li>
-          <li>
-            <Link to="/updateUserDetails">
-              <label className="user-dashboard-label">Update Details</label>
-            </Link>
-          </li>
-          <li>
-            <Link to="/deleteUserDetails">
-              <label className="user-dashboard-label">Delete Details</label>
-            </Link>
-          </li>
-        </ul>
-        <Switch>
-          <Route
-            path="/createUserDetails"
-            component={CreateUserDetails}
-          ></Route>
-          <Route path="/readUserDetails" component={ReadUserDetails}></Route>
-          <Route
-            path="/readUserDetailsById"
-            component={ReadUserDetailsById}
-          ></Route>
-          <Route
-            path="/readUserDetailsByName"
-            component={ReadUserDetailsByName}
-          ></Route>
-          <Route
-            path="/updateUserDetails"
-            component={UpdateUserDetails}
-          ></Route>
-          <Route
-            path="/deleteUserDetails"
-            component={DeleteUserDetails}
-          ></Route>
-        </Switch>
-      </div>
-    </BrowserRouter>
-  );
-};
+class UserDashboard extends React.Component {
+  componentDidMount() {
+    // Jquery
+    $("#bugTab a").on("click", function (e) {
+      e.preventDefault();
+      $(this).tab("show");
+    });
+  }
+  render() {
+    return (
+      <BrowserRouter>
+        <div className="card shadow mt-3 rounded-0">
+          <div className="card-header lead font-weight-bold text-danger">
+            USER DASHBOARD
+          </div>
+          <div className="card-body ">
+            {/* Start-Navigation page */}
+            <ul class="nav nav-tabs" id="bugTab" role="tablist">
+              <li class="nav-item">
+                <a
+                  class="nav-link active text-danger"
+                  id="view-tab"
+                  data-toggle="tab"
+                  href="#view"
+                  role="tab"
+                  aria-controls="view"
+                  aria-selected="true"
+                >
+                  View Users
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link disabled"
+                  id="stat-tab"
+                  data-toggle="tab"
+                  href="#stat"
+                  role="tab"
+                  aria-controls="stat"
+                  aria-selected="true"
+                  disabled
+                >
+                  User Stat
+                </a>
+              </li>
+            </ul>
+            <div class="tab-content border shadow" id="userTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="view"
+                role="tabpanel"
+                aria-labelledby="view-tab"
+              >
+                <div class="card-body bg-white  pl-2 pr-2">
+                  <ViewUserDetails />
+                </div>
+              </div>
+              <div
+                class="tab-pane fade show"
+                id="stat"
+                role="tabpanel"
+                aria-labelledby="stat-tab"
+              >
+                <div class="card-body bg-white pl-0 pr-0 m-0">
+                  {/* <UserStat /> */}
+                </div>
+              </div>
+            </div>
+            {/* End Navigation Page */}
+            {/* </div>
+              </div>
+            </div> */}
+          </div>
+        </div>
+      </BrowserRouter>
+    );
+  }
+}
 export default UserDashboard;

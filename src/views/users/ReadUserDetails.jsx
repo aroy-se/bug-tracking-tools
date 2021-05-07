@@ -22,8 +22,7 @@ class ReadUserDetails extends Component {
           <thead class="thead-light">
             <tr>
               <th>ID</th>
-              <th>First Name</th>
-              <th>Last Name</th>
+              <th>Name</th>
               <th>Username</th>
               <th>Password</th>
               <th>Role</th>
@@ -40,8 +39,9 @@ class ReadUserDetails extends Component {
           {this.state.userDetails.map((user, index) => (
             <tr key={index}>
               <td>{user.userId}</td>
-              <td>{user.firstName}</td>
-              <td>{user.lastName}</td>
+              <td>
+                {user.firstName} {user.lastName}
+              </td>
               <td>{user.userName}</td>
               <td>{user.password}</td>
               <td>{user.role}</td>

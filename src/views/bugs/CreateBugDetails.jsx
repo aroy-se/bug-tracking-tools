@@ -37,7 +37,7 @@ const CreateBugDetails = () => {
     fixVersion: "NA",
     resolution: "Unresolved",
     state: "New",
-    priority: "P4-Low",
+    priority: "Undecided",
     // duplicateBugIds: [""],
   };
   const [input, setInput] = useState(initialState);
@@ -81,7 +81,7 @@ const CreateBugDetails = () => {
       fixVersion: "NA",
       resolution: "Unresolved",
       state: "New",
-      priority: "P4-Low",
+      priority: "Undecided",
       // duplicateBugIds: [""],
 
       submitterName: input.submitterName,
@@ -121,7 +121,7 @@ const CreateBugDetails = () => {
         fixVersion: "NA",
         resolution: "Unresolved",
         state: "New",
-        priority: "P4-Low",
+        priority: "Undecided",
         // duplicateBugIds: [""],
       };
     });
@@ -141,6 +141,7 @@ const CreateBugDetails = () => {
         setSuccess(true);
       });
   };
+  // To fetch all the components from the database
   function handleOnClickComponent(event) {
     event.preventDefault();
     fetch(Constants.COMPONENT_URL)
@@ -244,6 +245,7 @@ const CreateBugDetails = () => {
                               <option>BTT-v2020.09</option>
                               <option>BTT-v2020.12</option>
                               <option>BTT-v2021.03</option>
+                              <option>NA</option>
                             </select>
                           </td>
                         </tr>
@@ -339,6 +341,7 @@ const CreateBugDetails = () => {
                               <option>BTT-v2020.06</option>
                               <option>BTT-v2020.09</option>
                               <option>BTT-v2020.12</option>
+                              <option>NA</option>
                             </select>
                           </td>
                         </tr>

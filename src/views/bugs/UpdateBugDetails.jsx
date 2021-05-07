@@ -36,7 +36,8 @@ const UpdateBugDetails = () => {
   const [bugData, setBugData] = useState([]);
   const [editable, setEditable] = useState(false);
   const [etaDate, setEtaDate] = useState(new Date());
-
+  const [componentDetails, setComponentDetails] = useState([]);
+  const [assigneeDetails, setAssigneeDetails] = useState([]);
   // set Bug page ediatable or not
   // function editBugDetails(event) {
   //   console.log(editable);
@@ -210,9 +211,32 @@ const UpdateBugDetails = () => {
       });
     document.getElementById("bugIdInputText").value = "";
   }
-
+  // To fetch all the components from the database
+  function handleOnClickComponent(event) {
+    event.preventDefault();
+    fetch(Constants.COMPONENT_URL)
+      .then((response) => response.json())
+      .then((data) => {
+        setComponentDetails(data);
+      })
+      .catch(() => {
+        alert(`A problem is occured while fetching all the component names`);
+      });
+  }
+  // To fetch all the assignee from the database
+  function handleOnClickAssignee(event) {
+    event.preventDefault();
+    fetch(Constants.URL)
+      .then((response) => response.json())
+      .then((data) => {
+        setAssigneeDetails(data);
+      })
+      .catch(() => {
+        alert(`A problem is occured while fetching all the component names`);
+      });
+  }
   return (
-    <div className="container-fluid mt-5">
+    <div className="container-fluid">
       {/* End of search bug id box */}
       <div class="row mb-5">
         {/* col-1 */}
@@ -244,12 +268,14 @@ const UpdateBugDetails = () => {
                   id="assignee"
                   value={input.assignee}
                   onChange={handleChange}
+                  onClick={handleOnClickAssignee}
                 >
                   <option>Set Assignee</option>
-                  <option>Elangovan Perumalsamy</option>
-                  <option>Afroz Khan</option>
-                  <option>Seela Balaji</option>
-                  <option>Abhijit Roy</option>
+                  {assigneeDetails.map((assignee, index) => (
+                    <option>
+                      {assignee.firstName} {assignee.lastName}
+                    </option>
+                  ))}
                 </select>
               )}
               <i class="far fa-calendar-alt text-secondary" aria-hidden="true">
@@ -313,6 +339,7 @@ const UpdateBugDetails = () => {
                     <option>BTT-v2021.06</option>
                     <option>BTT-v2021.09</option>
                     <option>BTT-v2021.12</option>
+                    <option>NA</option>
                   </select>
                 </div>
               )}
@@ -437,14 +464,19 @@ const UpdateBugDetails = () => {
                                   id="component"
                                   value={input.component}
                                   onChange={handleChange}
+                                  onClick={handleOnClickComponent}
                                 >
                                   <option selected>Set Component</option>
-                                  <option>Component-1</option>
+                                  {componentDetails.map((component, index) => (
+                                    <option>{component.componentName}</option>
+                                  ))}
+                                  <option>NA</option>
+                                  {/* <option>Component-1</option>
                                   <option>Component-2</option>
                                   <option>Component-3</option>
                                   <option>BTT-Authentication</option>
                                   <option>BTT-Bugs</option>
-                                  <option>BTT-Users</option>
+                                  <option>BTT-Users</option> */}
                                 </select>
                               </div>
                             )}
@@ -478,6 +510,7 @@ const UpdateBugDetails = () => {
                                 <option>BTT-v2020.09</option>
                                 <option>BTT-v2020.12</option>
                                 <option>BTT-v2021.03</option>
+                                <option>NA</option>
                               </select>
                             )}
                           </td>
@@ -635,6 +668,7 @@ const UpdateBugDetails = () => {
                                   <option>BTT-v2020.06</option>
                                   <option>BTT-v2020.09</option>
                                   <option>BTT-v2020.12</option>
+                                  <option>NA</option>
                                 </select>
                               </div>
                             )}

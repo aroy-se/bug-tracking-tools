@@ -331,7 +331,7 @@
 }
 .component-table-responsive {
   position: relative;
-  height: 200px;
+  height: 400px;
   overflow: auto;
 }
 .table-wrapper-scroll-y {

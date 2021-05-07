@@ -7,6 +7,7 @@ class ViewComponent extends Component {
       componentId: "",
       componentName: "",
       componentDetails: [],
+      successFetch: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFetchComponent = this.handleFetchComponent.bind(this);
@@ -59,6 +60,7 @@ class ViewComponent extends Component {
       componentId: "",
       componentName: "",
       componentDetails: [],
+      successFetch: false,
     });
   }
   /**
@@ -82,6 +84,7 @@ class ViewComponent extends Component {
         } else {
           this.setState({ componentDetails: data });
         }
+        this.setState({ successFetch: true });
       })
       .catch(
         catch_err_msg === ""
@@ -99,8 +102,8 @@ class ViewComponent extends Component {
     return (
       <div className="">
         <div className="row">
-          <div className="col-xl-3"></div>
-          <div className="col-xl-6 mb-3">
+          <div className="col-xl-4"></div>
+          <div className="col-xl-4 mb-3">
             <div class="input-group">
               <input
                 type="text"
@@ -125,34 +128,46 @@ class ViewComponent extends Component {
               </div>
             </div>
           </div>
-          <div className="col-xl-3"></div>
+          <div className="col-xl-4"></div>
         </div>
-        <div className="row">
-          <div className="col-xl-12">
-            <div className="table-wrapper-scroll-y component-table-responsive">
-              <table className="table table-sm table-hover border">
-                <thead class="thead-light">
-                  <tr>
-                    <th>Product Name</th>
-                    <th>Component ID</th>
-                    <th>Component Name</th>
-                    <th>Created Time</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.componentDetails.map((component, index) => (
-                    <tr key={index}>
-                      <td>{component.productName}</td>
-                      <td>{component.componentId}</td>
-                      <td>{component.componentName}</td>
-                      <td>{component.createdTime}</td>
+        {this.state.successFetch ? (
+          <div className="row">
+            <div className="col-xl-12">
+              <div className="table-wrapper-scroll-y component-table-responsive">
+                <table className="table table-sm table-hover border">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>Product Name</th>
+                      <th>Component ID</th>
+                      <th>Component Name</th>
+                      <th>Created Time</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {this.state.componentDetails.map((component, index) => (
+                      <tr key={index}>
+                        <td>{component.productName}</td>
+                        <td>{component.componentId}</td>
+                        <td>{component.componentName}</td>
+                        <td>{component.createdTime}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="row">
+            <div className="col-xl-3"></div>
+            <div className="col-xl-6">
+              <div className="alert alert-danger text-center">
+                Empty Result! Click on search to fetch the component details...
+              </div>
+            </div>
+            <div className="col-xl-3"></div>
+          </div>
+        )}
       </div>
     );
   }

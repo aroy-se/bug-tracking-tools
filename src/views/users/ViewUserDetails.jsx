@@ -9,6 +9,7 @@ class ViewUserDetails extends React.Component {
       userId: "",
       userName: "",
       searchInputText: "",
+      successFetch: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFetchUserSubmit = this.handleFetchUserSubmit.bind(this);
@@ -44,16 +45,19 @@ class ViewUserDetails extends React.Component {
         // Do nothing!
         return;
       }
+      console.log("empty target_url" + target_url);
       // Calling whole bug list
       this.fetchDatafromDatabase(target_url, false, catch_err_msg);
     } else if (isNaN(inputText)) {
       // fetch data by username
       target_url = Constants.URL_USER_BY_NAME + inputText;
       catch_err_msg = inputText;
+      console.log("name target_url: " + target_url);
       this.fetchDatafromDatabase(target_url, false, catch_err_msg);
     } else {
       // fetch data by user id
       target_url = Constants.URL + parseInt(inputText);
+      console.log("id target_url" + target_url);
       catch_err_msg = inputText;
       this.fetchDatafromDatabase(target_url, true, catch_err_msg);
     }
@@ -65,6 +69,7 @@ class ViewUserDetails extends React.Component {
       userId: "",
       userName: "",
       searchInputText: "",
+      successFetch: false,
     });
   }
 
@@ -89,6 +94,7 @@ class ViewUserDetails extends React.Component {
         } else {
           this.setState({ userDetails: data });
         }
+        this.setState({ successFetch: true });
       })
       .catch(
         catch_err_msg === ""
@@ -136,52 +142,64 @@ class ViewUserDetails extends React.Component {
           </div>
           <div className="col-xl-4"></div>
         </div>
-        <div className="row">
-          <div className="col-xl-12">
-            <div className="table-wrapper-scroll-y component-table-responsive">
-              <table className="table table-sm table-hover border">
-                <thead class="thead-light">
-                  <tr>
-                    <th>User-ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>Role</th>
-                    <th>Address-1</th>
-                    <th>Address-2</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Zip</th>
-                    <th>Photo</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.userDetails.map((user, index) => (
-                    <tr key={index}>
-                      <td>{user.userId}</td>
-                      <td>{user.firstName}</td>
-                      <td>{user.lastName}</td>
-                      <td>{user.userName}</td>
-                      <td>{user.password}</td>
-                      <td>{user.role}</td>
-                      <td>{user.address1}</td>
-                      <td>{user.address2}</td>
-                      <td>{user.city}</td>
-                      <td>{user.state}</td>
-                      <td>{user.zip}</td>
-                      <td>{user.photo}</td>
-                      <td>{user.email}</td>
-                      <td>{user.mobile}</td>
+        {this.state.successFetch ? (
+          <div className="row">
+            <div className="col-xl-12">
+              <div className="table-wrapper-scroll-y component-table-responsive">
+                <table className="table table-sm table-hover border">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>User-ID</th>
+                      <th>Username</th>
+                      <th>Name</th>
+                      {/* <th>Password</th> */}
+                      <th>Role</th>
+                      <th>Address-1</th>
+                      <th>Address-2</th>
+                      <th>City</th>
+                      <th>State</th>
+                      <th>Zip</th>
+                      {/* <th>Photo</th> */}
+                      <th>Email</th>
+                      <th>Phone</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {this.state.userDetails.map((user, index) => (
+                      <tr key={index}>
+                        <td>{user.userId}</td>
+                        <td>{user.userName}</td>
+                        <td>
+                          {user.firstName} {user.lastName}
+                        </td>
+                        {/* <td>{user.password}</td> */}
+                        <td>{user.role}</td>
+                        <td>{user.address1}</td>
+                        <td>{user.address2}</td>
+                        <td>{user.city}</td>
+                        <td>{user.state}</td>
+                        <td>{user.zip}</td>
+                        {/* <td>{user.photo}</td> */}
+                        <td>{user.email}</td>
+                        <td>{user.mobile}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="row">
+            <div className="col-xl-3"></div>
+            <div className="col-xl-6">
+              <div className="alert alert-danger text-center">
+                Empty Result! Click on search to fetch the user details...
+              </div>
+            </div>
+            <div className="col-xl-3"></div>
+          </div>
+        )}
       </div>
     );
   }
