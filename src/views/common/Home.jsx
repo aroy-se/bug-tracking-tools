@@ -20,15 +20,51 @@ const Home = () => {
               src={home_bg_img}
               alt="Card image cap"
             />
-            <div class="card-img-overlay text-right">
+            <div class="card-img-overlay text-center m-5 text-light">
               {/* <img src={bug64} alt="" className="" /> */}
+              <h2 class="card-title Blockquote">BTT - Bug Tracking Tools</h2>
+              <p class="card-text font-weight-lighter">
+                Bug tracking product, developed by APC-Web Development POC-G1
+                team, used for bug tracking and project management.
+              </p>
             </div>
             <div class="card-body">
-              <h5 class="card-title Blockquote">BTT - Bug Tracking Tools</h5>
+              {/* <h5 class="card-title Blockquote">BTT - Bug Tracking Tools</h5>
               <p class="card-text font-weight-lighter">
                 It is a brand new bug tracking product, developed by APC-Web
                 Development POC-G1 team, used for bug tracking and project
                 management.
+              </p> */}
+              <p class="card-text font-weight-lighter m-0">
+                <small class="text-muted m-0">
+                  The following steps may resolve your problem
+                </small>
+              </p>
+              <p class="card-text font-weight-lighter m-0">
+                <small class="text-muted m-0">
+                  <i class="far fa-hand-point-right">
+                    {" "}
+                    Use the latest version.
+                  </i>
+                </small>
+              </p>
+              <p class="card-text font-weight-lighter m-0">
+                <small class="text-muted m-0">
+                  <i class="far fa-hand-point-right">
+                    {" "}
+                    Check if the bug is already exist in our bug database.
+                  </i>
+                </small>
+              </p>
+              <p class="card-text font-weight-lighter m-0">
+                <small class="text-muted m-0">
+                  {" "}
+                  <i class="far fa-hand-point-right">
+                    {" "}
+                    Finding a duplicate saves your time and ours, specially if
+                    there is a known workaround or fix.
+                  </i>
+                </small>
               </p>
               <footer class="blockquote-footer float-right">
                 <small class="text-muted">
