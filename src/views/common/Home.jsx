@@ -21,20 +21,15 @@ const Home = () => {
               alt="Card image cap"
             />
             <div class="card-img-overlay text-center m-5 text-light">
-              {/* <img src={bug64} alt="" className="" /> */}
               <h2 class="card-title Blockquote">BTT - Bug Tracking Tools</h2>
               <p class="card-text font-weight-lighter">
-                Bug tracking product, developed by APC-Web Development POC-G1
-                team, used for bug tracking and project management.
+                <small>
+                  Bug tracking product, developed by APC-Web Development POC-G1
+                  team, used for bug tracking and project management.
+                </small>
               </p>
             </div>
             <div class="card-body">
-              {/* <h5 class="card-title Blockquote">BTT - Bug Tracking Tools</h5>
-              <p class="card-text font-weight-lighter">
-                It is a brand new bug tracking product, developed by APC-Web
-                Development POC-G1 team, used for bug tracking and project
-                management.
-              </p> */}
               <p class="card-text font-weight-lighter m-0">
                 <small class="text-muted m-0">
                   The following steps may resolve your problem
@@ -96,9 +91,7 @@ const Home = () => {
                     If you discover an issue with our Product, please start by
                     searching the Bug Database to find out if that issue has
                     been reported and fixed already. Once you confirm that the
-                    issue you discovered is new, please report it here. In your
-                    report, please include all relevant and detailed information
-                    necessary to reproduce the issue.
+                    issue you discovered is new, please report it here.
                   </p>
                   <Link
                     to="/createBugDetails"
