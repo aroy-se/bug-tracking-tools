@@ -336,17 +336,21 @@ api.put("/btt/:id", (request, response) => {
 });
 
 // CRU[D] := [D]ELETE - DELETE - ONE
-api.delete("/btt/:id", (request, response) => {
+
+api.delete("/btt/:id", (request, response, next) => {
   var targetDelete = parseInt(request.params.id);
-  userCollection.deleteOne({ userId: targetDelete }, (err, result) => {
-    if (err) {
-      return response.status(500).send(err);
-    }
-    response.send({
-      message: `The record[user_id:${targetDelete}] has beeen deleted successfully!`,
-      result,
+  userCollection
+    .deleteOne({ userId: targetDelete })
+    .then(() => {
+      response.status(200).json({
+        message: "The User record has been deleted Successfully!",
+      });
+    })
+    .catch((error) => {
+      response.status(400).json({
+        error: error,
+      });
     });
-  });
 });
 
 // Setting server Port and establishing Mongo database connection

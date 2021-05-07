@@ -36,20 +36,6 @@ const DeleteUserDetails = () => {
     event.preventDefault();
     const deleteAnUser = {
       userId: input.userId,
-      // userName: input.userName,
-      // password: input.password,
-      // firstName: input.firstName,
-      // lastName: input.lastName,
-      // address1: input.address1,
-      // address2: input.address2,
-      // city: input.city,
-      // state: input.state,
-      // zip: input.zip,
-      // photo: input.photo,
-      // email: input.email,
-      // mobile: input.mobile,
-      // language:input.language,
-      // moreInfo: input.moreInfo,
     };
     deleteUserDetails(deleteAnUser);
     // setInput.value = "";
@@ -57,11 +43,6 @@ const DeleteUserDetails = () => {
   var deleteUserDetails = (userData) => {
     const parameters = {
       method: "DELETE",
-      // headers: {
-      //   "Access-Control-Allow-Origin": "*",
-      //   "Content-Type": "application/json",
-      // },
-      // body: JSON.stringify(userData),
     };
     console.log(Constants.URL + input.userId);
     fetch(Constants.URL + parseInt(input.userId), parameters)
@@ -71,7 +52,6 @@ const DeleteUserDetails = () => {
       });
   };
   return (
-    // <div className="dashboard-details">
     <div className="registration_main" border="0">
       <form>
         <table className="registration_table">
@@ -114,7 +94,7 @@ const DeleteUserDetails = () => {
                 type="submit"
                 className="register"
                 name="submit"
-                value="DELETE"
+                value="DELETE USER"
                 onClick={handleSubmit}
               />
             </td>

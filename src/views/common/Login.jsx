@@ -50,8 +50,8 @@ class Login extends Component {
       <div className="container mt-5">
         <div className="row">
           <div className="col-xl-3"></div>
-          <div className="col-xl-5">
-            <div class="card shadow border-danger">
+          <div className="col-xl-5 mt-5">
+            <div class="card shadow border-danger#">
               <span class="card-header shadow-sm mb-2">
                 <i class="fas fa-sign-in-alt text-danger">
                   {" "}

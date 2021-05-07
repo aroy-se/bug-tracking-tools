@@ -294,6 +294,7 @@ const Registration = () => {
                               <option>Assam</option>
                               <option>Bihar</option>
                               <option>Chhattisgarh</option>
+                              <option>Delhi</option>
                               <option>Goa</option>
                               <option>Gujarat</option>
                               <option>Haryana</option>

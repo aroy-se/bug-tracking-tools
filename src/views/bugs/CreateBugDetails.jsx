@@ -6,6 +6,7 @@ const CreateBugDetails = () => {
   // To show status message after successful insertion
   const [success, setSuccess] = useState(false);
   const [id, setId] = useState("");
+  const [componentDetails, setComponentDetails] = useState([]);
   // const [acceptCheck, setAcceptCheck] = useState(false);
 
   const initialState = {
@@ -140,6 +141,17 @@ const CreateBugDetails = () => {
         setSuccess(true);
       });
   };
+  function handleOnClickComponent(event) {
+    event.preventDefault();
+    fetch(Constants.COMPONENT_URL)
+      .then((response) => response.json())
+      .then((data) => {
+        setComponentDetails(data);
+      })
+      .catch(() => {
+        alert(`A problem occures while fetching all the component names`);
+      });
+  }
   return (
     <div className="container p-0 pt-5">
       <div class="row">
@@ -196,16 +208,21 @@ const CreateBugDetails = () => {
                             <select
                               className="custom-select shadow-sm form-control"
                               name="component"
-                              value={input.component}
-                              onChange={handleChange}
+                              // value={input.component}
+                              // onChange={handleChange}
+                              // value={componentDetails.componentName}
+                              onClick={handleOnClickComponent}
                             >
                               <option selected>Select Any Component</option>
-                              <option>Component-1</option>
+                              {componentDetails.map((component, index) => (
+                                <option>{component.componentName}</option>
+                              ))}
+                              {/* <option>Component-1</option>
                               <option>Component-2</option>
                               <option>Component-3</option>
                               <option>BTT-Authentication</option>
                               <option>BTT-Bugs</option>
-                              <option>BTT-Users</option>
+                              <option>BTT-Users</option> */}
                             </select>
                           </td>
                         </tr>

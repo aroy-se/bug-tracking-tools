@@ -4,6 +4,7 @@ class ViewComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      componentId: "",
       componentName: "",
       componentDetails: [],
     };
@@ -12,21 +13,62 @@ class ViewComponent extends Component {
   }
   // Handle function
   handleChange(event) {
-    this.setState({ componentName: event.target.value });
+    if (event.target.value === "") {
+      this.setState({ componentId: "" });
+      this.setState({ componentName: "" });
+    } else {
+      if (isNaN(event.target.value)) {
+        this.setState({ componentName: event.target.value });
+      } else {
+        this.setState({ componentId: event.target.value });
+      }
+    }
   }
   handleFetchComponent(event) {
-    event.preventDefault();
-    if (window.confirm("Do you want to fetch all the components?")) {
-      // Fetch all!
+    // event.preventDefault();
+    var searchInputText =
+      this.state.componentId !== ""
+        ? this.state.componentId
+        : this.state.componentName !== ""
+        ? this.state.componentName
+        : "";
+    var target_url = Constants.COMPONENT_URL;
+    var catch_err_msg = "";
+    if (searchInputText === "") {
+      if (window.confirm("Do you really want to fetch all the Components?")) {
+        // Fetch All!
+      } else {
+        // Do nothing!
+        return;
+      }
+      // Calling whole bug list
+      this.fetchDatafromDatabase(target_url, false, catch_err_msg);
+    } else if (isNaN(searchInputText)) {
+      // fetch data by bug title
+      target_url = Constants.COMPONENT_BY_NAME_URL + searchInputText;
+      catch_err_msg = searchInputText;
+      this.fetchDatafromDatabase(target_url, false, catch_err_msg);
     } else {
-      // Do nothing!
-      return;
+      // fetch data by bug id
+      target_url = Constants.COMPONENT_URL + parseInt(searchInputText);
+      catch_err_msg = searchInputText;
+      this.fetchDatafromDatabase(target_url, true, catch_err_msg);
     }
-    let URL = Constants.COMPONENT_URL;
-    if (this.state.componentName !== "") {
-      URL = Constants.COMPONENT_BY_NAME_URL + this.state.componentName;
-    }
-    fetch(URL)
+    // finally reset the array
+    this.setState({
+      componentId: "",
+      componentName: "",
+      componentDetails: [],
+    });
+  }
+  /**
+   * To fetch data
+   * arg1- var(string):: db url
+   * arg2- boolean:: wrap the data inside an array
+   * arg3- var(string):: error-catch message
+   */
+  fetchDatafromDatabase(url, wrapArray, catch_err_msg) {
+    fetch(url)
       .then((response) => {
         if (!response.ok) {
           throw Error(response.statusText);
@@ -35,21 +77,22 @@ class ViewComponent extends Component {
       })
       .then((response) => response.json())
       .then((data) => {
-        data.forEach((componentData) => {
-          this.setState({
-            componentDetails: [...this.state.componentDetails, componentData],
-          });
-        });
+        if (wrapArray === true) {
+          this.setState({ componentDetails: new Array(data) });
+        } else {
+          this.setState({ componentDetails: data });
+        }
       })
-      .catch(() => {
-        alert(
-          `The Component: ${this.state.componentName} does not exist in our database`
-        );
-      });
-    // finally reset the array
-    this.setState({
-      componentDetails: [],
-    });
+      .catch(
+        catch_err_msg === ""
+          ? (error) => console.log("Error: " + error)
+          : () => {
+              alert(
+                `The component, ${catch_err_msg} does not exist in our database`
+              );
+            }
+      );
+    return;
   }
 
   render() {
@@ -61,14 +104,12 @@ class ViewComponent extends Component {
             <div class="input-group">
               <input
                 type="text"
-                class="form-control"
-                aria-label=""
-                aria-describedby="basic-addon1"
-                placeholder="Provide component name"
-                required={true}
+                className="form-control shadow-sm"
+                placeholder="Search component/s by Id/Name"
+                required
                 autoComplete="off"
                 name="componentName"
-                value={this.state.componentName}
+                id="componentName"
                 onChange={this.handleChange}
               />
               <div class="input-group-append">

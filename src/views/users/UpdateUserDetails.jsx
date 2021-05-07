@@ -5,6 +5,7 @@ import update_img from "../../assets/images/user_register.jpg";
 const UpdateUserDetails = () => {
   // To show status message after successful insertion
   const [success, setSuccess] = useState(false);
+  const [id, setId] = useState("");
   const [input, setInput] = useState({
     userId: "",
     userName: "",
@@ -23,6 +24,8 @@ const UpdateUserDetails = () => {
 
   // Handle function
   function handleChange(event) {
+    // reset the status label
+    setSuccess(false);
     const { name, value } = event.target;
     setInput((prevInput) => {
       return {
@@ -30,11 +33,13 @@ const UpdateUserDetails = () => {
         [name]: value,
       };
     });
-    // reset the status label
-    setSuccess(false);
   }
   function handleFetchById(event) {
     event.preventDefault();
+    if (input.userId === "") {
+      alert("User-Id field should not be empty!");
+      return;
+    }
     fetch(Constants.URL + parseInt(input.userId))
       .then((response) => response.json())
       .then((data) => {
@@ -87,11 +92,14 @@ const UpdateUserDetails = () => {
       email: input.email,
       mobile: input.mobile,
     };
+    setId(userUpdateObject.userId);
     saveUserDetails(userUpdateObject);
     // resetting the form fields after successful updation
+    // document.getElementById("userId").value = "";
     setInput((prevState) => {
       return {
         ...prevState,
+        userId: "",
         userName: "",
         password: "",
         firstName: "",
@@ -124,12 +132,12 @@ const UpdateUserDetails = () => {
   };
   return (
     // <!-- START - Tag <div> for Main HTML body (Registration Details) -->
-    <div class="container mt-5">
+    <div class="container">
       {/* Main single row */}
       <div class="row">
         <div class="col-xl-12">
           <div class="card shadow">
-            <div class="card-header text-danger shadow-sm">
+            <div class="card-header text-danger shadow-sm pt-2 pb-1">
               <h4 className="lead font-weight-bold">UPDATE USER DETAILS</h4>
             </div>
             <div class="card-body">
@@ -158,6 +166,7 @@ const UpdateUserDetails = () => {
                                 autoComplete="off"
                                 className="form-control fetch-n-update-by-id-text"
                                 name="userId"
+                                id="userId"
                                 value={input.userId}
                                 onChange={handleChange}
                               />
@@ -189,7 +198,7 @@ const UpdateUserDetails = () => {
                       {/* First Name */}
                       <tr>
                         <td>
-                          <div class="form-group">
+                          <div class="form-group  p-0 m-0">
                             <h6>First Name</h6>
                             <input
                               type="text"
@@ -205,7 +214,7 @@ const UpdateUserDetails = () => {
                       {/* Username */}
                       <tr>
                         <td>
-                          <div class="form-group">
+                          <div class="form-group  p-0 m-0">
                             <h6>Username</h6>
                             <input
                               type="text"
@@ -221,7 +230,7 @@ const UpdateUserDetails = () => {
                       {/* Address1 */}
                       <tr>
                         <td>
-                          <div class="form-group">
+                          <div class="form-group  p-0 m-0">
                             <h6>Address1</h6>
                             <input
                               type="text"
@@ -237,7 +246,7 @@ const UpdateUserDetails = () => {
                       {/* City */}
                       <tr>
                         <td>
-                          <div class="form-group">
+                          <div class="form-group  p-0 m-0">
                             <h6>City</h6>
                             <input
                               type="text"
@@ -253,7 +262,7 @@ const UpdateUserDetails = () => {
                       {/* Zip Code */}
                       <tr>
                         <td>
-                          <div class="form-group">
+                          <div class="form-group  p-0 m-0">
                             <h6>Zip Code</h6>
                             <input
                               type="text"
@@ -269,7 +278,7 @@ const UpdateUserDetails = () => {
                       {/* Phone Number */}
                       <tr>
                         <td>
-                          <div class="form-group">
+                          <div class="form-group  p-0 m-0">
                             <h6>Phone Number</h6>
                             <input
                               type="text"
@@ -293,7 +302,7 @@ const UpdateUserDetails = () => {
                       {/* Last Name */}
                       <tr>
                         <td>
-                          <div class="form-group">
+                          <div class="form-group  p-0 m-0">
                             <h6>Last Name</h6>
                             <input
                               type="text"
@@ -310,10 +319,10 @@ const UpdateUserDetails = () => {
                       {/* Password */}
                       <tr>
                         <td>
-                          <div class="form-group">
+                          <div class="form-group  p-0 m-0">
                             <h6>Password</h6>
                             <input
-                              type="text"
+                              type="password"
                               className="update-password shadow-sm form-control"
                               autoComplete="off"
                               name="password"
@@ -325,7 +334,7 @@ const UpdateUserDetails = () => {
                       </tr>
                       <tr>
                         <td>
-                          <div class="form-group">
+                          <div class="form-group  p-0 m-0">
                             <h6>Address2</h6>
                             <input
                               type="text"
@@ -341,7 +350,7 @@ const UpdateUserDetails = () => {
                       {/* State */}
                       <tr>
                         <td>
-                          <div class="form-group">
+                          <div class="form-group  p-0 m-0">
                             <h6>State</h6>
                             <select
                               name="state"
@@ -355,6 +364,7 @@ const UpdateUserDetails = () => {
                               <option>Assam</option>
                               <option>Bihar</option>
                               <option>Chhattisgarh</option>
+                              <option>Delhi</option>
                               <option>Goa</option>
                               <option>Gujarat</option>
                               <option>Haryana</option>
@@ -385,7 +395,7 @@ const UpdateUserDetails = () => {
                       {/* Email ID */}
                       <tr>
                         <td>
-                          <div class="form-group">
+                          <div class="form-group  p-0 m-0">
                             <h6>Email ID</h6>
                             <input
                               type="text"
@@ -401,7 +411,7 @@ const UpdateUserDetails = () => {
                       {/* User Photo */}
                       <tr>
                         <td>
-                          <div class="form-group ">
+                          <div class="form-group  p-0 m-0">
                             <h6>User Photo (Max Limit: 500KB)</h6>
                             <div className="custom-file">
                               <input
@@ -414,7 +424,7 @@ const UpdateUserDetails = () => {
                                 onChange={handleChange}
                               />
                               <label class="custom-file-label" for="attachment">
-                                Choose photo
+                                {input.photo}
                               </label>
                             </div>
                           </div>
@@ -434,8 +444,7 @@ const UpdateUserDetails = () => {
                         className="alert alert-success p-0 d-flex justify-content-center"
                         role="alert"
                       >
-                        The UserId={input.userId} has been updated successfully!
-                        successfully!
+                        The UserId={id} has been updated successfully!
                       </label>
                     )}
                   </span>
@@ -446,7 +455,7 @@ const UpdateUserDetails = () => {
                     value="UPDATE"
                     onClick={handleSubmit}
                   >
-                    UPDATE
+                    UPDATE USER
                   </button>
                 </div>
                 <div class="col-xl-3"></div>

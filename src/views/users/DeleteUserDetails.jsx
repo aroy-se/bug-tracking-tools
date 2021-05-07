@@ -5,7 +5,7 @@ const DeleteUserDetails = () => {
   // To show status message after successful insertion
   const [success, setSuccess] = useState(false);
   const [input, setInput] = useState({
-    // userId: 0,
+    userId: "",
     userName: "",
     password: "",
     firstName: "",
@@ -23,6 +23,8 @@ const DeleteUserDetails = () => {
 
   // Handle function
   function handleChange(event) {
+    // reset msg
+    setSuccess(false);
     const { name, value } = event.target;
     setInput((prevInput) => {
       return {
@@ -33,6 +35,10 @@ const DeleteUserDetails = () => {
   }
   function handleSubmit(event) {
     event.preventDefault();
+    if (input.userId === "") {
+      alert("UserId field should not be empty!");
+      return;
+    }
     const deleteAnUser = {
       userId: input.userId,
     };
@@ -44,26 +50,37 @@ const DeleteUserDetails = () => {
     };
     console.log(Constants.URL + input.userId);
     fetch(Constants.URL + parseInt(input.userId), parameters)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
       .then((response) => response.json())
       .then(() => {
         setSuccess(true);
+      })
+      .catch(() => {
+        alert(`The User, ${input.userId} does not exist in our database!`);
       });
     setInput({ userId: "" });
   };
   return (
     <div className="container" border="0">
-      <div class="row mt-5">
+      <div class="row">
         <div class="col-xl-3"></div>
         <div class="col-xl-6">
-          <div class="card shadow mb-5">
-            <div class="card-header text-danger shadow bg-danger text-light">
+          <div class="card shadow">
+            <div class="card-header text-danger shadow-sm">
               <h5>DELETE A USER RECORD</h5>
             </div>
             <div class="card-body">
               <div class="row">
                 <div class="col-xl-12">
                   <div class="form-group">
-                    <label>User Id</label>
+                    <label className="badge badge-light text-dark">
+                      User Id
+                    </label>
                     <input
                       type="text"
                       class="form-control shadow-sm"
@@ -89,7 +106,7 @@ const DeleteUserDetails = () => {
                       type="submit"
                       className="btn btn-danger btn-lg btn-block shadow register#"
                       name="submit"
-                      value="DELETE"
+                      value="DELETE USER"
                       onClick={handleSubmit}
                     />
                   </div>

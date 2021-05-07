@@ -1,9 +1,10 @@
 import React from "react";
-import * as Constants from "../../utility/Constants";
-import UpdateComponent from "./UpdateComponent";
-import CreateComponent from "./CreateComponent";
-import ViewComponent from "./ViewComponents";
-const ManageComponent = () => {
+import UserRoleSettings from "../users/UserRoleSettings";
+import UpdateUserDetails from "./UpdateUserDetails";
+import DeleteUserDetails from "./DeleteUserDetails";
+import ViewUserDetails from "./ViewUserDetails";
+
+const UserSettings = () => {
   return (
     <div className="mt-0">
       <div className="row">
@@ -19,7 +20,7 @@ const ManageComponent = () => {
                     aria-expanded="true"
                     aria-controls="collapseOne"
                   >
-                    View All Components
+                    User Role Settings
                   </button>
                 </h5>
               </div>
@@ -31,10 +32,11 @@ const ManageComponent = () => {
                 data-parent="#accordion"
               >
                 <div class="card-body">
-                  <ViewComponent />
+                  <UserRoleSettings />
                 </div>
               </div>
             </div>
+            {/* ///////////View USER//////////// */}
             <div class="card">
               <div class="card-header" id="headingTwo">
                 <h5 class="mb-0">
@@ -45,7 +47,7 @@ const ManageComponent = () => {
                     aria-expanded="false"
                     aria-controls="collapseTwo"
                   >
-                    Create Component
+                    View User
                   </button>
                 </h5>
               </div>
@@ -57,15 +59,16 @@ const ManageComponent = () => {
               >
                 <div class="card-body ">
                   <div className="row ">
-                    <div className="col-xl-3"></div>
-                    <div className="col-xl-6 shadow pt-3 pb-3">
-                      <CreateComponent />
+                    {/* <div className="col-xl-3"></div> */}
+                    <div className="col-xl-12">
+                      <ViewUserDetails />
                     </div>
-                    <div className="col-xl-3"></div>
+                    {/* <div className="col-xl-3"></div> */}
                   </div>
                 </div>
               </div>
             </div>
+            {/* ////////////UPDATE USER///////////// */}
             <div class="card">
               <div class="card-header" id="headingThree">
                 <h5 class="mb-0">
@@ -76,7 +79,7 @@ const ManageComponent = () => {
                     aria-expanded="false"
                     aria-controls="collapseThree"
                   >
-                    Update Component
+                    Update User
                   </button>
                 </h5>
               </div>
@@ -87,13 +90,46 @@ const ManageComponent = () => {
                 data-parent="#accordion"
               >
                 <div class="card-body">
-                  <div className="row ">
+                  {/* <div className="row "> */}
+                  {/* <div className="col-xl-3"></div> */}
+                  {/* <div className="col-xl-12"> */}
+                  <UpdateUserDetails />
+                  {/* </div> */}
+                  {/* <div className="col-xl-3"></div> */}
+                  {/* </div> */}
+                </div>
+              </div>
+            </div>
+            {/* /////////DELETE USER//////////// */}
+
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                  <button
+                    class="btn btn-link collapsed text-danger p-0"
+                    data-toggle="collapse"
+                    data-target="#collapseFour"
+                    aria-expanded="false"
+                    aria-controls="collapseFour"
+                  >
+                    Delete User
+                  </button>
+                </h5>
+              </div>
+              <div
+                id="collapseFour"
+                class="collapse"
+                aria-labelledby="headingThree"
+                data-parent="#accordion"
+              >
+                <div class="card-body">
+                  {/* <div className="row ">
                     <div className="col-xl-3"></div>
-                    <div className="col-xl-6 shadow pt-3 pb-3">
-                      <UpdateComponent />
-                    </div>
-                    <div className="col-xl-3"></div>
-                  </div>
+                    <div className="col-xl-6 shadow pt-3 pb-3"> */}
+                  <DeleteUserDetails />
+                  {/* </div> */}
+                  {/* <div className="col-xl-3"></div> */}
+                  {/* </div> */}
                 </div>
               </div>
             </div>
@@ -103,4 +139,4 @@ const ManageComponent = () => {
     </div>
   );
 };
-export default ManageComponent;
+export default UserSettings;

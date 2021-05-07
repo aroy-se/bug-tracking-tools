@@ -15,9 +15,11 @@ class ReadUserDetails extends Component {
   }
   render() {
     return (
-      <div className="dashboard-details">
-        <table className="user-table">
-          <thead>
+      // <div className="dashboard-details">
+      //   <table className="user-table">
+      <div className="table-wrapper-scroll-y component-table-responsive">
+        <table className="table table-sm table-hover border">
+          <thead class="thead-light">
             <tr>
               <th>ID</th>
               <th>First Name</th>

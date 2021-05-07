@@ -128,7 +128,7 @@ const Home = () => {
                   </p>
                   <Link
                     to="/faq"
-                    class="btn btn-sm p-0 pl-1 pr-1 btn-outline-secondary shadow"
+                    class="btn btn-sm btn-outline-secondary shadow"
                   >
                     FAQ Page
                   </Link>

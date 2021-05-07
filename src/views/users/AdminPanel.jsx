@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import $ from "jquery";
-import UserRoleSettings from "./UserRoleSettings";
+import UserSettings from "./UserSettings";
 import ManageComponent from "../product/ManageComponent";
 class AdminPanel extends React.Component {
   constructor(props) {
@@ -9,20 +8,23 @@ class AdminPanel extends React.Component {
   }
   componentDidMount() {
     // Jquery
-    $("#myTab a").on("click", function (e) {
+    $("#adminTab a").on("click", function (e) {
       e.preventDefault();
       $(this).tab("show");
     });
   }
   render() {
     return (
-      <div className="container mt-5 mb-5">
+      <div className="container-fluid mt-5 mb-5">
         <div className="row">
           <div className="col-xl-12">
             <div className="card shadow">
+              <div className="card-header lead font-weight-bold text-danger">
+                <i class="fas fa-user-cog"> ADMIN PANEL</i>
+              </div>
               <div className="card-body ">
                 {/* Start-Navigation page */}
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <ul class="nav nav-tabs" id="adminTab" role="tablist">
                   <li class="nav-item">
                     <a
                       class="nav-link active text-danger"
@@ -36,7 +38,7 @@ class AdminPanel extends React.Component {
                       User
                     </a>
                   </li>
-                  <li class="nav-item text-danger">
+                  <li class="nav-item">
                     <a
                       class="nav-link text-danger"
                       id="component-tab"
@@ -44,13 +46,13 @@ class AdminPanel extends React.Component {
                       href="#component"
                       role="tab"
                       aria-controls="component"
-                      aria-selected="false"
+                      aria-selected="true"
                     >
                       Component
                     </a>
                   </li>
                 </ul>
-                <div class="tab-content" id="myTabContent">
+                <div class="tab-content" id="adminTabContent">
                   <div
                     class="tab-pane fade show active"
                     id="user"
@@ -58,7 +60,7 @@ class AdminPanel extends React.Component {
                     aria-labelledby="user-tab"
                   >
                     <div class="card-body bg-white">
-                      <UserRoleSettings />
+                      <UserSettings />
                     </div>
                   </div>
                   <div
