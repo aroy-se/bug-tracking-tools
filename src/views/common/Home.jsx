@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import home_bg_img from "../../assets/images/home_bg_img.jpg";
 import bug_img from "../../assets/images/bug_home_img.jpg";
-import bug64 from "../../assets/images/bug64.jpg";
 import enhancement_img from "../../assets/images/enhancement_home_img.jpg";
 import new_feature_img from "../../assets/images/new_feature_home_img.jpg";
 import faq_img from "../../assets/images/faq_home_img.jpg";

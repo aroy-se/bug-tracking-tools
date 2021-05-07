@@ -19,15 +19,15 @@ class FetchBugDetails extends Component {
         <table className="table table-bordered">
           <thead className="thead-light">
             <tr>
-              <th>Bug-ID</th>
+              <th>BugId</th>
               <th>Created Time</th>
-              <th>Issue Type</th>
+              <th>Type</th>
               <th>Component</th>
-              <th>Report Version</th>
+              <th>Reported Version</th>
               {/* <th>OS</th> */}
               {/* <th>Issue Sub-type</th> */}
               {/* <th>Severity</th> */}
-              <th>Regression Version</th>
+              <th>Regression</th>
               {/* <th>Browser</th> */}
               <th>Bug Title</th>
               {/* <th>Bug Desc</th> */}
@@ -37,9 +37,10 @@ class FetchBugDetails extends Component {
               {/* <th>Source Code</th> */}
               {/* <th>Attachment</th> */}
               {/* <th>Workaround</th> */}
-              <th>Submitter Name</th>
-              <th>Submitter Email</th>
-              <th>Submitter Company</th>
+              <th>Submitter</th>
+              <th>Assignee</th>
+              {/* <th>Submitter Email</th> */}
+              {/* <th>Submitter Company</th> */}
             </tr>
           </thead>
           <tbody>
@@ -64,8 +65,9 @@ class FetchBugDetails extends Component {
                 {/* <td>{bug.attachment}</td> */}
                 {/* <td>{bug.workaround}</td> */}
                 <td>{bug.submitterName}</td>
-                <td>{bug.submitterEmail}</td>
-                <td>{bug.submitterCompany}</td>
+                <td>{bug.assignee}</td>
+                {/* <td>{bug.submitterEmail}</td>
+                <td>{bug.submitterCompany}</td> */}
               </tr>
             ))}
           </tbody>

@@ -1,5 +1,4 @@
 import React from "react";
-import * as Constants from "../../utility/Constants";
 import UpdateComponent from "./UpdateComponent";
 import CreateComponent from "./CreateComponent";
 import ViewComponent from "./ViewComponents";

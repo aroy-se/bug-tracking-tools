@@ -3,9 +3,9 @@ import $ from "jquery";
 import UserSettings from "./UserSettings";
 import ManageComponent from "../product/ManageComponent";
 class AdminPanel extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
   componentDidMount() {
     // Jquery
     $("#adminTab a").on("click", function (e) {

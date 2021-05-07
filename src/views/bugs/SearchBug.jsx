@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import * as Constants from "../../utility/Constants";
 
 class SearchBug extends Component {
   constructor(props) {
@@ -57,23 +56,6 @@ class SearchBug extends Component {
         </div>
       </div>
     );
-    // For testing purpose
-    {
-      /* <div>
-        <span class="">
-          {bugCount !== 0 ? (
-            <span class="badge badge-pill badge-success pb-1 mt-2 shadow">
-              {"Found " + bugCount + (bugCount > 1 ? " items" : " item")}
-            </span>
-          ) : (
-            <span class="badge badge-pill badge-secondary pb-1 mt-2 shadow">
-              No result found
-            </span>
-          )}
-          {}
-        </span>
-      </div> */
-    }
   }
 }
 
