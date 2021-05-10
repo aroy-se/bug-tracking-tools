@@ -1,128 +1,247 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as Constants from "../../utility/Constants";
+import { setInStorage, getFromStorage } from "../../utility/storage";
+import Home from "./Home";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: "",
-      pwd: "",
+      isLoading: true,
+      token: "",
+      loginError: "",
+      loginSuccess: "",
+
+      email: "",
+      password: "",
       userDetails: [],
     };
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+    this.onClickLogIn = this.onClickLogIn.bind(this);
   }
-
-  componentDidMount() {
-    fetch(Constants.URL)
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ userDetails: data });
+  onChangeEmail(event) {
+    this.setState({
+      email: event.target.value,
+    });
+  }
+  onChangePassword(event) {
+    this.setState({
+      password: event.target.value,
+    });
+  }
+  onClickLogIn() {
+    // Grab state
+    const { email, password } = this.state;
+    this.setState({
+      isLoading: true,
+    });
+    // Post request to backend
+    fetch("http://localhost:8765/btt/user/login", {
+      method: "POST",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log("json", json);
+        if (json.success) {
+          setInStorage("btt_local_storage", { token: json.token });
+          this.setState({
+            loginError: "",
+            loginSuccess: json.message,
+            isLoading: false,
+            password: "",
+            email: "",
+            token: json.token,
+          });
+        } else {
+          this.setState({
+            loginSuccess: "",
+            loginError: json.message,
+            isLoading: false,
+          });
+        }
       });
   }
-  checkLogin = () => {
-    const data = this.state.userDetails;
-    for (let i = 0; i < data.length; i++) {
-      if (
-        this.state.userName === data[i].userName &&
-        this.state.pwd === data[i].password
-      ) {
-        this.setState({ error: false, success: true });
-        break;
-      } else {
-        this.setState({ error: true });
-      }
+  componentDidMount() {
+    const obj = getFromStorage("btt_local_storage");
+    if (obj && obj.token) {
+      const { token } = obj;
+      // Verify token
+      fetch("http://localhost:8765/btt/user/verify?token=" + token)
+        .then((res) => res.json())
+        .then((json) => {
+          if (json.success) {
+            this.setState({
+              token,
+              isLoading: false,
+            });
+          } else {
+            this.setState({
+              isLoading: false,
+            });
+          }
+        });
+    } else {
+      this.setState({
+        isLoading: false,
+      });
     }
-  };
+  }
+  // checkLogin = () => {
+  //   const data = this.state.userDetails;
+  //   for (let i = 0; i < data.length; i++) {
+  //     if (
+  //       this.state.userName === data[i].userName &&
+  //       this.state.pwd === data[i].password
+  //     ) {
+  //       this.setState({ error: false, success: true });
+  //       break;
+  //     } else {
+  //       this.setState({ error: true });
+  //     }
+  //   }
+  // };
 
-  changeUsernameState = (event) => {
-    this.setState({ error: false, success: false });
-    this.setState({ userName: event.target.value });
-  };
+  // changeUsernameState = (event) => {
+  //   this.setState({ error: false, success: false });
+  //   this.setState({ userName: event.target.value });
+  // };
 
-  changePasswordState = (event) => {
-    this.setState({ error: false, success: false });
-    this.setState({ pwd: event.target.value });
-  };
+  // changePasswordState = (event) => {
+  //   this.setState({ error: false, success: false });
+  //   this.setState({ pwd: event.target.value });
+  // };
 
   render() {
-    const { error, success } = this.state;
-    return (
-      <div className="container mt-5">
-        <div className="row">
-          <div className="col-xl-3"></div>
-          <div className="col-xl-5 mt-5">
-            <div class="card shadow border-danger#">
-              <span class="card-header shadow-sm mb-2">
-                <i class="fas fa-sign-in-alt text-danger">
-                  {" "}
-                  <span className="lead text-danger">USER LOGIN</span>
-                </i>
-              </span>
-              <div class="card-body">
-                <input
-                  className="login-username-input mb-3 mt-3"
-                  id="userName"
-                  type="text"
-                  placeholder="Username"
-                  onChange={this.changeUsernameState}
-                  required
-                  autoComplete="off"
-                />
-                <input
-                  className={`login-password-input ${
-                    error ? "error-password-input" : ""
-                  }`}
-                  id="userName"
-                  type="password"
-                  placeholder="Password"
-                  onChange={this.changePasswordState}
-                  required
-                  autoComplete="off"
-                />
-                {success && (
-                  <p className="login-success">You are a valid user!</p>
-                )}
-                {error && (
-                  <p className="login-error">
-                    Invalid Username and/or Password.
-                  </p>
-                )}
-                <div class="custom-control custom-checkbox mt-3">
+    const {
+      isLoading,
+      token,
+      loginError,
+      loginSuccess,
+      email,
+      password,
+    } = this.state;
+    if (isLoading) {
+      return (
+        <div className="container mt-5">
+          <p>Loading...</p>
+        </div>
+      );
+    }
+    console.log("Inside login render Token: " + token);
+    if (!token) {
+      return (
+        <div className="container mt-5">
+          <div className="row">
+            <div className="col-xl-3"></div>
+            <div className="col-xl-5 mt-5">
+              <div class="card shadow border-danger#">
+                <span class="card-header shadow-sm mb-2">
+                  <i class="fas fa-sign-in-alt text-danger">
+                    {" "}
+                    <span className="lead text-danger">USER LOGIN</span>
+                  </i>
+                </span>
+                <div class="card-body">
                   <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="remember-me"
+                    className="login-username-input mb-3 mt-3"
+                    id="userName"
+                    type="text"
+                    placeholder="Username"
+                    value={email}
+                    onChange={this.onChangeEmail}
+                    required
+                    autoComplete="off"
                   />
-                  <label
-                    class="custom-control-label font-weight-lighter mb-2"
-                    for="remember-me"
+                  <input
+                    className={`login-password-input ${
+                      loginError ? "error-password-input" : ""
+                    }`}
+                    id="password"
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={this.onChangePassword}
+                    required
+                    autoComplete="off"
+                  />
+                  {/* {success && (
+                    <p className="login-success">You are a valid user!</p>
+                  )} */}
+                  {/* {loginError && (
+                    <label className="alert alert-danger p-0 text-center">
+                      loginError
+                    </label>
+                  )} */}
+                  <div class="custom-control custom-checkbox mt-3">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      id="remember-me"
+                    />
+                    <label
+                      class="custom-control-label font-weight-lighter mb-2"
+                      for="remember-me"
+                    >
+                      Remember me
+                    </label>
+                  </div>
+                  {loginError ? (
+                    <label
+                      className="alert alert-danger p-0 d-flex justify-content-center"
+                      role="alert"
+                    >
+                      {loginError}{" "}
+                    </label>
+                  ) : null}
+                  {loginSuccess ? (
+                    <label
+                      className="alert alert-success p-0 d-flex justify-content-center"
+                      role="alert"
+                    >
+                      {loginSuccess}{" "}
+                    </label>
+                  ) : null}
+                  <button
+                    className="login-btn mb-3"
+                    onClick={this.onClickLogIn}
                   >
-                    Remember me
-                  </label>
-                </div>
-                <button className="login-btn mb-3" onClick={this.checkLogin}>
-                  LOGIN
-                </button>
-                <div className="or-label">
-                  <label>
-                    <big>
-                      <b>OR</b>
-                    </big>
-                  </label>
-                </div>
-                <div className="create-account">
-                  <Link to="/registration">
-                    <span className="text-primary badge badge-light">
-                      <u>Create Account</u>
-                    </span>
-                  </Link>
+                    LOGIN
+                  </button>
+                  <div className="or-label">
+                    <label>
+                      <big>
+                        <b>OR</b>
+                      </big>
+                    </label>
+                  </div>
+                  <div className="create-account">
+                    <Link to="/registration">
+                      <span className="text-primary badge badge-light">
+                        <u>Create Account</u>
+                      </span>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
+            <div className="col-xl-3"></div>
           </div>
-          <div className="col-xl-3"></div>
         </div>
-      </div>
+      );
+    }
+    return (
+      // Redirectiong to home page after successful login
+      <Home />
     );
   }
 }

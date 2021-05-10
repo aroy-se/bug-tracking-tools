@@ -6,11 +6,13 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+// import Welcome from "./views/Welcome";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
+      {/* <Welcome /> */}
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

@@ -1,403 +1,519 @@
-import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import React from "react";
 import * as Constants from "../../utility/Constants";
 // import reg_img from "../../assets/images/user_register.jpg";
 
-const Registration = () => {
-  // To show status message after successful insertion
-  const [success, setSuccess] = useState(false);
-  const [id, setId] = useState("");
-  const initialState = {
-    userName: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    address1: "",
-    address2: "",
-    city: "",
-    state: "",
-    zip: "",
-    photo: "",
-    email: "",
-    mobile: "",
-  };
+class Registration extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      // isLoading: true,
+      token: "",
+      registrationError: "",
+      registrationSuccess: "",
 
-  const [input, setInput] = useState(initialState);
-  // Handle function
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setInput((prevInput) => {
-      return {
-        ...prevInput,
-        [name]: value,
-      };
-    });
-    // reset the status label
-    setSuccess(false);
-  }
-  function handleSubmit(event) {
-    event.preventDefault();
-    const newUser = {
-      userId: Math.floor(Math.random() * (99999 - 100) + 100), // Just demo purpose
-      userName: input.userName,
-      password: input.password,
-      firstName: input.firstName,
-      lastName: input.lastName,
-      role: Constants.USER_ROLE,
-      address1: input.address1,
-      address2: input.address2,
-      city: input.city,
-      state: input.state,
-      zip: input.zip,
-      photo: input.photo,
-      email: input.email,
-      mobile: input.mobile,
+      userName: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+      address1: "",
+      address2: "",
+      city: "",
+      state: "",
+      zip: "",
+      photo: "",
+      email: "",
+      mobile: "",
+      userDetails: [],
     };
-    setId(newUser.userId);
-    // to get the data upto the root App
-    // setUserDetails(newUser);
+    this.onChangeUserName = this.onChangeUserName.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeFirstName = this.onChangeFirstName.bind(this);
+    this.onChangeLastName = this.onChangeLastName.bind(this);
+    this.onChangeAddress1 = this.onChangeAddress1.bind(this);
+    this.onChangeAddress2 = this.onChangeAddress2.bind(this);
+    this.onChangeCity = this.onChangeCity.bind(this);
+    this.onChangeState = this.onChangeState.bind(this);
+    this.onChangeZip = this.onChangeZip.bind(this);
+    this.onChangePhoto = this.onChangePhoto.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangeMobile = this.onChangeMobile.bind(this);
 
-    // save the data intodatabase
-    saveUserDetails(newUser);
-    // resetting the form fields after successful insertion
-    setInput((prevState) => {
-      return {
-        ...prevState,
-        userName: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        address1: "",
-        address2: "",
-        city: "",
-        state: "",
-        zip: "",
-        photo: "",
-        email: "",
-        mobile: "",
-      };
+    this.onClickRegistration = this.onClickRegistration.bind(this);
+  }
+  onChangeUserName(event) {
+    this.setState({
+      userName: event.target.value,
     });
   }
-
-  var saveUserDetails = (userData) => {
-    const parameters = {
+  onChangePassword(event) {
+    this.setState({
+      password: event.target.value,
+    });
+  }
+  onChangeFirstName(event) {
+    this.setState({
+      firstName: event.target.value,
+    });
+  }
+  onChangeLastName(event) {
+    this.setState({
+      lastName: event.target.value,
+    });
+  }
+  onChangeAddress1(event) {
+    this.setState({
+      address1: event.target.value,
+    });
+  }
+  onChangeAddress2(event) {
+    this.setState({
+      address2: event.target.value,
+    });
+  }
+  onChangeCity(event) {
+    this.setState({
+      city: event.target.value,
+    });
+  }
+  onChangeState(event) {
+    this.setState({
+      state: event.target.value,
+    });
+  }
+  onChangeZip(event) {
+    this.setState({
+      zip: event.target.value,
+    });
+  }
+  onChangePhoto(event) {
+    this.setState({
+      photo: event.target.value,
+    });
+  }
+  onChangeEmail(event) {
+    this.setState({
+      email: event.target.value,
+    });
+  }
+  onChangeMobile(event) {
+    this.setState({
+      mobile: event.target.value,
+    });
+  }
+  onClickRegistration() {
+    // Grab state
+    const {
+      userName,
+      password,
+      firstName,
+      lastName,
+      address1,
+      address2,
+      city,
+      state,
+      zip,
+      photo,
+      email,
+      mobile,
+    } = this.state;
+    // this.setState({
+    //   isLoading: true,
+    // });
+    // Post request to backend
+    fetch("http://localhost:8765/btt/user/registration", {
       method: "POST",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userData),
-    };
-    fetch(Constants.URL, parameters)
-      .then((response) => response.json())
-      .then((userData) => {
-        setSuccess(true);
+      body: JSON.stringify({
+        userName: userName,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        address1: address1,
+        address2: address2,
+        city: city,
+        state: state,
+        zip: zip,
+        photo: photo,
+        email: email,
+        mobile: mobile,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log("json", json);
+        if (json.success) {
+          this.setState({
+            registrationError: "",
+            registrationSuccess: json.message,
+            isLoading: false,
+            userName: "",
+            password: "",
+            firstName: "",
+            lastName: "",
+            address1: "",
+            address2: "",
+            city: "",
+            state: "",
+            zip: "",
+            photo: "",
+            email: "",
+            mobile: "",
+          });
+        } else {
+          this.setState({
+            registrationSuccess: "",
+            registrationError: json.message,
+            // isLoading: false,
+          });
+        }
       });
-  };
-  return (
-    // <!-- START - Tag <div> for Main HTML body (Registration Details) -->
-    <div class="container mt-5 mb-5">
-      {/* Main single row */}
-      <div class="row">
-        <div class="col-xl-12">
-          <div class="card shadow">
-            <div class="card-header text-danger shadow-sm">
-              <i class="fas fa-user-plus">
-                <span className=" text-danger lead">
-                  {" "}
-                  USER REGISTRATION FORM
-                </span>
-              </i>
-            </div>
-            <div class="card-body">
-              <div class="row">
-                {/* 1st col */}
-                <div class="col-xl-6">
-                  <table class="table table-borderless">
-                    <tbody>
-                      {/* First Name */}
-                      <tr>
-                        <td>
-                          <div class="form-group">
-                            <h6>First Name</h6>
-                            <input
-                              type="text"
-                              className="user-first-name shadow-sm form-control"
-                              placeholder="First Name"
-                              required
-                              autoComplete="off"
-                              name="firstName"
-                              value={input.firstName}
-                              onChange={handleChange}
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                      {/* Username */}
-                      <tr>
-                        <td>
-                          <div class="form-group">
-                            <h6>Username</h6>
-                            <input
-                              type="text"
-                              className="user-username shadow-sm form-control"
-                              required
-                              autoComplete="off"
-                              name="userName"
-                              value={input.userName}
-                              onChange={handleChange}
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                      {/* Address1 */}
-                      <tr>
-                        <td>
-                          <div class="form-group">
-                            <h6>Address1</h6>
-                            <input
-                              type="text"
-                              className="user-address1 shadow-sm form-control"
-                              name="address1"
-                              value={input.address1}
-                              required
-                              autoComplete="off"
-                              onChange={handleChange}
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                      {/* City */}
-                      <tr>
-                        <td>
-                          <div class="form-group">
-                            <h6>City</h6>
-                            <input
-                              type="text"
-                              className="user-city shadow-sm form-control"
-                              name="city"
-                              value={input.city}
-                              required
-                              autoComplete="off"
-                              onChange={handleChange}
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                      {/* Zip Code */}
-                      <tr>
-                        <td>
-                          <div class="form-group">
-                            <h6>Zip Code</h6>
-                            <input
-                              type="text"
-                              className="user-zip shadow-sm form-control"
-                              name="zip"
-                              value={input.zip}
-                              required
-                              autoComplete="off"
-                              onChange={handleChange}
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                      {/* Phone Number */}
-                      <tr>
-                        <td>
-                          <div class="form-group">
-                            <h6>Phone Number</h6>
-                            <input
-                              type="text"
-                              className="user-mobile shadow-sm form-control"
-                              name="mobile"
-                              value={input.mobile}
-                              required
-                              autoComplete="off"
-                              onChange={handleChange}
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+  }
+  render() {
+    const {
+      // isLoading,
+      token,
+      registrationError,
+      registrationSuccess,
+      userName,
+      password,
+      firstName,
+      lastName,
+      address1,
+      address2,
+      city,
+      state,
+      zip,
+      photo,
+      email,
+      mobile,
+    } = this.state;
 
-                {/* 2nd col */}
-                <div class="col-xl-6">
-                  <table class="table table-borderless">
-                    <tbody>
-                      {/* Last Name */}
-                      <tr>
-                        <td>
-                          <div class="form-group">
-                            <h6>Last Name</h6>
-                            <input
-                              type="text"
-                              className="user-last-name shadow-sm form-control"
-                              placeholder="Last Name"
-                              required
-                              autoComplete="off"
-                              name="lastName"
-                              value={input.lastName}
-                              onChange={handleChange}
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                      {/* Password */}
-                      <tr>
-                        <td>
-                          <div class="form-group">
-                            <h6>Password</h6>
-                            <input
-                              type="password"
-                              className="user-password shadow-sm form-control"
-                              required
-                              autoComplete="off"
-                              name="password"
-                              value={input.password}
-                              onChange={handleChange}
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-group">
-                            <h6>Address2</h6>
-                            <input
-                              type="text"
-                              className="user-address2 shadow-sm form-control"
-                              name="address2"
-                              value={input.address2}
-                              required
-                              autoComplete="off"
-                              onChange={handleChange}
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                      {/* State */}
-                      <tr>
-                        <td>
-                          <div class="form-group">
-                            <h6>State</h6>
-                            <select
-                              name="state"
-                              className="custom-select user-state shadow-sm form-control"
-                              value={input.state}
-                              required
-                              onChange={handleChange}
-                            >
-                              <option>Select One State</option>
-                              <option>Andhra Pradesh</option>
-                              <option>Arunachal Pradesh</option>
-                              <option>Assam</option>
-                              <option>Bihar</option>
-                              <option>Chhattisgarh</option>
-                              <option>Delhi</option>
-                              <option>Goa</option>
-                              <option>Gujarat</option>
-                              <option>Haryana</option>
-                              <option>Himachal Pradesh</option>
-                              <option>Jharkhand</option>
-                              <option>Karnataka</option>
-                              <option>Kerala</option>
-                              <option>Madhya Pradesh</option>
-                              <option>Maharashtra</option>
-                              <option>Manipur</option>
-                              <option>Meghalaya</option>
-                              <option>Mizoram</option>
-                              <option>Nagaland</option>
-                              <option>Odisha</option>
-                              <option>Punjab</option>
-                              <option>Rajasthan</option>
-                              <option>Sikkim</option>
-                              <option>Tamil Nadu</option>
-                              <option>Telangana</option>
-                              <option>Tripura</option>
-                              <option>Uttar Pradesh</option>
-                              <option>Uttarakhand</option>
-                              <option>West Bengal</option>
-                            </select>
-                          </div>
-                        </td>
-                      </tr>
-                      {/* Email ID */}
-                      <tr>
-                        <td>
-                          <div class="form-group">
-                            <h6>Email ID</h6>
-                            <input
-                              type="text"
-                              className="user-email shadow-sm form-control"
-                              name="email"
-                              value={input.email}
-                              required
-                              autoComplete="off"
-                              onChange={handleChange}
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                      {/* User Photo */}
-                      <tr>
-                        <td>
-                          <div class="form-group ">
-                            <h6>User Photo (Max Limit: 500KB)</h6>
-                            <div className="custom-file">
-                              <input
-                                type="file"
-                                name="photo"
-                                id="attachment"
-                                className="custom-file-input form-control"
-                                required
-                                autoComplete="off"
-                                value={input.photo}
-                                onChange={handleChange}
-                              />
-                              <label class="custom-file-label" for="attachment">
-                                {input.photo}
-                              </label>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+    console.log("Inside registration render Token: " + token);
+    if (!token) {
+      return (
+        // <!-- START - Tag <div> for Main HTML body (Registration Details) -->
+        <div class="container mt-5 mb-5">
+          {/* Main single row */}
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="card shadow">
+                <div class="card-header text-danger shadow-sm">
+                  <i class="fas fa-user-plus">
+                    <span className=" text-danger lead">
+                      {" "}
+                      USER REGISTRATION FORM
+                    </span>
+                  </i>
                 </div>
-              </div>
-              {/* End of reg input details */}
-              <div class="row mb-4">
-                <div class="col-xl-3"></div>
-                <div class="col-xl-6">
-                  <span onChange={handleChange}>
-                    {success && (
-                      <label
-                        className="alert alert-success p-0 d-flex justify-content-center"
-                        role="alert"
+                <div class="card-body">
+                  <div class="row">
+                    {/* 1st col */}
+                    <div class="col-xl-6">
+                      <table class="table table-borderless">
+                        <tbody>
+                          {/* First Name */}
+                          <tr>
+                            <td>
+                              <div class="form-group">
+                                <h6>First Name</h6>
+                                <input
+                                  type="text"
+                                  className="user-first-name shadow-sm form-control"
+                                  placeholder="First Name"
+                                  required
+                                  autoComplete="off"
+                                  name="firstName"
+                                  value={firstName}
+                                  onChange={this.onChangeFirstName}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          {/* Username */}
+                          <tr>
+                            <td>
+                              <div class="form-group">
+                                <h6>Username</h6>
+                                <input
+                                  type="text"
+                                  className="user-username shadow-sm form-control"
+                                  required
+                                  autoComplete="off"
+                                  name="userName"
+                                  value={userName}
+                                  onChange={this.onChangeUserName}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          {/* Address1 */}
+                          <tr>
+                            <td>
+                              <div class="form-group">
+                                <h6>Address1</h6>
+                                <input
+                                  type="text"
+                                  className="user-address1 shadow-sm form-control"
+                                  name="address1"
+                                  value={address1}
+                                  required
+                                  autoComplete="off"
+                                  onChange={this.onChangeAddress1}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          {/* City */}
+                          <tr>
+                            <td>
+                              <div class="form-group">
+                                <h6>City</h6>
+                                <input
+                                  type="text"
+                                  className="user-city shadow-sm form-control"
+                                  name="city"
+                                  value={city}
+                                  required
+                                  autoComplete="off"
+                                  onChange={this.onChangeCity}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          {/* Zip Code */}
+                          <tr>
+                            <td>
+                              <div class="form-group">
+                                <h6>Zip Code</h6>
+                                <input
+                                  type="text"
+                                  className="user-zip shadow-sm form-control"
+                                  name="zip"
+                                  value={zip}
+                                  required
+                                  autoComplete="off"
+                                  onChange={this.onChangeZip}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          {/* Phone Number */}
+                          <tr>
+                            <td>
+                              <div class="form-group">
+                                <h6>Phone Number</h6>
+                                <input
+                                  type="text"
+                                  className="user-mobile shadow-sm form-control"
+                                  name="mobile"
+                                  value={mobile}
+                                  required
+                                  autoComplete="off"
+                                  onChange={this.onChangeMobile}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* 2nd col */}
+                    <div class="col-xl-6">
+                      <table class="table table-borderless">
+                        <tbody>
+                          {/* Last Name */}
+                          <tr>
+                            <td>
+                              <div class="form-group">
+                                <h6>Last Name</h6>
+                                <input
+                                  type="text"
+                                  className="user-last-name shadow-sm form-control"
+                                  placeholder="Last Name"
+                                  required
+                                  autoComplete="off"
+                                  name="lastName"
+                                  value={lastName}
+                                  onChange={this.onChangeLastName}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          {/* Password */}
+                          <tr>
+                            <td>
+                              <div class="form-group">
+                                <h6>Password</h6>
+                                <input
+                                  type="password"
+                                  className="user-password shadow-sm form-control"
+                                  required
+                                  autoComplete="off"
+                                  name="password"
+                                  value={password}
+                                  onChange={this.onChangePassword}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="form-group">
+                                <h6>Address2</h6>
+                                <input
+                                  type="text"
+                                  className="user-address2 shadow-sm form-control"
+                                  name="address2"
+                                  value={address2}
+                                  required
+                                  autoComplete="off"
+                                  onChange={this.onChangeAddress2}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          {/* State */}
+                          <tr>
+                            <td>
+                              <div class="form-group">
+                                <h6>State</h6>
+                                <select
+                                  name="state"
+                                  className="custom-select user-state shadow-sm form-control"
+                                  value={state}
+                                  required
+                                  onChange={this.onChangeState}
+                                >
+                                  <option>Select One State</option>
+                                  <option>Andhra Pradesh</option>
+                                  <option>Arunachal Pradesh</option>
+                                  <option>Assam</option>
+                                  <option>Bihar</option>
+                                  <option>Chhattisgarh</option>
+                                  <option>Delhi</option>
+                                  <option>Goa</option>
+                                  <option>Gujarat</option>
+                                  <option>Haryana</option>
+                                  <option>Himachal Pradesh</option>
+                                  <option>Jharkhand</option>
+                                  <option>Karnataka</option>
+                                  <option>Kerala</option>
+                                  <option>Madhya Pradesh</option>
+                                  <option>Maharashtra</option>
+                                  <option>Manipur</option>
+                                  <option>Meghalaya</option>
+                                  <option>Mizoram</option>
+                                  <option>Nagaland</option>
+                                  <option>Odisha</option>
+                                  <option>Punjab</option>
+                                  <option>Rajasthan</option>
+                                  <option>Sikkim</option>
+                                  <option>Tamil Nadu</option>
+                                  <option>Telangana</option>
+                                  <option>Tripura</option>
+                                  <option>Uttar Pradesh</option>
+                                  <option>Uttarakhand</option>
+                                  <option>West Bengal</option>
+                                </select>
+                              </div>
+                            </td>
+                          </tr>
+                          {/* Email ID */}
+                          <tr>
+                            <td>
+                              <div class="form-group">
+                                <h6>Email ID</h6>
+                                <input
+                                  type="text"
+                                  className="user-email shadow-sm form-control"
+                                  name="email"
+                                  value={email}
+                                  required
+                                  autoComplete="off"
+                                  onChange={this.onChangeEmail}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          {/* User Photo */}
+                          <tr>
+                            <td>
+                              <div class="form-group ">
+                                <h6>User Photo (Max Limit: 500KB)</h6>
+                                <div className="custom-file">
+                                  <input
+                                    type="file"
+                                    name="photo"
+                                    id="attachment"
+                                    className="custom-file-input form-control"
+                                    required
+                                    autoComplete="off"
+                                    value={photo}
+                                    onChange={this.onChangePhoto}
+                                  />
+                                  <label
+                                    class="custom-file-label"
+                                    for="attachment"
+                                  >
+                                    {photo}
+                                  </label>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  {/* End of reg input details */}
+                  <div class="row mb-4">
+                    <div class="col-xl-3"></div>
+                    <div class="col-xl-6">
+                      {registrationError ? (
+                        <label
+                          className="alert alert-danger p-0 d-flex justify-content-center"
+                          role="alert"
+                        >
+                          {registrationError}{" "}
+                        </label>
+                      ) : null}
+                      {registrationSuccess ? (
+                        <label
+                          className="alert alert-success p-0 d-flex justify-content-center"
+                          role="alert"
+                        >
+                          {registrationSuccess}
+                          {/* <Link to="/login">
+                              Click here to Login
+                          </Link> */}
+                          {/* {"and logged in to your account "} */}
+                        </label>
+                      ) : null}
+                      <button
+                        type="button"
+                        className="btn btn-danger btn-lg btn-block shadow"
+                        name="submit"
+                        value="REGISTER"
+                        onClick={this.onClickRegistration}
                       >
-                        The User(ID={id}) has been registered successfully!
-                      </label>
-                    )}
-                  </span>
-                  <button
-                    type="button"
-                    className="btn btn-danger btn-lg btn-block shadow"
-                    name="submit"
-                    value="REGISTER"
-                    onClick={handleSubmit}
-                  >
-                    REGISTER
-                  </button>
+                        REGISTER
+                      </button>
+                    </div>
+                    <div class="col-xl-3"></div>
+                  </div>
                 </div>
-                <div class="col-xl-3"></div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
-};
+      );
+    }
+  }
+}
 
 export default Registration;

@@ -98,7 +98,13 @@ class Header extends Component {
                             </Link>
                           </Dropdown.Item>
                           <Dropdown.Item eventKey="3">
-                            <a
+                            <Link to="/logout" className="text-secondary">
+                              <i className="fas fa-sign-out-alt text-secondary">
+                                {" "}
+                                Logout
+                              </i>
+                            </Link>
+                            {/* <a
                               className="text-secondary"
                               href="#"
                               onClick={(e) => this.logoutHandler(e)}
@@ -107,7 +113,7 @@ class Header extends Component {
                                 {" "}
                                 Logout
                               </i>
-                            </a>
+                            </a> */}
                           </Dropdown.Item>
                           <Dropdown.Divider />
                           <Dropdown.Item eventKey="4">
