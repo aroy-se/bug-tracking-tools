@@ -1,29 +1,18 @@
 import React, { useState } from "react";
 import * as Constants from "../../utility/Constants";
 
-const DeleteUserDetails = () => {
+const DeleteBugDetails = () => {
   // To show status message after successful insertion
   const [success, setSuccess] = useState(false);
   const [input, setInput] = useState({
-    // userId: 0,
-    userName: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    address1: "",
-    address2: "",
-    city: "",
-    state: "",
-    zip: "",
-    photo: "",
-    email: "",
-    mobile: "",
-    // language:"",
-    moreInfo: "",
+    bugId: "",
+    bugName: "",
   });
 
   // Handle function
   function handleChange(event) {
+    // reset msg
+    setSuccess(false);
     const { name, value } = event.target;
     setInput((prevInput) => {
       return {
@@ -34,76 +23,103 @@ const DeleteUserDetails = () => {
   }
   function handleSubmit(event) {
     event.preventDefault();
-    const deleteAnUser = {
-      userId: input.userId,
+    setSuccess(false);
+    if (input.bugId === "") {
+      alert("Bug Id should not be empty!");
+      return;
+    }
+    const deleteBug = {
+      bugId: input.bugId,
     };
-    deleteUserDetails(deleteAnUser);
-    // setInput.value = "";
+    deleteBugDetails(deleteBug);
   }
-  var deleteUserDetails = (userData) => {
+  var deleteBugDetails = (bugData) => {
     const parameters = {
       method: "DELETE",
     };
-    console.log(Constants.URL + input.userId);
-    fetch(Constants.URL + parseInt(input.userId), parameters)
+    if (window.confirm("Do you really want to delete the Bug?")) {
+      // Fetch All!
+    } else {
+      // Do nothing!
+      return;
+    }
+    fetch(Constants.BUG_URL + parseInt(input.bugId), parameters)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
       .then((response) => response.json())
       .then(() => {
         setSuccess(true);
+      })
+      .catch(() => {
+        alert(`The Bug, ${input.bugId} does not exist in our database!`);
       });
+    setInput({ bugId: "" });
   };
   return (
-    <div className="registration_main" border="0">
-      <form>
-        <table className="registration_table">
-          <tr>
-            <td></td>
-            <td>
-              <p className="reg-label">DELETE RECORD</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>USER ID</label>
-            </td>
-            <td>
-              <input
-                type="text"
-                placeholder="User ID"
-                required={true}
-                autoComplete="off"
-                name="userId"
-                value={input.userId}
-                onChange={handleChange}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <label className="insert-status-label" onChange={handleChange}>
-                {success && "The record has been deleted successfully!"}
-              </label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label></label>
-            </td>
-            <td className="register-btn-col">
-              <input
-                type="submit"
-                className="register"
-                name="submit"
-                value="DELETE USER"
-                onClick={handleSubmit}
-              />
-            </td>
-          </tr>
-        </table>
-      </form>
+    <div className="container" border="0">
+      <div class="row">
+        <div class="col-xl-3"></div>
+        <div class="col-xl-6">
+          <div class="card shadow">
+            <div class="card-header text-danger shadow-sm">
+              <h5>DELETE BUG</h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="form-group">
+                    <label className="badge badge-light text-dark">
+                      Bug ID
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control shadow-sm"
+                      placeholder="Provide a Bug ID"
+                      name="bugId"
+                      value={input.bugId}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  {/* delete message */}
+                  {/* <label
+                    className="insert-status-label"
+                    onChange={handleChange}
+                  > */}
+                  {success && (
+                    <label
+                      className="alert alert-success p-0 d-flex justify-content-center mt-5"
+                      role="alert"
+                    >
+                      Bug deletion successful!
+                    </label>
+                  )}
+                  {/* </label> */}
+                </div>
+              </div>
+              <div className="row">
+                <div class="col-xl-12">
+                  <div class="form-group">
+                    <input
+                      type="submit"
+                      className="btn btn-danger btn-lg btn-block shadow register#"
+                      name="submit"
+                      value="DELETE COMPONENT"
+                      onClick={handleSubmit}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3"></div>
+      </div>
     </div>
-    //  </div>
   );
 };
 
-export default DeleteUserDetails;
+export default DeleteBugDetails;

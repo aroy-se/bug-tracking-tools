@@ -134,51 +134,44 @@ class ViewComponent extends Component {
           </div>
           <div className="col-xl-4"></div>
         </div>
-        {
-          (console.log("Success fetch: " + this.state.successFetch),
-          console.log(
-            "length: " + Object.keys(this.state.componentDetails).length
-          ),
-          Object.keys(this.state.componentDetails).length > 0 ? (
-            <div className="row">
-              <div className="col-xl-12">
-                <div className="table-wrapper-scroll-y component-table-responsive">
-                  <table className="table table-sm table-hover border">
-                    <thead class="thead-light">
-                      <tr>
-                        <th>Product Name</th>
-                        <th>Component ID</th>
-                        <th>Component Name</th>
-                        <th>Created Time</th>
+        {Object.keys(this.state.componentDetails).length > 0 ? (
+          <div className="row">
+            <div className="col-xl-12">
+              <div className="table-wrapper-scroll-y component-table-responsive">
+                <table className="table table-sm table-hover border">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>Product Name</th>
+                      <th>Component ID</th>
+                      <th>Component Name</th>
+                      <th>Created Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.state.componentDetails.map((component, index) => (
+                      <tr key={index}>
+                        <td>{component.productName}</td>
+                        <td>{component.componentId}</td>
+                        <td>{component.componentName}</td>
+                        <td>{component.createdTime}</td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {this.state.componentDetails.map((component, index) => (
-                        <tr key={index}>
-                          <td>{component.productName}</td>
-                          <td>{component.componentId}</td>
-                          <td>{component.componentName}</td>
-                          <td>{component.createdTime}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
-          ) : (
-            <div className="row">
-              <div className="col-xl-3"></div>
-              <div className="col-xl-6">
-                <div className="alert alert-danger text-center">
-                  Empty Result! Click on search to fetch the component
-                  details...
-                </div>
+          </div>
+        ) : (
+          <div className="row">
+            <div className="col-xl-3"></div>
+            <div className="col-xl-6">
+              <div className="alert alert-danger text-center">
+                Empty Result! Click on search to fetch the component details...
               </div>
-              <div className="col-xl-3"></div>
             </div>
-          ))
-        }
+            <div className="col-xl-3"></div>
+          </div>
+        )}
       </div>
     );
   }

@@ -216,19 +216,19 @@ bugRouter.put("/bug/:id", (request, response) => {
  * Delete a User details by userid
  * CRU[D] := [D]ELETE - DELETE - ONE
  */
-// bugRouter.delete("/bug/:id", (request, response, next) => {
-//   var targetDelete = parseInt(request.params.id);
-//   BugModel.deleteOne({ bugId: targetDelete })
-//     .then(() => {
-//       response.status(200).json({
-//         message: "The Bug details has been deleted Successfully!",
-//       });
-//     })
-//     .catch((error) => {
-//       response.status(400).json({
-//         error: error,
-//       });
-//     });
-// });
+bugRouter.delete("/bug/:id", (request, response, next) => {
+  var targetDelete = parseInt(request.params.id);
+  BugModel.deleteOne({ bugId: targetDelete })
+    .then(() => {
+      response.status(200).json({
+        message: "The Bug details has been deleted Successfully!",
+      });
+    })
+    .catch((error) => {
+      response.status(400).json({
+        error: error,
+      });
+    });
+});
 
 module.exports = bugRouter;

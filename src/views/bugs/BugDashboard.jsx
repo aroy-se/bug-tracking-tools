@@ -7,7 +7,7 @@ import FetchBugDetails from "./FetchBugDetails";
 // import FetchBugDetailsById from "./FetchBugDetailsById";
 // import FetchBugDetailsByName from "./FetchBugDetailsByName";
 import UpdateBugDetails from "./UpdateBugDetails";
-// import DeleteBugDetails from "./DeleteBugDetails";
+import DeleteBugDetails from "./DeleteBugDetails";
 
 class BugDashboard extends React.Component {
   componentDidMount() {
@@ -53,7 +53,7 @@ class BugDashboard extends React.Component {
                 aria-controls="report"
                 aria-selected="true"
               >
-                Report A Bug
+                Report Bug
               </a>
             </li>
             <li class="nav-item">
@@ -66,7 +66,20 @@ class BugDashboard extends React.Component {
                 aria-controls="update"
                 aria-selected="true"
               >
-                Update A Bug
+                Update Bug
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-danger"
+                id="delete-tab"
+                data-toggle="tab"
+                href="#delete"
+                role="tab"
+                aria-controls="delete"
+                aria-selected="true"
+              >
+                Delete Bug
               </a>
             </li>
           </ul>
@@ -99,6 +112,16 @@ class BugDashboard extends React.Component {
             >
               <div class="card-body bg-white pl-0 pr-0">
                 <UpdateBugDetails />
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="delete"
+              role="tabpanel"
+              aria-labelledby="delete-tab"
+            >
+              <div class="card-body bg-white pl-0 pr-0">
+                <DeleteBugDetails />
               </div>
             </div>
           </div>
