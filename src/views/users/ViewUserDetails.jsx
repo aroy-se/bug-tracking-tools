@@ -30,7 +30,7 @@ class ViewUserDetails extends React.Component {
   }
 
   handleFetchUserSubmit(event) {
-    var target_url = Constants.URL;
+    var target_url = Constants.USER_URL;
     var inputText =
       this.state.userId !== ""
         ? this.state.userId
@@ -45,19 +45,19 @@ class ViewUserDetails extends React.Component {
         // Do nothing!
         return;
       }
-      console.log("empty target_url" + target_url);
+      // console.log("empty target_url:   " + target_url);
       // Calling whole bug list
       this.fetchDatafromDatabase(target_url, false, catch_err_msg);
     } else if (isNaN(inputText)) {
       // fetch data by username
       target_url = Constants.URL_USER_BY_NAME + inputText;
       catch_err_msg = inputText;
-      console.log("name target_url: " + target_url);
+      // console.log("name target_url: " + target_url);
       this.fetchDatafromDatabase(target_url, false, catch_err_msg);
     } else {
       // fetch data by user id
-      target_url = Constants.URL + parseInt(inputText);
-      console.log("id target_url" + target_url);
+      target_url = Constants.USER_URL + parseInt(inputText);
+      // console.log("id target_url:  " + target_url);
       catch_err_msg = inputText;
       this.fetchDatafromDatabase(target_url, true, catch_err_msg);
     }

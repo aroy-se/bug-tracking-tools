@@ -74,7 +74,7 @@ const UserRoleSettings = () => {
       alert("User-ID field should not be empty!");
       return;
     }
-    fetch(Constants.URL + parseInt(input.userId))
+    fetch(Constants.USER_URL + parseInt(input.userId))
       .then((response) => response.json())
       .then((data) => {
         var user = data;

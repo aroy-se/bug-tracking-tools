@@ -44,7 +44,7 @@ class ReadUserDetails extends Component {
               </td>
               <td>{user.userName}</td>
               <td>{user.password}</td>
-              <td>{user.role}</td>
+              <td>{user.userRole}</td>
               <td>{user.address1}</td>
               <td>{user.address2}</td>
               <td>{user.city}</td>

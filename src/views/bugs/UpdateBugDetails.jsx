@@ -226,7 +226,7 @@ const UpdateBugDetails = () => {
   // To fetch all the assignee from the database
   function handleOnClickAssignee(event) {
     event.preventDefault();
-    fetch(Constants.URL)
+    fetch(Constants.USER_URL)
       .then((response) => response.json())
       .then((data) => {
         setAssigneeDetails(data);

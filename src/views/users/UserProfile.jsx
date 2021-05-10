@@ -10,7 +10,7 @@ class UserProfile extends React.Component {
     };
   }
   componentDidMount() {
-    fetch(Constants.URL)
+    fetch(Constants.USER_URL)
       .then((response) => response.json())
       .then((data) => {
         this.setState({ userDetails: data });

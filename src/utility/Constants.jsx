@@ -13,9 +13,10 @@ const DATABASE_NAME = process.env.REACT_APP_DATABASE_NAME;
 const HOST = process.env.REACT_APP_HOSTNAME;
 
 // Constatnts for User Data
+const USER_PATH = process.env.REACT_APP_USER_PATH; // user
 const USER_BY_NAME = process.env.REACT_APP_SEARCH_USER_BY_NAME;
-export const URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/`;
-export const URL_USER_BY_NAME = `http://${HOST}:${PORT}/${USER_BY_NAME}/`;
+export const USER_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${USER_PATH}/`;
+export const URL_USER_BY_NAME = `http://${HOST}:${PORT}/${DATABASE_NAME}/${USER_BY_NAME}/`;
 
 // Default role of all users while registering
 export const USER_ROLE = "User";

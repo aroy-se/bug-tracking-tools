@@ -15,7 +15,8 @@ const LOCAL_DATABASE_URL =
   process.env.REACT_APP_LOCAL_DATABASE_URL || "mongodb://localhost:27017";
 const MONGODB_ATLAS_DATABASE_URL =
   URL_P1 + URL_P2 + ":" + URL_P3 + URL_P4 + URL_P5 || LOCAL_DATABASE_URL;
-const LOGIN_ROUTE = require("./src/controllers/UserAuthenticationRoute");
+const USER_AUTHENTICATION_ROUTE = require("./src/controllers/UserAuthenticationRoute");
+const USER_ROUTE = require("./src/controllers/UserRoute");
 const cors = require("cors");
 
 mongoose.connect(
@@ -27,7 +28,8 @@ mongoose.connect(
 app.use(express.json());
 app.use(cors());
 
-app.use("/btt", LOGIN_ROUTE);
+app.use("/btt", USER_AUTHENTICATION_ROUTE);
+app.use("/btt", USER_ROUTE);
 app.listen(PORT, () => {
   console.log(`[Port: ${PORT}] - The BTT app server is up and running...`);
 });

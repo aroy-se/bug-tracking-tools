@@ -48,8 +48,8 @@ const DeleteUserDetails = () => {
     const parameters = {
       method: "DELETE",
     };
-    console.log(Constants.URL + input.userId);
-    fetch(Constants.URL + parseInt(input.userId), parameters)
+    console.log(Constants.USER_URL + input.userId);
+    fetch(Constants.USER_URL + parseInt(input.userId), parameters)
       .then((response) => {
         if (!response.ok) {
           throw Error(response.statusText);
@@ -91,12 +91,19 @@ const DeleteUserDetails = () => {
                     />
                   </div>
                   {/* delete message */}
-                  <label
+                  {/* <label
                     className="insert-status-label"
                     onChange={handleChange}
-                  >
-                    {success && "The record has been deleted successfully!"}
-                  </label>
+                  > */}
+                  {success && (
+                    <label
+                      className="alert alert-success p-0 d-flex justify-content-center mt-5"
+                      role="alert"
+                    >
+                      User deletion successful!
+                    </label>
+                  )}
+                  {/* </label> */}
                 </div>
               </div>
               <div className="row">

@@ -40,7 +40,7 @@ const UpdateUserDetails = () => {
       alert("User-Id field should not be empty!");
       return;
     }
-    fetch(Constants.URL + parseInt(input.userId))
+    fetch(Constants.USER_URL + parseInt(input.userId))
       .then((response) => response.json())
       .then((data) => {
         var user = data;
@@ -124,7 +124,7 @@ const UpdateUserDetails = () => {
       },
       body: JSON.stringify(userData),
     };
-    fetch(Constants.URL + parseInt(input.userId), parameters)
+    fetch(Constants.USER_URL + parseInt(input.userId), parameters)
       .then((response) => response.json())
       .then(() => {
         setSuccess(true);

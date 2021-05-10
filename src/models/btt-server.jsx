@@ -245,15 +245,15 @@ api.put("/btt/userRole/:id", (request, response) => {
 
 // For User
 // [C]RUD := [C]REATE => POST(ONE)
-api.post("/btt", (request, response) => {
-  var toBeInsertedData = request.body;
-  userCollection.insertOne(toBeInsertedData, (err, result) => {
-    if (err) {
-      return response.status(500).send(err);
-    }
-    response.send(result);
-  });
-});
+// api.post("/btt", (request, response) => {
+//   var toBeInsertedData = request.body;
+//   userCollection.insertOne(toBeInsertedData, (err, result) => {
+//     if (err) {
+//       return response.status(500).send(err);
+//     }
+//     response.send(result);
+//   });
+// });
 
 // LOGIN
 // api.post("/btt", async (request, response) => {
@@ -275,26 +275,26 @@ api.post("/btt", (request, response) => {
 //   } catch {}
 // });
 
-// C[R]UD := [R]EAD => GET(ALL)
-api.get("/btt", (request, response) => {
-  userCollection.find({}).toArray((err, result) => {
-    if (err) {
-      return response.status(500).send(err);
-    }
-    response.send(result);
-  });
-});
+// // C[R]UD := [R]EAD => GET(ALL)
+// api.get("/btt", (request, response) => {
+//   userCollection.find({}).toArray((err, result) => {
+//     if (err) {
+//       return response.status(500).send(err);
+//     }
+//     response.send(result);
+//   });
+// });
 
-// C[R]UD := [R]EAD => GET(ONE) - byId
-api.get("/btt/:id", (request, response) => {
-  var targetId = parseInt(request.params.id);
-  userCollection.findOne({ userId: targetId }, (err, result) => {
-    if (err) {
-      return response.status(500).send(err);
-    }
-    response.send(result);
-  });
-});
+// // C[R]UD := [R]EAD => GET(ONE) - byId
+// api.get("/btt/:id", (request, response) => {
+//   var targetId = parseInt(request.params.id);
+//   userCollection.findOne({ userId: targetId }, (err, result) => {
+//     if (err) {
+//       return response.status(500).send(err);
+//     }
+//     response.send(result);
+//   });
+// });
 
 // C[R]UD := [R]EAD => GET(ALL) - byName
 // api.get("/bttUserByName/:name", (request, response) => {
@@ -306,64 +306,64 @@ api.get("/btt/:id", (request, response) => {
 //     response.send(result);
 //   });
 // });
-// To fetch all users By username with regex
-api.get("/bttUserByName/:name", (request, response) => {
-  var targetName = request.params.name;
-  userCollection
-    .find({ userName: { $regex: targetName, $options: "i" } })
-    .toArray((err, result) => {
-      if (err) {
-        return response.status(500).send(err);
-      }
-      response.send(result);
-    });
-});
+// // To fetch all users By username with regex
+// api.get("/bttUserByName/:name", (request, response) => {
+//   var targetName = request.params.name;
+//   userCollection
+//     .find({ userName: { $regex: targetName, $options: "i" } })
+//     .toArray((err, result) => {
+//       if (err) {
+//         return response.status(500).send(err);
+//       }
+//       response.send(result);
+//     });
+// });
 
-// CR[U]D := [U]PDATE => PUT - ONE
-api.put("/btt/:id", (request, response) => {
-  var targetId = { userId: parseInt(request.params.id) };
-  var toBeUpdated = {
-    $set: {
-      userName: request.body.userName,
-      password: request.body.password,
-      firstName: request.body.firstName,
-      lastName: request.body.lastName,
-      address1: request.body.address1,
-      address2: request.body.address2,
-      city: request.body.city,
-      state: request.body.state,
-      zip: request.body.zip,
-      photo: request.body.photo,
-      email: request.body.email,
-      mobile: request.body.mobile,
-    },
-  };
-  userCollection.updateOne(targetId, toBeUpdated, (err, result) => {
-    if (err) {
-      return response.status(500).send(err);
-    }
-    console.log("Record is updated!");
-    response.send(result);
-  });
-});
+// // CR[U]D := [U]PDATE => PUT - ONE
+// api.put("/btt/:id", (request, response) => {
+//   var targetId = { userId: parseInt(request.params.id) };
+//   var toBeUpdated = {
+//     $set: {
+//       userName: request.body.userName,
+//       password: request.body.password,
+//       firstName: request.body.firstName,
+//       lastName: request.body.lastName,
+//       address1: request.body.address1,
+//       address2: request.body.address2,
+//       city: request.body.city,
+//       state: request.body.state,
+//       zip: request.body.zip,
+//       photo: request.body.photo,
+//       email: request.body.email,
+//       mobile: request.body.mobile,
+//     },
+//   };
+//   userCollection.updateOne(targetId, toBeUpdated, (err, result) => {
+//     if (err) {
+//       return response.status(500).send(err);
+//     }
+//     console.log("Record is updated!");
+//     response.send(result);
+//   });
+// });
 
-// CRU[D] := [D]ELETE - DELETE - ONE
+// // CRU[D] := [D]ELETE - DELETE - ONE
 
-api.delete("/btt/:id", (request, response, next) => {
-  var targetDelete = parseInt(request.params.id);
-  userCollection
-    .deleteOne({ userId: targetDelete })
-    .then(() => {
-      response.status(200).json({
-        message: "The User record has been deleted Successfully!",
-      });
-    })
-    .catch((error) => {
-      response.status(400).json({
-        error: error,
-      });
-    });
-});
+// api.delete("/btt/:id", (request, response, next) => {
+//   var targetDelete = parseInt(request.params.id);
+//   userCollection
+//     .deleteOne({ userId: targetDelete })
+//     .then(() => {
+//       response.status(200).json({
+//         message: "The User record has been deleted Successfully!",
+//       });
+//     })
+//     .catch((error) => {
+//       response.status(400).json({
+//         error: error,
+//       });
+//     });
+// });
 
 // Setting server Port and establishing Mongo database connection
 console.log("LOCAL DATABASE URL: " + LOCAL_DATABASE_URL);
