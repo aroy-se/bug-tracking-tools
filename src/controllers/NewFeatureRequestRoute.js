@@ -6,7 +6,6 @@ const newFeatureRequestRouter = express.Router();
  * Create a new feature request
  * [C]RUD := [C]REATE => POST(ONE)
  */
-// ---------------------------------------------------------
 newFeatureRequestRouter.post("/newFeatureRequest", (request, response) => {
   const { body } = request;
   const {

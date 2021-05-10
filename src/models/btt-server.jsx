@@ -121,37 +121,37 @@ var database,
 // ---------------------------------------------------------
 // To Create a Bug/Defect
 // [C]RUD := [C]REATE => POST(ONE)
-api.post("/btt/bug", (request, response) => {
-  var toBeInsertedData = request.body;
-  bugCollection.insertOne(toBeInsertedData, (err, result) => {
-    if (err) {
-      return response.status(500).send(err);
-    }
-    response.send(result);
-  });
-});
+// api.post("/btt/bug", (request, response) => {
+//   var toBeInsertedData = request.body;
+//   bugCollection.insertOne(toBeInsertedData, (err, result) => {
+//     if (err) {
+//       return response.status(500).send(err);
+//     }
+//     response.send(result);
+//   });
+// });
 // TO Fetch all the bugs
 // C[R]UD := [R]EAD => GET(ALL)
-api.get("/btt/bug", (request, response) => {
-  bugCollection.find({}).toArray((err, result) => {
-    if (err) {
-      return response.status(500).send(err);
-    }
-    response.send(result);
-  });
-});
+// api.get("/btt/bug", (request, response) => {
+//   bugCollection.find({}).toArray((err, result) => {
+//     if (err) {
+//       return response.status(500).send(err);
+//     }
+//     response.send(result);
+//   });
+// });
 
 // To Fetch a Bug by bug-Id
 // C[R]UD := [R]EAD => GET(ONE) - byId
-api.get("/btt/bug/:id", (request, response) => {
-  var targetId = parseInt(request.params.id);
-  bugCollection.findOne({ bugId: targetId }, (err, result) => {
-    if (err) {
-      return response.status(500).send(err);
-    }
-    response.send(result);
-  });
-});
+// api.get("/btt/bug/:id", (request, response) => {
+//   var targetId = parseInt(request.params.id);
+//   bugCollection.findOne({ bugId: targetId }, (err, result) => {
+//     if (err) {
+//       return response.status(500).send(err);
+//     }
+//     response.send(result);
+//   });
+// });
 
 // To fetch all bugs By Name without regex
 // C[R]UD := [R]EAD => GET(ALL) - byName
@@ -166,81 +166,81 @@ api.get("/btt/bug/:id", (request, response) => {
 // });
 
 // To fetch all bugs By Title with regex
-api.get("/btt/bugByTitle/:name", (request, response) => {
-  var targetName = request.params.name;
-  bugCollection
-    .find({ bugTitle: { $regex: targetName, $options: "i" } })
-    .toArray((err, result) => {
-      if (err) {
-        return response.status(500).send(err);
-      }
-      response.send(result);
-    });
-});
+// api.get("/btt/bugByTitle/:name", (request, response) => {
+//   var targetName = request.params.name;
+//   bugCollection
+//     .find({ bugTitle: { $regex: targetName, $options: "i" } })
+//     .toArray((err, result) => {
+//       if (err) {
+//         return response.status(500).send(err);
+//       }
+//       response.send(result);
+//     });
+// });
 
 // Update a bug by bug-id
 // CR[U]D := [U]PDATE => PUT - ONE
-api.put("/btt/bug/:id", (request, response) => {
-  var targetId = { bugId: parseInt(request.params.id) };
-  var toBeUpdated = {
-    $set: {
-      issueType: request.body.issueType,
-      component: request.body.component,
-      reportVersion: request.body.reportVersion,
-      os: request.body.os,
-      issueSubType: request.body.issueSubType,
-      severity: request.body.severity,
-      regressionVersion: request.body.regressionVersion,
-      browser: request.body.browser,
-      bugTitle: request.body.bugTitle,
-      bugDesc: request.body.bugDesc,
-      reproducibleSteps: request.body.reproducibleSteps,
-      expectedOutput: request.body.expectedOutput,
-      actualOutput: request.body.actualOutput,
-      sourceCode: request.body.sourceCode,
-      attachment: request.body.attachment,
-      workaround: request.body.workaround,
-      // submitterName: request.body.submitterName,
-      // submitterEmail: request.body.submitterEmail,
-      // submitterCompany: request.body.submitterCompany,
-      assignee: request.body.assignee,
-      eta: request.body.eta,
-      fixVersion: request.body.fixVersion,
-      resolution: request.body.resolution,
-      state: request.body.state,
-      priority: request.body.priority,
-    },
-  };
-  bugCollection.updateOne(targetId, toBeUpdated, (err, result) => {
-    if (err) {
-      return response.status(500).send(err);
-    }
-    console.log("Record is updated!");
-    response.send(result);
-  });
-});
+// api.put("/btt/bug/:id", (request, response) => {
+//   var targetId = { bugId: parseInt(request.params.id) };
+//   var toBeUpdated = {
+//     $set: {
+//       issueType: request.body.issueType,
+//       component: request.body.component,
+//       reportVersion: request.body.reportVersion,
+//       os: request.body.os,
+//       issueSubType: request.body.issueSubType,
+//       severity: request.body.severity,
+//       regressionVersion: request.body.regressionVersion,
+//       browser: request.body.browser,
+//       bugTitle: request.body.bugTitle,
+//       bugDesc: request.body.bugDesc,
+//       reproducibleSteps: request.body.reproducibleSteps,
+//       expectedOutput: request.body.expectedOutput,
+//       actualOutput: request.body.actualOutput,
+//       sourceCode: request.body.sourceCode,
+//       attachment: request.body.attachment,
+//       workaround: request.body.workaround,
+//       // submitterName: request.body.submitterName,
+//       // submitterEmail: request.body.submitterEmail,
+//       // submitterCompany: request.body.submitterCompany,
+//       assignee: request.body.assignee,
+//       eta: request.body.eta,
+//       fixVersion: request.body.fixVersion,
+//       resolution: request.body.resolution,
+//       state: request.body.state,
+//       priority: request.body.priority,
+//     },
+//   };
+//   bugCollection.updateOne(targetId, toBeUpdated, (err, result) => {
+//     if (err) {
+//       return response.status(500).send(err);
+//     }
+//     console.log("Record is updated!");
+//     response.send(result);
+//   });
+// });
 
-// ---------------------------------------------------------
-// USER ROLE
-// ---------------------------------------------------------
+// // ---------------------------------------------------------
+// // USER ROLE
+// // ---------------------------------------------------------
 
-//UPDATE USER ROLE
-// CR[U]D := [U]PDATE => PUT - ONE
-api.put("/btt/userRole/:id", (request, response) => {
-  var targetId = { userId: parseInt(request.params.id) };
-  var toBeUpdated = {
-    $set: {
-      role: request.body.role,
-    },
-  };
-  userCollection.updateOne(targetId, toBeUpdated, (err, result) => {
-    if (err) {
-      return response.status(500).send(err);
-    }
-    console.log("Record is updated!");
-    response.send(result);
-  });
-});
+// //UPDATE USER ROLE
+// // CR[U]D := [U]PDATE => PUT - ONE
+// api.put("/btt/userRole/:id", (request, response) => {
+//   var targetId = { userId: parseInt(request.params.id) };
+//   var toBeUpdated = {
+//     $set: {
+//       role: request.body.role,
+//     },
+//   };
+//   userCollection.updateOne(targetId, toBeUpdated, (err, result) => {
+//     if (err) {
+//       return response.status(500).send(err);
+//     }
+//     console.log("Record is updated!");
+//     response.send(result);
+//   });
+// });
 //------------------------------------------------------------
 
 // For User
