@@ -1,188 +1,311 @@
 import React, { useState } from "react";
 import * as Constants from "../../utility/Constants";
 
-const NewFeature = () => {
-  const initialState = {
-    featureTitle: "",
-    featureDesc: "",
-    submitterName: "",
-    submitterEmail: "",
-    submitterCompany: "",
-  };
-  const [input, setInput] = useState(initialState);
-  const [id, setId] = useState("");
-  const [success, setSuccess] = useState(false);
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setInput((prevInput) => {
-      return {
-        ...prevInput,
-        [name]: value,
-      };
-    });
-    // reset the status label
-    setSuccess(false);
-  }
-  function handleNewFeatureRequest(event) {
-    event.preventDefault();
-    const newFeatureRequestObject = {
-      newFeatureId: Math.floor(Math.random() * (999999 - 100) + 100), // Just demo purpose
-      createdTime: Date().toLocaleString(),
-      featureTitle: input.featureTitle,
-      featureDesc: input.featureDesc,
-      submitterName: input.submitterName,
-      submitterEmail: input.submitterEmail,
-      submitterCompany: input.submitterCompany,
+class NewFeature extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      newFeatureRequestError: "",
+      newFeatureRequestSuccess: "",
+
+      featureTitle: "",
+      featureDesc: "",
+      submitterName: "",
+      submitterEmail: "",
+      submitterCompany: "",
     };
-    setId(newFeatureRequestObject.newFeatureId);
-    saveNewFeatureRequestDetails(newFeatureRequestObject);
-    setInput((prevState) => {
-      return {
-        ...prevState,
-        featureTitle: "",
-        featureDesc: "",
-        submitterName: "",
-        submitterEmail: "",
-        submitterCompany: "",
-      };
+
+    this.onChangeFeatureTitle = this.onChangeFeatureTitle.bind(this);
+    this.onChangeFeatureDesc = this.onChangeFeatureDesc.bind(this);
+    this.onChangeSubmitterName = this.onChangeSubmitterName.bind(this);
+    this.onChangeSubmitterEmail = this.onChangeSubmitterEmail.bind(this);
+    this.onChangeSubmitterCompany = this.onChangeSubmitterCompany.bind(this);
+
+    this.onClickCreateNewFeatureRequest = this.onClickCreateNewFeatureRequest.bind(
+      this
+    );
+  }
+  onChangeFeatureTitle(event) {
+    this.setState({
+      featureTitle: event.target.value,
     });
   }
-  var saveNewFeatureRequestDetails = (newFeatureRequestData) => {
-    const parameters = {
+  onChangeFeatureDesc(event) {
+    this.setState({
+      featureDesc: event.target.value,
+    });
+  }
+  onChangeSubmitterName(event) {
+    this.setState({
+      submitterName: event.target.value,
+    });
+  }
+  onChangeSubmitterEmail(event) {
+    this.setState({
+      submitterEmail: event.target.value,
+    });
+  }
+  onChangeSubmitterCompany(event) {
+    this.setState({
+      submitterCompany: event.target.value,
+    });
+  }
+  onClickCreateNewFeatureRequest(event) {
+    event.preventDefault();
+    // Grab state
+    const {
+      featureTitle,
+      featureDesc,
+      submitterName,
+      submitterEmail,
+      submitterCompany,
+    } = this.state;
+
+    // Post request to backend
+    fetch(Constants.NEW_FEATURE_REQUEST_URL, {
       method: "POST",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newFeatureRequestData),
-    };
-    fetch(Constants.NEW_FEATURE_REQUEST_URL, parameters)
-      .then((response) => response.json())
-      .then((newFeatureRequestData) => {
-        setSuccess(true);
+      body: JSON.stringify({
+        featureTitle: featureTitle,
+        featureDesc: featureDesc,
+        submitterName: submitterName,
+        submitterEmail: submitterEmail,
+        submitterCompany: submitterCompany,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.success) {
+          this.setState({
+            newFeatureRequestError: "",
+            newFeatureRequestSuccess: json.message,
+
+            featureTitle: "",
+            featureDesc: "",
+            submitterName: "",
+            submitterEmail: "",
+            submitterCompany: "",
+          });
+        } else {
+          this.setState({
+            newFeatureRequestSuccess: "",
+            newFeatureRequestError: json.message,
+          });
+        }
       });
-  };
-  return (
-    <div className="container-fluid mt-5">
-      <div className="row">
-        <div className="col-xl-2"></div>
-        <div className="col-xl-8">
-          <div class="card shadow">
-            <div class="card-header bg-info text-light shadow">
-              <span className="lead">New Feature Request</span>
-            </div>
-            <div class="card-body">
-              <form>
-                <div class="form-group">
-                  <label for="formGroupExampleInput">Feature Title</label>
-                  <input
-                    type="text"
-                    class="form-control shadow-sm"
-                    id="formGroupExampleInput"
-                    placeholder="Feature Title"
-                    name="featureTitle"
-                    value={input.featureTitle}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="formGroupExampleInput2">
-                    Feature Description
-                  </label>
-                  <textarea
-                    type="textarea"
-                    class="form-control shadow-sm"
-                    name="featureDesc"
-                    value={input.featureDesc}
-                    onChange={handleChange}
-                    placeholder="Provide detailed description of the new feature proposal"
-                  />
-                </div>
-              </form>
-              <div class="row">
-                <div class="col-xl-12">
-                  <div class="card shadow-sm">
-                    <div class="card-header pt-1 pb-1 text-info">
-                      <h5>Submitter Info.</h5>
-                    </div>
-                    <div class="card-body p-1">
-                      <div class="row">
-                        <div class="col-xl-4">
-                          <div class="form-group mb-1">
-                            <label>Submitter Name</label>
-                            <input
-                              type="text"
-                              class="form-control shadow-sm"
-                              name="submitterName"
-                              value={input.submitterName}
-                              onChange={handleChange}
-                              placeholder="Full Name"
-                            />
+  }
+
+  // const initialState = {
+  //   featureTitle: "",
+  //   featureDesc: "",
+  //   submitterName: "",
+  //   submitterEmail: "",
+  //   submitterCompany: "",
+  // };
+  // const [input, setInput] = useState(initialState);
+  // const [id, setId] = useState("");
+  // const [success, setSuccess] = useState(false);
+  // function this.onChange(event) {
+  //   const { name, value } = event.target;
+  //   setInput((prevInput) => {
+  //     return {
+  //       ...prevInput,
+  //       [name]: value,
+  //     };
+  //   });
+  //   // reset the status label
+  //   setSuccess(false);
+  // }
+  // function handleNewFeatureRequest(event) {
+  //   event.preventDefault();
+  //   const newFeatureRequestObject = {
+  //     newFeatureId: Math.floor(Math.random() * (999999 - 100) + 100), // Just demo purpose
+  //     createdTime: Date().toLocaleString(),
+  //     featureTitle: featureTitle,
+  //     featureDesc: featureDesc,
+  //     submitterName: submitterName,
+  //     submitterEmail: submitterEmail,
+  //     submitterCompany: submitterCompany,
+  //   };
+  //   setId(newFeatureRequestObject.newFeatureId);
+  //   saveNewFeatureRequestDetails(newFeatureRequestObject);
+  //   setInput((prevState) => {
+  //     return {
+  //       ...prevState,
+  //       featureTitle: "",
+  //       featureDesc: "",
+  //       submitterName: "",
+  //       submitterEmail: "",
+  //       submitterCompany: "",
+  //     };
+  //   });
+  // }
+  // var saveNewFeatureRequestDetails = (newFeatureRequestData) => {
+  //   const parameters = {
+  //     method: "POST",
+  //     headers: {
+  //       "Access-Control-Allow-Origin": "*",
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(newFeatureRequestData),
+  //   };
+  //   fetch(Constants.NEW_FEATURE_REQUEST_URL, parameters)
+  //     .then((response) => response.json())
+  //     .then((newFeatureRequestData) => {
+  //       setSuccess(true);
+  //     });
+  // };
+  render() {
+    const {
+      newFeatureRequestError,
+      newFeatureRequestSuccess,
+      featureTitle,
+      featureDesc,
+      submitterName,
+      submitterEmail,
+      submitterCompany,
+    } = this.state;
+    return (
+      <div className="container-fluid mt-5">
+        <div className="row">
+          <div className="col-xl-2"></div>
+          <div className="col-xl-8">
+            <div class="card shadow">
+              <div class="card-header bg-info text-light shadow">
+                <span className="lead">New Feature Request</span>
+              </div>
+              <div class="card-body">
+                <form>
+                  <div class="form-group">
+                    <label for="formGroupExampleInput">Feature Title</label>
+                    <input
+                      type="text"
+                      class="form-control shadow-sm"
+                      id="formGroupExampleInput"
+                      placeholder="Feature Title"
+                      name="featureTitle"
+                      value={featureTitle}
+                      onChange={this.onChangeFeatureTitle}
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="formGroupExampleInput2">
+                      Feature Description
+                    </label>
+                    <textarea
+                      type="textarea"
+                      class="form-control shadow-sm"
+                      name="featureDesc"
+                      value={featureDesc}
+                      onChange={this.onChangeFeatureDesc}
+                      placeholder="Provide detailed description of the new feature proposal"
+                    />
+                  </div>
+                </form>
+                <div class="row">
+                  <div class="col-xl-12">
+                    <div class="card shadow-sm">
+                      <div class="card-header pt-1 pb-1 text-info">
+                        <h5>Submitter Info.</h5>
+                      </div>
+                      <div class="card-body p-1">
+                        <div class="row">
+                          <div class="col-xl-4">
+                            <div class="form-group mb-1">
+                              <label>Submitter Name</label>
+                              <input
+                                type="text"
+                                class="form-control shadow-sm"
+                                name="submitterName"
+                                value={submitterName}
+                                onChange={this.onChangeSubmitterName}
+                                placeholder="Full Name"
+                              />
+                            </div>
                           </div>
-                        </div>
-                        <div class="col-xl-4">
-                          <div class="form-group mb-1">
-                            <label>Submitter Email Id</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              name="submitterEmail shadow-sm"
-                              value={input.submitterEmail}
-                              onChange={handleChange}
-                              placeholder="Email ID"
-                            />
+                          <div class="col-xl-4">
+                            <div class="form-group mb-1">
+                              <label>Submitter Email Id</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="submitterEmail shadow-sm"
+                                value={submitterEmail}
+                                onChange={this.onChangeSubmitterEmail}
+                                placeholder="Email ID"
+                              />
+                            </div>
                           </div>
-                        </div>
-                        <div class="col-xl-4">
-                          <div class="form-group mb-1">
-                            <label>Company Name</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              name="submitterCompany shadow-sm"
-                              value={input.submitterCompany}
-                              onChange={handleChange}
-                              placeholder="Company Name"
-                            />
+                          <div class="col-xl-4">
+                            <div class="form-group mb-1">
+                              <label>Company Name</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="submitterCompany shadow-sm"
+                                value={submitterCompany}
+                                onChange={this.onChangeSubmitterCompany}
+                                placeholder="Company Name"
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="row mt-4">
-                <div class="col-xl-3"></div>
-                <div class="col-xl-6">
-                  <span onChange={handleChange}>
-                    {success && (
+                <div class="row mt-4">
+                  <div class="col-xl-3"></div>
+                  <div class="col-xl-6">
+                    {/* <span onChange={this.onChange}>
+                      {success && (
+                        <label
+                          className="alert alert-success p-0 d-flex justify-content-center"
+                          role="alert"
+                        >
+                          Your new feature request(ID={id}) has been sent
+                          successfully!
+                        </label>
+                      )}
+                    </span> */}
+                    {newFeatureRequestError ? (
+                      <label
+                        className="alert alert-danger p-0 d-flex justify-content-center"
+                        role="alert"
+                      >
+                        {newFeatureRequestError}{" "}
+                      </label>
+                    ) : null}
+                    {newFeatureRequestSuccess ? (
                       <label
                         className="alert alert-success p-0 d-flex justify-content-center"
                         role="alert"
                       >
-                        Your new feature request(ID={id}) has been sent
-                        successfully!
+                        {newFeatureRequestSuccess}
                       </label>
-                    )}
-                  </span>
-                  <button
-                    type="button"
-                    className="btn btn-danger btn-lg btn-block shadow mb-2"
-                    name="submit"
-                    onClick={handleNewFeatureRequest}
-                  >
-                    NEW FEATURE REQUEST
-                  </button>
+                    ) : null}
+                    <button
+                      type="button"
+                      className="btn btn-danger btn-lg btn-block shadow mb-2"
+                      name="submit"
+                      onClick={this.onClickCreateNewFeatureRequest}
+                    >
+                      NEW FEATURE REQUEST
+                    </button>
+                  </div>
+                  <div class="col-xl-3"></div>
                 </div>
-                <div class="col-xl-3"></div>
               </div>
             </div>
           </div>
+          <div className="col-xl-2"></div>
         </div>
-        <div className="col-xl-2"></div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default NewFeature;

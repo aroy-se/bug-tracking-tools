@@ -7,7 +7,6 @@ class Registration extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // isLoading: true,
       token: "",
       registrationError: "",
       registrationSuccess: "",
@@ -117,9 +116,7 @@ class Registration extends React.Component {
       email,
       mobile,
     } = this.state;
-    // this.setState({
-    //   isLoading: true,
-    // });
+
     // Post request to backend
     fetch("http://localhost:8765/btt/user/registration", {
       method: "POST",
@@ -144,12 +141,10 @@ class Registration extends React.Component {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log("json", json);
         if (json.success) {
           this.setState({
             registrationError: "",
             registrationSuccess: json.message,
-            isLoading: false,
             userName: "",
             password: "",
             firstName: "",
@@ -167,14 +162,12 @@ class Registration extends React.Component {
           this.setState({
             registrationSuccess: "",
             registrationError: json.message,
-            // isLoading: false,
           });
         }
       });
   }
   render() {
     const {
-      // isLoading,
       token,
       registrationError,
       registrationSuccess,

@@ -4,6 +4,7 @@ class ViewComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      productName: "",
       componentId: "",
       componentName: "",
       componentDetails: [],
@@ -15,8 +16,7 @@ class ViewComponent extends Component {
   // Handle function
   handleChange(event) {
     if (event.target.value === "") {
-      this.setState({ componentId: "" });
-      this.setState({ componentName: "" });
+      this.setState({ productName: "", componentId: "", componentName: "" });
     } else {
       if (isNaN(event.target.value)) {
         this.setState({ componentName: event.target.value });
@@ -26,7 +26,9 @@ class ViewComponent extends Component {
     }
   }
   handleFetchComponent(event) {
-    // event.preventDefault();
+    event.preventDefault();
+    document.getElementById("componentName").value = "";
+
     var searchInputText =
       this.state.componentId !== ""
         ? this.state.componentId
@@ -53,10 +55,12 @@ class ViewComponent extends Component {
       // fetch data by bug id
       target_url = Constants.COMPONENT_URL + parseInt(searchInputText);
       catch_err_msg = searchInputText;
+      console.log("iddd Error: " + target_url);
       this.fetchDatafromDatabase(target_url, true, catch_err_msg);
     }
     // finally reset the array
     this.setState({
+      productName: "",
       componentId: "",
       componentName: "",
       componentDetails: [],
@@ -90,12 +94,12 @@ class ViewComponent extends Component {
         catch_err_msg === ""
           ? (error) => console.log("Error: " + error)
           : () => {
+              this.setState({ successFetch: false });
               alert(
                 `The component, ${catch_err_msg} does not exist in our database`
               );
             }
       );
-    return;
   }
 
   render() {
@@ -130,44 +134,51 @@ class ViewComponent extends Component {
           </div>
           <div className="col-xl-4"></div>
         </div>
-        {this.state.successFetch ? (
-          <div className="row">
-            <div className="col-xl-12">
-              <div className="table-wrapper-scroll-y component-table-responsive">
-                <table className="table table-sm table-hover border">
-                  <thead class="thead-light">
-                    <tr>
-                      <th>Product Name</th>
-                      <th>Component ID</th>
-                      <th>Component Name</th>
-                      <th>Created Time</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {this.state.componentDetails.map((component, index) => (
-                      <tr key={index}>
-                        <td>{component.productName}</td>
-                        <td>{component.componentId}</td>
-                        <td>{component.componentName}</td>
-                        <td>{component.createdTime}</td>
+        {
+          (console.log("Success fetch: " + this.state.successFetch),
+          console.log(
+            "length: " + Object.keys(this.state.componentDetails).length
+          ),
+          Object.keys(this.state.componentDetails).length > 0 ? (
+            <div className="row">
+              <div className="col-xl-12">
+                <div className="table-wrapper-scroll-y component-table-responsive">
+                  <table className="table table-sm table-hover border">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Product Name</th>
+                        <th>Component ID</th>
+                        <th>Component Name</th>
+                        <th>Created Time</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {this.state.componentDetails.map((component, index) => (
+                        <tr key={index}>
+                          <td>{component.productName}</td>
+                          <td>{component.componentId}</td>
+                          <td>{component.componentName}</td>
+                          <td>{component.createdTime}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
-          </div>
-        ) : (
-          <div className="row">
-            <div className="col-xl-3"></div>
-            <div className="col-xl-6">
-              <div className="alert alert-danger text-center">
-                Empty Result! Click on search to fetch the component details...
+          ) : (
+            <div className="row">
+              <div className="col-xl-3"></div>
+              <div className="col-xl-6">
+                <div className="alert alert-danger text-center">
+                  Empty Result! Click on search to fetch the component
+                  details...
+                </div>
               </div>
+              <div className="col-xl-3"></div>
             </div>
-            <div className="col-xl-3"></div>
-          </div>
-        )}
+          ))
+        }
       </div>
     );
   }

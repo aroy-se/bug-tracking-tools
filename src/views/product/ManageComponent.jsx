@@ -2,6 +2,7 @@ import React from "react";
 import UpdateComponent from "./UpdateComponent";
 import CreateComponent from "./CreateComponent";
 import ViewComponent from "./ViewComponents";
+import DeleteComponent from "./DeleteComponent";
 const ManageComponent = () => {
   return (
     <div className="mt-0">
@@ -18,7 +19,7 @@ const ManageComponent = () => {
                     aria-expanded="true"
                     aria-controls="collapseOne"
                   >
-                    View All Components
+                    View Component
                   </button>
                 </h5>
               </div>
@@ -34,6 +35,7 @@ const ManageComponent = () => {
                 </div>
               </div>
             </div>
+            {/* ///////////////////////////////////// */}
             <div class="card">
               <div class="card-header" id="headingTwo">
                 <h5 class="mb-0">
@@ -65,6 +67,7 @@ const ManageComponent = () => {
                 </div>
               </div>
             </div>
+            {/* ///////////////////////////////////// */}
             <div class="card">
               <div class="card-header" id="headingThree">
                 <h5 class="mb-0">
@@ -92,6 +95,38 @@ const ManageComponent = () => {
                       <UpdateComponent />
                     </div>
                     <div className="col-xl-3"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* ///////////////////////////////////// */}
+            <div class="card">
+              <div class="card-header" id="headingFour">
+                <h5 class="mb-0">
+                  <button
+                    class="btn btn-link collapsed text-danger p-0"
+                    data-toggle="collapse"
+                    data-target="#collapseFour"
+                    aria-expanded="false"
+                    aria-controls="collapseFour"
+                  >
+                    Delete Component
+                  </button>
+                </h5>
+              </div>
+              <div
+                id="collapseFour"
+                class="collapse"
+                aria-labelledby="headingFour"
+                data-parent="#accordion"
+              >
+                <div class="card-body">
+                  <div className="row ">
+                    {/* <div className="col-xl-3"></div> */}
+                    <div className="col-xl-12 pt-3 pb-3">
+                      <DeleteComponent />
+                    </div>
+                    {/* <div className="col-xl-3"></div> */}
                   </div>
                 </div>
               </div>

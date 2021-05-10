@@ -1,24 +1,12 @@
 import React, { useState } from "react";
 import * as Constants from "../../utility/Constants";
 
-const DeleteUserDetails = () => {
+const DeleteComponent = () => {
   // To show status message after successful insertion
   const [success, setSuccess] = useState(false);
   const [input, setInput] = useState({
-    userId: "",
-    userName: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    address1: "",
-    address2: "",
-    city: "",
-    state: "",
-    zip: "",
-    photo: "",
-    email: "",
-    mobile: "",
-    moreInfo: "",
+    componentId: "",
+    componentName: "",
   });
 
   // Handle function
@@ -36,26 +24,26 @@ const DeleteUserDetails = () => {
   function handleSubmit(event) {
     event.preventDefault();
     setSuccess(false);
-    if (input.userId === "") {
-      alert("User Id should not be empty!");
+    if (input.componentId === "") {
+      alert("Component Id should not be empty!");
       return;
     }
-    const deleteAnUser = {
-      userId: input.userId,
+    const deleteComponent = {
+      componentId: input.componentId,
     };
-    deleteUserDetails(deleteAnUser);
+    deleteComponentDetails(deleteComponent);
   }
-  var deleteUserDetails = (userData) => {
+  var deleteComponentDetails = (componentData) => {
     const parameters = {
       method: "DELETE",
     };
-    if (window.confirm("Do you really want to delete the User record?")) {
+    if (window.confirm("Do you really want to delete the Component?")) {
       // Fetch All!
     } else {
       // Do nothing!
       return;
     }
-    fetch(Constants.USER_URL + parseInt(input.userId), parameters)
+    fetch(Constants.COMPONENT_URL + parseInt(input.componentId), parameters)
       .then((response) => {
         if (!response.ok) {
           throw Error(response.statusText);
@@ -67,9 +55,11 @@ const DeleteUserDetails = () => {
         setSuccess(true);
       })
       .catch(() => {
-        alert(`The User, ${input.userId} does not exist in our database!`);
+        alert(
+          `The Component, ${input.componentId} does not exist in our database!`
+        );
       });
-    setInput({ userId: "" });
+    setInput({ componentId: "" });
   };
   return (
     <div className="container" border="0">
@@ -78,21 +68,21 @@ const DeleteUserDetails = () => {
         <div class="col-xl-6">
           <div class="card shadow">
             <div class="card-header text-danger shadow-sm">
-              <h5>DELETE A USER RECORD</h5>
+              <h5>DELETE COMPONENT</h5>
             </div>
             <div class="card-body">
               <div class="row">
                 <div class="col-xl-12">
                   <div class="form-group">
                     <label className="badge badge-light text-dark">
-                      User Id
+                      Component Id
                     </label>
                     <input
                       type="text"
                       class="form-control shadow-sm"
-                      placeholder="Provide a User ID"
-                      name="userId"
-                      value={input.userId}
+                      placeholder="Provide a Component ID"
+                      name="componentId"
+                      value={input.componentId}
                       onChange={handleChange}
                     />
                   </div>
@@ -106,7 +96,7 @@ const DeleteUserDetails = () => {
                       className="alert alert-success p-0 d-flex justify-content-center mt-5"
                       role="alert"
                     >
-                      User deletion successful!
+                      Component deletion successful!
                     </label>
                   )}
                   {/* </label> */}
@@ -119,7 +109,7 @@ const DeleteUserDetails = () => {
                       type="submit"
                       className="btn btn-danger btn-lg btn-block shadow register#"
                       name="submit"
-                      value="DELETE USER"
+                      value="DELETE COMPONENT"
                       onClick={handleSubmit}
                     />
                   </div>
@@ -134,4 +124,4 @@ const DeleteUserDetails = () => {
   );
 };
 
-export default DeleteUserDetails;
+export default DeleteComponent;

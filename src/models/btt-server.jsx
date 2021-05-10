@@ -38,85 +38,85 @@ var database,
   newFeatureRequestCollection,
   componentCollection;
 // ---------------------------------------------------------
-// COMPONENT
-// ---------------------------------------------------------
-// [C]RUD := [C]REATE => POST(ONE)
-api.post("/btt/component", (request, response) => {
-  var toBeInsertedData = request.body;
-  componentCollection.insertOne(toBeInsertedData, (err, result) => {
-    if (err) {
-      return response.status(500).send(err);
-    }
-    response.send(result);
-  });
-});
+// // COMPONENT
+// // ---------------------------------------------------------
+// // [C]RUD := [C]REATE => POST(ONE)
+// api.post("/btt/component", (request, response) => {
+//   var toBeInsertedData = request.body;
+//   componentCollection.insertOne(toBeInsertedData, (err, result) => {
+//     if (err) {
+//       return response.status(500).send(err);
+//     }
+//     response.send(result);
+//   });
+// });
 
 // TO Fetch all the components
 // C[R]UD := [R]EAD => GET(ALL)
-api.get("/btt/component", (request, response) => {
-  componentCollection.find({}).toArray((err, result) => {
-    if (err) {
-      return response.status(500).send(err);
-    }
-    response.send(result);
-  });
-});
+// api.get("/btt/component", (request, response) => {
+//   componentCollection.find({}).toArray((err, result) => {
+//     if (err) {
+//       return response.status(500).send(err);
+//     }
+//     response.send(result);
+//   });
+// });
 
 // To fetch all components By component name with regex
-api.get("/btt/componentByName/:name", (request, response) => {
-  var targetName = request.params.name;
-  componentCollection
-    .find({ componentName: { $regex: targetName, $options: "i" } })
-    .toArray((err, result) => {
-      if (err) {
-        return response.status(500).send(err);
-      }
-      response.send(result);
-    });
-});
+// api.get("/btt/componentByName/:name", (request, response) => {
+//   var targetName = request.params.name;
+//   componentCollection
+//     .find({ componentName: { $regex: targetName, $options: "i" } })
+//     .toArray((err, result) => {
+//       if (err) {
+//         return response.status(500).send(err);
+//       }
+//       response.send(result);
+//     });
+// });
 // To Fetch a component by component-Id
 // C[R]UD := [R]EAD => GET(ONE) - byId
-api.get("/btt/component/:id", (request, response) => {
-  var targetId = parseInt(request.params.id);
-  componentCollection.findOne({ componentId: targetId }, (err, result) => {
-    if (err) {
-      return response.status(500).send(err);
-    }
-    response.send(result);
-  });
-});
+// api.get("/btt/component/:id", (request, response) => {
+//   var targetId = parseInt(request.params.id);
+//   componentCollection.findOne({ componentId: targetId }, (err, result) => {
+//     if (err) {
+//       return response.status(500).send(err);
+//     }
+//     response.send(result);
+//   });
+// });
 // Update a Component by component-id
 // CR[U]D := [U]PDATE => PUT - ONE
-api.put("/btt/component/:id", (request, response) => {
-  var targetId = { componentId: parseInt(request.params.id) };
-  var toBeUpdated = {
-    $set: {
-      componentName: request.body.componentName,
-    },
-  };
-  componentCollection.updateOne(targetId, toBeUpdated, (err, result) => {
-    if (err) {
-      return response.status(500).send(err);
-    }
-    console.log("Record is updated!");
-    response.send(result);
-  });
-});
+// api.put("/btt/component/:id", (request, response) => {
+//   var targetId = { componentId: parseInt(request.params.id) };
+//   var toBeUpdated = {
+//     $set: {
+//       componentName: request.body.componentName,
+//     },
+//   };
+//   componentCollection.updateOne(targetId, toBeUpdated, (err, result) => {
+//     if (err) {
+//       return response.status(500).send(err);
+//     }
+//     console.log("Record is updated!");
+//     response.send(result);
+//   });
+// });
 
 // ---------------------------------------------------------
 // NEW FEATURE
 // ---------------------------------------------------------
 // To Create a new Feature request
 // [C]RUD := [C]REATE => POST(ONE)
-api.post("/btt/newFeatureRequest", (request, response) => {
-  var toBeInsertedData = request.body;
-  newFeatureRequestCollection.insertOne(toBeInsertedData, (err, result) => {
-    if (err) {
-      return response.status(500).send(err);
-    }
-    response.send(result);
-  });
-});
+// api.post("/btt/newFeatureRequest", (request, response) => {
+//   var toBeInsertedData = request.body;
+//   newFeatureRequestCollection.insertOne(toBeInsertedData, (err, result) => {
+//     if (err) {
+//       return response.status(500).send(err);
+//     }
+//     response.send(result);
+//   });
+// });
 
 // ---------------------------------------------------------
 // To Create a Bug/Defect

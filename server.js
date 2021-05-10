@@ -17,6 +17,8 @@ const MONGODB_ATLAS_DATABASE_URL =
   URL_P1 + URL_P2 + ":" + URL_P3 + URL_P4 + URL_P5 || LOCAL_DATABASE_URL;
 const USER_AUTHENTICATION_ROUTE = require("./src/controllers/UserAuthenticationRoute");
 const USER_ROUTE = require("./src/controllers/UserRoute");
+const COMPONENT_ROUTE = require("./src/controllers/ComponentRoute");
+const NEW_FEATURE_REQUEST_ROUTE = require("./src/controllers/NewFeatureRequestRoute");
 const cors = require("cors");
 
 mongoose.connect(
@@ -30,6 +32,8 @@ app.use(cors());
 
 app.use("/btt", USER_AUTHENTICATION_ROUTE);
 app.use("/btt", USER_ROUTE);
+app.use("/btt", COMPONENT_ROUTE);
+app.use("/btt", NEW_FEATURE_REQUEST_ROUTE);
 app.listen(PORT, () => {
   console.log(`[Port: ${PORT}] - The BTT app server is up and running...`);
 });

@@ -1,4 +1,3 @@
-const User = require("../models/UserModel");
 const UserSession = require("../models/UserSession");
 const express = require("express");
 const UserModel = require("../models/UserModel");
@@ -8,7 +7,6 @@ const router = express.Router();
  */
 router.post("/user/registration", (req, res, next) => {
   const { body } = req;
-  console.log("body", body);
   const {
     userName,
     password,
@@ -124,7 +122,7 @@ router.post("/user/registration", (req, res, next) => {
         });
       }
       // save the new user
-      var newUser = new User();
+      var newUser = new UserModel();
       newUser.userName = userName;
       newUser.password = newUser.generateHash(password);
       newUser.firstName = firstName;
