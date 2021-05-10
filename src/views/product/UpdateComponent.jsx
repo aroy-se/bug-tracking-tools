@@ -26,6 +26,9 @@ const UpdateComponent = () => {
     if (input.componentName === "") {
       alert("Component-Name field should not be empty!");
       return;
+    } else if (isNaN(input.componentId)) {
+      alert("Only Digits are accepted");
+      return;
     }
     const updateComponentObject = {
       componentName: input.componentName,

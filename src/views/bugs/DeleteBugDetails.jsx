@@ -27,6 +27,9 @@ const DeleteBugDetails = () => {
     if (input.bugId === "") {
       alert("Bug Id should not be empty!");
       return;
+    } else if (isNaN(input.bugId)) {
+      alert("Only Digits are accepted");
+      return;
     }
     const deleteBug = {
       bugId: input.bugId,

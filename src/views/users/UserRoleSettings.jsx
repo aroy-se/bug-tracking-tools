@@ -8,6 +8,8 @@ const UserRoleSettings = () => {
     userName: "",
     userRole: "",
     newRole: "",
+    roleSuccess: "",
+    roleError: "",
   };
   const [input, setInput] = useState(initialState);
   const [id, setID] = useState("");
@@ -15,7 +17,6 @@ const UserRoleSettings = () => {
 
   function handleChange(event) {
     const { name, value } = event.target;
-    console.log(name + " <=> " + value);
     setInput((prevInput) => {
       return {
         ...prevInput,
@@ -28,6 +29,7 @@ const UserRoleSettings = () => {
 
   function handleUserRoleSubmit(event) {
     event.preventDefault();
+
     setSuccess(false);
     if (input.newRole === "") {
       alert(`Please select a UserRole for the User, ${input.userName}!`);
@@ -55,6 +57,8 @@ const UserRoleSettings = () => {
         userName: "",
         userRole: "",
         newRole: "",
+        roleSuccess: "",
+        roleError: "",
       };
     });
   }
@@ -76,36 +80,57 @@ const UserRoleSettings = () => {
   };
   function handleFetchById(event) {
     event.preventDefault();
+    document.getElementById("userId").value = "";
     setSuccess(false);
     if (input.userId === "") {
       alert("User ID can not be blank!");
       return;
+    } else if (isNaN(input.userId)) {
+      alert("Only Digits are accepted");
+      return;
     }
     fetch(Constants.USER_URL + parseInt(input.userId))
       .then((response) => response.json())
-      .then((data) => {
-        var user = data;
-        var userId = JSON.stringify(user.userId);
-        var firstName = JSON.stringify(user.firstName);
-        var lastName = JSON.stringify(user.lastName);
-        var userName = JSON.stringify(user.userName);
-        var userRole = JSON.stringify(user.userRole);
+      .then(
+        (jsonData) => {
+          if (jsonData.success) {
+            setInput({
+              roleSuccess: jsonData.message,
+              roleError: "",
+            });
+            var user = jsonData;
+            var userId = JSON.stringify(user.userId);
+            var firstName = JSON.stringify(user.firstName);
+            var lastName = JSON.stringify(user.lastName);
+            var userName = JSON.stringify(user.userName);
+            var userRole = JSON.stringify(user.userRole);
 
-        setInput((user) => {
-          return {
-            ...user,
-            userId: JSON.parse(userId),
-            firstName: JSON.parse(firstName),
-            lastName: JSON.parse(lastName),
-            userName: JSON.parse(userName),
-            userRole: JSON.parse(userRole),
-          };
-        });
-      })
-      .catch(() => {
-        alert(`The User, ${input.userId} does not exist in our database!`);
-      });
+            setInput((user) => {
+              return {
+                ...user,
+                userId: JSON.parse(userId),
+                firstName: JSON.parse(firstName),
+                lastName: JSON.parse(lastName),
+                userName: JSON.parse(userName),
+                userRole: JSON.parse(userRole),
+              };
+            });
+          } //end success
+          else {
+            setInput({
+              roleSuccess: "",
+              roleError: jsonData.message,
+            });
+          }
+        } ////
+      );
+    // .catch(() => {
+    //   setSuccess(false);
+    //   alert(`The User, ${input.userId} does not exist in our database!`);
+    //   return;
+    // });
   }
+
   return (
     <div className="mt-4">
       <div className="row">
@@ -125,6 +150,8 @@ const UserRoleSettings = () => {
                 autoComplete="off"
                 className="form-control fetch-n-update-by-id-text"
                 name="userId"
+                id="userId"
+                pattern="[0-9]"
                 value={input.userId}
                 onChange={handleChange}
               />
@@ -205,7 +232,7 @@ const UserRoleSettings = () => {
               </div>
             </div>
           </div>
-          <span onChange={handleChange} className="">
+          {/* <span onChange={handleChange} className="">
             {success && (
               <label
                 className="alert alert-success p-0 d-flex justify-content-center"
@@ -214,7 +241,23 @@ const UserRoleSettings = () => {
                 UserRole updation successful!
               </label>
             )}
-          </span>
+          </span> */}
+          {input.roleError ? (
+            <label
+              className="alert alert-danger p-0 d-flex justify-content-center"
+              role="alert"
+            >
+              {input.roleError}{" "}
+            </label>
+          ) : null}
+          {input.roleSuccess ? (
+            <label
+              className="alert alert-success p-0 d-flex justify-content-center"
+              role="alert"
+            >
+              {input.roleSuccess}
+            </label>
+          ) : null}
           <button
             type="button"
             className="btn btn-danger btn-lg btn-block shadow"

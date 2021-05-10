@@ -89,6 +89,7 @@ class ViewUserDetails extends React.Component {
       })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data + "user count:   " + Object.keys(data).length);
         if (wrapArray === true) {
           this.setState({ userDetails: new Array(data) });
         } else {
@@ -100,6 +101,7 @@ class ViewUserDetails extends React.Component {
         catch_err_msg === ""
           ? (error) => console.log(error)
           : () => {
+              this.setState({ successFetch: false });
               alert(
                 `The search input, ${catch_err_msg} does not exist in our database`
               );

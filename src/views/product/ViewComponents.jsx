@@ -83,6 +83,7 @@ class ViewComponent extends Component {
       })
       .then((response) => response.json())
       .then((data) => {
+        console.log("component Length:   " + Object.keys(data).length);
         if (wrapArray === true) {
           this.setState({ componentDetails: new Array(data) });
         } else {

@@ -207,6 +207,7 @@ const UpdateBugDetails = () => {
         });
       })
       .catch(() => {
+        setSuccess(false);
         alert(`The Bug Id: ${input.bugId} does not exist in our database`);
       });
     document.getElementById("bugIdInputText").value = "";
@@ -220,7 +221,8 @@ const UpdateBugDetails = () => {
         setComponentDetails(data);
       })
       .catch(() => {
-        alert(`A problem is occured while fetching all the component names`);
+        setSuccess(false);
+        alert(`The search input does not exist in our database`);
       });
   }
   // To fetch all the assignee from the database
@@ -232,7 +234,8 @@ const UpdateBugDetails = () => {
         setAssigneeDetails(data);
       })
       .catch(() => {
-        alert(`A problem is occured while fetching all the component names`);
+        setSuccess(false);
+        alert(`The search input does not exist in our database`);
       });
   }
   return (

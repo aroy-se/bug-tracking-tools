@@ -27,6 +27,9 @@ const DeleteComponent = () => {
     if (input.componentId === "") {
       alert("Component Id should not be empty!");
       return;
+    } else if (isNaN(input.componentId)) {
+      alert("Only Digits are accepted");
+      return;
     }
     const deleteComponent = {
       componentId: input.componentId,

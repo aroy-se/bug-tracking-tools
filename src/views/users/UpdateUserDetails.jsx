@@ -39,40 +39,51 @@ const UpdateUserDetails = () => {
     if (input.userId === "") {
       alert("User-Id field should not be empty!");
       return;
+    } else if (isNaN(input.userId)) {
+      alert("Only digits are accepted");
+      return;
     }
     fetch(Constants.USER_URL + parseInt(input.userId))
       .then((response) => response.json())
       .then((data) => {
-        var user = data;
-        var username = JSON.stringify(user.userName);
-        var password = JSON.stringify(user.password);
-        var firstName = JSON.stringify(user.firstName);
-        var lastName = JSON.stringify(user.lastName);
-        var address1 = JSON.stringify(user.address1);
-        var address2 = JSON.stringify(user.address2);
-        var city = JSON.stringify(user.city);
-        var state = JSON.stringify(user.state);
-        var zip = JSON.stringify(user.zip);
-        // var photo = JSON.stringify(user.photo);
-        var email = JSON.stringify(user.email);
-        var mobile = JSON.stringify(user.mobile);
-        setInput((user) => {
-          return {
-            ...user,
-            userName: JSON.parse(username),
-            password: JSON.parse(password),
-            firstName: JSON.parse(firstName),
-            lastName: JSON.parse(lastName),
-            address1: JSON.parse(address1),
-            address2: JSON.parse(address2),
-            city: JSON.parse(city),
-            state: JSON.parse(state),
-            zip: JSON.parse(zip),
-            // photo: JSON.parse(photo),
-            email: JSON.parse(email),
-            mobile: JSON.parse(mobile),
-          };
-        });
+        console.log(
+          data + "...Countttttttttttttt: " + Object.keys(data).length
+        );
+        if (Object.keys(data).length > 0) {
+          var user = data;
+          var username = JSON.stringify(user.userName);
+          var password = JSON.stringify(user.password);
+          var firstName = JSON.stringify(user.firstName);
+          var lastName = JSON.stringify(user.lastName);
+          var address1 = JSON.stringify(user.address1);
+          var address2 = JSON.stringify(user.address2);
+          var city = JSON.stringify(user.city);
+          var state = JSON.stringify(user.state);
+          var zip = JSON.stringify(user.zip);
+          // var photo = JSON.stringify(user.photo);
+          var email = JSON.stringify(user.email);
+          var mobile = JSON.stringify(user.mobile);
+          setInput((user) => {
+            return {
+              ...user,
+              userName: JSON.parse(username),
+              password: JSON.parse(password),
+              firstName: JSON.parse(firstName),
+              lastName: JSON.parse(lastName),
+              address1: JSON.parse(address1),
+              address2: JSON.parse(address2),
+              city: JSON.parse(city),
+              state: JSON.parse(state),
+              zip: JSON.parse(zip),
+              // photo: JSON.parse(photo),
+              email: JSON.parse(email),
+              mobile: JSON.parse(mobile),
+            };
+          });
+        } else {
+          setSuccess(false);
+          alert(`The search input does not exist in our database`);
+        }
       });
   }
   function handleSubmit(event) {
@@ -128,7 +139,12 @@ const UpdateUserDetails = () => {
       .then((response) => response.json())
       .then(() => {
         setSuccess(true);
+      })
+      .catch(() => {
+        setSuccess(false);
+        alert(`The search input does not exist in our database`);
       });
+    document.getElementById("userId").value = "";
   };
   return (
     // <!-- START - Tag <div> for Main HTML body (Registration Details) -->

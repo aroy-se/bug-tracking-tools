@@ -7,14 +7,14 @@ const userRouter = express.Router();
  * C[R]UD := [R]EAD => GET(ALL)
  */
 userRouter.get("/user", (request, response) => {
-  UserModel.find()
+  UserModel.find({})
     .then((data) => {
       response.json(data);
     })
     .catch((err) => {
       return response.send({
         success: false,
-        message: `Error: error occurred while fetching all users details.\n ${err}`,
+        message: `Error: error occurred while fetching all users details`,
       });
     });
 });
@@ -33,7 +33,7 @@ userRouter.get("/user/:id", (request, response) => {
     .catch((err) => {
       return response.send({
         success: false,
-        message: `Error: error occurred while fetching the users details by id.\n ${err}`,
+        message: `Error: error occurred while fetching the users details by id`,
       });
     });
 });
@@ -51,7 +51,7 @@ userRouter.get("/userByName/:name", (request, response) => {
     .catch((err) => {
       return response.send({
         success: false,
-        message: `Error: error occurred while fetching the users details by username.\n ${err}`,
+        message: `Error: error occurred while fetching the users details by username`,
       });
     });
 });
@@ -86,7 +86,7 @@ userRouter.put("/user/:id", (request, response) => {
     .catch((err) => {
       return response.send({
         success: false,
-        message: `Error: error occurred while updating the users details by userid.\n ${err}`,
+        message: `Error: error occurred while updating the users details by userid`,
       });
     });
 });
@@ -146,7 +146,7 @@ userRouter.put("/userRole/:id", (request, response) => {
     .catch((err) => {
       return response.send({
         success: false,
-        message: `Error: error occurred while updating the User role by id.\n ${err}`,
+        message: `Error: error occurred while updating the User role by id.`,
       });
     });
 });

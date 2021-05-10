@@ -39,6 +39,9 @@ const DeleteUserDetails = () => {
     if (input.userId === "") {
       alert("User Id should not be empty!");
       return;
+    } else if (isNaN(input.userId)) {
+      alert("Only Digits are accepted");
+      return;
     }
     const deleteAnUser = {
       userId: input.userId,
