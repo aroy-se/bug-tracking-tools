@@ -3,8 +3,10 @@ import * as Constants from "../../utility/Constants";
 const UserRoleSettings = () => {
   const initialState = {
     userId: "",
+    firstName: "",
+    lastName: "",
     userName: "",
-    role: "",
+    userRole: "",
     newRole: "",
   };
   const [input, setInput] = useState(initialState);
@@ -26,28 +28,32 @@ const UserRoleSettings = () => {
 
   function handleUserRoleSubmit(event) {
     event.preventDefault();
-    console.log(input.role + "..." + input.newRole);
+    setSuccess(false);
     if (input.newRole === "") {
-      alert(`Please select a role for the User, ${input.userName}!`);
+      alert(`Please select a UserRole for the User, ${input.userName}!`);
       return;
     }
-    if (input.role === input.newRole) {
-      alert("Selected and the existing role, both are same!");
+    if (input.userRole === input.newRole) {
+      alert("Selected and the existing UserRole, both are same!");
       return;
     }
 
     const newUserRoleSettingsObject = {
       userId: input.userId,
+      firstName: input.firstName,
+      lastName: input.lastName,
       userName: input.userName,
-      role: input.newRole,
+      userRole: input.newRole,
     };
     saveUserRoleSettings(newUserRoleSettingsObject);
     setInput((prevState) => {
       return {
         ...prevState,
         userId: "",
+        firstName: "",
+        lastName: "",
         userName: "",
-        role: "",
+        userRole: "",
         newRole: "",
       };
     });
@@ -70,8 +76,9 @@ const UserRoleSettings = () => {
   };
   function handleFetchById(event) {
     event.preventDefault();
+    setSuccess(false);
     if (input.userId === "") {
-      alert("User-ID field should not be empty!");
+      alert("User ID can not be blank!");
       return;
     }
     fetch(Constants.USER_URL + parseInt(input.userId))
@@ -79,15 +86,19 @@ const UserRoleSettings = () => {
       .then((data) => {
         var user = data;
         var userId = JSON.stringify(user.userId);
+        var firstName = JSON.stringify(user.firstName);
+        var lastName = JSON.stringify(user.lastName);
         var userName = JSON.stringify(user.userName);
-        var userRole = JSON.stringify(user.role);
+        var userRole = JSON.stringify(user.userRole);
 
         setInput((user) => {
           return {
             ...user,
             userId: JSON.parse(userId),
+            firstName: JSON.parse(firstName),
+            lastName: JSON.parse(lastName),
             userName: JSON.parse(userName),
-            role: JSON.parse(userRole),
+            userRole: JSON.parse(userRole),
           };
         });
       })
@@ -132,6 +143,18 @@ const UserRoleSettings = () => {
           </div>
           <hr></hr>
           <div class="form-group">
+            <span className="badge badge-light text-dark">Full Name</span>
+            <input
+              type="text"
+              className="shadow-sm form-control"
+              autoComplete="off"
+              name="fullName"
+              value={input.firstName + " " + input.lastName}
+              onChange={handleChange}
+              disabled
+            />
+          </div>
+          <div class="form-group">
             <span className="badge badge-light text-dark">User Name</span>
             <input
               type="text"
@@ -152,7 +175,7 @@ const UserRoleSettings = () => {
                   className="shadow-sm form-control"
                   autoComplete="off"
                   name="userRole"
-                  value={input.role}
+                  value={input.userRole}
                   onChange={handleChange}
                   disabled
                 />
@@ -188,7 +211,7 @@ const UserRoleSettings = () => {
                 className="alert alert-success p-0 d-flex justify-content-center"
                 role="alert"
               >
-                The UserId-{id}, role has been updated successfully!
+                UserRole updation successful!
               </label>
             )}
           </span>

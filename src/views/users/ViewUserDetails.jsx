@@ -154,14 +154,14 @@ class ViewUserDetails extends React.Component {
                       <th>Name</th>
                       {/* <th>Password</th> */}
                       <th>Role</th>
+                      <th>Email</th>
+                      <th>Phone</th>
                       <th>Address-1</th>
                       <th>Address-2</th>
                       <th>City</th>
                       <th>State</th>
                       <th>Zip</th>
                       {/* <th>Photo</th> */}
-                      <th>Email</th>
-                      <th>Phone</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -169,19 +169,17 @@ class ViewUserDetails extends React.Component {
                       <tr key={index}>
                         <td>{user.userId}</td>
                         <td>{user.userName}</td>
-                        <td>
-                          {user.firstName} {user.lastName}
-                        </td>
+                        <td>{user.firstName + " " + user.lastName}</td>
                         {/* <td>{user.password}</td> */}
-                        <td>{user.role}</td>
+                        <td>{user.userRole}</td>
+                        <td>{user.email}</td>
+                        <td>{user.mobile}</td>
                         <td>{user.address1}</td>
                         <td>{user.address2}</td>
                         <td>{user.city}</td>
                         <td>{user.state}</td>
                         <td>{user.zip}</td>
                         {/* <td>{user.photo}</td> */}
-                        <td>{user.email}</td>
-                        <td>{user.mobile}</td>
                       </tr>
                     ))}
                   </tbody>

@@ -110,4 +110,44 @@ userRouter.delete("/user/:id", (request, response, next) => {
       });
     });
 });
+
+/**
+ * Update User Role
+ * CR[U]D := [U]PDATE => PUT - ONE
+ */
+// userRouter.put("/userRole/:id", (request, response) => {
+//   var targetId = { userId: parseInt(request.params.id) };
+//   var toBeUpdated = {
+//     $set: {
+//       userRole: request.body.userRole,
+//     },
+//   };
+//   userRouter.updateOne(targetId, toBeUpdated, (err, result) => {
+//     if (err) {
+//       return response.status(500).send(err);
+//     }
+//     console.log("User Role is updated!");
+//     response.send(result);
+//   });
+// });
+
+userRouter.put("/userRole/:id", (request, response) => {
+  var targetId = { userId: parseInt(request.params.id) };
+  var toBeUpdated = {
+    $set: {
+      userRole: request.body.userRole,
+    },
+  };
+  UserModel.updateOne(targetId, toBeUpdated)
+    .then((data) => {
+      console.log("User Role is updated!");
+      response.json(data);
+    })
+    .catch((err) => {
+      return response.send({
+        success: false,
+        message: `Error: error occurred while updating the User role by id.\n ${err}`,
+      });
+    });
+});
 module.exports = userRouter;
