@@ -1,6 +1,7 @@
 import React from "react";
 import user_profile_img from "../../assets/images/user_profile_img.jpg";
 import * as Constants from "../../utility/Constants";
+import { getFromStorage } from "../../utility/storage";
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -10,11 +11,18 @@ class UserProfile extends React.Component {
     };
   }
   componentDidMount() {
-    fetch(Constants.USER_URL)
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ userDetails: data });
-      });
+    const local_storage_user = getFromStorage("btt_current_user");
+    if (local_storage_user && local_storage_user.user) {
+      const { user } = local_storage_user;
+      fetch(Constants.URL_USER_BY_EXACT_EMAIL + user)
+        .then((response) => response.json())
+        .then((data) => {
+          this.setState({ userDetails: data });
+        });
+    } else {
+      alert("Currently, No user logged in...");
+      return;
+    }
   }
   render() {
     return (
@@ -35,41 +43,89 @@ class UserProfile extends React.Component {
                 />
               </div>
               <div class="card-body text-center">
-                {/* <p class="card-text">
-                  <u>User details</u>
-                </p> */}
-                <ul class="list-group list-group-flush text-left">
-                  <li class="list-group-item">
-                    <span className="badge badge-light text-secondary mr-5">
-                      First Name
-                    </span>
-                    <label>Anonymous</label>
-                  </li>
-                  <li class="list-group-item">
-                    <span className="badge badge-light text-secondary mr-5">
-                      Last Name
-                    </span>
-                    <label>Anonymous</label>
-                  </li>
-                  <li class="list-group-item">
-                    <span className="badge badge-light text-secondary mr-5">
-                      Address
-                    </span>
-                    <label>NA</label>
-                  </li>
-                  <li class="list-group-item">
-                    <span className="badge badge-light text-secondary mr-5">
-                      Email-ID
-                    </span>
-                    <label>info@btt.com</label>
-                  </li>
-                  <li class="list-group-item">
-                    <span className="badge badge-light text-secondary mr-5">
-                      Phone Number
-                    </span>
-                    <label>+91-7676767676</label>
-                  </li>
-                </ul>
+                {this.state.userDetails.map((user, index) => (
+                  <ul class="list-group list-group-flush text-left" key={index}>
+                    <li class="list-group-item">
+                      <div className="row">
+                        <div className="col-xl-4">
+                          <span className="badge badge-light lead text-danger font-weight-normal">
+                            First Name
+                          </span>
+                        </div>
+                        <div className="col-xl-8">
+                          <span className="badge badge-light lead text-info font-weight-bold">
+                            {user.firstName}
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div className="row">
+                        <div className="col-xl-4">
+                          <span className="badge badge-light lead text-danger font-weight-normal">
+                            Last Name
+                          </span>
+                        </div>
+                        <div className="col-xl-8">
+                          <span className="badge badge-light lead text-info font-weight-bold">
+                            {user.lastName}
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div className="row">
+                        <div className="col-xl-4">
+                          <span className="badge badge-light lead text-danger font-weight-normal">
+                            Address
+                          </span>
+                        </div>
+                        <div className="col-xl-8">
+                          {" "}
+                          <span className="badge badge-light lead text-info font-weight-bold">
+                            {user.address1 +
+                              ", " +
+                              user.address2 +
+                              ", " +
+                              user.city +
+                              ", " +
+                              user.state +
+                              ", " +
+                              user.zip}
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div className="row">
+                        <div className="col-xl-4">
+                          <span className="badge badge-light lead text-danger font-weight-normal">
+                            Email-ID
+                          </span>
+                        </div>
+                        <div className="col-xl-8">
+                          <span className="badge badge-light lead text-info font-weight-bold">
+                            {user.email}
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div className="row">
+                        <div className="col-xl-4">
+                          <span className="badge badge-light lead text-danger font-weight-normal">
+                            Phone Number
+                          </span>
+                        </div>
+                        <div className="col-xl-8">
+                          <span className="badge badge-light lead text-info font-weight-bold">
+                            {user.mobile}
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                ))}
               </div>
             </div>
           </div>

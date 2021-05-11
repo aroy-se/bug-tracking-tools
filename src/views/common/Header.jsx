@@ -115,7 +115,9 @@ class Header extends Component {
                       class="btn btn-light"
                       onClick={this.onClickLogin}
                     >
-                      Anonymous User
+                      {getFromStorage("btt_current_user").user !== ""
+                        ? getFromStorage("btt_current_user").user
+                        : "Anonymous User"}
                     </button>
                     <button
                       type="button"

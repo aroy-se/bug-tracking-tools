@@ -1,5 +1,5 @@
 import React from "react";
-import { getFromStorage } from "../../utility/storage";
+import { setInStorage, getFromStorage } from "../../utility/storage";
 import Home from "./Home";
 import Login from "./Login";
 
@@ -47,6 +47,7 @@ class Logout extends React.Component {
     }
     console.log("Inside logout render Token: " + token);
     if (!token) {
+      setInStorage("btt_current_user", { user: "" });
       return <Login />;
       // return <Home />;
     }

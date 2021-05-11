@@ -17,6 +17,7 @@ const USER_PATH = process.env.REACT_APP_USER_PATH; // user
 const USER_BY_EMAIL = process.env.REACT_APP_SEARCH_USER_BY_EMAIL;
 export const USER_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${USER_PATH}/`;
 export const URL_USER_BY_EMAIL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${USER_BY_EMAIL}/`;
+export const URL_USER_BY_EXACT_EMAIL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${USER_PATH}/${USER_BY_EMAIL}/`;
 
 // Default role of all users while registering
 export const USER_ROLE = "User";

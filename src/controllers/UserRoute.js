@@ -39,12 +39,30 @@ userRouter.get("/user/:id", (request, response) => {
 });
 
 /**
- * To fetch all users By username with regex
- * C[R]UD := [R]EAD => GET(ALL) - byName
+ * To fetch all users By email-id without regex
+ * C[R]UD := [R]EAD => GET(ALL) - byEmail
+ */
+userRouter.get("/user/userByEmail/:name", (request, response) => {
+  var targetName = request.params.name;
+  UserModel.find({ email: { $regex: targetName, $options: "i" } })
+    .then((data) => {
+      response.json(data);
+    })
+    .catch((err) => {
+      return response.send({
+        success: false,
+        message: `Error: error occurred while fetching the users details by username`,
+      });
+    });
+});
+
+/**
+ * To fetch all users By emai-id with regex
+ * C[R]UD := [R]EAD => GET(ALL) - byEmail
  */
 userRouter.get("/userByEmail/:name", (request, response) => {
   var targetName = request.params.name;
-  UserModel.find({ userName: { $regex: targetName, $options: "i" } })
+  UserModel.find({ email: { $regex: targetName, $options: "i" } })
     .then((data) => {
       response.json(data);
     })

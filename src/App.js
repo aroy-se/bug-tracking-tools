@@ -20,14 +20,35 @@ import About from "./views/misc/About";
 import AdminPanel from "./views/users/AdminPanel";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { storeEmail: "" };
+    this.getData = this.getData.bind(this);
+  }
+  getData(email) {
+    this.setState({ storeEmail: email });
+    // console.log("Email " + email);
+    // alert("Email: " + email);
+  }
+
   render() {
     return (
       <div className="container-fluid pl-0 pr-0">
-        <Header />
+        <Header sendData={this.state.storeEmail} />
         <Switch>
           <Route path="/about" component={About} exact />
           <Route path="/faq" component={Faq} />
-          <Route path="/login" component={Login} />
+          <Route
+            path="/login"
+            render={() => (
+              <Login
+                appData={{
+                  storeEmail: this.state.storeEmail,
+                  getData: this.getData.bind(this),
+                }}
+              />
+            )}
+          />
           <Route path="/logout" component={Logout} />
           <Route path="/registration" component={() => <Registration />} />
           <Route path="/userProfile" component={() => <UserProfile />} />

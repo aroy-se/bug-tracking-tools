@@ -15,7 +15,7 @@ class Login extends Component {
 
       email: "",
       password: "",
-      userDetails: [],
+      // storeEmail: "",
     };
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
@@ -51,9 +51,10 @@ class Login extends Component {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log("json", json);
+        console.log("loginjson", json);
         if (json.success) {
           setInStorage("btt_local_storage", { token: json.token });
+          setInStorage("btt_current_user", { user: email });
           this.setState({
             loginError: "",
             loginSuccess: json.message,
@@ -62,6 +63,8 @@ class Login extends Component {
             email: "",
             token: json.token,
           });
+          // store email to send the data to app.js parent
+          // this.props.appData.getData(this.state.storeEmail);
         } else {
           this.setState({
             loginSuccess: "",
@@ -98,14 +101,8 @@ class Login extends Component {
   }
 
   render() {
-    const {
-      isLoading,
-      token,
-      loginError,
-      loginSuccess,
-      email,
-      password,
-    } = this.state;
+    const { isLoading, token, loginError, loginSuccess, email, password } =
+      this.state;
     if (isLoading) {
       return (
         <div className="container mt-5">
