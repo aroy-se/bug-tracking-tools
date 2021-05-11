@@ -2,22 +2,10 @@ import React from "react";
 import $ from "jquery";
 import UserSettings from "./UserSettings";
 import ManageComponent from "../product/ManageComponent";
+
 class AdminPanel extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-  componentDidMount() {
-    // Jquery
-    $("#adminTab a").on("click", function (e) {
-      e.preventDefault();
-      $(this).tab("show");
-    });
-  }
   render() {
     return (
-      // <div className="container-fluid mt-5 mb-5">
-      //   <div className="row">
-      //     <div className="col-xl-12">
       <div className="card shadow mt-3 rounded-0">
         <div className="card-header lead font-weight-bold text-danger">
           <i class="fas fa-user-cog"> ADMIN PANEL</i>
@@ -77,9 +65,6 @@ class AdminPanel extends React.Component {
           {/* End Navigation Page */}
         </div>
       </div>
-      //     </div>
-      //   </div>
-      // </div>
     );
   }
 }

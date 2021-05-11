@@ -27,6 +27,7 @@ class Logout extends React.Component {
               token: "",
               isLoading: false,
             });
+            // window.location.reload();
           } else {
             this.setState({
               isLoading: false,

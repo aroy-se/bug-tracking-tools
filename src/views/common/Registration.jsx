@@ -11,8 +11,10 @@ class Registration extends React.Component {
       registrationError: "",
       registrationSuccess: "",
 
-      userName: "",
+      // userName: "",
+      email: "",
       password: "",
+      confirmPassword: "",
       firstName: "",
       lastName: "",
       address1: "",
@@ -21,12 +23,13 @@ class Registration extends React.Component {
       state: "",
       zip: "",
       photo: "",
-      email: "",
       mobile: "",
       userDetails: [],
     };
-    this.onChangeUserName = this.onChangeUserName.bind(this);
+    // this.onChangeUserName = this.onChangeUserName.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeConfirmPassword = this.onChangeConfirmPassword.bind(this);
     this.onChangeFirstName = this.onChangeFirstName.bind(this);
     this.onChangeLastName = this.onChangeLastName.bind(this);
     this.onChangeAddress1 = this.onChangeAddress1.bind(this);
@@ -35,20 +38,30 @@ class Registration extends React.Component {
     this.onChangeState = this.onChangeState.bind(this);
     this.onChangeZip = this.onChangeZip.bind(this);
     this.onChangePhoto = this.onChangePhoto.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangeMobile = this.onChangeMobile.bind(this);
 
     this.onClickRegistration = this.onClickRegistration.bind(this);
   }
-  onChangeUserName(event) {
+  // onChangeUserName(event) {
+  //   this.setState({
+  //     userName: event.target.value,
+  //   });
+  // }
+  onChangeEmail(event) {
     this.setState({
-      userName: event.target.value,
+      email: event.target.value,
     });
   }
   onChangePassword(event) {
     this.setState({
       password: event.target.value,
     });
+  }
+  onChangeConfirmPassword(event) {
+    this.setState({ confirmPassword: event.target.value });
+    // if (this.state.password !== event.target.value) {
+    //   alert("Password does not match!");
+    // }
   }
   onChangeFirstName(event) {
     this.setState({
@@ -90,11 +103,7 @@ class Registration extends React.Component {
       photo: event.target.value,
     });
   }
-  onChangeEmail(event) {
-    this.setState({
-      email: event.target.value,
-    });
-  }
+
   onChangeMobile(event) {
     this.setState({
       mobile: event.target.value,
@@ -103,8 +112,10 @@ class Registration extends React.Component {
   onClickRegistration() {
     // Grab state
     const {
-      userName,
+      // userName,
+      email,
       password,
+      confirmPassword,
       firstName,
       lastName,
       address1,
@@ -113,7 +124,7 @@ class Registration extends React.Component {
       state,
       zip,
       photo,
-      email,
+
       mobile,
     } = this.state;
 
@@ -125,8 +136,10 @@ class Registration extends React.Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userName: userName,
+        // userName: userName,
+        email: email,
         password: password,
+        confirmPassword,
         firstName: firstName,
         lastName: lastName,
         address1: address1,
@@ -135,7 +148,6 @@ class Registration extends React.Component {
         state: state,
         zip: zip,
         photo: photo,
-        email: email,
         mobile: mobile,
       }),
     })
@@ -145,8 +157,10 @@ class Registration extends React.Component {
           this.setState({
             registrationError: "",
             registrationSuccess: json.message,
-            userName: "",
+            // userName: "",
+            email: "",
             password: "",
+            confirmPassword: "",
             firstName: "",
             lastName: "",
             address1: "",
@@ -155,7 +169,6 @@ class Registration extends React.Component {
             state: "",
             zip: "",
             photo: "",
-            email: "",
             mobile: "",
           });
         } else {
@@ -171,8 +184,10 @@ class Registration extends React.Component {
       token,
       registrationError,
       registrationSuccess,
-      userName,
+      // userName,
+      email,
       password,
+      confirmPassword,
       firstName,
       lastName,
       address1,
@@ -181,7 +196,6 @@ class Registration extends React.Component {
       state,
       zip,
       photo,
-      email,
       mobile,
     } = this.state;
 
@@ -226,7 +240,7 @@ class Registration extends React.Component {
                               </div>
                             </td>
                           </tr>
-                          {/* Username */}
+                          {/* Username
                           <tr>
                             <td>
                               <div class="form-group">
@@ -239,6 +253,40 @@ class Registration extends React.Component {
                                   name="userName"
                                   value={userName}
                                   onChange={this.onChangeUserName}
+                                />
+                              </div>
+                            </td>
+                          </tr> */}
+                          {/* Email ID */}
+                          <tr>
+                            <td>
+                              <div class="form-group">
+                                <h6>Email ID</h6>
+                                <input
+                                  type="text"
+                                  className="user-email shadow-sm form-control"
+                                  name="email"
+                                  value={email}
+                                  required
+                                  autoComplete="off"
+                                  onChange={this.onChangeEmail}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          {/* Password */}
+                          <tr>
+                            <td>
+                              <div class="form-group">
+                                <h6>Password</h6>
+                                <input
+                                  type="password"
+                                  className="user-password shadow-sm form-control"
+                                  required
+                                  autoComplete="off"
+                                  name="password"
+                                  value={password}
+                                  onChange={this.onChangePassword}
                                 />
                               </div>
                             </td>
@@ -294,7 +342,7 @@ class Registration extends React.Component {
                               </div>
                             </td>
                           </tr>
-                          {/* Phone Number */}
+                          {/* Phone Number
                           <tr>
                             <td>
                               <div class="form-group">
@@ -310,7 +358,7 @@ class Registration extends React.Component {
                                 />
                               </div>
                             </td>
-                          </tr>
+                          </tr> */}
                         </tbody>
                       </table>
                     </div>
@@ -337,19 +385,36 @@ class Registration extends React.Component {
                               </div>
                             </td>
                           </tr>
-                          {/* Password */}
+                          {/* Phone Number */}
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6>Password</h6>
+                                <h6>Phone Number</h6>
+                                <input
+                                  type="text"
+                                  className="user-mobile shadow-sm form-control"
+                                  name="mobile"
+                                  value={mobile}
+                                  required
+                                  autoComplete="off"
+                                  onChange={this.onChangeMobile}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          {/* Confirm Password */}
+                          <tr>
+                            <td>
+                              <div class="form-group">
+                                <h6>Confirm Password</h6>
                                 <input
                                   type="password"
                                   className="user-password shadow-sm form-control"
                                   required
                                   autoComplete="off"
-                                  name="password"
-                                  value={password}
-                                  onChange={this.onChangePassword}
+                                  name="confirmPassword"
+                                  value={confirmPassword}
+                                  onChange={this.onChangeConfirmPassword}
                                 />
                               </div>
                             </td>
@@ -416,7 +481,7 @@ class Registration extends React.Component {
                               </div>
                             </td>
                           </tr>
-                          {/* Email ID */}
+                          {/* Email ID
                           <tr>
                             <td>
                               <div class="form-group">
@@ -432,7 +497,7 @@ class Registration extends React.Component {
                                 />
                               </div>
                             </td>
-                          </tr>
+                          </tr> */}
                           {/* User Photo */}
                           <tr>
                             <td>

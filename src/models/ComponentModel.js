@@ -23,7 +23,7 @@ const ComponentSchema = new mongoose.Schema(
       default: Date.now(),
     },
   },
-  { collection: "component_table" }
+  { collection: "component_details" }
 );
 
-module.exports = mongoose.model("component_table", ComponentSchema);
+module.exports = mongoose.model("component_details", ComponentSchema);

@@ -96,30 +96,6 @@ class Login extends Component {
       });
     }
   }
-  // checkLogin = () => {
-  //   const data = this.state.userDetails;
-  //   for (let i = 0; i < data.length; i++) {
-  //     if (
-  //       this.state.userName === data[i].userName &&
-  //       this.state.pwd === data[i].password
-  //     ) {
-  //       this.setState({ error: false, success: true });
-  //       break;
-  //     } else {
-  //       this.setState({ error: true });
-  //     }
-  //   }
-  // };
-
-  // changeUsernameState = (event) => {
-  //   this.setState({ error: false, success: false });
-  //   this.setState({ userName: event.target.value });
-  // };
-
-  // changePasswordState = (event) => {
-  //   this.setState({ error: false, success: false });
-  //   this.setState({ pwd: event.target.value });
-  // };
 
   render() {
     const {
@@ -156,7 +132,7 @@ class Login extends Component {
                     className="login-username-input mb-3 mt-3"
                     id="userName"
                     type="text"
-                    placeholder="Username"
+                    placeholder="Provide registered Email-ID"
                     value={email}
                     onChange={this.onChangeEmail}
                     required
@@ -174,14 +150,6 @@ class Login extends Component {
                     required
                     autoComplete="off"
                   />
-                  {/* {success && (
-                    <p className="login-success">You are a valid user!</p>
-                  )} */}
-                  {/* {loginError && (
-                    <label className="alert alert-danger p-0 text-center">
-                      loginError
-                    </label>
-                  )} */}
                   <div class="custom-control custom-checkbox mt-3">
                     <input
                       type="checkbox"
@@ -242,6 +210,10 @@ class Login extends Component {
     return (
       // Redirectiong to home page after successful login
       <Home />
+      // <div>
+      //  <h1>{this.props.redirect}</h1>
+      // </div>
+      // <this.props.redirect />
     );
   }
 }

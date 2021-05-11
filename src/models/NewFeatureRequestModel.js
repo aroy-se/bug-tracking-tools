@@ -38,7 +38,7 @@ const NewFeatureRequestSchema = new mongoose.Schema(
       default: Date.now(),
     },
   },
-  { collection: "new_feature_request_table" }
+  { collection: "new_feature_request_details" }
 );
 
 module.exports = mongoose.model(

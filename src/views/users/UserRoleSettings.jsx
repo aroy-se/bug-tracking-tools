@@ -5,7 +5,7 @@ const UserRoleSettings = () => {
     userId: "",
     firstName: "",
     lastName: "",
-    userName: "",
+    email: "",
     userRole: "",
     newRole: "",
     roleSuccess: "",
@@ -32,7 +32,7 @@ const UserRoleSettings = () => {
 
     setSuccess(false);
     if (input.newRole === "") {
-      alert(`Please select a UserRole for the User, ${input.userName}!`);
+      alert(`Please select a UserRole for the User, ${input.email}!`);
       return;
     }
     if (input.userRole === input.newRole) {
@@ -44,7 +44,7 @@ const UserRoleSettings = () => {
       userId: input.userId,
       firstName: input.firstName,
       lastName: input.lastName,
-      userName: input.userName,
+      email: input.email,
       userRole: input.newRole,
     };
     saveUserRoleSettings(newUserRoleSettingsObject);
@@ -54,7 +54,7 @@ const UserRoleSettings = () => {
         userId: "",
         firstName: "",
         lastName: "",
-        userName: "",
+        email: "",
         userRole: "",
         newRole: "",
         roleSuccess: "",
@@ -73,62 +73,47 @@ const UserRoleSettings = () => {
     };
     fetch(Constants.USER_ROLE_URL + parseInt(input.userId), parameters)
       .then((response) => response.json())
-      .then(() => {
+      .then((jsonData) => {
+        console.log("Json dataaaaaaaaaaa" + JSON.stringify(jsonData));
         setSuccess(true);
       });
     setID(input.userId);
   };
   function handleFetchById(event) {
     event.preventDefault();
-    document.getElementById("userId").value = "";
-    setSuccess(false);
     if (input.userId === "") {
-      alert("User ID can not be blank!");
+      alert("User-Id can not be empty!");
       return;
     } else if (isNaN(input.userId)) {
-      alert("Only Digits are accepted");
+      alert("Only digits are accepted");
       return;
     }
     fetch(Constants.USER_URL + parseInt(input.userId))
       .then((response) => response.json())
-      .then(
-        (jsonData) => {
-          if (jsonData.success) {
-            setInput({
-              roleSuccess: jsonData.message,
-              roleError: "",
-            });
-            var user = jsonData;
-            var userId = JSON.stringify(user.userId);
-            var firstName = JSON.stringify(user.firstName);
-            var lastName = JSON.stringify(user.lastName);
-            var userName = JSON.stringify(user.userName);
-            var userRole = JSON.stringify(user.userRole);
-
-            setInput((user) => {
-              return {
-                ...user,
-                userId: JSON.parse(userId),
-                firstName: JSON.parse(firstName),
-                lastName: JSON.parse(lastName),
-                userName: JSON.parse(userName),
-                userRole: JSON.parse(userRole),
-              };
-            });
-          } //end success
-          else {
-            setInput({
-              roleSuccess: "",
-              roleError: jsonData.message,
-            });
-          }
-        } ////
-      );
-    // .catch(() => {
-    //   setSuccess(false);
-    //   alert(`The User, ${input.userId} does not exist in our database!`);
-    //   return;
-    // });
+      .then((data) => {
+        if (Object.keys(data).length > 0) {
+          var user = data;
+          var userId = JSON.stringify(user.userId);
+          var firstName = JSON.stringify(user.firstName);
+          var lastName = JSON.stringify(user.lastName);
+          var email = JSON.stringify(user.email);
+          var userRole = JSON.stringify(user.userRole);
+          setInput((user) => {
+            return {
+              ...user,
+              userId: JSON.parse(userId),
+              firstName: JSON.parse(firstName),
+              lastName: JSON.parse(lastName),
+              userRole: JSON.parse(userRole),
+              email: JSON.parse(email),
+            };
+          });
+        } else {
+          setSuccess(false);
+          alert(`The search input does not exist in our database`);
+        }
+      });
+    document.getElementById("userId").value = "";
   }
 
   return (
@@ -151,7 +136,6 @@ const UserRoleSettings = () => {
                 className="form-control fetch-n-update-by-id-text"
                 name="userId"
                 id="userId"
-                pattern="[0-9]"
                 value={input.userId}
                 onChange={handleChange}
               />
@@ -182,13 +166,13 @@ const UserRoleSettings = () => {
             />
           </div>
           <div class="form-group">
-            <span className="badge badge-light text-dark">User Name</span>
+            <span className="badge badge-light text-dark">Email ID</span>
             <input
               type="text"
               className="shadow-sm form-control"
               autoComplete="off"
-              name="userName"
-              value={input.userName}
+              name="email"
+              value={input.email}
               onChange={handleChange}
               disabled
             />
@@ -232,7 +216,7 @@ const UserRoleSettings = () => {
               </div>
             </div>
           </div>
-          {/* <span onChange={handleChange} className="">
+          <span onChange={handleChange} className="">
             {success && (
               <label
                 className="alert alert-success p-0 d-flex justify-content-center"
@@ -241,8 +225,8 @@ const UserRoleSettings = () => {
                 UserRole updation successful!
               </label>
             )}
-          </span> */}
-          {input.roleError ? (
+          </span>
+          {/* {input.roleError ? (
             <label
               className="alert alert-danger p-0 d-flex justify-content-center"
               role="alert"
@@ -257,7 +241,7 @@ const UserRoleSettings = () => {
             >
               {input.roleSuccess}
             </label>
-          ) : null}
+          ) : null} */}
           <button
             type="button"
             className="btn btn-danger btn-lg btn-block shadow"

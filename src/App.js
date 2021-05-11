@@ -1,5 +1,6 @@
 import "./App.css";
-import React, { useState } from "react";
+import React from "react";
+import { withRouter } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
 import Header from "./views/common/Header";
 import Home from "./views/common/Home";
@@ -18,36 +19,31 @@ import Faq from "./views/misc/Faq";
 import About from "./views/misc/About";
 import AdminPanel from "./views/users/AdminPanel";
 
-function App() {
-  const [userDetails, setUserDetails] = useState("");
-  return (
-    <div className="container-fluid pl-0 pr-0">
-      <Header />
-      <Switch>
-        <Route path="/about" component={About} exact />
-        <Route path="/faq" component={Faq} />
-        <Route path="/login" component={() => <Login />} />
-        <Route path="/logout" component={Logout} />
-        <Route
-          path="/registration"
-          component={() => <Registration setUserDetails={setUserDetails} />}
-        />
-        <Route
-          path="/userProfile"
-          component={() => <UserProfile userDetails={userDetails} />}
-        />
-        <Route path="/adminPanel" component={AdminPanel} />
-        <Route path="/userDashboard" component={UserDashboard} />
-        <Route path="/bugDashboard" component={BugDashboard} />
-        <Route path="/createBugDetails" component={CreateBugDetails} />
-        <Route path="/newFeature" component={NewFeature} />
-        <Route path="/bugList" component={BugList} />
-        <Route path="/fetchBugDetailsById" component={FetchBugDetailsById} />
-        <Route path="/updateBugDetails" component={UpdateBugDetails} />
-        <Route path="/" component={Home} />
-      </Switch>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div className="container-fluid pl-0 pr-0">
+        <Header />
+        <Switch>
+          <Route path="/about" component={About} exact />
+          <Route path="/faq" component={Faq} />
+          <Route path="/login" component={Login} />
+          <Route path="/logout" component={Logout} />
+          <Route path="/registration" component={() => <Registration />} />
+          <Route path="/userProfile" component={() => <UserProfile />} />
+          <Route path="/adminPanel" component={AdminPanel} />
+          <Route path="/userDashboard" component={UserDashboard} />
+          <Route path="/bugDashboard" component={BugDashboard} />
+          <Route path="/createBugDetails" component={CreateBugDetails} />
+          <Route path="/newFeature" component={NewFeature} />
+          <Route path="/bugList" component={BugList} />
+          <Route path="/fetchBugDetailsById" component={FetchBugDetailsById} />
+          <Route path="/updateBugDetails" component={UpdateBugDetails} />
+          <Route path="/" component={Home} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default withRouter(App);

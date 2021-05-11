@@ -1,16 +1,52 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router";
-import Dropdown from "react-bootstrap/Dropdown";
-import SplitButton from "react-bootstrap/SplitButton";
+import { Link, withRouter } from "react-router-dom";
 import brand_img from "../../assets/images/bug64.jpg";
 import "../../assets/css/btt-style.css";
 import SearchBug from "../bugs/SearchBug";
+import { getFromStorage } from "../../utility/storage";
+import HomeInternalDashboard from "./HomeInternalDashBoard";
 
 class Header extends Component {
-  logoutHandler = (e) => {
-    this.props.history.push("/login");
-  };
+  constructor(props) {
+    super(props);
+    this.state = { token: "", authStat: false };
+    this.onClickLogin = this.onClickLogin.bind(this);
+  }
+  componentDidMount() {
+    this.onClickLogin();
+  }
+  onClickFetchUser() {}
+  onClickLogin() {
+    const btt_local_storage_obj = getFromStorage("btt_local_storage");
+    if (btt_local_storage_obj && btt_local_storage_obj.token) {
+      const { token } = btt_local_storage_obj;
+      // Verify token
+      fetch("http://localhost:8765/btt/user/verify?token=" + token)
+        .then((res) => res.json())
+        .then((json) => {
+          if (json.success) {
+            // alert(JSON.stringify(json.data));
+            this.setState({
+              token,
+              authStat: true,
+            });
+            // alert("Header usersessions Token: Success >> " + token);
+          } else {
+            // alert("else Token: " + JSON.stringify(json));
+            this.setState({
+              token: "",
+              authStat: false,
+            });
+          }
+        });
+    } else {
+      alert("outer else Token: ");
+      this.setState({
+        token: "",
+        authStat: false,
+      });
+    }
+  }
   render() {
     return (
       <div className="">
@@ -70,86 +106,69 @@ class Header extends Component {
                     </Link>
                   </div>
                 </li>
+
                 <li className="nav-item">
-                  <div>
-                    <>
-                      {
-                        <SplitButton
-                          key="Info"
-                          id={`dropdown-split-variants-Info`}
-                          title="Anonymous User"
-                          variant="light"
-                          size=""
-                        >
-                          <Dropdown.Item eventKey="1">
-                            <Link to="/userProfile" className="text-info">
-                              <i className="fas fa-user-circle text-info">
-                                {" "}
-                                User Profile
-                              </i>
-                            </Link>
-                          </Dropdown.Item>
-                          <Dropdown.Item eventKey="2">
-                            <Link to="/login" className="text-secondary">
-                              <i className="fas fa-sign-in-alt text-secondary">
-                                {" "}
-                                Login
-                              </i>
-                            </Link>
-                          </Dropdown.Item>
-                          <Dropdown.Item eventKey="3">
-                            <Link to="/logout" className="text-secondary">
-                              <i className="fas fa-sign-out-alt text-secondary">
-                                {" "}
-                                Logout
-                              </i>
-                            </Link>
-                            {/* <a
-                              className="text-secondary"
-                              href="#"
-                              onClick={(e) => this.logoutHandler(e)}
-                            >
-                              <i className="fas fa-sign-out-alt text-secondary">
-                                {" "}
-                                Logout
-                              </i>
-                            </a> */}
-                          </Dropdown.Item>
-                          <Dropdown.Divider />
-                          <Dropdown.Item eventKey="4">
-                            <Link to="/adminPanel" className="text-secondary">
-                              <i class="fas fa-user-cog"> Admin Panel</i>
-                            </Link>
-                          </Dropdown.Item>
-                          <Dropdown.Item eventKey="5">
-                            <Link
-                              to="/userDashboard"
-                              className="text-secondary"
-                            >
-                              <i className="fas fa-users"> User Dashboard</i>
-                            </Link>
-                          </Dropdown.Item>
-                          <Dropdown.Item eventKey="6">
-                            <Link to="/bugDashboard" className="text-secondary">
-                              <i className="fas fa-bug"> Bug Dashboard</i>
-                            </Link>
-                          </Dropdown.Item>
-                          <Dropdown.Divider />
-                          <Dropdown.Item eventKey="7" className="">
-                            <span className="badge badge-primary text-monospace p-2">
-                              {" "}
-                              <Link to="/registration" className="text-light">
-                                <i className="fas fa-user-plus">
-                                  <span className="font-weight-bold pl-5 pr-5">
-                                    REGISTRATION
-                                  </span>
-                                </i>
-                              </Link>
+                  {/* Dropdownlist */}
+                  <div class="btn-group">
+                    <button
+                      type="button"
+                      class="btn btn-light"
+                      onClick={this.onClickLogin}
+                    >
+                      Anonymous User
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-light dropdown-toggle dropdown-toggle-split"
+                      onClick={this.onClickLogin}
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <Link
+                        to="/userProfile"
+                        className="text-info dropdown-item"
+                      >
+                        <i className="fas fa-user-circle text-info">
+                          {" "}
+                          User Profile
+                        </i>
+                      </Link>
+                      <Link
+                        to="/login"
+                        className="text-secondary dropdown-item"
+                        onClick={this.onClickLogin}
+                      >
+                        <i className="fas fa-sign-in-alt text-secondary">
+                          {" "}
+                          Login
+                        </i>
+                      </Link>
+                      <Link
+                        to="/logout"
+                        className="text-secondary dropdown-item"
+                      >
+                        <i className="fas fa-sign-out-alt text-secondary">
+                          {" "}
+                          Logout
+                        </i>
+                      </Link>
+                      {this.state.authStat ? <HomeInternalDashboard /> : null}
+                      <div class="dropdown-divider"></div>
+                      <Link to="/registration" className="text-light">
+                        <span className="badge badge-primary text-monospace p-2 m-2">
+                          {" "}
+                          <i className="fas fa-user-plus">
+                            <span className="font-weight-bold pl-5 pr-5">
+                              REGISTRATION
                             </span>
-                          </Dropdown.Item>
-                        </SplitButton>
-                      }
-                    </>
+                          </i>
+                        </span>
+                      </Link>
+                    </div>
                   </div>
                 </li>
               </ul>
@@ -158,7 +177,10 @@ class Header extends Component {
         </nav>
       </div>
     );
+    // } else {
+    //   return <Login />;
+    // }
   }
 }
-
+// export default Header;
 export default withRouter(Header);

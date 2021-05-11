@@ -7,7 +7,7 @@ class ViewUserDetails extends React.Component {
     this.state = {
       userDetails: [],
       userId: "",
-      userName: "",
+      email: "",
       searchInputText: "",
       successFetch: false,
     };
@@ -19,10 +19,10 @@ class ViewUserDetails extends React.Component {
   handleChange(event) {
     if (event.target.value === "") {
       this.setState({ userId: "" });
-      this.setState({ userName: "" });
+      this.setState({ email: "" });
     } else {
       if (isNaN(event.target.value)) {
-        this.setState({ userName: event.target.value });
+        this.setState({ email: event.target.value });
       } else {
         this.setState({ userId: event.target.value });
       }
@@ -34,8 +34,8 @@ class ViewUserDetails extends React.Component {
     var inputText =
       this.state.userId !== ""
         ? this.state.userId
-        : this.state.userName !== ""
-        ? this.state.userName
+        : this.state.email !== ""
+        ? this.state.email
         : "";
     var catch_err_msg = "";
     if (inputText === "") {
@@ -49,8 +49,8 @@ class ViewUserDetails extends React.Component {
       // Calling whole bug list
       this.fetchDatafromDatabase(target_url, false, catch_err_msg);
     } else if (isNaN(inputText)) {
-      // fetch data by username
-      target_url = Constants.URL_USER_BY_NAME + inputText;
+      // fetch data by email id
+      target_url = Constants.URL_USER_BY_EMAIL + inputText;
       catch_err_msg = inputText;
       // console.log("name target_url: " + target_url);
       this.fetchDatafromDatabase(target_url, false, catch_err_msg);
@@ -67,7 +67,7 @@ class ViewUserDetails extends React.Component {
     this.setState({
       userDetails: [],
       userId: "",
-      userName: "",
+      email: "",
       searchInputText: "",
       successFetch: false,
     });
@@ -89,7 +89,6 @@ class ViewUserDetails extends React.Component {
       })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data + "user count:   " + Object.keys(data).length);
         if (wrapArray === true) {
           this.setState({ userDetails: new Array(data) });
         } else {
@@ -121,7 +120,7 @@ class ViewUserDetails extends React.Component {
               <input
                 type="text"
                 className="form-control shadow-sm"
-                placeholder="Search user by userid/username"
+                placeholder="Search user by userid/email-id"
                 required
                 autoComplete="off"
                 name="userSearchInputText"
@@ -152,7 +151,7 @@ class ViewUserDetails extends React.Component {
                   <thead class="thead-light">
                     <tr>
                       <th>User-ID</th>
-                      <th>Username</th>
+                      {/* <th>Username</th> */}
                       <th>Name</th>
                       {/* <th>Password</th> */}
                       <th>Role</th>
@@ -170,7 +169,7 @@ class ViewUserDetails extends React.Component {
                     {this.state.userDetails.map((user, index) => (
                       <tr key={index}>
                         <td>{user.userId}</td>
-                        <td>{user.userName}</td>
+                        {/* <td>{user.email}</td> */}
                         <td>{user.firstName + " " + user.lastName}</td>
                         {/* <td>{user.password}</td> */}
                         <td>{user.userRole}</td>

@@ -1,18 +1,18 @@
 const UserSession = require("../models/UserSession");
 const express = require("express");
 const UserModel = require("../models/UserModel");
-const router = express.Router();
+const userAuthRouter = express.Router();
 /**
  * Registration Page
  */
-router.post("/user/registration", (req, res, next) => {
+userAuthRouter.post("/user/registration", (req, res, next) => {
   const { body } = req;
   const {
     userName,
     password,
+    confirmPassword,
     firstName,
     lastName,
-    userRole,
     address1,
     address2,
     city,
@@ -35,24 +35,42 @@ router.post("/user/registration", (req, res, next) => {
       message: "Error: Last Name cannot be blank",
     });
   }
-  if (!userName) {
+  if (!email) {
     return res.send({
       success: false,
-      message: "Error: Username cannot be blank",
+      message: "Error: Email-ID cannot be blank",
     });
   }
+  if (!mobile) {
+    return res.send({
+      success: false,
+      message: "Error: Phone Number cannot be blank",
+    });
+  }
+  // if (!userName) {
+  //   return res.send({
+  //     success: false,
+  //     message: "Error: Username cannot be blank",
+  //   });
+  // }
   if (!password) {
     return res.send({
       success: false,
       message: "Error: Password cannot be blank",
     });
   }
-  // if (!userRole) {
-  //   return res.send({
-  //     success: false,
-  //     message: "Error: User Role cannot be blank",
-  //   });
-  // }
+  if (!confirmPassword) {
+    return res.send({
+      success: false,
+      message: "Error: Confirm Password cannot be blank",
+    });
+  } else if (password !== confirmPassword) {
+    return res.send({
+      success: false,
+      message: "Error: Password and Confirm Password must be matched",
+    });
+  }
+
   if (!address1) {
     return res.send({
       success: false,
@@ -89,18 +107,7 @@ router.post("/user/registration", (req, res, next) => {
   //     message: "Error: Photo cannot be blank",
   //   });
   // }
-  if (!email) {
-    return res.send({
-      success: false,
-      message: "Error: Email-ID cannot be blank",
-    });
-  }
-  if (!mobile) {
-    return res.send({
-      success: false,
-      message: "Error: Mobile Number cannot be blank",
-    });
-  }
+
   email = email.toLowerCase();
   // Steps:
   // 1. Verify email doesn't exist
@@ -110,6 +117,7 @@ router.post("/user/registration", (req, res, next) => {
       email: email,
     },
     (err, prevUsers) => {
+      console.log("User Detailsssssssssssss: " + JSON.stringify(prevUsers));
       if (err) {
         return res.send({
           success: false,
@@ -118,7 +126,7 @@ router.post("/user/registration", (req, res, next) => {
       } else if (prevUsers.length > 0) {
         return res.send({
           success: false,
-          message: "Error: The User account already exist",
+          message: "Error: The User account already exist with this Email-ID",
         });
       }
       // save the new user
@@ -127,7 +135,6 @@ router.post("/user/registration", (req, res, next) => {
       newUser.password = newUser.generateHash(password);
       newUser.firstName = firstName;
       newUser.lastName = lastName;
-      newUser.userRole = userRole;
       newUser.address1 = address1;
       newUser.address2 = address2;
       newUser.city = city;
@@ -149,15 +156,6 @@ router.post("/user/registration", (req, res, next) => {
           message: "Registration Successful ",
         });
       });
-      /////
-      // newUser.save()
-      // .then(data =>{
-      //     res.json(data);
-      // })
-      // .catch(err=>{
-      //     res.json(err);
-      // });
-      ////
     }
   );
 });
@@ -165,7 +163,7 @@ router.post("/user/registration", (req, res, next) => {
 /**
  *  Login part
  */
-router.post("/user/login", (req, res, next) => {
+userAuthRouter.post("/user/login", (req, res, next) => {
   const { body } = req;
   const { password } = body;
   let { email } = body;
@@ -182,7 +180,7 @@ router.post("/user/login", (req, res, next) => {
     });
   }
   email = email.toLowerCase();
-  User.find(
+  UserModel.find(
     {
       email: email,
     },
@@ -219,6 +217,7 @@ router.post("/user/login", (req, res, next) => {
         return res.send({
           success: true,
           message: "Login success...",
+          data: doc,
           token: doc._id,
         });
       });
@@ -229,7 +228,7 @@ router.post("/user/login", (req, res, next) => {
 /**
  * User verification
  */
-router.get("/user/verify", (req, res, next) => {
+userAuthRouter.get("/user/verify", (req, res, next) => {
   // get the token
   const { query } = req;
   const { token } = query;
@@ -256,6 +255,7 @@ router.get("/user/verify", (req, res, next) => {
       } else {
         return res.send({
           success: true,
+          data: sessions,
           message: "Verification Successful!",
         });
       }
@@ -266,7 +266,7 @@ router.get("/user/verify", (req, res, next) => {
 /**
  * User logout
  */
-router.get("/user/logout", (req, res, next) => {
+userAuthRouter.get("/user/logout", (req, res, next) => {
   // get the token
   const { query } = req;
   const { token } = query;
@@ -296,4 +296,4 @@ router.get("/user/logout", (req, res, next) => {
   );
 });
 // };
-module.exports = router;
+module.exports = userAuthRouter;

@@ -121,7 +121,7 @@ const BugSchema = new mongoose.Schema(
       default: "Undecided",
     },
   },
-  { collection: "bug_tables" }
+  { collection: "bug_details" }
 );
 
-module.exports = mongoose.model("bug_tables", BugSchema);
+module.exports = mongoose.model("bug_details", BugSchema);

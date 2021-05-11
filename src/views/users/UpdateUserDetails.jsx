@@ -46,9 +46,6 @@ const UpdateUserDetails = () => {
     fetch(Constants.USER_URL + parseInt(input.userId))
       .then((response) => response.json())
       .then((data) => {
-        console.log(
-          data + "...Countttttttttttttt: " + Object.keys(data).length
-        );
         if (Object.keys(data).length > 0) {
           var user = data;
           var username = JSON.stringify(user.userName);

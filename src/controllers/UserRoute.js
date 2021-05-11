@@ -42,7 +42,7 @@ userRouter.get("/user/:id", (request, response) => {
  * To fetch all users By username with regex
  * C[R]UD := [R]EAD => GET(ALL) - byName
  */
-userRouter.get("/userByName/:name", (request, response) => {
+userRouter.get("/userByEmail/:name", (request, response) => {
   var targetName = request.params.name;
   UserModel.find({ userName: { $regex: targetName, $options: "i" } })
     .then((data) => {
