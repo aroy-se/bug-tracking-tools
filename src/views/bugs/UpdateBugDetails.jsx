@@ -91,40 +91,7 @@ const UpdateBugDetails = () => {
       //submitterEmail: input.,
       //submitterCompany: input.,
     };
-    console.log(bugUpdateObject);
     saveBugDetails(bugUpdateObject);
-    // resetting the form fields after successful updatation
-    setInput((prevState) => {
-      return {
-        ...prevState,
-        issueType: "",
-        component: "",
-        reportVersion: "",
-        os: "",
-        issueSubType: "",
-        severity: "",
-        regressionVersion: "",
-        browser: "",
-        bugTitle: "",
-        bugDesc: "",
-        reproducibleSteps: "",
-        expectedOutput: "",
-        actualOutput: "",
-        sourceCode: "",
-        attachment: "",
-        workaround: "",
-        assignee: "",
-        eta: "",
-        fixVersion: "",
-        resolution: "",
-        state: "",
-        priority: "",
-        submitterName: "",
-        submitterEmail: "",
-        submitterCompany: "",
-      };
-    });
-    document.getElementById("bugIdInputText").value = "";
   }
   // To save the bug object
   function saveBugDetails(bugUpdateObject) {
@@ -140,10 +107,12 @@ const UpdateBugDetails = () => {
       .then((response) => response.json())
       .then(() => {
         setSuccess(true);
+        document.getElementById("bugIdInputText").value = "";
+        handleFetchBug();
       });
   }
-  function handleFetchBug(event) {
-    event.preventDefault();
+  function handleFetchBug() {
+    // event.preventDefault();
     if (input.bugId === "") {
       alert("The Search Field should not be empty!");
       return;

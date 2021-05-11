@@ -117,7 +117,6 @@ userAuthRouter.post("/user/registration", (req, res, next) => {
       email: email,
     },
     (err, prevUsers) => {
-      console.log("User Detailsssssssssssss: " + JSON.stringify(prevUsers));
       if (err) {
         return res.send({
           success: false,
