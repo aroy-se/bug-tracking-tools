@@ -113,10 +113,10 @@ const UpdateBugDetails = () => {
   }
   function handleFetchBug() {
     // event.preventDefault();
-    if (input.bugId === "") {
-      alert("The Search Field should not be empty!");
-      return;
-    }
+    // if (input.bugId === "") {
+    //   alert("The Search Field should not be empty!");
+    //   return;
+    // }
     fetch(Constants.BUG_URL + parseInt(input.bugId))
       .then((response) => response.json())
       .then((data) => {
@@ -179,7 +179,7 @@ const UpdateBugDetails = () => {
         setSuccess(false);
         alert(`The Bug Id: ${input.bugId} does not exist in our database`);
       });
-    document.getElementById("bugIdInputText").value = "";
+    // document.getElementById("bugIdInputText").value = "";
   }
   // To fetch all the components from the database
   function handleOnClickComponent(event) {
@@ -214,7 +214,7 @@ const UpdateBugDetails = () => {
         {/* col-1 */}
         {/* Issue resolver info */}
         <div class="col-xl-2 pr-0 pl-1">
-          <div class="card shadow">
+          <div class="card shadow rounded-0">
             <span class="blockquote card-header shadow-sm">
               <i class="fa fa-bug text-danger" aria-hidden="true">
                 <span className="lead text-info"> Bug Resolution Info</span>
@@ -235,7 +235,7 @@ const UpdateBugDetails = () => {
               ) : (
                 // Editable assignee
                 <select
-                  className="custom-select shadow-sm form-control m-2"
+                  className="custom-select shadow-sm form-control mt-2 mb-2 rounded-0"
                   name="assignee"
                   id="assignee"
                   value={input.assignee}
@@ -256,7 +256,10 @@ const UpdateBugDetails = () => {
                   Created Date
                 </span>
               </i>
-              <p class="card-text alert alert-secondary p-1" role="alert">
+              <p
+                class="card-text alert alert-secondary p-1 mt-2 mb-2 rounded-0"
+                role="alert"
+              >
                 {bugData.createdTime}
               </p>
               <i class="far fa-clock text-secondary" aria-hidden="true">
@@ -272,12 +275,12 @@ const UpdateBugDetails = () => {
                 </p>
               ) : (
                 // Editable eta
-                <div className="m-2">
+                <div className="">
                   <DatePicker
                     selected={etaDate}
                     // dateFormat="DD-MM-YYYY"
                     onChange={(date) => setEtaDate(date)}
-                    className="form-control text-secondary pl-2 shadow-sm"
+                    className="form-control text-secondary shadow-sm mt-2 mb-2 rounded-0"
                     name="eta"
                     // id="eta"
                     // value={input.eta}
@@ -299,9 +302,9 @@ const UpdateBugDetails = () => {
                 </p>
               ) : (
                 // Editable fix Version
-                <div className="m-2">
+                <div className="">
                   <select
-                    className="custom-select shadow-sm form-control"
+                    className="custom-select shadow-sm form-control mt-2 mb-2 rounded-0"
                     name="fixVersion"
                     id="fixVersion"
                     value={input.fixVersion}
@@ -321,7 +324,7 @@ const UpdateBugDetails = () => {
         {/* </div> */}
         {/* col-2 */}
         <div class="col-xl-8 mb-5">
-          <div class="card shadow">
+          <div class="card shadow rounded-0">
             <div class="card-header text-danger form-inline d-flex justify-content-between p-2 shadow-sm">
               <div>
                 <h4 className="bugIdLabel">Bug-ID: #{bugData.bugId}</h4>
@@ -394,7 +397,7 @@ const UpdateBugDetails = () => {
                                   {bugData.issueType}
                                 </span>
                               ) : (
-                                <span className="badge badge-primary font-weight-bold">
+                                <span className="badge badge-primary font-weight-bold ">
                                   {bugData.issueType}
                                 </span>
                               )
@@ -402,7 +405,7 @@ const UpdateBugDetails = () => {
                               // editable bug-type
                               <div>
                                 <select
-                                  className="custom-select shadow-sm form-control"
+                                  className="custom-select shadow-sm form-control rounded-0"
                                   name="issueType"
                                   id="issueType"
                                   value={input.issueType}
@@ -431,7 +434,7 @@ const UpdateBugDetails = () => {
                               // editable component
                               <div>
                                 <select
-                                  className="custom-select shadow-sm form-control"
+                                  className="custom-select shadow-sm form-control rounded-0"
                                   name="component"
                                   id="component"
                                   value={input.component}
@@ -470,7 +473,7 @@ const UpdateBugDetails = () => {
                             ) : (
                               // Non editable reportVersion
                               <select
-                                className="custom-select shadow-sm form-control"
+                                className="custom-select shadow-sm form-control rounded-0"
                                 name="reportVersion"
                                 id="reportVersion"
                                 value={input.reportVersion}
@@ -522,7 +525,7 @@ const UpdateBugDetails = () => {
                             ) : (
                               // Editable OS
                               <select
-                                class="custom-select shadow-sm form-control"
+                                class="custom-select shadow-sm form-control rounded-0"
                                 name="os"
                                 id="os"
                                 value={input.os}
@@ -566,7 +569,7 @@ const UpdateBugDetails = () => {
                             ) : (
                               <div>
                                 <select
-                                  className="custom-select shadow-sm form-control"
+                                  className="custom-select shadow-sm form-control rounded-0"
                                   name="issueSubType"
                                   id="issueSubType"
                                   value={input.issueSubType}
@@ -598,7 +601,7 @@ const UpdateBugDetails = () => {
                               // editable sub-component
                               <div>
                                 <select
-                                  className="custom-select shadow-sm form-control"
+                                  className="custom-select shadow-sm form-control rounded-0"
                                   name="subComponent"
                                   id="subComponent"
                                   disabled
@@ -629,7 +632,7 @@ const UpdateBugDetails = () => {
                             ) : (
                               <div>
                                 <select
-                                  class="custom-select shadow-sm form-control"
+                                  class="custom-select shadow-sm form-control rounded-0"
                                   name="regressionVersion"
                                   id="regressionVersion"
                                   value={input.regressionVersion}
@@ -685,7 +688,7 @@ const UpdateBugDetails = () => {
                               // editable browser
                               <div>
                                 <select
-                                  class="custom-select shadow-sm form-control"
+                                  class="custom-select shadow-sm form-control rounded-0"
                                   name="browser"
                                   id="browser"
                                   value={input.browser}
@@ -737,7 +740,7 @@ const UpdateBugDetails = () => {
                             ) : (
                               // editable severity
                               <select
-                                class="custom-select shadow-sm form-control"
+                                class="custom-select shadow-sm form-control rounded-0"
                                 name="severity"
                                 id="severity"
                                 value={input.severity}
@@ -794,7 +797,7 @@ const UpdateBugDetails = () => {
                             ) : (
                               // editable bug state
                               <select
-                                class="custom-select shadow-sm form-control"
+                                class="custom-select shadow-sm form-control rounded-0"
                                 name="state"
                                 id="state"
                                 value={input.state}
@@ -851,7 +854,7 @@ const UpdateBugDetails = () => {
                             ) : (
                               // editable resolution
                               <select
-                                class="custom-select shadow-sm form-control"
+                                class="custom-select shadow-sm form-control rounded-0"
                                 name="resolution"
                                 id="resolution"
                                 value={input.resolution}
@@ -905,7 +908,7 @@ const UpdateBugDetails = () => {
                             ) : (
                               // editable priority
                               <select
-                                class="custom-select shadow-sm form-control"
+                                class="custom-select shadow-sm form-control rounded-0"
                                 name="priority"
                                 id="priority"
                                 value={input.priority}
@@ -943,7 +946,9 @@ const UpdateBugDetails = () => {
                           </span>
                         ) : (
                           // editable duplicate bugs
-                          <a>Add Duplicate/Similar Bug/s</a>
+                          <a className="font-weight-lighter">
+                            <small>Add Duplicate/Similar Bug/s</small>
+                          </a>
                         )}
                       </div>
                     </div>
@@ -975,7 +980,7 @@ const UpdateBugDetails = () => {
                                 <div>
                                   <input
                                     type="text"
-                                    class="form-control"
+                                    class="form-control rounded-0"
                                     name="bugTitle"
                                     id="bugTitle"
                                     value={input.bugTitle}
@@ -1003,7 +1008,7 @@ const UpdateBugDetails = () => {
                                 <div>
                                   <textarea
                                     type="textarea"
-                                    class="form-control"
+                                    class="form-control rounded-0"
                                     name="bugDesc"
                                     id="bugDesc"
                                     value={input.bugDesc}
@@ -1030,7 +1035,7 @@ const UpdateBugDetails = () => {
                                 // editable reproducible steps
                                 <textarea
                                   type="textarea"
-                                  class="form-control"
+                                  class="form-control rounded-0"
                                   name="reproducibleSteps"
                                   id="reproducibleSteps"
                                   value={input.reproducibleSteps}
@@ -1056,7 +1061,7 @@ const UpdateBugDetails = () => {
                                 // editable
                                 <textarea
                                   type="textarea"
-                                  class="form-control"
+                                  class="form-control rounded-0"
                                   name="expectedOutput"
                                   id="expectedOutput"
                                   value={input.expectedOutput}
@@ -1082,7 +1087,7 @@ const UpdateBugDetails = () => {
                                 // editable actual Output
                                 <textarea
                                   type="textarea"
-                                  class="form-control"
+                                  class="form-control rounded-0"
                                   name="actualOutput"
                                   id="actualOutput"
                                   value={input.actualOutput}
@@ -1110,7 +1115,7 @@ const UpdateBugDetails = () => {
                                 // editable
                                 <textarea
                                   type="textarea"
-                                  class="form-control"
+                                  class="form-control rounded-0"
                                   name="sourceCode"
                                   id="sourceCode"
                                   value={input.sourceCode}
@@ -1136,7 +1141,7 @@ const UpdateBugDetails = () => {
                                 // editable
                                 <textarea
                                   type="textarea"
-                                  class="form-control"
+                                  class="form-control rounded-0"
                                   name="workaround"
                                   id="workaround"
                                   value={input.workaround}
@@ -1168,7 +1173,7 @@ const UpdateBugDetails = () => {
                 {/* Add Comment */}
                 <div className="row ">
                   <div className="col-xl-12 p-0">
-                    <div class="card ">
+                    <div class="card  rounded-0">
                       <div class="card-header p-1 text-info">
                         <i class="fa fa-comments" aria-hidden="true">
                           <span> Add Comment</span>
@@ -1178,7 +1183,7 @@ const UpdateBugDetails = () => {
                         <div class="form-group mb-1">
                           <textarea
                             type="textarea"
-                            className="form-control pb-0"
+                            className="form-control pb-0 rounded-0"
                             name="comment"
                             id="comment"
                             // value={input.comment}
@@ -1189,7 +1194,7 @@ const UpdateBugDetails = () => {
                         <div class="form-group m-0 ">
                           <button
                             type="submit"
-                            class="btn btn-sm btn-outline-info"
+                            class="btn btn-sm btn-outline-info rounded-0"
                           >
                             Add Comment
                           </button>
@@ -1208,8 +1213,7 @@ const UpdateBugDetails = () => {
                           className="alert alert-success p-0 d-flex justify-content-center"
                           role="alert"
                         >
-                          The Bug-Id={input.bugId} has been updated
-                          successfully!
+                          Bug updation successful!
                         </label>
                       )}
                     </span>
@@ -1218,7 +1222,6 @@ const UpdateBugDetails = () => {
                       className="btn btn-danger btn-lg btn-block shadow-lg"
                       name="submit"
                       onClick={handleUpdateBugDetails}
-                      // disabled={acceptCheck}
                     >
                       UPDATE REPORT
                     </button>
@@ -1233,7 +1236,7 @@ const UpdateBugDetails = () => {
         {/* col-3 */}
         {/* Submitter info */}
         <div class="col-xl-2 pl-0 pr-1">
-          <div class="card shadow">
+          <div class="card shadow rounded-0">
             <span class="blockquote card-header text-info shadow-sm">
               Submitter Info
             </span>
@@ -1244,7 +1247,10 @@ const UpdateBugDetails = () => {
                   Submitter Name
                 </span>
               </i>
-              <p class="card-text alert alert-secondary p-1" role="alert">
+              <p
+                class="card-text alert alert-secondary mt-2 p-1 rounded-0"
+                role="alert"
+              >
                 {bugData.submitterName}
               </p>
               <i class="fas fa-at text-secondary" aria-hidden="true">
@@ -1253,7 +1259,10 @@ const UpdateBugDetails = () => {
                   Submitter Email-ID
                 </span>
               </i>
-              <p class="card-text alert alert-secondary p-1" role="alert">
+              <p
+                class="card-text alert alert-secondary mt-2 p-1 rounded-0"
+                role="alert"
+              >
                 {bugData.submitterEmail}
               </p>
               <i class="far fa-building text-secondary" aria-hidden="true">
@@ -1262,7 +1271,10 @@ const UpdateBugDetails = () => {
                   Company
                 </span>
               </i>
-              <p class="card-text alert alert-secondary p-1" role="alert">
+              <p
+                class="card-text alert alert-secondary mt-2 p-1 rounded-0"
+                role="alert"
+              >
                 {bugData.submitterCompany}
               </p>
               <i class="fas fa-paperclip text-secondary" aria-hidden="true">
@@ -1281,7 +1293,7 @@ const UpdateBugDetails = () => {
                 <div className="custom-file">
                   <input
                     type="file"
-                    class="custom-file-input form-control "
+                    class="custom-file-input form-control"
                     id="attachment"
                     name="attachment"
                     // value={input.attachment}
