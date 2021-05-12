@@ -5,27 +5,45 @@ import "../../assets/css/btt-style.css";
 import SearchBug from "../bugs/SearchBug";
 import { getFromStorage } from "../../utility/storage";
 import HomeInternalDashboard from "./HomeInternalDashBoard";
+import * as Constants from "../../utility/Constants";
 
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = { token: "", authStat: false };
+    this.state = { token: "", authStat: false, userRole: "" };
     this.onClickLogin = this.onClickLogin.bind(this);
+    this.onClickFetchUserEmail = this.onClickFetchUserEmail.bind(this);
   }
   componentDidMount() {
     this.onClickLogin();
   }
-  onClickFetchUser() {}
+  onClickFetchUserEmail() {
+    const btt_current_user_email = getFromStorage("btt_current_user");
+    if (btt_current_user_email && btt_current_user_email.user) {
+      fetch(Constants.URL_USER_BY_EXACT_EMAIL + btt_current_user_email.user)
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log(JSON.stringify(data));
+          data.map((user) => {
+            this.setState({ userRole: user.userRole });
+          });
+        });
+    } else {
+      alert("Currently, No user logged in...");
+      return;
+    }
+  }
   onClickLogin() {
-    const btt_local_storage_obj = getFromStorage("btt_local_storage");
-    if (btt_local_storage_obj && btt_local_storage_obj.token) {
-      const { token } = btt_local_storage_obj;
+    const btt_local_storage_token = getFromStorage("btt_local_storage");
+    if (btt_local_storage_token && btt_local_storage_token.token) {
+      const { token } = btt_local_storage_token;
       // Verify token
       fetch("http://localhost:8765/btt/user/verify?token=" + token)
         .then((res) => res.json())
         .then((json) => {
           if (json.success) {
             // alert(JSON.stringify(json.data));
+            this.onClickFetchUserEmail();
             this.setState({
               token,
               authStat: true,
@@ -40,7 +58,7 @@ class Header extends Component {
           }
         });
     } else {
-      alert("outer else Token: ");
+      // alert("outer else Token: ");
       this.setState({
         token: "",
         authStat: false,
@@ -115,9 +133,23 @@ class Header extends Component {
                       class="btn btn-light"
                       onClick={this.onClickLogin}
                     >
-                      {getFromStorage("btt_current_user").user !== ""
-                        ? getFromStorage("btt_current_user").user
-                        : "Anonymous User"}
+                      {getFromStorage("btt_current_user") &&
+                      getFromStorage("btt_current_user").user !== "" ? (
+                        /////////////
+                        this.state.userRole === "Admin" ? (
+                          <i class="fas fa-user-shield">
+                            {" "}
+                            {getFromStorage("btt_current_user").user}
+                          </i>
+                        ) : (
+                          <i class="far fa-user text-info ">
+                            {" "}
+                            {getFromStorage("btt_current_user").user}
+                          </i>
+                        )
+                      ) : (
+                        <i class="fas fa-user-slash"> Anonymous User</i>
+                      )}
                     </button>
                     <button
                       type="button"
@@ -158,7 +190,9 @@ class Header extends Component {
                           Logout
                         </i>
                       </Link>
-                      {this.state.authStat ? <HomeInternalDashboard /> : null}
+                      {this.state.authStat ? (
+                        <HomeInternalDashboard userRole={this.state.userRole} />
+                      ) : null}
                       <div class="dropdown-divider"></div>
                       <Link to="/registration" className="text-light">
                         <span className="badge badge-primary text-monospace p-2 m-2">

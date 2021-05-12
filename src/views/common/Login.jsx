@@ -51,7 +51,7 @@ class Login extends Component {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log("loginjson", json);
+        // console.log("loginjson", json);
         if (json.success) {
           setInStorage("btt_local_storage", { token: json.token });
           setInStorage("btt_current_user", { user: email });

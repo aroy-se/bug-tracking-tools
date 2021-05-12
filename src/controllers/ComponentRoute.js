@@ -8,7 +8,6 @@ const componentRouter = express.Router();
  */
 // ---------------------------------------------------------
 componentRouter.post("/component", (request, response) => {
-  console.log(request);
   const { body } = request;
   const { productName, componentName } = body;
   if (!productName) {

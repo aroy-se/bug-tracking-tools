@@ -5,13 +5,15 @@ class HomeDashboard extends React.Component {
     return (
       <div>
         <div class="dropdown-divider"></div>
-        <Link
-          to="/adminPanel"
-          className="text-secondary dropdown-item"
-          onClick={this.onClickLogin}
-        >
-          <i class="fas fa-user-cog"> Admin Panel</i>
-        </Link>
+        {this.props.userRole === "Admin" ? (
+          <Link
+            to="/adminPanel"
+            className="text-secondary dropdown-item"
+            onClick={this.onClickLogin}
+          >
+            <i class="fas fa-user-cog"> Admin Panel </i>
+          </Link>
+        ) : null}
         <Link to="/userDashboard" className="text-secondary dropdown-item">
           <i className="fas fa-users"> User Dashboard</i>
         </Link>
