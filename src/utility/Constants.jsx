@@ -41,3 +41,7 @@ const COMPONENT_PATH = process.env.REACT_APP_COMPONENT_PATH; // component
 const COMPONENT_BY_NAME = process.env.REACT_APP_SEARCH_COMPONENT_BY_NAME; // componentByName
 export const COMPONENT_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${COMPONENT_PATH}/`;
 export const COMPONENT_BY_NAME_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${COMPONENT_BY_NAME}/`;
+
+// Constatnt for Comment
+const COMMENT_PATH = process.env.REACT_APP_COMMENT_PATH;
+export const COMMENT_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${COMMENT_PATH}/`;

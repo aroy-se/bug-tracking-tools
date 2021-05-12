@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import * as Constants from "../../utility/Constants";
+import { getFromStorage } from "../../utility/storage";
 
 const UpdateBugDetails = () => {
   const [input, setInput] = useState({
@@ -32,12 +33,25 @@ const UpdateBugDetails = () => {
     submitterEmail: "",
     submitterCompany: "",
   });
+  const [commentDetails, setCommentDetails] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    commentId: "",
+    comment: "",
+    commentator: "",
+
+    bugUpdateSuccess: "",
+    bugUpdateError: "",
+  });
+  const [viewComments, setViewComments] = useState([]);
   const [success, setSuccess] = useState(false);
   const [bugData, setBugData] = useState([]);
   const [editable, setEditable] = useState(false);
   const [etaDate, setEtaDate] = useState(new Date());
   const [componentDetails, setComponentDetails] = useState([]);
   const [assigneeDetails, setAssigneeDetails] = useState([]);
+
   // set Bug page ediatable or not
   // function editBugDetails(event) {
   //   console.log(editable);
@@ -56,6 +70,7 @@ const UpdateBugDetails = () => {
     // reset the status label
     setSuccess(false);
   }
+
   // set BugId value for searching a bug
   // handleChange(event) {
   //   // this.setState({ bugId: event.target.value });
@@ -174,6 +189,8 @@ const UpdateBugDetails = () => {
             priority: JSON.parse(priority),
           };
         });
+        // fetch comments in bug details page
+        fetchComments(input.bugId);
       })
       .catch(() => {
         setSuccess(false);
@@ -207,6 +224,95 @@ const UpdateBugDetails = () => {
         alert(`The search input does not exist in our database`);
       });
   }
+  function onClickEditableToggle() {
+    setEditable(!editable);
+    setSuccess(false);
+  }
+  function onChangeComment(event) {
+    setCommentDetails({ comment: event.target.value });
+  }
+  // To fetch all the comments from the database
+  function fetchComments(bugId) {
+    fetch(Constants.COMMENT_URL + parseInt(bugId))
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("comments dataaaaaa:" + JSON.stringify(data));
+        setViewComments(data);
+      })
+      .catch(() => {
+        setSuccess(false);
+        alert(`No comments in our database`);
+      });
+  }
+  async function onClickAddComment() {
+    //////////////////////
+    const local_storage_user = getFromStorage("btt_current_user");
+
+    if (
+      local_storage_user &&
+      local_storage_user.user &&
+      input.bugId !== null &&
+      input.bugId !== ""
+    ) {
+      const { user } = local_storage_user;
+      console.log(user);
+      await fetch(Constants.URL_USER_BY_EXACT_EMAIL + user)
+        .then((response) => response.json())
+        .then((data) => {
+          data.map((user) => {
+            var commentator = user.firstName + " " + user.lastName;
+            const commentObject = {
+              bugId: input.bugId,
+              comment: commentDetails.comment,
+              commentator: commentator,
+            };
+            const parameters = {
+              method: "POST",
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(commentObject),
+            };
+            fetch(Constants.COMMENT_URL, parameters)
+              .then((response) => response.json())
+              .then((jsonData) => {
+                if (jsonData.success) {
+                  alert("Comment added successfully!!!");
+                  // post comment in bug details page
+                  fetchComments(input.bugId);
+                  //reset
+                  setCommentDetails((prev) => {
+                    return {
+                      ...prev,
+                      bugUpdateSuccess: jsonData.message,
+                      bugUpdateError: "",
+                      comment: "",
+                      commentator: "",
+                      bugId: "",
+                    };
+                  });
+                  // handleFetchBug();
+                } else {
+                  setCommentDetails((prev) => {
+                    return {
+                      ...prev,
+                      bugUpdateSuccess: "",
+                      bugUpdateError: jsonData.message,
+                    };
+                  });
+                }
+              });
+
+            document.getElementById("comment").value = "";
+          });
+        });
+    } else {
+      alert("Either user is not logged in or bug-id not available");
+      return;
+    }
+    //////////////////////
+  }
   return (
     <div className="container-fluid">
       {/* End of search bug id box */}
@@ -229,7 +335,10 @@ const UpdateBugDetails = () => {
               </i>
               {editable === false ? (
                 // Non editable assignee
-                <p class="card-text alert alert-secondary p-1" role="alert">
+                <p
+                  class="card-text alert alert-secondary p-1 mt-2 mb-2 rounded-0"
+                  role="alert"
+                >
                   <span class="">{bugData.assignee}</span>
                 </p>
               ) : (
@@ -270,7 +379,10 @@ const UpdateBugDetails = () => {
               </i>
               {editable === false ? (
                 // Non editable eta
-                <p class="card-text alert alert-secondary p-1" role="alert">
+                <p
+                  class="card-text alert alert-secondary p-1 mt-2 mt-2 rounded-0"
+                  role="alert"
+                >
                   {bugData.eta}
                 </p>
               ) : (
@@ -297,7 +409,10 @@ const UpdateBugDetails = () => {
               </i>
               {editable === false ? (
                 // Non editable fix Version
-                <p class="card-text alert alert-secondary p-1" role="alert">
+                <p
+                  class="card-text alert alert-secondary p-1 mb-2 mt-2 rounded-0"
+                  role="alert"
+                >
                   {bugData.fixVersion}
                 </p>
               ) : (
@@ -367,13 +482,13 @@ const UpdateBugDetails = () => {
                   class="custom-control-input"
                   id="editBugDetailsId"
                   name="editable"
-                  onClick={() => setEditable(!editable)}
+                  onClick={onClickEditableToggle}
                 />
                 <label
-                  class="custom-control-label text-info"
+                  class="custom-control-label text-danger"
                   for="editBugDetailsId"
                 >
-                  Edit
+                  {/* Edit */}
                 </label>
               </div>
             </div>
@@ -446,12 +561,6 @@ const UpdateBugDetails = () => {
                                     <option>{component.componentName}</option>
                                   ))}
                                   <option>NA</option>
-                                  {/* <option>Component-1</option>
-                                  <option>Component-2</option>
-                                  <option>Component-3</option>
-                                  <option>BTT-Authentication</option>
-                                  <option>BTT-Bugs</option>
-                                  <option>BTT-Users</option> */}
                                 </select>
                               </div>
                             )}
@@ -830,7 +939,7 @@ const UpdateBugDetails = () => {
                                   {bugData.resolution}
                                 </span>
                               ) : bugData.resolution === "Assigned" ? (
-                                <span class="badge badge-secondary text-danger font-weight-bold">
+                                <span class="badge badge-secondary text-warning font-weight-bold">
                                   {" "}
                                   {bugData.resolution}
                                 </span>
@@ -1151,7 +1260,7 @@ const UpdateBugDetails = () => {
                             </div>
                           </td>
                         </tr>
-                        {/* Workaround */}
+                        {/* Comments */}
                         <tr>
                           <td>
                             <div class="form-group">
@@ -1159,9 +1268,45 @@ const UpdateBugDetails = () => {
                                 <span class="">Comments</span>
                               </h6>
                               <span class="font-weight-light">
-                                {bugData.comments === ""
-                                  ? bugData.comments
-                                  : "No Comments"}
+                                <div class="card-body ml-0 mr-0 pl-0 pr-0">
+                                  {Object.keys(viewComments).length > 0
+                                    ? viewComments.map((comments, index) => (
+                                        <div
+                                          className="list-group p-1 mb-1 border rounded-0 shadow-sm"
+                                          key={index}
+                                        >
+                                          <span class="mb-1 font-weight-normal text-info">
+                                            <div class="d-flex w-100 justify-content-between">
+                                              <span className="badge badge-light text-primary font-weight-normal ">
+                                                {" "}
+                                                COMMENT #{index}
+                                              </span>
+                                              <small>
+                                                {comments.commentator}
+                                              </small>
+                                            </div>
+                                          </span>
+                                          <div class="d-flex w-100 justify-content-between">
+                                            <span class="mb-1 font-weight-light text-secondary">
+                                              <span className="badge badge-light text-secondary">
+                                                Comment Details:
+                                              </span>{" "}
+                                              {comments.comment}
+                                            </span>
+                                            <small class="text-secondary font-weight-light">
+                                              <span className="badge badge-pill badge-light">
+                                                Created On:{" "}
+                                              </span>
+                                              <span className="font-weight-lighter text-secondary">
+                                                {comments.createdTime}
+                                              </span>
+                                            </small>
+                                          </div>
+                                        </div>
+                                      ))
+                                    : "No Comments"}
+                                </div>
+                                {/* ///////////////////////////// */}
                               </span>
                             </div>
                           </td>
@@ -1186,8 +1331,8 @@ const UpdateBugDetails = () => {
                             className="form-control pb-0 rounded-0"
                             name="comment"
                             id="comment"
-                            // value={input.comment}
-                            // onChange={handleChange}
+                            value={commentDetails.comment}
+                            onChange={onChangeComment}
                             placeholder="Post your comments here..."
                           />
                         </div>
@@ -1195,6 +1340,7 @@ const UpdateBugDetails = () => {
                           <button
                             type="submit"
                             class="btn btn-sm btn-outline-info rounded-0"
+                            onClick={onClickAddComment}
                           >
                             Add Comment
                           </button>
@@ -1207,6 +1353,26 @@ const UpdateBugDetails = () => {
                 <div class="row mt-4">
                   <div class="col-xl-3"></div>
                   <div class="col-xl-6">
+                    {commentDetails.bugUpdateError ? (
+                      <label
+                        className="alert alert-danger p-0 d-flex justify-content-center"
+                        role="alert"
+                      >
+                        {commentDetails.bugUpdateError}{" "}
+                      </label>
+                    ) : null}
+                    {commentDetails.bugUpdateSuccess ? (
+                      <label
+                        className="alert alert-success p-0 d-flex justify-content-center"
+                        role="alert"
+                      >
+                        {commentDetails.bugUpdateSuccess}
+                        {/* <Link to="/login">
+                              Click here to Login
+                          </Link> */}
+                        {/* {"and logged in to your account "} */}
+                      </label>
+                    ) : null}
                     <span>
                       {success && (
                         <label
@@ -1217,14 +1383,16 @@ const UpdateBugDetails = () => {
                         </label>
                       )}
                     </span>
-                    <button
-                      type="button"
-                      className="btn btn-danger btn-lg btn-block shadow-lg"
-                      name="submit"
-                      onClick={handleUpdateBugDetails}
-                    >
-                      UPDATE REPORT
-                    </button>
+                    {editable ? (
+                      <button
+                        type="button"
+                        className="btn btn-danger btn-lg btn-block shadow-lg"
+                        name="submit"
+                        onClick={handleUpdateBugDetails}
+                      >
+                        UPDATE REPORT
+                      </button>
+                    ) : null}
                   </div>
                   <div class="col-xl-3"></div>
                 </div>
@@ -1248,7 +1416,7 @@ const UpdateBugDetails = () => {
                 </span>
               </i>
               <p
-                class="card-text alert alert-secondary mt-2 p-1 rounded-0"
+                class="card-text alert alert-secondary  mb-2 mt-2 p-1 rounded-0"
                 role="alert"
               >
                 {bugData.submitterName}
@@ -1260,7 +1428,7 @@ const UpdateBugDetails = () => {
                 </span>
               </i>
               <p
-                class="card-text alert alert-secondary mt-2 p-1 rounded-0"
+                class="card-text alert alert-secondary  mb-2 mt-2 p-1 rounded-0"
                 role="alert"
               >
                 {bugData.submitterEmail}
@@ -1272,7 +1440,7 @@ const UpdateBugDetails = () => {
                 </span>
               </i>
               <p
-                class="card-text alert alert-secondary mt-2 p-1 rounded-0"
+                class="card-text alert alert-secondary mb-2 mt-2 p-1 rounded-0"
                 role="alert"
               >
                 {bugData.submitterCompany}
@@ -1285,7 +1453,10 @@ const UpdateBugDetails = () => {
               </i>
               {editable === false ? (
                 // Non editable attachment
-                <p class="card-text alert alert-secondary p-1" role="alert">
+                <p
+                  class="card-text alert alert-secondary p-1 mb-2 mt-2 rounded-0"
+                  role="alert"
+                >
                   {bugData.attachment}
                 </p>
               ) : (
