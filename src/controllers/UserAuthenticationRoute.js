@@ -8,7 +8,7 @@ const userAuthRouter = express.Router();
 userAuthRouter.post("/user/registration", (req, res, next) => {
   const { body } = req;
   const {
-    userName,
+    // userName,
     password,
     confirmPassword,
     firstName,
@@ -130,7 +130,8 @@ userAuthRouter.post("/user/registration", (req, res, next) => {
       }
       // save the new user
       var newUser = new UserModel();
-      newUser.userName = userName;
+      newUser.userId = Math.floor(Math.random() * (999999 - 100) + 100); // Just demo purpose
+      // newUser.userName = userName;
       newUser.password = newUser.generateHash(password);
       newUser.firstName = firstName;
       newUser.lastName = lastName;

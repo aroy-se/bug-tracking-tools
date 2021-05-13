@@ -25,6 +25,7 @@ componentRouter.post("/component", (request, response) => {
   // save the new component
   let newComponent = new ComponentModel();
   newComponent.productName = productName;
+  newComponent.componentId = Math.floor(Math.random() * (999 - 100) + 100); // Just demo purpose
   newComponent.componentName = componentName;
 
   newComponent.save((err, component) => {

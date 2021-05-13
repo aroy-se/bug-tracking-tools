@@ -31,7 +31,7 @@ const NewFeatureRequestSchema = new mongoose.Schema(
     // Backend default fields
     featureId: {
       type: Number,
-      default: Math.floor(Math.random() * (9999 - 100) + 100), // Just demo purpose
+      default: 0,
     },
     createdTime: {
       type: Date,

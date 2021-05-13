@@ -65,7 +65,7 @@ const UserSchema = new mongoose.Schema(
     // Backend default fields
     userId: {
       type: Number,
-      default: Math.floor(Math.random() * (99999 - 100) + 100), // Just demo purpose
+      default: 0,
     },
     userRole: {
       type: String,

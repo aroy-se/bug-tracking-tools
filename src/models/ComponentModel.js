@@ -16,7 +16,7 @@ const ComponentSchema = new mongoose.Schema(
     // Backend default fields
     componentId: {
       type: Number,
-      default: Math.floor(Math.random() * (999 - 100) + 100), // Just demo purpose
+      default: 0,
     },
     createdTime: {
       type: Date,

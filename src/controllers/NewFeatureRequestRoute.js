@@ -49,6 +49,9 @@ newFeatureRequestRouter.post("/newFeatureRequest", (request, response) => {
 
   // save the new component
   let newFeatureRequest = new NewFeatureRequestModel();
+  newFeatureRequestRouter.featureId = Math.floor(
+    Math.random() * (9999 - 100) + 100
+  ); // Just demo purpose
   newFeatureRequest.featureTitle = featureTitle;
   newFeatureRequest.featureDesc = featureDesc;
   newFeatureRequest.submitterName = submitterName;
