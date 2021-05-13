@@ -8,7 +8,7 @@ const commentRouter = express.Router();
  */
 commentRouter.post("/comment", (request, response) => {
   const { body } = request;
-  const { bugId, comment, commentator } = body;
+  const { bugId, comment, commentator, commentType } = body;
 
   if (!comment) {
     return response.send({
@@ -22,6 +22,7 @@ commentRouter.post("/comment", (request, response) => {
   newComment.bugId = bugId;
   newComment.comment = comment;
   newComment.commentator = commentator;
+  newComment.commentType = commentType;
 
   newComment.save((err, comment) => {
     if (err) {

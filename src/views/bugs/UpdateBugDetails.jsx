@@ -37,7 +37,6 @@ const UpdateBugDetails = () => {
     firstName: "",
     lastName: "",
     email: "",
-    commentId: "",
     comment: "",
     commentator: "",
     commentType: "",
@@ -60,7 +59,6 @@ const UpdateBugDetails = () => {
   // For onChange event
   function handleChange(event) {
     const { name, value } = event.target;
-    console.log(name + "..." + value);
     setInput((prevInput) => {
       return {
         ...prevInput,
@@ -276,7 +274,7 @@ const UpdateBugDetails = () => {
             var commentator = user.firstName + " " + user.lastName;
             var comType =
               commentDetails.commentType === ""
-                ? "Public"
+                ? "public"
                 : commentDetails.commentType;
             const commentObject = {
               bugId: input.bugId,
@@ -307,7 +305,6 @@ const UpdateBugDetails = () => {
                       bugUpdateError: "",
                       comment: "",
                       commentator: "",
-                      bugId: "",
                       commentType: "public",
                     };
                   });
@@ -1353,7 +1350,7 @@ const UpdateBugDetails = () => {
                                         getFromStorage("btt_current_user_role")
                                           .userRole ? (
                                           // Show comemnt if submitter is a user and comments are public
-                                          comments.commentType === "Public" &&
+                                          comments.commentType === "public" &&
                                           getFromStorage(
                                             "btt_current_user_role"
                                           ).userRole === "User" ? (
@@ -1365,7 +1362,7 @@ const UpdateBugDetails = () => {
                                                 <div class="d-flex w-100 justify-content-between">
                                                   <span className="badge badge-light text-primary font-weight-normal ">
                                                     {" "}
-                                                    COMMENT #{index}
+                                                    COMMENT #{index + 1}
                                                   </span>
                                                   <small>
                                                     {comments.commentator}
@@ -1389,18 +1386,28 @@ const UpdateBugDetails = () => {
                                                 </small>
                                               </div>
                                             </div>
-                                          ) : (
-                                            // For all except user
+                                          ) : // For all except user
+                                          getFromStorage(
+                                              "btt_current_user_role"
+                                            ).userRole !== "User" ? (
                                             <div
                                               className="list-group p-1 mb-1 border rounded-0 shadow-sm"
                                               key={index}
                                             >
                                               <span class="mb-1 font-weight-normal text-info">
                                                 <div class="d-flex w-100 justify-content-between">
-                                                  <span className="badge badge-light text-primary font-weight-normal ">
-                                                    {" "}
-                                                    COMMENT #{index}
-                                                  </span>
+                                                  {comments.commentType ===
+                                                  "private" ? (
+                                                    <span className="badge badge-light text-danger font-weight-normal ">
+                                                      {" "}
+                                                      COMMENT #{index + 1}
+                                                    </span>
+                                                  ) : (
+                                                    <span className="badge badge-light text-primary font-weight-normal ">
+                                                      {" "}
+                                                      COMMENT #{index + 1}
+                                                    </span>
+                                                  )}
                                                   <small>
                                                     {comments.commentator}
                                                   </small>
@@ -1423,7 +1430,7 @@ const UpdateBugDetails = () => {
                                                 </small>
                                               </div>
                                             </div>
-                                          )
+                                          ) : null
                                         ) : (
                                           alert("Login required")
                                         )
@@ -1518,10 +1525,6 @@ const UpdateBugDetails = () => {
                         role="alert"
                       >
                         {commentDetails.bugUpdateSuccess}
-                        {/* <Link to="/login">
-                              Click here to Login
-                          </Link> */}
-                        {/* {"and logged in to your account "} */}
                       </label>
                     ) : null}
                     <span>

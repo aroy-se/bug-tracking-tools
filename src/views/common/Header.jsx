@@ -23,7 +23,7 @@ class Header extends Component {
       fetch(Constants.URL_USER_BY_EXACT_EMAIL + btt_current_user_email.user)
         .then((response) => response.json())
         .then((data) => {
-          this.onClickLogin();
+          // this.onClickLogin();
           data.map((user) => {
             this.setState({ userRole: user.userRole });
             setInStorage("btt_current_user_role", { userRole: user.userRole });

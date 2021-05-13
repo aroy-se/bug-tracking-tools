@@ -14,14 +14,14 @@ const CommentSchema = new mongoose.Schema(
       type: String,
       default: "Unknown",
     },
+    commentType: {
+      type: String,
+      default: "",
+    },
     // Default
     createdTime: {
       type: Date,
       default: Date().toLocaleString(),
-    },
-    commentType: {
-      type: String,
-      default: "public",
     },
   },
   { collection: "comment_details" }
