@@ -25,8 +25,10 @@ export const USER_ROLE = "User";
 // Constants for Bug Data
 const BUG_PATH = process.env.REACT_APP_BUG_PATH; // bug
 const BUG_BY_TITLE = process.env.REACT_APP_SEARCH_BUG_BY_TITLE; // bugByTitle
+const FIX_VERSION = process.env.REACT_APP_FIX_VERSION; // fixVersion
 export const BUG_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${BUG_PATH}/`;
 export const BUG_BY_TITLE_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${BUG_BY_TITLE}/`;
+export const FIX_VERSION_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${BUG_PATH}/${FIX_VERSION}/`;
 
 // Constatnt for new feature request
 const FEATURE_REQUEST_PATH = process.env.REACT_APP_NEW_FEATURE_REQUEST_PATH; // newFeatureRequest
@@ -36,12 +38,12 @@ export const NEW_FEATURE_REQUEST_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/
 const USER_ROLE_PATH = process.env.REACT_APP_USER_ROLE_PATH; // userRole
 export const USER_ROLE_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${USER_ROLE_PATH}/`;
 
-// Constatnt for user role
+// Constatnt for component
 const COMPONENT_PATH = process.env.REACT_APP_COMPONENT_PATH; // component
 const COMPONENT_BY_NAME = process.env.REACT_APP_SEARCH_COMPONENT_BY_NAME; // componentByName
 export const COMPONENT_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${COMPONENT_PATH}/`;
 export const COMPONENT_BY_NAME_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${COMPONENT_BY_NAME}/`;
 
 // Constatnt for Comment
-const COMMENT_PATH = process.env.REACT_APP_COMMENT_PATH;
+const COMMENT_PATH = process.env.REACT_APP_COMMENT_PATH; //comment
 export const COMMENT_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${COMMENT_PATH}/`;

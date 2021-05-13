@@ -40,7 +40,7 @@ const UpdateBugDetails = () => {
     commentId: "",
     comment: "",
     commentator: "",
-
+    commentType: "",
     bugUpdateSuccess: "",
     bugUpdateError: "",
   });
@@ -229,7 +229,21 @@ const UpdateBugDetails = () => {
     setSuccess(false);
   }
   function onChangeComment(event) {
-    setCommentDetails({ comment: event.target.value });
+    setCommentDetails((prev) => {
+      return {
+        ...prev,
+        comment: event.target.value,
+      };
+    });
+  }
+  function onChangeCommentType(event) {
+    console.log("Comment Type: " + event.target.value);
+    setCommentDetails((prev) => {
+      return {
+        ...prev,
+        commentType: event.target.value,
+      };
+    });
   }
   // To fetch all the comments from the database
   function fetchComments(bugId) {
@@ -255,17 +269,22 @@ const UpdateBugDetails = () => {
       input.bugId !== ""
     ) {
       const { user } = local_storage_user;
-      console.log(user);
       await fetch(Constants.URL_USER_BY_EXACT_EMAIL + user)
         .then((response) => response.json())
         .then((data) => {
           data.map((user) => {
             var commentator = user.firstName + " " + user.lastName;
+            var comType =
+              commentDetails.commentType === ""
+                ? "Public"
+                : commentDetails.commentType;
             const commentObject = {
               bugId: input.bugId,
               comment: commentDetails.comment,
               commentator: commentator,
+              commentType: comType,
             };
+            console.log("CommentObject: " + JSON.stringify(commentObject));
             const parameters = {
               method: "POST",
               headers: {
@@ -278,7 +297,6 @@ const UpdateBugDetails = () => {
               .then((response) => response.json())
               .then((jsonData) => {
                 if (jsonData.success) {
-                  alert("Comment added successfully!!!");
                   // post comment in bug details page
                   fetchComments(input.bugId);
                   //reset
@@ -290,6 +308,7 @@ const UpdateBugDetails = () => {
                       comment: "",
                       commentator: "",
                       bugId: "",
+                      commentType: "public",
                     };
                   });
                   // handleFetchBug();
@@ -312,6 +331,38 @@ const UpdateBugDetails = () => {
       return;
     }
     //////////////////////
+  }
+
+  function onClickFixVersion() {
+    if (input.bugId) {
+      const setFixVersionObject = {
+        fixVersion: input.fixVersion,
+      };
+      const parameters = {
+        method: "PUT",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(setFixVersionObject),
+      };
+
+      fetch(Constants.FIX_VERSION_URL + parseInt(input.bugId), parameters)
+        .then((response) => response.json())
+        .then((jsonData) => {
+          if (jsonData.success) {
+            setSuccess(false);
+            alert("Unable to set Fix Version");
+          } else {
+            {
+              setSuccess(true);
+              handleFetchBug();
+            }
+          }
+        });
+    } else {
+      alert("BugId is missing");
+    }
   }
   return (
     <div className="container-fluid">
@@ -415,23 +466,41 @@ const UpdateBugDetails = () => {
                 >
                   {bugData.fixVersion}
                 </p>
-              ) : (
-                // Editable fix Version
-                <div className="">
-                  <select
-                    className="custom-select shadow-sm form-control mt-2 mb-2 rounded-0"
-                    name="fixVersion"
-                    id="fixVersion"
-                    value={input.fixVersion}
-                    onChange={handleChange}
-                  >
-                    <option selected>Set fix Version</option>
-                    <option>BTT-v2021.06</option>
-                    <option>BTT-v2021.09</option>
-                    <option>BTT-v2021.12</option>
-                    <option>NA</option>
-                  </select>
+              ) : // Editable fix Version
+              getFromStorage("btt_current_user_role").userRole ===
+                "Project Manager" ? (
+                // SET Fix Version
+                <div class="form-group mt-2">
+                  <div class="input-group ">
+                    <input
+                      type="text"
+                      placeholder="Set Fix Version"
+                      className="form-control shadow-sm rounded-0"
+                      name="fixVersion"
+                      id="fixVersion"
+                      value={input.fixVersion}
+                      onChange={handleChange}
+                    />
+                    <div class="input-group-append">
+                      <button
+                        type="button"
+                        name="fixVersionBtn"
+                        className="btn btn-danger rounded-0"
+                        value="Search"
+                        onClick={onClickFixVersion}
+                      >
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
+              ) : (
+                <p
+                  class="card-text alert alert-secondary p-1 mb-2 mt-2 rounded-0"
+                  role="alert"
+                >
+                  {bugData.fixVersion}
+                </p>
               )}
             </div>
           </div>
@@ -839,9 +908,14 @@ const UpdateBugDetails = () => {
                                   {" "}
                                   {bugData.severity}
                                 </span>
-                              ) : (
-                                //"Always"
+                              ) : bugData.severity === "Always" ? (
                                 <span class="badge badge-warning text-danger">
+                                  {" "}
+                                  {bugData.severity}
+                                </span>
+                              ) : (
+                                // others
+                                <span class="badge badge-secondary text-light">
                                   {" "}
                                   {bugData.severity}
                                 </span>
@@ -859,6 +933,7 @@ const UpdateBugDetails = () => {
                                 <option>Rarely</option>
                                 <option>Intermittently</option>
                                 <option>Always</option>
+                                <option>NA</option>
                               </select>
                             )}
                           </td>
@@ -1263,47 +1338,96 @@ const UpdateBugDetails = () => {
                         {/* Comments */}
                         <tr>
                           <td>
-                            <div class="form-group">
+                            <div class="form-group m-0">
                               <h6 class="">
                                 <span class="">Comments</span>
                               </h6>
-                              <span class="font-weight-light">
-                                <div class="card-body ml-0 mr-0 pl-0 pr-0">
+                              <span class="font-weight-light ">
+                                <div class="card-body ml-0 mr-0 pl-0 pr-0 pt-1 pb-1">
                                   {Object.keys(viewComments).length > 0
-                                    ? viewComments.map((comments, index) => (
-                                        <div
-                                          className="list-group p-1 mb-1 border rounded-0 shadow-sm"
-                                          key={index}
-                                        >
-                                          <span class="mb-1 font-weight-normal text-info">
-                                            <div class="d-flex w-100 justify-content-between">
-                                              <span className="badge badge-light text-primary font-weight-normal ">
-                                                {" "}
-                                                COMMENT #{index}
+                                    ? viewComments.map((comments, index) =>
+                                        // check for local storage(empty or not)
+                                        getFromStorage(
+                                          "btt_current_user_role"
+                                        ) &&
+                                        getFromStorage("btt_current_user_role")
+                                          .userRole ? (
+                                          // Show comemnt if submitter is a user and comments are public
+                                          comments.commentType === "Public" &&
+                                          getFromStorage(
+                                            "btt_current_user_role"
+                                          ).userRole === "User" ? (
+                                            <div
+                                              className="list-group p-1 mb-1 border rounded-0 shadow-sm"
+                                              key={index}
+                                            >
+                                              <span class="mb-1 font-weight-normal text-info">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                  <span className="badge badge-light text-primary font-weight-normal ">
+                                                    {" "}
+                                                    COMMENT #{index}
+                                                  </span>
+                                                  <small>
+                                                    {comments.commentator}
+                                                  </small>
+                                                </div>
                                               </span>
-                                              <small>
-                                                {comments.commentator}
-                                              </small>
+                                              <div class="d-flex w-100 justify-content-between">
+                                                <span class="mb-1 font-weight-light text-secondary">
+                                                  <span className="badge badge-light text-secondary">
+                                                    Comment Details:
+                                                  </span>{" "}
+                                                  {comments.comment}
+                                                </span>
+                                                <small class="text-secondary font-weight-light">
+                                                  <span className="badge badge-pill badge-light">
+                                                    Created On:{" "}
+                                                  </span>
+                                                  <span className="font-weight-lighter text-secondary">
+                                                    {comments.createdTime}
+                                                  </span>
+                                                </small>
+                                              </div>
                                             </div>
-                                          </span>
-                                          <div class="d-flex w-100 justify-content-between">
-                                            <span class="mb-1 font-weight-light text-secondary">
-                                              <span className="badge badge-light text-secondary">
-                                                Comment Details:
-                                              </span>{" "}
-                                              {comments.comment}
-                                            </span>
-                                            <small class="text-secondary font-weight-light">
-                                              <span className="badge badge-pill badge-light">
-                                                Created On:{" "}
+                                          ) : (
+                                            // For all except user
+                                            <div
+                                              className="list-group p-1 mb-1 border rounded-0 shadow-sm"
+                                              key={index}
+                                            >
+                                              <span class="mb-1 font-weight-normal text-info">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                  <span className="badge badge-light text-primary font-weight-normal ">
+                                                    {" "}
+                                                    COMMENT #{index}
+                                                  </span>
+                                                  <small>
+                                                    {comments.commentator}
+                                                  </small>
+                                                </div>
                                               </span>
-                                              <span className="font-weight-lighter text-secondary">
-                                                {comments.createdTime}
-                                              </span>
-                                            </small>
-                                          </div>
-                                        </div>
-                                      ))
+                                              <div class="d-flex w-100 justify-content-between">
+                                                <span class="mb-1 font-weight-light text-secondary">
+                                                  <span className="badge badge-light text-secondary">
+                                                    Comment Details:
+                                                  </span>{" "}
+                                                  {comments.comment}
+                                                </span>
+                                                <small class="text-secondary font-weight-light">
+                                                  <span className="badge badge-pill badge-light">
+                                                    Created On:{" "}
+                                                  </span>
+                                                  <span className="font-weight-lighter text-secondary">
+                                                    {comments.createdTime}
+                                                  </span>
+                                                </small>
+                                              </div>
+                                            </div>
+                                          )
+                                        ) : (
+                                          alert("Login required")
+                                        )
+                                      )
                                     : "No Comments"}
                                 </div>
                                 {/* ///////////////////////////// */}
@@ -1319,10 +1443,37 @@ const UpdateBugDetails = () => {
                 <div className="row ">
                   <div className="col-xl-12 p-0">
                     <div class="card  rounded-0">
-                      <div class="card-header p-1 text-info">
+                      <div class="card-header p-1 text-info form-inline d-flex justify-content-between">
                         <i class="fa fa-comments" aria-hidden="true">
                           <span> Add Comment</span>
                         </i>
+                        {getFromStorage("btt_current_user_role") &&
+                        getFromStorage("btt_current_user_role").userRole !==
+                          "User" ? (
+                          <div
+                            class="btn-group btn-group-sm"
+                            role="group"
+                            aria-label="Visibility"
+                          >
+                            <button
+                              type="button"
+                              class="btn btn-outline-primary border-right-0 pt-0 pb-0 pl-1 pr-1"
+                              value="Public"
+                              onClick={onChangeCommentType}
+                            >
+                              Public
+                            </button>{" "}
+                            <button
+                              type="button"
+                              class="btn btn-outline-danger pt-0 pb-0 pl-1 pr-1"
+                              value="Private"
+                              onClick={onChangeCommentType}
+                            >
+                              Private
+                            </button>
+                          </div>
+                        ) : // just for user
+                        null}
                       </div>
                       <div class="card-body p-1">
                         <div class="form-group mb-1">

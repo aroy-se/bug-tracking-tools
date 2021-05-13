@@ -75,8 +75,9 @@ bugRouter.post("/bug", (request, response) => {
     });
   }
 
-  // save the new component
+  // save the new Bug
   let newBug = new BugModel();
+  newBug.bugId = Math.floor(Math.random() * (999999 - 100) + 100); // Just demo purpose;
   newBug.issueType = issueType;
   newBug.component = component;
   newBug.reportVersion = reportVersion;
@@ -111,7 +112,7 @@ bugRouter.post("/bug", (request, response) => {
   });
 });
 /**
- * Fetch ALL Users
+ * Fetch ALL Bug
  * C[R]UD := [R]EAD => GET(ALL)
  */
 bugRouter.get("/bug", (request, response) => {
@@ -122,13 +123,13 @@ bugRouter.get("/bug", (request, response) => {
     .catch((err) => {
       return response.send({
         success: false,
-        message: `Error: error occurred while fetching all the bug details.\n ${err}`,
+        message: `Error: error occurred while fetching all the bug details.`,
       });
     });
 });
 
 /**
- * Fetch User details by uerid
+ * Fetch Bug details by bug-id
  * C[R]UD := [R]EAD => GET(ONE) - byId
  */
 
@@ -141,14 +142,14 @@ bugRouter.get("/bug/:id", (request, response) => {
     .catch((err) => {
       return response.send({
         success: false,
-        message: `Error: error occurred while fetching the bug details by id.\n ${err}`,
+        message: `Error: error occurred while fetching the bug details by id.`,
       });
     });
 });
 
 /**
- * To fetch all users By username with regex
- * C[R]UD := [R]EAD => GET(ALL) - byName
+ * To fetch all bugs By bug-title with regex
+ * C[R]UD := [R]EAD => GET(ALL) - byTitle
  */
 bugRouter.get("/bugByTitle/:name", (request, response) => {
   var targetName = request.params.name;
@@ -159,13 +160,13 @@ bugRouter.get("/bugByTitle/:name", (request, response) => {
     .catch((err) => {
       return response.send({
         success: false,
-        message: `Error: error occurred while fetching the users details by username.\n ${err}`,
+        message: `Error: error occurred while fetching the users details by username.`,
       });
     });
 });
 
 /**
- * Update a User details by userid
+ * Update a Bug details by bugid
  * CR[U]D := [U]PDATE => PUT - ONE
  */
 bugRouter.put("/bug/:id", (request, response) => {
@@ -207,13 +208,13 @@ bugRouter.put("/bug/:id", (request, response) => {
     .catch((err) => {
       return response.send({
         success: false,
-        message: `Error: error occurred while updating the bug details by bugid.\n ${err}`,
+        message: `Error: error occurred while updating the bug details by bugid.`,
       });
     });
 });
 
 /**
- * Delete a User details by userid
+ * Delete a Bug details by userid
  * CRU[D] := [D]ELETE - DELETE - ONE
  */
 bugRouter.delete("/bug/:id", (request, response, next) => {
@@ -227,6 +228,30 @@ bugRouter.delete("/bug/:id", (request, response, next) => {
     .catch((error) => {
       response.status(400).json({
         error: error,
+      });
+    });
+});
+
+/**
+ * Set fixVersion by bug-id
+ * CR[U]D := [U]PDATE => PUT - ONE
+ */
+bugRouter.put("/bug/fixVersion/:id", (request, response) => {
+  var targetId = { bugId: parseInt(request.params.id) };
+  var toBeUpdated = {
+    $set: {
+      fixVersion: request.body.fixVersion,
+    },
+  };
+  BugModel.updateOne(targetId, toBeUpdated)
+    .then((data) => {
+      console.log("Fix Version is updated!");
+      response.json(data);
+    })
+    .catch((err) => {
+      return response.send({
+        success: false,
+        message: `Error: error occurred while setting the bug fix version by bugid`,
       });
     });
 });

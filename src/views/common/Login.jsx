@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import * as Constants from "../../utility/Constants";
+import { Link, withRouter } from "react-router-dom";
 import { setInStorage, getFromStorage } from "../../utility/storage";
 import Home from "./Home";
 
@@ -15,7 +14,6 @@ class Login extends Component {
 
       email: "",
       password: "",
-      // storeEmail: "",
     };
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
@@ -51,7 +49,6 @@ class Login extends Component {
     })
       .then((res) => res.json())
       .then((json) => {
-        // console.log("loginjson", json);
         if (json.success) {
           setInStorage("btt_local_storage", { token: json.token });
           setInStorage("btt_current_user", { user: email });
@@ -215,4 +212,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import brand_img from "../../assets/images/bug64.jpg";
 import "../../assets/css/btt-style.css";
 import SearchBug from "../bugs/SearchBug";
-import { getFromStorage } from "../../utility/storage";
+import { setInStorage, getFromStorage } from "../../utility/storage";
 import HomeInternalDashboard from "./HomeInternalDashBoard";
 import * as Constants from "../../utility/Constants";
 
@@ -23,9 +23,10 @@ class Header extends Component {
       fetch(Constants.URL_USER_BY_EXACT_EMAIL + btt_current_user_email.user)
         .then((response) => response.json())
         .then((data) => {
-          // console.log(JSON.stringify(data));
+          this.onClickLogin();
           data.map((user) => {
             this.setState({ userRole: user.userRole });
+            setInStorage("btt_current_user_role", { userRole: user.userRole });
           });
         });
     } else {
@@ -141,6 +142,11 @@ class Header extends Component {
                             {" "}
                             {getFromStorage("btt_current_user").user}
                           </i>
+                        ) : this.state.userRole === "Project Manager" ? (
+                          <i class="fas fa-user-secret text-secondary">
+                            {" "}
+                            {getFromStorage("btt_current_user").user}
+                          </i>
                         ) : (
                           <i class="far fa-user text-info ">
                             {" "}
@@ -190,9 +196,19 @@ class Header extends Component {
                           Logout
                         </i>
                       </Link>
-                      {this.state.authStat ? (
-                        <HomeInternalDashboard userRole={this.state.userRole} />
-                      ) : null}
+
+                      {
+                        // Show the dashboard panel if the loggedin member is not a User
+                        getFromStorage("btt_current_user_role") &&
+                        getFromStorage("btt_current_user_role").userRole !==
+                          "User" ? (
+                          this.state.authStat ? (
+                            <HomeInternalDashboard
+                              userRole={this.state.userRole}
+                            />
+                          ) : null
+                        ) : null
+                      }
                       <div class="dropdown-divider"></div>
                       <Link to="/registration" className="text-light">
                         <span className="badge badge-primary text-monospace p-2 m-2">

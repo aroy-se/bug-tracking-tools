@@ -74,7 +74,6 @@ const UserRoleSettings = () => {
     fetch(Constants.USER_ROLE_URL + parseInt(input.userId), parameters)
       .then((response) => response.json())
       .then((jsonData) => {
-        console.log("Json dataaaaaaaaaaa" + JSON.stringify(jsonData));
         setSuccess(true);
       });
     setID(input.userId);
@@ -208,7 +207,7 @@ const UserRoleSettings = () => {
                   <option selected>Set User Role</option>
                   <option>Admin</option>
                   <option>Project Manager</option>
-                  <option>Product Owner</option>
+                  {/* <option>Product Owner</option> */}
                   <option>Developer</option>
                   <option>TriageMan</option>
                   <option>Tester</option>

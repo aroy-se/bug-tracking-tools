@@ -12,7 +12,7 @@ import ViewUserDetails from "./ViewUserDetails";
 class UserDashboard extends React.Component {
   componentDidMount() {
     // Jquery
-    $("#bugTab a").on("click", function (e) {
+    $("#userTab a").on("click", function (e) {
       e.preventDefault();
       $(this).tab("show");
     });
@@ -26,7 +26,7 @@ class UserDashboard extends React.Component {
         </div>
         <div className="card-body ">
           {/* Start-Navigation page */}
-          <ul class="nav nav-tabs" id="bugTab" role="tablist">
+          <ul class="nav nav-tabs" id="userTab" role="tablist">
             <li class="nav-item">
               <a
                 class="nav-link active text-danger"

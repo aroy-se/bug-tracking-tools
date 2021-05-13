@@ -90,7 +90,7 @@ const BugSchema = new mongoose.Schema(
     // Backend default fields
     bugId: {
       type: Number,
-      default: Math.floor(Math.random() * (999999 - 100) + 100), // Just demo purpose
+      default: 0,
     },
     assignee: {
       type: String,
