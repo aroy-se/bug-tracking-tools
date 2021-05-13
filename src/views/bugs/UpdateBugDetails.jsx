@@ -554,7 +554,7 @@ const UpdateBugDetails = () => {
                   class="custom-control-label text-danger"
                   for="editBugDetailsId"
                 >
-                  {/* Edit */}
+                  Edit
                 </label>
               </div>
             </div>
