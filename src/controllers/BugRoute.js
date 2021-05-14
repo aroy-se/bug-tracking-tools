@@ -256,4 +256,22 @@ bugRouter.put("/bug/fixVersion/:id", (request, response) => {
     });
 });
 
+/**
+ * To fetch all bugs By assigne wise
+ * C[R]UD := [R]EAD => GET(ALL) - by assignee
+ */
+bugRouter.get("/bug/assignee/:name", (request, response) => {
+  var targetName = request.params.name;
+  BugModel.find({ assignee: targetName })
+    .then((data) => {
+      response.json(data);
+    })
+    .catch((err) => {
+      return response.send({
+        success: false,
+        message: `Error: error occurred while fetching the users details by username.`,
+      });
+    });
+});
+
 module.exports = bugRouter;

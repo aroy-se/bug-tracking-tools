@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import * as Constants from "../../utility/Constants";
 import bug_img from "../../assets/images/bug64.jpg";
+import { getFromStorage } from "../../utility/storage";
+import Login from "../common/Login";
 
 class CreateBugDetails extends React.Component {
   constructor(props) {
@@ -398,512 +400,515 @@ class CreateBugDetails extends React.Component {
       });
   }
   render() {
-    const {
-      reportSuccess,
-      reportError,
-      issueType,
-      component,
-      reportVersion,
-      os,
-      issueSubType,
-      severity,
-      regressionVersion,
-      browser,
+    const btt_local_storage_token = getFromStorage("btt_local_storage");
+    if (btt_local_storage_token && btt_local_storage_token.token) {
+      const {
+        reportSuccess,
+        reportError,
+        issueType,
+        component,
+        reportVersion,
+        os,
+        issueSubType,
+        severity,
+        regressionVersion,
+        browser,
 
-      bugTitle,
-      bugDesc,
-      reproducibleSteps,
-      expectedOutput,
-      actualOutput,
-      sourceCode,
-      attachment,
-      workaround,
+        bugTitle,
+        bugDesc,
+        reproducibleSteps,
+        expectedOutput,
+        actualOutput,
+        sourceCode,
+        attachment,
+        workaround,
 
-      submitterName,
-      submitterEmail,
-      submitterCompany,
-      componentDetails,
-    } = this.state;
-    return (
-      <div className="container p-0 pt-5">
-        <div class="row">
-          <div class="col-xl-12 p-0 mb-5">
-            <div class="card shadow">
-              <div class="card-header text-danger form-inline d-flex justify-content-between shadow-sm">
-                <h4>REPORT A BUG</h4>
-                <img
-                  src={bug_img}
-                  alt="bug-img"
-                  style={{ width: 35, height: 35 }}
-                />
-              </div>
-              <div className="card-body">
-                {/* 1st row */}
-                <div className="container-fluid p-0">
-                  <div className="row">
-                    <div className="col-xl-6 p-0">
-                      <table className="table table-borderless">
-                        <tbody>
-                          {/* bug-type */}
-                          <tr>
-                            <td>
-                              <h6>Issue Type</h6>
-                            </td>
-                            <td>
-                              <input
-                                type="radio"
-                                name="issueType"
-                                id="issueType1"
-                                className="m-2"
-                                value="Bug"
-                                onChange={this.onChangeIssueType}
-                                defaultChecked
-                              />
-                              <label for="issueType1">Bug</label>
-                              <input
-                                type="radio"
-                                name="issueType"
-                                id="issueType2"
-                                className="m-2"
-                                value="Enhancement"
-                                onChange={this.onChangeIssueType}
-                              />
-                              <label for="issueType2">Enhancement</label>
-                            </td>
-                          </tr>
-                          {/* - Affected Component: Component n Sub-component */}
-                          <tr>
-                            <td>
-                              <h6>Component</h6>
-                            </td>
-                            <td>
-                              <select
-                                className="custom-select shadow-sm form-control"
-                                name="component"
-                                value={component}
-                                onChange={this.onChangeComponent}
-                                // value={componentDetails.componentName}
-                                onClick={this.onClickFetchComponents}
-                              >
-                                <option selected>Select Any Component</option>
-                                {componentDetails.map((component, index) => (
-                                  <option key={index}>
-                                    {component.componentName}
-                                  </option>
-                                ))}
-                                {/* <option>Component-1</option>
+        submitterName,
+        submitterEmail,
+        submitterCompany,
+        componentDetails,
+      } = this.state;
+      return (
+        <div className="container p-0 pt-5">
+          <div class="row">
+            <div class="col-xl-12 p-0 mb-5">
+              <div class="card shadow">
+                <div class="card-header text-danger form-inline d-flex justify-content-between shadow-sm">
+                  <h4>REPORT A BUG</h4>
+                  <img
+                    src={bug_img}
+                    alt="bug-img"
+                    style={{ width: 35, height: 35 }}
+                  />
+                </div>
+                <div className="card-body">
+                  {/* 1st row */}
+                  <div className="container-fluid p-0">
+                    <div className="row">
+                      <div className="col-xl-6 p-0">
+                        <table className="table table-borderless">
+                          <tbody>
+                            {/* bug-type */}
+                            <tr>
+                              <td>
+                                <h6>Issue Type</h6>
+                              </td>
+                              <td>
+                                <input
+                                  type="radio"
+                                  name="issueType"
+                                  id="issueType1"
+                                  className="m-2"
+                                  value="Bug"
+                                  onChange={this.onChangeIssueType}
+                                  defaultChecked
+                                />
+                                <label for="issueType1">Bug</label>
+                                <input
+                                  type="radio"
+                                  name="issueType"
+                                  id="issueType2"
+                                  className="m-2"
+                                  value="Enhancement"
+                                  onChange={this.onChangeIssueType}
+                                />
+                                <label for="issueType2">Enhancement</label>
+                              </td>
+                            </tr>
+                            {/* - Affected Component: Component n Sub-component */}
+                            <tr>
+                              <td>
+                                <h6>Component</h6>
+                              </td>
+                              <td>
+                                <select
+                                  className="custom-select shadow-sm form-control"
+                                  name="component"
+                                  value={component}
+                                  onChange={this.onChangeComponent}
+                                  // value={componentDetails.componentName}
+                                  onClick={this.onClickFetchComponents}
+                                >
+                                  <option selected>Select Any Component</option>
+                                  {componentDetails.map((component, index) => (
+                                    <option key={index}>
+                                      {component.componentName}
+                                    </option>
+                                  ))}
+                                  {/* <option>Component-1</option>
                                 <option>Component-2</option>
                                 <option>Component-3</option>
                                 <option>BTT-Authentication</option>
                                 <option>BTT-Bugs</option>
                                 <option>BTT-Users</option> */}
-                              </select>
-                            </td>
-                          </tr>
-                          {/* - Reporting version (On issue version issue is occurring) */}
-                          <tr>
-                            <td>
-                              <h6>Reporting Version</h6>
-                            </td>
-                            <td>
-                              <select
-                                className="custom-select shadow-sm form-control"
-                                name="reportVersion"
-                                value={reportVersion}
-                                onChange={this.onChangeReportVersion}
-                              >
-                                <option selected>
-                                  Select Reporting Version
-                                </option>
-                                <option>BTT-v2020.03</option>
-                                <option>BTT-v2020.06</option>
-                                <option>BTT-v2020.09</option>
-                                <option>BTT-v2020.12</option>
-                                <option>BTT-v2021.03</option>
-                                <option>NA</option>
-                              </select>
-                            </td>
-                          </tr>
-                          {/* - OS: Win/Mac/Lin */}
-                          <tr>
-                            <td>
-                              <h6>Operating System</h6>
-                            </td>
-                            <td>
-                              <select
-                                class="custom-select shadow-sm form-control"
-                                name="os"
-                                value={os}
-                                onChange={this.onChangeOs}
-                              >
-                                <option selected>
-                                  Select Operating System
-                                </option>
-                                <option>Windows</option>
-                                <option>MacOS</option>
-                                <option>Linux</option>
-                                <option>Others</option>
-                              </select>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    {/* 2nd row */}
-                    <div class="col-xl-6 p-0">
-                      <table class="table table-borderless">
-                        <tbody>
-                          {/* Bug-sub-type */}
-                          <tr>
-                            <td>
-                              <h6>Issue Sub-Type</h6>
-                            </td>
-                            <td>
-                              <input
-                                type="radio"
-                                name="issueSubType"
-                                id="issueSubType1"
-                                className="m-2"
-                                value="Crash"
-                                onChange={this.onChangeIssueSubType}
-                              />
-                              <label for="issueSubType1">Crash</label>
-                              <input
-                                type="radio"
-                                name="issueSubType"
-                                id="issueSubType2"
-                                className="m-2"
-                                value="Others"
-                                onChange={this.onChangeIssueSubType}
-                                defaultChecked
-                              />
-                              <label for="issueSubType2">Others</label>
-                            </td>
-                          </tr>
-                          {/* - Severity/Frequency: intermittently/frequently/always */}
-                          <tr>
-                            <td>
-                              <h6>Severity Type</h6>
-                            </td>
-                            <td>
-                              <select
-                                class="custom-select shadow-sm form-control"
-                                name="severity"
-                                value={severity}
-                                onChange={this.onChangeSeverity}
-                              >
-                                <option selected>Select Severity Type</option>
-                                <option>Rarely</option>
-                                <option>Intermittently</option>
-                                <option>Always</option>
-                              </select>
-                            </td>
-                          </tr>
-                          {/* - Reporting version (On issue version issue is occurring) */}
-                          <tr>
-                            <td>
-                              <h6>Regression Version</h6>
-                            </td>
-                            <td>
-                              <select
-                                class="custom-select shadow-sm form-control"
-                                name="regressionVersion"
-                                value={regressionVersion}
-                                onChange={this.onChangeRegressionVersion}
-                              >
-                                <option selected>
-                                  Select Regression Version
-                                </option>
-                                <option>BTT-v2020.03</option>
-                                <option>BTT-v2020.06</option>
-                                <option>BTT-v2020.09</option>
-                                <option>BTT-v2020.12</option>
-                                <option>NA</option>
-                              </select>
-                            </td>
-                          </tr>
-                          {/* Browser : Chrome/Firefox/Edge/Safari */}
-                          <tr>
-                            <td>
-                              <h6>Browser</h6>
-                            </td>
-                            <td>
-                              <select
-                                class="custom-select shadow-sm form-control"
-                                name="browser"
-                                value={browser}
-                                onChange={this.onChangeBrowser}
-                              >
-                                <option selected>Select Browser Name</option>
-                                <option>Google Chrome</option>
-                                <option>Mozilla Firefox</option>
-                                <option>Microsoft Edge</option>
-                                <option>Apple Safari</option>
-                                <option>Others</option>
-                              </select>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                                </select>
+                              </td>
+                            </tr>
+                            {/* - Reporting version (On issue version issue is occurring) */}
+                            <tr>
+                              <td>
+                                <h6>Reporting Version</h6>
+                              </td>
+                              <td>
+                                <select
+                                  className="custom-select shadow-sm form-control"
+                                  name="reportVersion"
+                                  value={reportVersion}
+                                  onChange={this.onChangeReportVersion}
+                                >
+                                  <option selected>
+                                    Select Reporting Version
+                                  </option>
+                                  <option>BTT-v2020.03</option>
+                                  <option>BTT-v2020.06</option>
+                                  <option>BTT-v2020.09</option>
+                                  <option>BTT-v2020.12</option>
+                                  <option>BTT-v2021.03</option>
+                                  <option>NA</option>
+                                </select>
+                              </td>
+                            </tr>
+                            {/* - OS: Win/Mac/Lin */}
+                            <tr>
+                              <td>
+                                <h6>Operating System</h6>
+                              </td>
+                              <td>
+                                <select
+                                  class="custom-select shadow-sm form-control"
+                                  name="os"
+                                  value={os}
+                                  onChange={this.onChangeOs}
+                                >
+                                  <option selected>
+                                    Select Operating System
+                                  </option>
+                                  <option>Windows</option>
+                                  <option>MacOS</option>
+                                  <option>Linux</option>
+                                  <option>Others</option>
+                                </select>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      {/* 2nd row */}
+                      <div class="col-xl-6 p-0">
+                        <table class="table table-borderless">
+                          <tbody>
+                            {/* Bug-sub-type */}
+                            <tr>
+                              <td>
+                                <h6>Issue Sub-Type</h6>
+                              </td>
+                              <td>
+                                <input
+                                  type="radio"
+                                  name="issueSubType"
+                                  id="issueSubType1"
+                                  className="m-2"
+                                  value="Crash"
+                                  onChange={this.onChangeIssueSubType}
+                                />
+                                <label for="issueSubType1">Crash</label>
+                                <input
+                                  type="radio"
+                                  name="issueSubType"
+                                  id="issueSubType2"
+                                  className="m-2"
+                                  value="Others"
+                                  onChange={this.onChangeIssueSubType}
+                                  defaultChecked
+                                />
+                                <label for="issueSubType2">Others</label>
+                              </td>
+                            </tr>
+                            {/* - Severity/Frequency: intermittently/frequently/always */}
+                            <tr>
+                              <td>
+                                <h6>Severity Type</h6>
+                              </td>
+                              <td>
+                                <select
+                                  class="custom-select shadow-sm form-control"
+                                  name="severity"
+                                  value={severity}
+                                  onChange={this.onChangeSeverity}
+                                >
+                                  <option selected>Select Severity Type</option>
+                                  <option>Rarely</option>
+                                  <option>Intermittently</option>
+                                  <option>Always</option>
+                                </select>
+                              </td>
+                            </tr>
+                            {/* - Reporting version (On issue version issue is occurring) */}
+                            <tr>
+                              <td>
+                                <h6>Regression Version</h6>
+                              </td>
+                              <td>
+                                <select
+                                  class="custom-select shadow-sm form-control"
+                                  name="regressionVersion"
+                                  value={regressionVersion}
+                                  onChange={this.onChangeRegressionVersion}
+                                >
+                                  <option selected>
+                                    Select Regression Version
+                                  </option>
+                                  <option>BTT-v2020.03</option>
+                                  <option>BTT-v2020.06</option>
+                                  <option>BTT-v2020.09</option>
+                                  <option>BTT-v2020.12</option>
+                                  <option>NA</option>
+                                </select>
+                              </td>
+                            </tr>
+                            {/* Browser : Chrome/Firefox/Edge/Safari */}
+                            <tr>
+                              <td>
+                                <h6>Browser</h6>
+                              </td>
+                              <td>
+                                <select
+                                  class="custom-select shadow-sm form-control"
+                                  name="browser"
+                                  value={browser}
+                                  onChange={this.onChangeBrowser}
+                                >
+                                  <option selected>Select Browser Name</option>
+                                  <option>Google Chrome</option>
+                                  <option>Mozilla Firefox</option>
+                                  <option>Microsoft Edge</option>
+                                  <option>Apple Safari</option>
+                                  <option>Others</option>
+                                </select>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
-                </div>
-                {/* Start Bug input details */}
-                {/* 1st row */}
-                <div class="container p-0">
-                  <div class="row">
-                    <div class="col-xl-12 p-0">
-                      <table class="table table-borderless">
-                        <tbody>
-                          {/* Title/Summary/Synopsis */}
-                          <tr>
-                            <td>
-                              <div class="form-group">
-                                <h6>Bug Title</h6>
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  name="bugTitle"
-                                  value={bugTitle}
-                                  onChange={this.onChangeBugTitle}
-                                  placeholder="Enter a summary of your bug report"
-                                />
-                              </div>
-                            </td>
-                          </tr>
-                          {/* Description - More Info */}
-                          <tr>
-                            <td>
-                              <div class="form-group">
-                                <h6>Bug Description</h6>
-                                <textarea
-                                  type="textarea"
-                                  class="form-control"
-                                  name="bugDesc"
-                                  value={bugDesc}
-                                  onChange={this.onChangeBugDesc}
-                                  placeholder="Enter a detailed description of the problem. Do not create multiple issues in one report"
-                                />
-                              </div>
-                            </td>
-                          </tr>
-                          {/* Reproducible Steps */}
-                          <tr>
-                            <td>
-                              <div class="form-group">
-                                <h6>Reproducible Steps</h6>
-                                <textarea
-                                  type="textarea"
-                                  class="form-control"
-                                  name="reproducibleSteps"
-                                  value={reproducibleSteps}
-                                  onChange={this.onChangeReproducibleSteps}
-                                  placeholder="Describe the step-by-step process that we can follow to Reproduce the bug"
-                                />
-                              </div>
-                            </td>
-                          </tr>
-                          {/* Expected Output */}
-                          <tr>
-                            <td>
-                              <div class="form-group">
-                                <h6>Expected Output</h6>
-                                <textarea
-                                  type="textarea"
-                                  class="form-control"
-                                  name="expectedOutput"
-                                  value={expectedOutput}
-                                  onChange={this.onChangeExpectedOutput}
-                                  placeholder="Describe the results that you are expecting when performing the above steps"
-                                />
-                              </div>
-                            </td>
-                          </tr>
-                          {/* Actual Output */}
-                          <tr>
-                            <td>
-                              <div class="form-group">
-                                <h6>Actual Output</h6>
-                                <textarea
-                                  type="textarea"
-                                  class="form-control"
-                                  name="actualOutput"
-                                  value={actualOutput}
-                                  onChange={this.onChangeActualOutput}
-                                  placeholder="Please report the actual result that you are getting"
-                                />
-                              </div>
-                            </td>
-                          </tr>
-                          {/* Source code/test case/stack trace content (Optional) */}
-                          <tr>
-                            <td>
-                              <div class="form-group">
-                                <h6>Source code / Test case / Stacktrace</h6>
-                                <textarea
-                                  type="textarea"
-                                  class="form-control"
-                                  name="sourceCode"
-                                  value={sourceCode}
-                                  onChange={this.onChangeSourceCode}
-                                  placeholder="Please provide a complete test case without any dependency"
-                                />
-                              </div>
-                            </td>
-                          </tr>
-                          {/* Attachment(with Limit) */}
-                          <tr>
-                            <td>
-                              <div class="form-group ">
-                                <h6>Attachment (Max Limit: 2MB)</h6>
-                                <div className="custom-file">
+                  {/* Start Bug input details */}
+                  {/* 1st row */}
+                  <div class="container p-0">
+                    <div class="row">
+                      <div class="col-xl-12 p-0">
+                        <table class="table table-borderless">
+                          <tbody>
+                            {/* Title/Summary/Synopsis */}
+                            <tr>
+                              <td>
+                                <div class="form-group">
+                                  <h6>Bug Title</h6>
                                   <input
-                                    type="file"
-                                    class="custom-file-input form-control"
-                                    id="attachment"
-                                    name="attachment"
-                                    value={attachment}
-                                    onChange={this.onChangeAttachment}
+                                    type="text"
+                                    class="form-control"
+                                    name="bugTitle"
+                                    value={bugTitle}
+                                    onChange={this.onChangeBugTitle}
+                                    placeholder="Enter a summary of your bug report"
                                   />
-                                  <label
-                                    class="custom-file-label"
-                                    for="attachment"
-                                    value={attachment}
-                                    onChange={this.onChangeAttachment}
-                                  >
-                                    {attachment}
-                                    {/* Choose file */}
-                                  </label>
+                                </div>
+                              </td>
+                            </tr>
+                            {/* Description - More Info */}
+                            <tr>
+                              <td>
+                                <div class="form-group">
+                                  <h6>Bug Description</h6>
+                                  <textarea
+                                    type="textarea"
+                                    class="form-control"
+                                    name="bugDesc"
+                                    value={bugDesc}
+                                    onChange={this.onChangeBugDesc}
+                                    placeholder="Enter a detailed description of the problem. Do not create multiple issues in one report"
+                                  />
+                                </div>
+                              </td>
+                            </tr>
+                            {/* Reproducible Steps */}
+                            <tr>
+                              <td>
+                                <div class="form-group">
+                                  <h6>Reproducible Steps</h6>
+                                  <textarea
+                                    type="textarea"
+                                    class="form-control"
+                                    name="reproducibleSteps"
+                                    value={reproducibleSteps}
+                                    onChange={this.onChangeReproducibleSteps}
+                                    placeholder="Describe the step-by-step process that we can follow to Reproduce the bug"
+                                  />
+                                </div>
+                              </td>
+                            </tr>
+                            {/* Expected Output */}
+                            <tr>
+                              <td>
+                                <div class="form-group">
+                                  <h6>Expected Output</h6>
+                                  <textarea
+                                    type="textarea"
+                                    class="form-control"
+                                    name="expectedOutput"
+                                    value={expectedOutput}
+                                    onChange={this.onChangeExpectedOutput}
+                                    placeholder="Describe the results that you are expecting when performing the above steps"
+                                  />
+                                </div>
+                              </td>
+                            </tr>
+                            {/* Actual Output */}
+                            <tr>
+                              <td>
+                                <div class="form-group">
+                                  <h6>Actual Output</h6>
+                                  <textarea
+                                    type="textarea"
+                                    class="form-control"
+                                    name="actualOutput"
+                                    value={actualOutput}
+                                    onChange={this.onChangeActualOutput}
+                                    placeholder="Please report the actual result that you are getting"
+                                  />
+                                </div>
+                              </td>
+                            </tr>
+                            {/* Source code/test case/stack trace content (Optional) */}
+                            <tr>
+                              <td>
+                                <div class="form-group">
+                                  <h6>Source code / Test case / Stacktrace</h6>
+                                  <textarea
+                                    type="textarea"
+                                    class="form-control"
+                                    name="sourceCode"
+                                    value={sourceCode}
+                                    onChange={this.onChangeSourceCode}
+                                    placeholder="Please provide a complete test case without any dependency"
+                                  />
+                                </div>
+                              </td>
+                            </tr>
+                            {/* Attachment(with Limit) */}
+                            <tr>
+                              <td>
+                                <div class="form-group ">
+                                  <h6>Attachment (Max Limit: 2MB)</h6>
+                                  <div className="custom-file">
+                                    <input
+                                      type="file"
+                                      class="custom-file-input form-control"
+                                      id="attachment"
+                                      name="attachment"
+                                      value={attachment}
+                                      onChange={this.onChangeAttachment}
+                                    />
+                                    <label
+                                      class="custom-file-label"
+                                      for="attachment"
+                                      value={attachment}
+                                      onChange={this.onChangeAttachment}
+                                    >
+                                      {attachment}
+                                      {/* Choose file */}
+                                    </label>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            {/* Workaround */}
+                            <tr>
+                              <td>
+                                <div class="form-group">
+                                  <h6>Workaround</h6>
+                                  <textarea
+                                    type="textarea"
+                                    class="form-control"
+                                    name="workaround"
+                                    value={workaround}
+                                    onChange={this.onChangeWorkaround}
+                                    placeholder="Please provide a temporary method for bypassing this bug, if you have found one"
+                                  />
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-12">
+                        <div class="card shadow-sm">
+                          <div class="card-header pt-1 pb-1 text-info">
+                            <h5>Submitter Info.</h5>
+                          </div>
+                          <div class="card-body p-1">
+                            <div class="row">
+                              <div class="col-xl-4">
+                                <div class="form-group mb-1">
+                                  <label>Submitter Name</label>
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    name="submitterName"
+                                    value={submitterName}
+                                    onChange={this.onChangeSubmitterName}
+                                    placeholder="Full Name"
+                                  />
                                 </div>
                               </div>
-                            </td>
-                          </tr>
-                          {/* Workaround */}
-                          <tr>
-                            <td>
-                              <div class="form-group">
-                                <h6>Workaround</h6>
-                                <textarea
-                                  type="textarea"
-                                  class="form-control"
-                                  name="workaround"
-                                  value={workaround}
-                                  onChange={this.onChangeWorkaround}
-                                  placeholder="Please provide a temporary method for bypassing this bug, if you have found one"
-                                />
+                              <div class="col-xl-4">
+                                <div class="form-group mb-1">
+                                  <label>Submitter Email Id</label>
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    name="submitterEmail"
+                                    value={submitterEmail}
+                                    onChange={this.onChangeSubmitterEmail}
+                                    placeholder="Email ID"
+                                  />
+                                </div>
                               </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-xl-12">
-                      <div class="card shadow-sm">
-                        <div class="card-header pt-1 pb-1 text-info">
-                          <h5>Submitter Info.</h5>
-                        </div>
-                        <div class="card-body p-1">
-                          <div class="row">
-                            <div class="col-xl-4">
-                              <div class="form-group mb-1">
-                                <label>Submitter Name</label>
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  name="submitterName"
-                                  value={submitterName}
-                                  onChange={this.onChangeSubmitterName}
-                                  placeholder="Full Name"
-                                />
-                              </div>
-                            </div>
-                            <div class="col-xl-4">
-                              <div class="form-group mb-1">
-                                <label>Submitter Email Id</label>
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  name="submitterEmail"
-                                  value={submitterEmail}
-                                  onChange={this.onChangeSubmitterEmail}
-                                  placeholder="Email ID"
-                                />
-                              </div>
-                            </div>
-                            <div class="col-xl-4">
-                              <div class="form-group mb-1">
-                                <label>Company Name</label>
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  name="submitterCompany"
-                                  value={submitterCompany}
-                                  onChange={this.onChangeSubmitterCompany}
-                                  placeholder="Provide your Company Name or Self"
-                                />
+                              <div class="col-xl-4">
+                                <div class="form-group mb-1">
+                                  <label>Company Name</label>
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    name="submitterCompany"
+                                    value={submitterCompany}
+                                    onChange={this.onChangeSubmitterCompany}
+                                    placeholder="Provide your Company Name or Self"
+                                  />
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  {/* <i class="fa fa-info-circle" aria-hidden="true"> */}
-                  {/* <span className="terms-info"> */}
-                  {/* Please accept if you agree to our{" "} */}
-                  {/* <a href="#!">Terms of Service.</a> */}
-                  {/* </span> */}
-                  {/* </i> */}
-                  <div className="mt-3">
-                    <p className="text-muted font-weight-lighter">
-                      In addition, We respects your desire for privacy. Personal
-                      data collected from this program will not be sold, given
-                      or shared with organizations external to our Company. We
-                      will use this data for communications with you to clarify
-                      issues regarding the report you submitted and/or status of
-                      that report. The issues that you report may be made
-                      publicly available, however your personal data will be
-                      kept confidential. If you are not comfortable with the
-                      above conditions, please do not press the Submit button.
-                    </p>
-                    <div class="custom-control custom-checkbox">
-                      <input
-                        type="checkbox"
-                        class="custom-control-input"
-                        id="acceptReport"
-                        // value={setAcceptCheck(!acceptCheck)}
-                      />
-                      <label
-                        class="custom-control-label font-italic font-weight-normal text-secondary"
-                        for="acceptReport"
-                      >
-                        Check here to indicate that you have read and agree to
-                        the terms of our Service
-                      </label>
+                    {/* <i class="fa fa-info-circle" aria-hidden="true"> */}
+                    {/* <span className="terms-info"> */}
+                    {/* Please accept if you agree to our{" "} */}
+                    {/* <a href="#!">Terms of Service.</a> */}
+                    {/* </span> */}
+                    {/* </i> */}
+                    <div className="mt-3">
+                      <p className="text-muted font-weight-lighter">
+                        In addition, We respects your desire for privacy.
+                        Personal data collected from this program will not be
+                        sold, given or shared with organizations external to our
+                        Company. We will use this data for communications with
+                        you to clarify issues regarding the report you submitted
+                        and/or status of that report. The issues that you report
+                        may be made publicly available, however your personal
+                        data will be kept confidential. If you are not
+                        comfortable with the above conditions, please do not
+                        press the Submit button.
+                      </p>
+                      <div class="custom-control custom-checkbox">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="acceptReport"
+                          // value={setAcceptCheck(!acceptCheck)}
+                        />
+                        <label
+                          class="custom-control-label font-italic font-weight-normal text-secondary"
+                          for="acceptReport"
+                        >
+                          Check here to indicate that you have read and agree to
+                          the terms of our Service
+                        </label>
+                      </div>
                     </div>
-                  </div>
-                  <div class="row m-5">
-                    <div class="col-xl-3"></div>
-                    <div class="col-xl-6">
-                      {reportError ? (
-                        <label
-                          className="alert alert-danger p-0 d-flex justify-content-center"
-                          role="alert"
-                        >
-                          {reportError}{" "}
-                        </label>
-                      ) : null}
-                      {reportSuccess ? (
-                        <label
-                          className="alert alert-success p-0 d-flex justify-content-center"
-                          role="alert"
-                        >
-                          {reportSuccess}
-                        </label>
-                      ) : null}
-                      {/* <span onChange={this.onChange}>
+                    <div class="row m-5">
+                      <div class="col-xl-3"></div>
+                      <div class="col-xl-6">
+                        {reportError ? (
+                          <label
+                            className="alert alert-danger p-0 d-flex justify-content-center"
+                            role="alert"
+                          >
+                            {reportError}{" "}
+                          </label>
+                        ) : null}
+                        {reportSuccess ? (
+                          <label
+                            className="alert alert-success p-0 d-flex justify-content-center"
+                            role="alert"
+                          >
+                            {reportSuccess}
+                          </label>
+                        ) : null}
+                        {/* <span onChange={this.onChange}>
                         {success && (
                           <label
                             className="alert alert-success p-0 d-flex justify-content-center"
@@ -913,26 +918,29 @@ class CreateBugDetails extends React.Component {
                           </label>
                         )}
                       </span> */}
-                      <button
-                        type="button"
-                        className="btn btn-danger btn-lg btn-block"
-                        name="submit"
-                        onClick={this.onClickCreateBugReport}
-                        // disabled={acceptCheck}
-                      >
-                        SUBMIT REPORT
-                      </button>
+                        <button
+                          type="button"
+                          className="btn btn-danger btn-lg btn-block"
+                          name="submit"
+                          onClick={this.onClickCreateBugReport}
+                          // disabled={acceptCheck}
+                        >
+                          SUBMIT REPORT
+                        </button>
+                      </div>
+                      <div class="col-xl-3"></div>
                     </div>
-                    <div class="col-xl-3"></div>
                   </div>
+                  {/* End Bug input details */}
                 </div>
-                {/* End Bug input details */}
               </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return <Login />;
+    }
   }
 }
 

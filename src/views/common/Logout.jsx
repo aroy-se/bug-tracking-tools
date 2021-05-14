@@ -48,6 +48,8 @@ class Logout extends React.Component {
     console.log("Inside logout render Token: " + token);
     if (!token) {
       setInStorage("btt_current_user", { user: "" });
+      setInStorage("btt_current_user_role", { userRole: "" });
+      setInStorage("btt_local_storage", { token: "" });
       return <Login />;
       // return <Home />;
     }

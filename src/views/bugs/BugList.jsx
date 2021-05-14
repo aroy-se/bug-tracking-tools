@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as Constants from "../../utility/Constants";
+import { getFromStorage } from "../../utility/storage";
+import Login from "../common/Login";
 
 class BugList extends Component {
   constructor(props) {
@@ -109,73 +111,78 @@ class BugList extends Component {
   }
 
   render() {
-    return (
-      <div className="container-fluid mt-5 mb-3">
-        <div className="row">
-          <div className="col-xl-12 mb-3">
-            <div class="card">
-              <div class="card-header ">
-                <div className="form-inline d-flex justify-content-between">
-                  <i class="fa fa-bug text-danger" aria-hidden="true">
-                    <span className="lead text-danger"> Bug List</span>
-                  </i>
-                </div>
-              </div>
-              <div class="card-body">
-                {this.state.bugDetails.map((bug, index) => (
-                  <div className="list-group p-1" key={index}>
-                    <Link
-                      class="list-group-item list-group-item-action flex-column align-items-start"
-                      to={{
-                        pathname: `/fetchBugDetailsById`,
-                        // pathname: `/updateBugDetails`,
-                        state: {
-                          bugId: bug.bugId,
-                        },
-                      }}
-                    >
-                      <span class="mb-1 font-weight-normal text-info">
-                        {bug.issueType === "Bug" ? (
-                          <span className="badge badge-light text-danger">
-                            {" "}
-                            Bug ID #{bug.bugId}
-                          </span>
-                        ) : (
-                          <span className="badge badge-light text-primary">
-                            {" "}
-                            Bug ID #{bug.bugId}
-                          </span>
-                        )}
-                      </span>
-                      <div class="d-flex w-100 justify-content-between">
-                        <span class="mb-1 font-weight-light text-secondary">
-                          <span className="badge badge-light text-secondary">
-                            Bug Title:
-                          </span>{" "}
-                          {bug.bugTitle}
-                        </span>
-                        <small class="text-secondary font-weight-light">
-                          <span className="badge badge-pill badge-light">
-                            Created On:{" "}
-                          </span>
-                          <span className="font-weight-lighter text-secondary">
-                            {bug.createdTime}
-                          </span>
-                        </small>
-                        {/* <small>{bug.bugDesc}</small> */}
-                      </div>
-                    </Link>
+    const btt_local_storage_token = getFromStorage("btt_local_storage");
+    if (btt_local_storage_token && btt_local_storage_token.token) {
+      return (
+        <div className="container-fluid mt-5 mb-3">
+          <div className="row">
+            <div className="col-xl-12 mb-3">
+              <div class="card">
+                <div class="card-header ">
+                  <div className="form-inline d-flex justify-content-between">
+                    <i class="fa fa-bug text-danger" aria-hidden="true">
+                      <span className="lead text-danger"> Bug List</span>
+                    </i>
                   </div>
-                ))}
-              </div>
-              {/* Start-Footer */}
+                </div>
+                <div class="card-body">
+                  {this.state.bugDetails.map((bug, index) => (
+                    <div className="list-group p-1" key={index}>
+                      <Link
+                        class="list-group-item list-group-item-action flex-column align-items-start"
+                        to={{
+                          pathname: `/fetchBugDetailsById`,
+                          // pathname: `/updateBugDetails`,
+                          state: {
+                            bugId: bug.bugId,
+                          },
+                        }}
+                      >
+                        <span class="mb-1 font-weight-normal text-info">
+                          {bug.issueType === "Bug" ? (
+                            <span className="badge badge-light text-danger">
+                              {" "}
+                              Bug ID #{bug.bugId}
+                            </span>
+                          ) : (
+                            <span className="badge badge-light text-primary">
+                              {" "}
+                              Bug ID #{bug.bugId}
+                            </span>
+                          )}
+                        </span>
+                        <div class="d-flex w-100 justify-content-between">
+                          <span class="mb-1 font-weight-light text-secondary">
+                            <span className="badge badge-light text-secondary">
+                              Bug Title:
+                            </span>{" "}
+                            {bug.bugTitle}
+                          </span>
+                          <small class="text-secondary font-weight-light">
+                            <span className="badge badge-pill badge-light">
+                              Created On:{" "}
+                            </span>
+                            <span className="font-weight-lighter text-secondary">
+                              {bug.createdTime}
+                            </span>
+                          </small>
+                          {/* <small>{bug.bugDesc}</small> */}
+                        </div>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+                {/* Start-Footer */}
 
-              {/* End footer */}
+                {/* End footer */}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return <Login />;
+    }
   }
 }
 

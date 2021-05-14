@@ -157,11 +157,11 @@ class ViewUserDetails extends React.Component {
                       <th>Role</th>
                       <th>Email</th>
                       <th>Phone</th>
-                      <th>Address-1</th>
-                      <th>Address-2</th>
-                      <th>City</th>
-                      <th>State</th>
-                      <th>Zip</th>
+                      {/* <th>Address-1</th> */}
+                      {/* <th>Address-2</th> */}
+                      {/* <th>City</th> */}
+                      {/* <th>State</th> */}
+                      {/* <th>Zip</th> */}
                       {/* <th>Photo</th> */}
                     </tr>
                   </thead>
@@ -175,11 +175,11 @@ class ViewUserDetails extends React.Component {
                         <td>{user.userRole}</td>
                         <td>{user.email}</td>
                         <td>{user.mobile}</td>
-                        <td>{user.address1}</td>
-                        <td>{user.address2}</td>
-                        <td>{user.city}</td>
-                        <td>{user.state}</td>
-                        <td>{user.zip}</td>
+                        {/* <td>{user.address1}</td> */}
+                        {/* <td>{user.address2}</td> */}
+                        {/* <td>{user.city}</td> */}
+                        {/* <td>{user.state}</td> */}
+                        {/* <td>{user.zip}</td> */}
                         {/* <td>{user.photo}</td> */}
                       </tr>
                     ))}
