@@ -25,6 +25,8 @@ class Registration extends React.Component {
       photo: "",
       mobile: "",
       userDetails: [],
+
+      acceptCheckbox: true,
     };
     // this.onChangeUserName = this.onChangeUserName.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -41,6 +43,12 @@ class Registration extends React.Component {
     this.onChangeMobile = this.onChangeMobile.bind(this);
 
     this.onClickRegistration = this.onClickRegistration.bind(this);
+    this.onChangeAcceptCheckbox = this.onChangeAcceptCheckbox.bind(this);
+  }
+  onChangeAcceptCheckbox(event) {
+    this.setState({
+      acceptCheckbox: !this.state.acceptCheckbox,
+    });
   }
   // onChangeUserName(event) {
   //   this.setState({
@@ -561,6 +569,43 @@ class Registration extends React.Component {
                       </table>
                     </div>
                   </div>
+                  <div className="row">
+                    <div className="col-xl-12">
+                      <div className="mb-5">
+                        <p className="text-muted font-weight-lighter">
+                          <small>
+                            In addition, We respects your desire for privacy.
+                            Personal data collected from this program will not
+                            be sold, given or shared with organizations external
+                            to our Company. We will use this data for
+                            communications with you to clarify issues regarding
+                            the report you submitted and/or status of that
+                            report. The issues that you report may be made
+                            publicly available, however your personal data will
+                            be kept confidential. If you are not comfortable
+                            with the above conditions, please do not press the
+                            Submit button.
+                          </small>
+                        </p>
+                        <div class="custom-control custom-checkbox">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="acceptCheckbox"
+                            value={this.state.acceptCheckbox}
+                            onChange={this.onChangeAcceptCheckbox}
+                          />
+                          <label
+                            class="custom-control-label font-italic font-weight-normal text-secondary"
+                            for="acceptCheckbox"
+                          >
+                            Check here to indicate that you have read and agree
+                            to the terms of our Service
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   {/* End of reg input details */}
                   <div class="row mb-4">
                     <div class="col-xl-3"></div>
@@ -590,6 +635,7 @@ class Registration extends React.Component {
                         className="btn btn-danger btn-lg btn-block shadow"
                         name="submit"
                         value="REGISTER"
+                        disabled={this.state.acceptCheckbox}
                         onClick={this.onClickRegistration}
                       >
                         REGISTER

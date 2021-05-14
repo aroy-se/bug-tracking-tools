@@ -34,6 +34,8 @@ class CreateBugDetails extends React.Component {
       submitterCompany: "",
 
       componentDetails: [],
+
+      acceptCheckbox: true,
     };
     this.onChangeIssueType = this.onChangeIssueType.bind(this);
     this.onChangeComponent = this.onChangeComponent.bind(this);
@@ -57,6 +59,13 @@ class CreateBugDetails extends React.Component {
 
     this.onClickCreateBugReport = this.onClickCreateBugReport.bind(this);
     this.onClickFetchComponents = this.onClickFetchComponents.bind(this);
+
+    this.onChangeAcceptCheckbox = this.onChangeAcceptCheckbox.bind(this);
+  }
+  onChangeAcceptCheckbox(event) {
+    this.setState({
+      acceptCheckbox: !this.state.acceptCheckbox,
+    });
   }
   onChangeIssueType(event) {
     this.setState({
@@ -881,35 +890,32 @@ class CreateBugDetails extends React.Component {
                         </div>
                       </div>
                     </div>
-                    {/* <i class="fa fa-info-circle" aria-hidden="true"> */}
-                    {/* <span className="terms-info"> */}
-                    {/* Please accept if you agree to our{" "} */}
-                    {/* <a href="#!">Terms of Service.</a> */}
-                    {/* </span> */}
-                    {/* </i> */}
                     <div className="mt-3">
                       <p className="text-muted font-weight-lighter">
-                        In addition, We respects your desire for privacy.
-                        Personal data collected from this program will not be
-                        sold, given or shared with organizations external to our
-                        Company. We will use this data for communications with
-                        you to clarify issues regarding the report you submitted
-                        and/or status of that report. The issues that you report
-                        may be made publicly available, however your personal
-                        data will be kept confidential. If you are not
-                        comfortable with the above conditions, please do not
-                        press the Submit button.
+                        <small>
+                          In addition, We respects your desire for privacy.
+                          Personal data collected from this program will not be
+                          sold, given or shared with organizations external to
+                          our Company. We will use this data for communications
+                          with you to clarify issues regarding the report you
+                          submitted and/or status of that report. The issues
+                          that you report may be made publicly available,
+                          however your personal data will be kept confidential.
+                          If you are not comfortable with the above conditions,
+                          please do not press the Submit button.
+                        </small>
                       </p>
                       <div class="custom-control custom-checkbox">
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id="acceptReport"
-                          // value={setAcceptCheck(!acceptCheck)}
+                          id="acceptCheckbox"
+                          value={this.state.acceptCheckbox}
+                          onChange={this.onChangeAcceptCheckbox}
                         />
                         <label
                           class="custom-control-label font-italic font-weight-normal text-secondary"
-                          for="acceptReport"
+                          for="acceptCheckbox"
                         >
                           Check here to indicate that you have read and agree to
                           the terms of our Service
@@ -949,8 +955,8 @@ class CreateBugDetails extends React.Component {
                           type="button"
                           className="btn btn-danger btn-lg btn-block"
                           name="submit"
+                          disabled={this.state.acceptCheckbox}
                           onClick={this.onClickCreateBugReport}
-                          // disabled={acceptCheck}
                         >
                           SUBMIT REPORT
                         </button>
