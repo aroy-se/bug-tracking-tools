@@ -61,13 +61,15 @@ const Home = () => {
                   </i>
                 </small>
               </p>
-              <footer class="blockquote-footer float-right">
+              {/* <footer class="blockquote-footer float-right"> */}
+              <marquee behavior="scroll" direction="left" scrollamount="2">
                 <small class="text-muted">
                   Upcoming release{" "}
                   <span className="text-danger">BTT-v2021.06</span> will be
                   released on <span className="text-danger">14-May-2021</span>
                 </small>
-              </footer>
+              </marquee>
+              {/* </footer> */}
             </div>
           </div>
         </div>

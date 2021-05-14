@@ -126,7 +126,7 @@ class Login extends Component {
                     className="login-username-input mb-3 mt-3"
                     id="userName"
                     type="text"
-                    placeholder="Provide registered Email-ID"
+                    placeholder="Registered Email-ID"
                     value={email}
                     onChange={this.onChangeEmail}
                     required

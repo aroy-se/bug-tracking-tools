@@ -127,7 +127,7 @@ class Header extends Component {
                 </li>
 
                 <li className="nav-item">
-                  {/* Dropdownlist */}
+                  {/* Dropdown list */}
                   <div class="btn-group">
                     <button
                       type="button"
@@ -143,7 +143,7 @@ class Header extends Component {
                             {getFromStorage("btt_current_user").user}
                           </i>
                         ) : this.state.userRole === "Project Manager" ? (
-                          <i class="fas fa-user-secret text-secondary">
+                          <i class="fas fa-user-secret text-info">
                             {" "}
                             {getFromStorage("btt_current_user").user}
                           </i>
@@ -154,7 +154,10 @@ class Header extends Component {
                           </i>
                         )
                       ) : (
-                        <i class="fas fa-user-slash"> Anonymous User</i>
+                        <span class="fas fa-user-slash text-secondary">
+                          {" "}
+                          Anonymous User
+                        </span>
                       )}
                     </button>
                     <button
@@ -177,25 +180,29 @@ class Header extends Component {
                           User Profile
                         </i>
                       </Link>
-                      <Link
-                        to="/login"
-                        className="text-secondary dropdown-item"
-                        onClick={this.onClickLogin}
-                      >
-                        <i className="fas fa-sign-in-alt text-secondary">
-                          {" "}
-                          Login
-                        </i>
-                      </Link>
-                      <Link
-                        to="/logout"
-                        className="text-secondary dropdown-item"
-                      >
-                        <i className="fas fa-sign-out-alt text-secondary">
-                          {" "}
-                          Logout
-                        </i>
-                      </Link>
+                      {getFromStorage("btt_local_storage") &&
+                      getFromStorage("btt_local_storage").token === "" ? (
+                        <Link
+                          to="/login"
+                          className="text-secondary dropdown-item"
+                          onClick={this.onClickLogin}
+                        >
+                          <i className="fas fa-sign-in-alt text-secondary">
+                            {" "}
+                            Login
+                          </i>
+                        </Link>
+                      ) : (
+                        <Link
+                          to="/logout"
+                          className="text-secondary dropdown-item"
+                        >
+                          <i className="fas fa-sign-out-alt text-secondary">
+                            {" "}
+                            Logout
+                          </i>
+                        </Link>
+                      )}
 
                       {
                         // Show the dashboard panel if the loggedin member is not a User
