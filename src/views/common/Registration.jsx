@@ -226,7 +226,10 @@ class Registration extends React.Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6>First Name</h6>
+                                <h6>
+                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  First Name
+                                </h6>
                                 <input
                                   type="text"
                                   className="user-first-name shadow-sm form-control"
@@ -261,7 +264,10 @@ class Registration extends React.Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6>Email ID</h6>
+                                <h6>
+                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  Email ID
+                                </h6>
                                 <input
                                   type="text"
                                   className="user-email shadow-sm form-control"
@@ -278,7 +284,10 @@ class Registration extends React.Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6>Password</h6>
+                                <h6>
+                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  Password
+                                </h6>
                                 <input
                                   type="password"
                                   className="user-password shadow-sm form-control"
@@ -295,7 +304,10 @@ class Registration extends React.Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6>Address1</h6>
+                                <h6>
+                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  Address1
+                                </h6>
                                 <input
                                   type="text"
                                   className="user-address1 shadow-sm form-control"
@@ -312,7 +324,10 @@ class Registration extends React.Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6>City</h6>
+                                <h6>
+                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  City
+                                </h6>
                                 <input
                                   type="text"
                                   className="user-city shadow-sm form-control"
@@ -329,7 +344,10 @@ class Registration extends React.Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6>Zip Code</h6>
+                                <h6>
+                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  Zip Code
+                                </h6>
                                 <input
                                   type="text"
                                   className="user-zip shadow-sm form-control"
@@ -371,7 +389,10 @@ class Registration extends React.Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6>Last Name</h6>
+                                <h6>
+                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  Last Name
+                                </h6>
                                 <input
                                   type="text"
                                   className="user-last-name shadow-sm form-control"
@@ -389,7 +410,10 @@ class Registration extends React.Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6>Phone Number</h6>
+                                <h6>
+                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  Phone Number
+                                </h6>
                                 <input
                                   type="text"
                                   className="user-mobile shadow-sm form-control"
@@ -406,7 +430,10 @@ class Registration extends React.Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6>Confirm Password</h6>
+                                <h6>
+                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  Confirm Password
+                                </h6>
                                 <input
                                   type="password"
                                   className="user-password shadow-sm form-control"
@@ -422,7 +449,10 @@ class Registration extends React.Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6>Address2</h6>
+                                <h6>
+                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  Address2
+                                </h6>
                                 <input
                                   type="text"
                                   className="user-address2 shadow-sm form-control"
@@ -439,7 +469,10 @@ class Registration extends React.Component {
                           <tr>
                             <td>
                               <div class="form-group">
-                                <h6>State</h6>
+                                <h6>
+                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  State
+                                </h6>
                                 <select
                                   name="state"
                                   className="custom-select user-state shadow-sm form-control"

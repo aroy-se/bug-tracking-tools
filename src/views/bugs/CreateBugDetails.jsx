@@ -451,7 +451,10 @@ class CreateBugDetails extends React.Component {
                             {/* bug-type */}
                             <tr>
                               <td>
-                                <h6>Issue Type</h6>
+                                <h6>
+                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  Issue Type
+                                </h6>
                               </td>
                               <td>
                                 <input
@@ -478,7 +481,10 @@ class CreateBugDetails extends React.Component {
                             {/* - Affected Component: Component n Sub-component */}
                             <tr>
                               <td>
-                                <h6>Component</h6>
+                                <h6>
+                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  Component
+                                </h6>
                               </td>
                               <td>
                                 <select
@@ -507,7 +513,10 @@ class CreateBugDetails extends React.Component {
                             {/* - Reporting version (On issue version issue is occurring) */}
                             <tr>
                               <td>
-                                <h6>Reporting Version</h6>
+                                <h6>
+                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  Reporting Version
+                                </h6>
                               </td>
                               <td>
                                 <select
@@ -560,7 +569,10 @@ class CreateBugDetails extends React.Component {
                             {/* Bug-sub-type */}
                             <tr>
                               <td>
-                                <h6>Issue Sub-Type</h6>
+                                <h6>
+                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  Issue Sub-Type
+                                </h6>
                               </td>
                               <td>
                                 <input
@@ -663,7 +675,10 @@ class CreateBugDetails extends React.Component {
                             <tr>
                               <td>
                                 <div class="form-group">
-                                  <h6>Bug Title</h6>
+                                  <h6>
+                                    <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                    Bug Title
+                                  </h6>
                                   <input
                                     type="text"
                                     class="form-control"
@@ -679,7 +694,10 @@ class CreateBugDetails extends React.Component {
                             <tr>
                               <td>
                                 <div class="form-group">
-                                  <h6>Bug Description</h6>
+                                  <h6>
+                                    <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                    Bug Description
+                                  </h6>
                                   <textarea
                                     type="textarea"
                                     class="form-control"
@@ -812,7 +830,10 @@ class CreateBugDetails extends React.Component {
                             <div class="row">
                               <div class="col-xl-4">
                                 <div class="form-group mb-1">
-                                  <label>Submitter Name</label>
+                                  <label>
+                                    <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                    Submitter Name
+                                  </label>
                                   <input
                                     type="text"
                                     class="form-control"
@@ -825,7 +846,10 @@ class CreateBugDetails extends React.Component {
                               </div>
                               <div class="col-xl-4">
                                 <div class="form-group mb-1">
-                                  <label>Submitter Email Id</label>
+                                  <label>
+                                    <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                    Submitter Email Id
+                                  </label>
                                   <input
                                     type="text"
                                     class="form-control"
@@ -838,7 +862,10 @@ class CreateBugDetails extends React.Component {
                               </div>
                               <div class="col-xl-4">
                                 <div class="form-group mb-1">
-                                  <label>Company Name</label>
+                                  <label>
+                                    <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                    Company Name
+                                  </label>
                                   <input
                                     type="text"
                                     class="form-control"
