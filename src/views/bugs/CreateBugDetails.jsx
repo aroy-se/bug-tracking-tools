@@ -257,144 +257,6 @@ class CreateBugDetails extends React.Component {
       });
   }
 
-  // // To show status message after successful insertion
-  // const [success, setSuccess] = useState(false);
-  // const [id, setId] = useState("");
-  // const [componentDetails, setComponentDetails] = useState([]);
-  // // const [acceptCheck, setAcceptCheck] = useState(false);
-
-  // const initialState = {
-  //   issueType: "Bug",
-  //   component: "",
-  //   reportVersion: "",
-  //   os: "",
-  //   issueSubType: "Others",
-  //   severity: "",
-  //   regressionVersion: "",
-  //   browser: "",
-
-  //   bugTitle: "",
-  //   bugDesc: "",
-  //   reproducibleSteps: "",
-  //   expectedOutput: "",
-  //   actualOutput: "",
-  //   sourceCode: "",
-  //   attachment: "",
-  //   workaround: "",
-
-  //   submitterName: "",
-  //   submitterEmail: "",
-  //   submitterCompany: "",
-
-  //   assignee: "Unknown",
-  //   eta: "NA",
-  //   fixVersion: "NA",
-  //   resolution: "Unresolved",
-  //   state: "New",
-  //   priority: "Undecided",
-  //   // duplicateBugIds: [""],
-  // };
-  // const [input, setInput] = useState(initialState);
-  // // Handle function
-  // function this.onChange(event) {
-  //   const { name, value } = event.target;
-  //   setInput((prevInput) => {
-  //     return {
-  //       ...prevInput,
-  //       [name]: value,
-  //     };
-  //   });
-  //   // reset the status label
-  //   setSuccess(false);
-  // }
-  // function handleReportBug(event) {
-  //   event.preventDefault();
-  //   const newBug = {
-  //     bugId: Math.floor(Math.random() * (999999 - 100) + 100), // Just demo purpose
-  //     createdTime: Date().toLocaleString(),
-  //     issueType: issueType,
-  //     component: component,
-  //     reportVersion: reportVersion,
-  //     os: os,
-  //     issueSubType: issueSubType,
-  //     severity: severity,
-  //     regressionVersion: regressionVersion,
-  //     browser: browser,
-
-  //     bugTitle: bugTitle,
-  //     bugDesc: bugDesc,
-  //     reproducibleSteps: reproducibleSteps,
-  //     expectedOutput: expectedOutput,
-  //     actualOutput: actualOutput,
-  //     sourceCode: sourceCode,
-  //     attachment: attachment,
-  //     workaround: workaround,
-
-  //     assignee: "Unknown",
-  //     eta: "NA",
-  //     fixVersion: "NA",
-  //     resolution: "Unresolved",
-  //     state: "New",
-  //     priority: "Undecided",
-  //     // duplicateBugIds: [""],
-
-  //     submitterName: submitterName,
-  //     submitterEmail: submitterEmail,
-  //     submitterCompany: submitterCompany,
-  //   };
-  //   setId(newBug.bugId);
-  //   saveBugDetails(newBug);
-  //   // resetting the form fields after successful insertion
-  //   setInput((prevState) => {
-  //     return {
-  //       ...prevState,
-  //       issueType: "Bug",
-  //       component: "",
-  //       reportVersion: "",
-  //       os: "",
-  //       issueSubType: "Others",
-  //       severity: "",
-  //       regressionVersion: "",
-  //       browser: "",
-
-  //       bugTitle: "",
-  //       bugDesc: "",
-  //       reproducibleSteps: "",
-  //       expectedOutput: "",
-  //       actualOutput: "",
-  //       sourceCode: "",
-  //       attachment: "",
-  //       workaround: "",
-
-  //       submitterName: "",
-  //       submitterEmail: "",
-  //       submitterCompany: "",
-
-  //       assignee: "Unknown",
-  //       eta: "NA",
-  //       fixVersion: "NA",
-  //       resolution: "Unresolved",
-  //       state: "New",
-  //       priority: "Undecided",
-  //       // duplicateBugIds: [""],
-  //     };
-  //   });
-  // }
-  // var saveBugDetails = (bugData) => {
-  //   const parameters = {
-  //     method: "POST",
-  //     headers: {
-  //       "Access-Control-Allow-Origin": "*",
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(bugData),
-  //   };
-  //   fetch(Constants.BUG_URL, parameters)
-  //     .then((response) => response.json())
-  //     .then((bugData) => {
-  //       setSuccess(true);
-  //     });
-  // };
   // To fetch all the components from the database
   onClickFetchComponents(event) {
     // event.preventDefault();
@@ -405,7 +267,7 @@ class CreateBugDetails extends React.Component {
         this.setState({ componentDetails: data });
       })
       .catch(() => {
-        alert(`A problem occures while fetching all the component names`);
+        alert(`A problem occurred while fetching all the component names`);
       });
   }
   render() {
@@ -461,7 +323,9 @@ class CreateBugDetails extends React.Component {
                             <tr>
                               <td>
                                 <h6>
-                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
                                   Issue Type
                                 </h6>
                               </td>
@@ -491,7 +355,9 @@ class CreateBugDetails extends React.Component {
                             <tr>
                               <td>
                                 <h6>
-                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
                                   Component
                                 </h6>
                               </td>
@@ -523,7 +389,9 @@ class CreateBugDetails extends React.Component {
                             <tr>
                               <td>
                                 <h6>
-                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
                                   Reporting Version
                                 </h6>
                               </td>
@@ -579,7 +447,9 @@ class CreateBugDetails extends React.Component {
                             <tr>
                               <td>
                                 <h6>
-                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
                                   Issue Sub-Type
                                 </h6>
                               </td>
@@ -685,7 +555,9 @@ class CreateBugDetails extends React.Component {
                               <td>
                                 <div class="form-group">
                                   <h6>
-                                    <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                    <i class="lead font-weight-bold text-danger">
+                                      *
+                                    </i>{" "}
                                     Bug Title
                                   </h6>
                                   <input
@@ -704,7 +576,9 @@ class CreateBugDetails extends React.Component {
                               <td>
                                 <div class="form-group">
                                   <h6>
-                                    <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                    <i class="lead font-weight-bold text-danger">
+                                      *
+                                    </i>{" "}
                                     Bug Description
                                   </h6>
                                   <textarea
@@ -840,7 +714,9 @@ class CreateBugDetails extends React.Component {
                               <div class="col-xl-4">
                                 <div class="form-group mb-1">
                                   <label>
-                                    <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                    <i class="lead font-weight-bold text-danger">
+                                      *
+                                    </i>{" "}
                                     Submitter Name
                                   </label>
                                   <input
@@ -856,7 +732,9 @@ class CreateBugDetails extends React.Component {
                               <div class="col-xl-4">
                                 <div class="form-group mb-1">
                                   <label>
-                                    <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                    <i class="lead font-weight-bold text-danger">
+                                      *
+                                    </i>{" "}
                                     Submitter Email Id
                                   </label>
                                   <input
@@ -872,7 +750,9 @@ class CreateBugDetails extends React.Component {
                               <div class="col-xl-4">
                                 <div class="form-group mb-1">
                                   <label>
-                                    <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                    <i class="lead font-weight-bold text-danger">
+                                      *
+                                    </i>{" "}
                                     Company Name
                                   </label>
                                   <input

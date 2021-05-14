@@ -235,7 +235,9 @@ class Registration extends React.Component {
                             <td>
                               <div class="form-group">
                                 <h6>
-                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
                                   First Name
                                 </h6>
                                 <input
@@ -273,7 +275,9 @@ class Registration extends React.Component {
                             <td>
                               <div class="form-group">
                                 <h6>
-                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
                                   Email ID
                                 </h6>
                                 <input
@@ -293,7 +297,9 @@ class Registration extends React.Component {
                             <td>
                               <div class="form-group">
                                 <h6>
-                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
                                   Password
                                 </h6>
                                 <input
@@ -313,7 +319,9 @@ class Registration extends React.Component {
                             <td>
                               <div class="form-group">
                                 <h6>
-                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
                                   Address1
                                 </h6>
                                 <input
@@ -333,7 +341,9 @@ class Registration extends React.Component {
                             <td>
                               <div class="form-group">
                                 <h6>
-                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
                                   City
                                 </h6>
                                 <input
@@ -353,7 +363,9 @@ class Registration extends React.Component {
                             <td>
                               <div class="form-group">
                                 <h6>
-                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
                                   Zip Code
                                 </h6>
                                 <input
@@ -398,7 +410,9 @@ class Registration extends React.Component {
                             <td>
                               <div class="form-group">
                                 <h6>
-                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
                                   Last Name
                                 </h6>
                                 <input
@@ -419,7 +433,9 @@ class Registration extends React.Component {
                             <td>
                               <div class="form-group">
                                 <h6>
-                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
                                   Phone Number
                                 </h6>
                                 <input
@@ -439,7 +455,9 @@ class Registration extends React.Component {
                             <td>
                               <div class="form-group">
                                 <h6>
-                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
                                   Confirm Password
                                 </h6>
                                 <input
@@ -458,7 +476,9 @@ class Registration extends React.Component {
                             <td>
                               <div class="form-group">
                                 <h6>
-                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
                                   Address2
                                 </h6>
                                 <input
@@ -478,7 +498,9 @@ class Registration extends React.Component {
                             <td>
                               <div class="form-group">
                                 <h6>
-                                  <i class="fas fa-asterisk text-danger fa-xs"></i>{" "}
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
                                   State
                                 </h6>
                                 <select
