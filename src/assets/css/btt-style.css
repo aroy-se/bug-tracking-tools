@@ -337,3 +337,7 @@
 .table-wrapper-scroll-y {
   display: block;
 }
+.bug-stat-table-responsive {
+  position: relative;
+  overflow: auto;
+}

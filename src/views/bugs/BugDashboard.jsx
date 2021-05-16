@@ -4,6 +4,7 @@ import $ from "jquery";
 import CreateBugDetails from "./CreateBugDetails";
 // import BugList from "./BugList";
 import FetchBugDetails from "./FetchBugDetails";
+import BugDetailsStat from "./BugDetailsStat";
 // import FetchBugDetailsById from "./FetchBugDetailsById";
 // import FetchBugDetailsByName from "./FetchBugDetailsByName";
 import UpdateBugDetails from "./UpdateBugDetails";
@@ -41,6 +42,19 @@ class BugDashboard extends React.Component {
                 aria-selected="true"
               >
                 View Bugs
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-danger"
+                id="stat-tab"
+                data-toggle="tab"
+                href="#stat"
+                role="tab"
+                aria-controls="stat"
+                aria-selected="true"
+              >
+                Bug Stat
               </a>
             </li>
             <li class="nav-item">
@@ -92,6 +106,16 @@ class BugDashboard extends React.Component {
             >
               <div class="card-body bg-white border border-top-0 shadow pl-0 pr-0">
                 <FetchBugDetails />
+              </div>
+            </div>
+            <div
+              class="tab-pane fade show"
+              id="stat"
+              role="tabpanel"
+              aria-labelledby="stat-tab"
+            >
+              <div class="card-body bg-white border border-top-0 shadow pl-0 pr-0">
+                <BugDetailsStat />
               </div>
             </div>
             <div
