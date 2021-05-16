@@ -21,7 +21,7 @@ const FetchBugDetails = () => {
     fetch(Constants.BUG_URL)
       .then((response) => response.json())
       .then((data) => {
-        // setBugDetails(data);
+        setBugDetails(data);
         // console.log("Inner data:    " + data);
         // data.forEach((userData) => {
         setBugDetails((prev) => [...prev, data]);
@@ -41,8 +41,8 @@ const FetchBugDetails = () => {
     });
   }, []);
 
-  const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => bugDetails, []);
+  // const columns = useMemo(() => COLUMNS, []);
+  // const data = useMemo(() => bugDetails, []);
   const defaultColumn = useMemo(() => {
     return {
       Filter: ColumnFilter,
@@ -50,8 +50,8 @@ const FetchBugDetails = () => {
   }, []);
   const tableInstance = useTable(
     {
-      columns,
-      data,
+      columns: COLUMNS,
+      data: bugDetails,
       defaultColumn,
       initialState: { pageIndex: 0 },
     },

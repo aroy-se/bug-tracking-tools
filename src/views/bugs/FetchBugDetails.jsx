@@ -47,8 +47,8 @@ class FetchBugDetails extends Component {
         <div className="row">
           <div className="col-xl-12">
             <div className="table-wrapper-scroll-y bug-stat-table-responsive">
-              <table className="table table-sm table-bordered table-hover font-weight-lighter text-center small">
-                <thead className="thead-light">
+              <table className="table table-sm table-bordered table-hover font-weight-lighter small">
+                <thead className="thead-light text-center">
                   <tr>
                     <th>BugId</th>
                     <th>Created Time</th>
