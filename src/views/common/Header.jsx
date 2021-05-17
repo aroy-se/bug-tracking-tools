@@ -24,6 +24,7 @@ class Header extends Component {
         .then((response) => response.json())
         .then((data) => {
           // this.onClickLogin();
+          console.log("onClickFetchUserEmail: " + JSON.stringify(data));
           data.map((user) => {
             this.setState({ userRole: user.userRole });
             setInStorage("btt_current_user_role", { userRole: user.userRole });

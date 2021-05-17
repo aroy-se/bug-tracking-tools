@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, Redirect, withRouter } from "react-router-dom";
 import { setInStorage, getFromStorage } from "../../utility/storage";
+import * as Constants from "../../utility/Constants";
 import Home from "./Home";
 
 class Login extends Component {
@@ -52,6 +53,15 @@ class Login extends Component {
         if (json.success) {
           setInStorage("btt_local_storage", { token: json.token });
           setInStorage("btt_current_user", { user: email });
+          fetch(Constants.URL_USER_BY_EXACT_EMAIL + email)
+            .then((response) => response.json())
+            .then((data) => {
+              data.map((user) => {
+                setInStorage("btt_current_user_role", {
+                  userRole: user.userRole,
+                });
+              });
+            });
           this.setState({
             loginError: "",
             loginSuccess: json.message,
@@ -62,6 +72,10 @@ class Login extends Component {
           });
           // store email to send the data to app.js parent
           // this.props.appData.getData(this.state.storeEmail);
+          // console.log(
+          //   "this.props.location.state: " +
+          //     JSON.stringify(this.props.location.pathname)
+          // );
         } else {
           this.setState({
             loginSuccess: "",
@@ -203,11 +217,11 @@ class Login extends Component {
     }
     return (
       // Redirectiong to home page after successful login
-      <Home />
-      // <div>
-      //  <h1>{this.props.redirect}</h1>
-      // </div>
-      // <this.props.redirect />
+      // <Home />
+      // console.log(
+      //   "this.props.redirect:::::::::: " + this.props.location.pathname
+      // ),
+      <Redirect to={this.props.location.pathname} />
     );
   }
 }
