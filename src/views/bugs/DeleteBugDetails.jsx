@@ -110,7 +110,7 @@ const DeleteBugDetails = () => {
                       type="submit"
                       className="btn btn-danger btn-lg btn-block shadow register#"
                       name="submit"
-                      value="DELETE COMPONENT"
+                      value="DELETE BUG"
                       onClick={handleSubmit}
                     />
                   </div>

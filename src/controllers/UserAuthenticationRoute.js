@@ -194,7 +194,7 @@ userAuthRouter.post("/user/login", (req, res, next) => {
       if (users.length != 1) {
         return res.send({
           success: false,
-          message: "Error: Invalid-No user",
+          message: "Error: Invalid user",
         });
       }
       const user = users[0];

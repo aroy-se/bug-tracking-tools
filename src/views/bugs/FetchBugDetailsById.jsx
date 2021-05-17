@@ -1391,11 +1391,9 @@ const FetchBugDetailsById = (props) => {
                                   {Object.keys(viewComments).length > 0
                                     ? viewComments.map((comments, index) =>
                                         // check for local storage(empty or not)
-                                        getFromStorage(
-                                          "btt_current_user_role"
-                                        ) &&
-                                        getFromStorage("btt_current_user_role")
-                                          .userRole ? (
+                                        getFromStorage("btt_local_storage") &&
+                                        getFromStorage("btt_local_storage")
+                                          .token ? (
                                           // Show comemnt if submitter is a user and comments are public
                                           comments.commentType === "public" &&
                                           getFromStorage(
@@ -1479,7 +1477,7 @@ const FetchBugDetailsById = (props) => {
                                             </div>
                                           ) : null
                                         ) : (
-                                          alert("Login required")
+                                          console.log("Login required")
                                         )
                                       )
                                     : "No Comments"}
