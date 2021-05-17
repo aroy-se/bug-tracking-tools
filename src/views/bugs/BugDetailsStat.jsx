@@ -27,7 +27,7 @@ const FetchBugDetails = () => {
         setBugDetails((prev) => [...prev, data]);
         // });
       });
-    console.log("Outer BugDetails:    " + JSON.stringify(bugDetails));
+    // console.log("Outer BugDetails:    " + JSON.stringify(bugDetails));
   }
   function onClickRefresh() {
     fetchBugData();

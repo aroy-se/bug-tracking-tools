@@ -8,8 +8,10 @@ const UpdateUserDetails = () => {
   const [id, setId] = useState("");
   const [input, setInput] = useState({
     userId: "",
-    userName: "",
+    // userName: "",
+    email: "",
     password: "",
+    confirmPassword: "",
     firstName: "",
     lastName: "",
     address1: "",
@@ -18,7 +20,6 @@ const UpdateUserDetails = () => {
     state: "",
     zip: "",
     photo: "",
-    email: "",
     mobile: "",
   });
 
@@ -34,21 +35,31 @@ const UpdateUserDetails = () => {
       };
     });
   }
+  function onChangeConfirmPassword(event) {
+    setInput((prevInput) => {
+      return {
+        ...prevInput,
+        confirmPassword: event.target.value,
+      };
+    });
+  }
   function handleFetchById(event) {
     event.preventDefault();
     if (input.userId === "") {
       alert("User-Id field should not be empty!");
       return;
-    } else if (isNaN(input.userId)) {
-      alert("Only digits are accepted");
-      return;
     }
+    // else if (isNaN(input.userId)) {
+    //   alert("Only digits are accepted");
+    //   return;
+    // }
     fetch(Constants.USER_URL + parseInt(input.userId))
       .then((response) => response.json())
       .then((data) => {
         if (Object.keys(data).length > 0) {
           var user = data;
-          var username = JSON.stringify(user.userName);
+          // var username = JSON.stringify(user.userName);
+          var email = JSON.stringify(user.email);
           var password = JSON.stringify(user.password);
           var firstName = JSON.stringify(user.firstName);
           var lastName = JSON.stringify(user.lastName);
@@ -58,12 +69,13 @@ const UpdateUserDetails = () => {
           var state = JSON.stringify(user.state);
           var zip = JSON.stringify(user.zip);
           // var photo = JSON.stringify(user.photo);
-          var email = JSON.stringify(user.email);
+
           var mobile = JSON.stringify(user.mobile);
           setInput((user) => {
             return {
               ...user,
-              userName: JSON.parse(username),
+              // userName: JSON.parse(username),
+              email: JSON.parse(email),
               password: JSON.parse(password),
               firstName: JSON.parse(firstName),
               lastName: JSON.parse(lastName),
@@ -73,7 +85,6 @@ const UpdateUserDetails = () => {
               state: JSON.parse(state),
               zip: JSON.parse(zip),
               // photo: JSON.parse(photo),
-              email: JSON.parse(email),
               mobile: JSON.parse(mobile),
             };
           });
@@ -85,10 +96,17 @@ const UpdateUserDetails = () => {
   }
   function handleSubmit(event) {
     event.preventDefault();
+    // pwd and confirm pwd are same or not
+    // if (input.password !== input.confirmPassword) {
+    //   alert("Error: Password and Confirm Password must be matched");
+    //   return;
+    // }
     const userUpdateObject = {
       userId: input.userId,
-      userName: input.userName,
-      password: input.password,
+      // userName: input.userName,
+      email: input.email,
+      // password: input.password,
+      // password: input.confirmPassword,
       firstName: input.firstName,
       lastName: input.lastName,
       address1: input.address1,
@@ -97,7 +115,6 @@ const UpdateUserDetails = () => {
       state: input.state,
       zip: input.zip,
       photo: input.photo,
-      email: input.email,
       mobile: input.mobile,
     };
     setId(userUpdateObject.userId);
@@ -108,8 +125,9 @@ const UpdateUserDetails = () => {
       return {
         ...prevState,
         userId: "",
-        userName: "",
+        // userName: "",
         password: "",
+        confirmPassword: "",
         firstName: "",
         lastName: "",
         address1: "",
@@ -225,7 +243,7 @@ const UpdateUserDetails = () => {
                         </td>
                       </tr>
                       {/* Username */}
-                      <tr>
+                      {/* <tr>
                         <td>
                           <div class="form-group  p-0 m-0">
                             <h6>Username</h6>
@@ -239,7 +257,40 @@ const UpdateUserDetails = () => {
                             />
                           </div>
                         </td>
+                      </tr> */}
+                      {/* Email ID */}
+                      <tr>
+                        <td>
+                          <div class="form-group  p-0 m-0">
+                            <h6>Email ID</h6>
+                            <input
+                              type="text"
+                              className="update-email shadow-sm form-control"
+                              name="email"
+                              value={input.email}
+                              autoComplete="off"
+                              onChange={handleChange}
+                            />
+                          </div>
+                        </td>
                       </tr>
+                      {/* Password */}
+                      {/* <tr>
+                        <td>
+                          <div class="form-group  p-0 m-0">
+                            <h6>Password</h6>
+                            <input
+                              type="password"
+                              className="update-password shadow-sm form-control"
+                              autoComplete="off"
+                              name="password"
+                              value={input.password}
+                              onChange={handleChange}
+                              disabled
+                            />
+                          </div>
+                        </td>
+                      </tr> */}
                       {/* Address1 */}
                       <tr>
                         <td>
@@ -289,7 +340,7 @@ const UpdateUserDetails = () => {
                         </td>
                       </tr>
                       {/* Phone Number */}
-                      <tr>
+                      {/* <tr>
                         <td>
                           <div class="form-group  p-0 m-0">
                             <h6>Phone Number</h6>
@@ -303,7 +354,7 @@ const UpdateUserDetails = () => {
                             />
                           </div>
                         </td>
-                      </tr>
+                      </tr> */}
                     </tbody>
                   </table>
                 </div>
@@ -329,22 +380,40 @@ const UpdateUserDetails = () => {
                           </div>
                         </td>
                       </tr>
-                      {/* Password */}
+                      {/* Phone Number */}
                       <tr>
                         <td>
                           <div class="form-group  p-0 m-0">
-                            <h6>Password</h6>
+                            <h6>Phone Number</h6>
                             <input
-                              type="password"
-                              className="update-password shadow-sm form-control"
+                              type="text"
+                              className="update-mobile shadow-sm form-control"
+                              name="mobile"
+                              value={input.mobile}
                               autoComplete="off"
-                              name="password"
-                              value={input.password}
                               onChange={handleChange}
                             />
                           </div>
                         </td>
                       </tr>
+                      {/* Confirm Password */}
+                      {/* <tr>
+                        <td>
+                          <div class="form-group">
+                            <h6>Confirm Password</h6>
+                            <input
+                              type="password"
+                              className="user-password shadow-sm form-control"
+                              required
+                              autoComplete="off"
+                              name="confirmPassword"
+                              value={input.confirmPassword}
+                              onChange={onChangeConfirmPassword}
+                              disabled
+                            />
+                          </div>
+                        </td>
+                      </tr> */}
                       <tr>
                         <td>
                           <div class="form-group  p-0 m-0">
@@ -406,7 +475,7 @@ const UpdateUserDetails = () => {
                         </td>
                       </tr>
                       {/* Email ID */}
-                      <tr>
+                      {/* <tr>
                         <td>
                           <div class="form-group  p-0 m-0">
                             <h6>Email ID</h6>
@@ -420,7 +489,7 @@ const UpdateUserDetails = () => {
                             />
                           </div>
                         </td>
-                      </tr>
+                      </tr> */}
                       {/* User Photo */}
                       <tr>
                         <td>

@@ -82,8 +82,9 @@ userRouter.put("/user/:id", (request, response) => {
   var targetId = { userId: parseInt(request.params.id) };
   var toBeUpdated = {
     $set: {
-      userName: request.body.userName,
-      password: request.body.password,
+      // userName: request.body.userName,
+      // password: request.body.password,
+      email: request.body.email,
       firstName: request.body.firstName,
       lastName: request.body.lastName,
       address1: request.body.address1,
@@ -92,7 +93,6 @@ userRouter.put("/user/:id", (request, response) => {
       state: request.body.state,
       zip: request.body.zip,
       photo: request.body.photo,
-      email: request.body.email,
       mobile: request.body.mobile,
     },
   };
