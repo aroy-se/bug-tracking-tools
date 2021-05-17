@@ -29,8 +29,13 @@ Link: https://github.com/aroy-se/bug-tracking-tools
 
 WIKI
 -----
-Home Wiki: https://github.com/aroy-se/bug-tracking-tools/wiki
-Git wiki: https://github.com/aroy-se/bug-tracking-tools/wiki/Git-Setup-Wiki
-BTT Dev setup wiki: https://github.com/aroy-se/bug-tracking-tools/wiki/BTT-Development-Setup
-Structure wiki: https://github.com/aroy-se/bug-tracking-tools/wiki/Structure-of-Bugs-Tracking-Tools
+Overview: https://github.com/aroy-se/bug-tracking-tools/wiki
+
+Git: https://github.com/aroy-se/bug-tracking-tools/wiki/Git-Setup-Wiki
+
+Structure of BTT: https://github.com/aroy-se/bug-tracking-tools/wiki/Structure-of-Bugs-Tracking-Tools
+
+BTT Dev setup: https://github.com/aroy-se/bug-tracking-tools/wiki/BTT-Development-Setup
+
+
 
