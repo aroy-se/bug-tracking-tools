@@ -10,15 +10,16 @@ import Logout from "./views/common/Logout";
 import Registration from "./views/common/Registration";
 import UserProfile from "./views/users/UserProfile";
 import UserDashboard from "./views/users/UserDashboard";
+import AdminPanel from "./views/users/AdminPanel";
 import BugDashboard from "./views/bugs/BugDashboard";
 import CreateBugDetails from "./views/bugs/CreateBugDetails";
-import NewFeature from "./views/bugs/NewFeature";
 import BugList from "./views/bugs/BugList";
 import FetchBugDetailsById from "./views/bugs/FetchBugDetailsById";
 import UpdateBugDetails from "./views/bugs/UpdateBugDetails";
+import CreateNewFeatureRequest from "./views/new_feature_request/CreateNewFeatureRequest";
+import ViewNewFeatureRequestList from "./views/new_feature_request/ViewNewFeatureRequestList";
 import Faq from "./views/misc/Faq";
 import About from "./views/misc/About";
-import AdminPanel from "./views/users/AdminPanel";
 
 class App extends React.Component {
   constructor(props) {
@@ -57,7 +58,15 @@ class App extends React.Component {
           <Route path="/userDashboard" component={UserDashboard} />
           <Route path="/bugDashboard" component={BugDashboard} />
           <Route path="/createBugDetails" component={CreateBugDetails} />
-          <Route path="/newFeature" component={NewFeature} />
+          <Route
+            path="/createNewFeatureRequest"
+            component={CreateNewFeatureRequest}
+          />
+          <Route
+            path="/viewNewFeatureRequestList"
+            component={ViewNewFeatureRequestList}
+          />
+
           <Route path="/bugList" component={BugList} />
           <Route path="/fetchBugDetailsById" component={FetchBugDetailsById} />
           <Route path="/updateBugDetails" component={UpdateBugDetails} />

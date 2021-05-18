@@ -25,7 +25,7 @@ newFeatureRequestRouter.post("/newFeatureRequest", (request, response) => {
   if (!featureDesc) {
     return response.send({
       success: false,
-      message: "Error: Decription should not be blank",
+      message: "Error: Description should not be blank",
     });
   }
   if (!submitterName) {
@@ -73,21 +73,21 @@ newFeatureRequestRouter.post("/newFeatureRequest", (request, response) => {
 });
 
 /**
- * Fetch ALL Components
+ * Fetch ALL new feature request
  * C[R]UD := [R]EAD => GET(ALL)
  */
-// newFeatureRequestRouter.get("/component", (request, response) => {
-//   NewFeatureRequestModel.find()
-//     .then((data) => {
-//       response.json(data);
-//     })
-//     .catch((err) => {
-//       return response.send({
-//         success: false,
-//         message: `Error: error occurred while fetching all components details.\n ${err}`,
-//       });
-//     });
-// });
+newFeatureRequestRouter.get("/newFeatureRequest", (request, response) => {
+  NewFeatureRequestModel.find()
+    .then((data) => {
+      response.json(data);
+    })
+    .catch((err) => {
+      return response.send({
+        success: false,
+        message: `Error: error occurred while fetching all new feature request details.`,
+      });
+    });
+});
 
 /**
  * Fetch Component by componentid

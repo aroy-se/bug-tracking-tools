@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as Constants from "../../utility/Constants";
-import { getFromStorage } from "../../utility/storage";
-// import Login from "../common/Login";
 
 class BugList extends Component {
   constructor(props) {

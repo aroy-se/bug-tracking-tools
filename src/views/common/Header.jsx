@@ -246,6 +246,26 @@ class Header extends Component {
                         </>
                       ) : // no token
                       null}
+                      {/* PM Only */}
+                      {getFromStorage("btt_local_storage") &&
+                      getFromStorage("btt_local_storage").token !== "" ? (
+                        getFromStorage("btt_current_user_role").userRole ===
+                          Constants.ADMIN ||
+                        getFromStorage("btt_current_user_role").userRole ===
+                          Constants.PROJECT_MANAGER ? (
+                          <>
+                            <Link
+                              to="/viewNewFeatureRequestList"
+                              className="text-secondary dropdown-item"
+                            >
+                              <i class="fas fa-user-cog text-secondary">
+                                {" "}
+                                Feature Dashboard
+                              </i>
+                            </Link>
+                          </>
+                        ) : null
+                      ) : null}
                       {/* Admin panel Only for admin */}
                       {getFromStorage("btt_local_storage") &&
                       getFromStorage("btt_local_storage").token !== "" ? (
@@ -256,13 +276,17 @@ class Header extends Component {
                             <Link
                               to="/adminPanel"
                               className="text-secondary dropdown-item"
-                              // onClick={this.onClickLogin}
                             >
-                              <i class="fas fa-user-cog"> Admin Panel </i>
+                              <i class="fas fa-user-cog text-danger">
+                                {" "}
+                                <span className="text-danger">Admin Panel</span>
+                              </i>
                             </Link>
                           </>
                         ) : null
                       ) : null}
+                      {/* ////////////////////// */}
+
                       <div class="dropdown-divider"></div>
                       <Link to="/registration" className="text-light">
                         <span className="badge badge-primary text-monospace p-2 m-2">

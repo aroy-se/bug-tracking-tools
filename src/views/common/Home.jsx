@@ -66,7 +66,7 @@ const Home = () => {
                 <small class="text-muted">
                   Upcoming release{" "}
                   <span className="text-danger">BTT-v2021.06</span> will be
-                  released on <span className="text-danger">14-May-2021</span>
+                  released on <span className="text-danger">18-May-2021</span>
                 </small>
               </marquee>
               {/* </footer> */}
@@ -140,7 +140,7 @@ const Home = () => {
                     to propose large changes to our Product.
                   </p>
                   <Link
-                    to="/newFeature"
+                    to="/createNewFeatureRequest"
                     class="btn btn-sm btn-outline-info shadow"
                   >
                     New Feature

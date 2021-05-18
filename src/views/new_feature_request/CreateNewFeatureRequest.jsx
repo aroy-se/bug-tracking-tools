@@ -3,7 +3,7 @@ import * as Constants from "../../utility/Constants";
 import { getFromStorage } from "../../utility/storage";
 import Login from "../common/Login";
 
-class NewFeature extends React.Component {
+class CreateNewFeatureRequest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -99,66 +99,6 @@ class NewFeature extends React.Component {
       });
   }
 
-  // const initialState = {
-  //   featureTitle: "",
-  //   featureDesc: "",
-  //   submitterName: "",
-  //   submitterEmail: "",
-  //   submitterCompany: "",
-  // };
-  // const [input, setInput] = useState(initialState);
-  // const [id, setId] = useState("");
-  // const [success, setSuccess] = useState(false);
-  // function this.onChange(event) {
-  //   const { name, value } = event.target;
-  //   setInput((prevInput) => {
-  //     return {
-  //       ...prevInput,
-  //       [name]: value,
-  //     };
-  //   });
-  //   // reset the status label
-  //   setSuccess(false);
-  // }
-  // function handleNewFeatureRequest(event) {
-  //   event.preventDefault();
-  //   const newFeatureRequestObject = {
-  //     newFeatureId: Math.floor(Math.random() * (999999 - 100) + 100), // Just demo purpose
-  //     createdTime: Date().toLocaleString(),
-  //     featureTitle: featureTitle,
-  //     featureDesc: featureDesc,
-  //     submitterName: submitterName,
-  //     submitterEmail: submitterEmail,
-  //     submitterCompany: submitterCompany,
-  //   };
-  //   setId(newFeatureRequestObject.newFeatureId);
-  //   saveNewFeatureRequestDetails(newFeatureRequestObject);
-  //   setInput((prevState) => {
-  //     return {
-  //       ...prevState,
-  //       featureTitle: "",
-  //       featureDesc: "",
-  //       submitterName: "",
-  //       submitterEmail: "",
-  //       submitterCompany: "",
-  //     };
-  //   });
-  // }
-  // var saveNewFeatureRequestDetails = (newFeatureRequestData) => {
-  //   const parameters = {
-  //     method: "POST",
-  //     headers: {
-  //       "Access-Control-Allow-Origin": "*",
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(newFeatureRequestData),
-  //   };
-  //   fetch(Constants.NEW_FEATURE_REQUEST_URL, parameters)
-  //     .then((response) => response.json())
-  //     .then((newFeatureRequestData) => {
-  //       setSuccess(true);
-  //     });
-  // };
   render() {
     const btt_local_storage_token = getFromStorage("btt_local_storage");
     if (btt_local_storage_token && btt_local_storage_token.token) {
@@ -314,4 +254,4 @@ class NewFeature extends React.Component {
   }
 }
 
-export default NewFeature;
+export default CreateNewFeatureRequest;
