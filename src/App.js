@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
 import Header from "./views/common/Header";
 import Home from "./views/common/Home";
+import HomeInternalDashboard from "./views/common/HomeInternalDashBoard";
 import Login from "./views/common/Login";
 import Logout from "./views/common/Logout";
 import Registration from "./views/common/Registration";
@@ -60,6 +61,10 @@ class App extends React.Component {
           <Route path="/bugList" component={BugList} />
           <Route path="/fetchBugDetailsById" component={FetchBugDetailsById} />
           <Route path="/updateBugDetails" component={UpdateBugDetails} />
+          <Route
+            path="/homeInternalDashboard"
+            component={HomeInternalDashboard}
+          />
           <Route path="/" component={Home} />
         </Switch>
       </div>

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
 import { setInStorage, getFromStorage } from "../../utility/storage";
 import * as Constants from "../../utility/Constants";
-import Home from "./Home";
 
 class Login extends Component {
   constructor(props) {
@@ -15,10 +14,12 @@ class Login extends Component {
 
       email: "",
       password: "",
+      usrRole: "",
     };
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onClickLogIn = this.onClickLogIn.bind(this);
+    this.fetchEmail = this.fetchEmail.bind(this);
   }
   onChangeEmail(event) {
     this.setState({
@@ -30,6 +31,21 @@ class Login extends Component {
       password: event.target.value,
     });
   }
+  fetchEmail(email) {
+    fetch(Constants.URL_USER_BY_EXACT_EMAIL + email)
+      .then((response) => response.json())
+      .then((data) => {
+        data.map((user) => {
+          this.setState({
+            usrRole: user.userRole,
+          });
+          setInStorage("btt_current_user_role", {
+            userRole: user.userRole,
+          });
+        });
+      });
+  }
+
   onClickLogIn() {
     // Grab state
     const { email, password } = this.state;
@@ -53,15 +69,11 @@ class Login extends Component {
         if (json.success) {
           setInStorage("btt_local_storage", { token: json.token });
           setInStorage("btt_current_user", { user: email });
-          fetch(Constants.URL_USER_BY_EXACT_EMAIL + email)
-            .then((response) => response.json())
-            .then((data) => {
-              data.map((user) => {
-                setInStorage("btt_current_user_role", {
-                  userRole: user.userRole,
-                });
-              });
-            });
+          this.fetchEmail(email);
+          setInStorage("btt_current_user_role", {
+            userRole: this.state.usrRole,
+          });
+
           this.setState({
             loginError: "",
             loginSuccess: json.message,
@@ -70,12 +82,6 @@ class Login extends Component {
             email: "",
             token: json.token,
           });
-          // store email to send the data to app.js parent
-          // this.props.appData.getData(this.state.storeEmail);
-          // console.log(
-          //   "this.props.location.state: " +
-          //     JSON.stringify(this.props.location.pathname)
-          // );
         } else {
           this.setState({
             loginSuccess: "",
@@ -121,7 +127,7 @@ class Login extends Component {
         </div>
       );
     }
-    console.log("Inside login render Token: " + token);
+    // console.log("Inside login render Token: " + token);
     if (!token) {
       return (
         <div className="container mt-5">

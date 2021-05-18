@@ -51,6 +51,7 @@ class Header extends Component {
               token,
               authStat: true,
             });
+
             // alert("Header usersessions Token: Success >> " + token);
           } else {
             // alert("else Token: " + JSON.stringify(json));
@@ -139,12 +140,13 @@ class Header extends Component {
                       {getFromStorage("btt_current_user") &&
                       getFromStorage("btt_current_user").user !== "" ? (
                         /////////////
-                        this.state.userRole === "Admin" ? (
+                        this.state.userRole === Constants.ADMIN ? (
                           <i class="fas fa-user-shield">
                             {" "}
                             {getFromStorage("btt_current_user").user}
                           </i>
-                        ) : this.state.userRole === "Project Manager" ? (
+                        ) : this.state.userRole ===
+                          Constants.PROJECT_MANAGER ? (
                           <i class="fas fa-user-secret text-info">
                             {" "}
                             {getFromStorage("btt_current_user").user}
@@ -158,7 +160,7 @@ class Header extends Component {
                       ) : (
                         <span class="fas fa-user-slash text-secondary">
                           {" "}
-                          Anonymous User
+                          {Constants.ANONYMOUS_USER}
                         </span>
                       )}
                     </button>
@@ -207,18 +209,60 @@ class Header extends Component {
                         </Link>
                       )}
 
-                      {
-                        // Show the dashboard panel if the loggedin member is not a User
-                        getFromStorage("btt_current_user_role") &&
-                        getFromStorage("btt_current_user_role").userRole !==
-                          "User" ? (
-                          this.state.authStat ? (
-                            <HomeInternalDashboard
-                              userRole={this.state.userRole}
-                            />
-                          ) : null
+                      {getFromStorage("btt_local_storage") &&
+                      getFromStorage("btt_local_storage").token !== "" ? (
+                        // token available => show internal dropdownList
+                        <>
+                          {
+                            (getFromStorage("btt_current_user_role")
+                              .userRole === ""
+                              ? this.onClickFetchUserEmail()
+                              : console.log(
+                                  getFromStorage("btt_current_user_role")
+                                    .userRole
+                                ),
+                            getFromStorage("btt_current_user_role").userRole !==
+                            Constants.END_USER ? (
+                              <>
+                                <div class="dropdown-divider"></div>
+                                <Link
+                                  to="/userDashboard"
+                                  className="text-secondary dropdown-item"
+                                >
+                                  <i className="fas fa-users">
+                                    {" "}
+                                    User Dashboard
+                                  </i>
+                                </Link>
+                                <Link
+                                  to="/bugDashboard"
+                                  className="text-secondary dropdown-item"
+                                >
+                                  <i className="fas fa-bug"> Bug Dashboard</i>
+                                </Link>
+                              </>
+                            ) : null)
+                          }
+                        </>
+                      ) : // no token
+                      null}
+                      {/* Admin panel Only for admin */}
+                      {getFromStorage("btt_local_storage") &&
+                      getFromStorage("btt_local_storage").token !== "" ? (
+                        getFromStorage("btt_current_user_role").userRole ===
+                        Constants.ADMIN ? (
+                          <>
+                            <div class="dropdown-divider"></div>
+                            <Link
+                              to="/adminPanel"
+                              className="text-secondary dropdown-item"
+                              // onClick={this.onClickLogin}
+                            >
+                              <i class="fas fa-user-cog"> Admin Panel </i>
+                            </Link>
+                          </>
                         ) : null
-                      }
+                      ) : null}
                       <div class="dropdown-divider"></div>
                       <Link to="/registration" className="text-light">
                         <span className="badge badge-primary text-monospace p-2 m-2">
