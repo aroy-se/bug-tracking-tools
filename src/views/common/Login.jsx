@@ -215,14 +215,20 @@ class Login extends Component {
         </div>
       );
     }
-    return (
-      // Redirectiong to home page after successful login
-      // <Home />
-      // console.log(
-      //   "this.props.redirect:::::::::: " + this.props.location.pathname
-      // ),
-      <Redirect to={this.props.location.pathname} />
-    );
+    if (this.props.location.pathname === "/login") {
+      return <Redirect to="/" />;
+    } else if (this.props.location.pathname === "/logout") {
+      return <Redirect to={this.props.location.pathname} />;
+    } else {
+      return (
+        // Redirection to home page after successful login
+        // <Home />
+        // console.log(
+        //   "this.props.redirect:::::::::: " + this.props.location.pathname
+        // ),
+        <Redirect to={this.props.location.pathname} />
+      );
+    }
   }
 }
 

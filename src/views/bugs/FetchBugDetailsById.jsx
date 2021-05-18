@@ -590,7 +590,7 @@ const FetchBugDetailsById = (props) => {
                             </div>
                           </div>
                         </div>
-                        {/* Ediatable switch */}
+                        {/* Editable switch */}
                         <div class="custom-control custom-switch">
                           <input
                             type="checkbox"
@@ -1497,7 +1497,7 @@ const FetchBugDetailsById = (props) => {
                                               </div>
                                             ) : null
                                           ) : (
-                                            console.log("Login required")
+                                            alert("Login required")
                                           )
                                         )
                                       : "No Comments"}

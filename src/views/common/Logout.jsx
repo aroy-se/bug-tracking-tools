@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router";
 import { setInStorage, getFromStorage } from "../../utility/storage";
 import Home from "./Home";
 import Login from "./Login";
@@ -10,8 +11,9 @@ class Logout extends React.Component {
       isLoading: true,
       token: "",
     };
+    this.onClickLogout = this.onClickLogout.bind(this);
   }
-  componentDidMount() {
+  onClickLogout() {
     this.setState({
       isLoading: true,
     });
@@ -36,6 +38,9 @@ class Logout extends React.Component {
         });
     }
   }
+  componentDidMount() {
+    this.onClickLogout();
+  }
   render() {
     const { isLoading, token } = this.state;
     if (isLoading) {
@@ -50,7 +55,8 @@ class Logout extends React.Component {
       setInStorage("btt_current_user", { user: "" });
       setInStorage("btt_current_user_role", { userRole: "" });
       setInStorage("btt_local_storage", { token: "" });
-      return <Login />;
+      return <Redirect to="/login" />;
+      // <Login />;
       // return <Home />;
     }
     // else {

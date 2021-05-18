@@ -24,12 +24,13 @@ class Header extends Component {
         .then((response) => response.json())
         .then((data) => {
           // this.onClickLogin();
-          console.log("onClickFetchUserEmail: " + JSON.stringify(data));
+          // console.log("onClickFetchUserEmail: " + JSON.stringify(data));
           data.map((user) => {
             this.setState({ userRole: user.userRole });
-            setInStorage("btt_current_user_role", { userRole: user.userRole });
+            // setInStorage("btt_current_user_role", { userRole: user.userRole });
           });
         });
+      setInStorage("btt_current_user_role", { userRole: this.state.userRole });
     } else {
       alert("Currently, No user logged in...");
       return;
@@ -197,6 +198,7 @@ class Header extends Component {
                         <Link
                           to="/logout"
                           className="text-secondary dropdown-item"
+                          onClick={this.onClickLogin}
                         >
                           <i className="fas fa-sign-out-alt text-secondary">
                             {" "}
