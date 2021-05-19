@@ -116,17 +116,20 @@ class CreateNewFeatureRequest extends React.Component {
           <div className="row">
             <div className="col-xl-2"></div>
             <div className="col-xl-8">
-              <div class="card shadow">
-                <div class="card-header bg-info text-light shadow">
+              <div class="card shadow rounded-0">
+                <div class="card-header bg-info text-light shadow rounded-0">
                   <span className="lead">New Feature Request</span>
                 </div>
                 <div class="card-body">
                   <form>
                     <div class="form-group">
-                      <label for="formGroupExampleInput">Feature Title</label>
+                      <label for="formGroupExampleInput">
+                        <i class="lead font-weight-bold text-danger">*</i>{" "}
+                        Feature Title
+                      </label>
                       <input
                         type="text"
-                        class="form-control shadow-sm"
+                        class="form-control shadow-sm rounded-0"
                         id="formGroupExampleInput"
                         placeholder="Feature Title"
                         name="featureTitle"
@@ -136,11 +139,12 @@ class CreateNewFeatureRequest extends React.Component {
                     </div>
                     <div class="form-group">
                       <label for="formGroupExampleInput2">
+                        <i class="lead font-weight-bold text-danger">*</i>{" "}
                         Feature Description
                       </label>
                       <textarea
                         type="textarea"
-                        class="form-control shadow-sm"
+                        class="form-control shadow-sm rounded-0"
                         name="featureDesc"
                         value={featureDesc}
                         onChange={this.onChangeFeatureDesc}
@@ -150,7 +154,7 @@ class CreateNewFeatureRequest extends React.Component {
                   </form>
                   <div class="row">
                     <div class="col-xl-12">
-                      <div class="card shadow-sm">
+                      <div class="card shadow-sm rounded-0">
                         <div class="card-header pt-1 pb-1 text-info">
                           <h5>Submitter Info.</h5>
                         </div>
@@ -158,10 +162,15 @@ class CreateNewFeatureRequest extends React.Component {
                           <div class="row">
                             <div class="col-xl-4">
                               <div class="form-group mb-1">
-                                <label>Submitter Name</label>
+                                <label>
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
+                                  Submitter Name
+                                </label>
                                 <input
                                   type="text"
-                                  class="form-control shadow-sm"
+                                  class="form-control shadow-sm rounded-0"
                                   name="submitterName"
                                   value={submitterName}
                                   onChange={this.onChangeSubmitterName}
@@ -171,11 +180,16 @@ class CreateNewFeatureRequest extends React.Component {
                             </div>
                             <div class="col-xl-4">
                               <div class="form-group mb-1">
-                                <label>Submitter Email Id</label>
+                                <label>
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
+                                  Submitter Email ID
+                                </label>
                                 <input
                                   type="text"
-                                  class="form-control"
-                                  name="submitterEmail shadow-sm"
+                                  class="form-control rounded-0 shadow-sm"
+                                  name="submitterEmail"
                                   value={submitterEmail}
                                   onChange={this.onChangeSubmitterEmail}
                                   placeholder="Email ID"
@@ -184,11 +198,16 @@ class CreateNewFeatureRequest extends React.Component {
                             </div>
                             <div class="col-xl-4">
                               <div class="form-group mb-1">
-                                <label>Company Name</label>
+                                <label>
+                                  <i class="lead font-weight-bold text-danger">
+                                    *
+                                  </i>{" "}
+                                  Company Name
+                                </label>
                                 <input
                                   type="text"
-                                  class="form-control"
-                                  name="submitterCompany shadow-sm"
+                                  class="form-control rounded-0 shadow-sm"
+                                  name="submitterCompany"
                                   value={submitterCompany}
                                   onChange={this.onChangeSubmitterCompany}
                                   placeholder="Company Name"

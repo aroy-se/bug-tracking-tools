@@ -509,7 +509,9 @@ const FetchBugDetailsById = (props) => {
                   </p>
                 ) : // Editable fix Version
                 getFromStorage("btt_current_user_role").userRole ===
-                  "Project Manager" ? (
+                    Constants.ADMIN ||
+                  getFromStorage("btt_current_user_role").userRole ===
+                    Constants.PROJECT_MANAGER ? (
                   // SET Fix Version
                   <div class="form-group mt-2">
                     <div class="input-group ">

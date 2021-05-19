@@ -258,7 +258,7 @@ class Header extends Component {
                               to="/viewNewFeatureRequestList"
                               className="text-secondary dropdown-item"
                             >
-                              <i class="fas fa-user-cog text-secondary">
+                              <i class="fas fa-plus-square">
                                 {" "}
                                 Feature Dashboard
                               </i>
@@ -270,13 +270,17 @@ class Header extends Component {
                       {getFromStorage("btt_local_storage") &&
                       getFromStorage("btt_local_storage").token !== "" ? (
                         getFromStorage("btt_current_user_role").userRole ===
-                        Constants.DEVELOPER ? (
+                          Constants.ADMIN ||
+                        getFromStorage("btt_current_user_role").userRole ===
+                          Constants.PROJECT_MANAGER ||
+                        getFromStorage("btt_current_user_role").userRole ===
+                          Constants.DEVELOPER ? (
                           <>
                             <Link
                               to="/createFaq"
                               className="text-secondary dropdown-item"
                             >
-                              <i class="fas fa-user-cog text-secondary">
+                              <i class="fas fa-question-circle">
                                 {" "}
                                 <span className="text-secondary">
                                   FAQ Panel
