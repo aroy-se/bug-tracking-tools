@@ -29,7 +29,6 @@ faqRouter.post("/faq", (request, response) => {
   faqObject.faqTitle = faqTitle;
   faqObject.faqDesc = faqDesc;
 
-  console.log(faqObject);
   faqObject.save((err, faqObject) => {
     if (err) {
       return response.send({
