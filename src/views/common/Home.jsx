@@ -14,9 +14,9 @@ const Home = () => {
         <div className="col-xl-2"></div>
         {/* r1c2 - Home image box */}
         <div className="col-xl-8">
-          <div class="card mb-0 shadow border-0">
+          <div class="card mb-0 shadow border-0 rounded-0">
             <img
-              class="card-img-top shadow"
+              class="card-img-top shadow rounded-0"
               src={home_bg_img}
               alt="Card image cap"
             />
@@ -29,7 +29,7 @@ const Home = () => {
                 </small>
               </p>
             </div>
-            <div class="card-body">
+            <div class="card-body rounded-0">
               <p class="card-text font-weight-lighter m-0">
                 <small class="text-muted m-0">
                   The following steps may resolve your problem
@@ -80,7 +80,7 @@ const Home = () => {
         <div className="col-xl-2"></div>
         <div className="col-xl-8">
           {/* Issue type info */}
-          <div class="card shadow">
+          <div class="card shadow rounded-0">
             <div class="card-header">
               <h5>We Offer</h5>
             </div>
