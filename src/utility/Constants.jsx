@@ -55,3 +55,6 @@ export const COMPONENT_BY_NAME_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${
 // Constants for Comment
 const COMMENT_PATH = process.env.REACT_APP_COMMENT_PATH; //comment
 export const COMMENT_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${COMMENT_PATH}/`;
+
+const FAQ_PATH = process.env.REACT_APP_FAQ_PATH; //faq
+export const FAQ_URL = `http://${HOST}:${PORT}/${DATABASE_NAME}/${FAQ_PATH}/`;

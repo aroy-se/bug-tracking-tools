@@ -94,7 +94,7 @@ class ViewNewFeatureRequestList extends Component {
    * arg3- var(string):: error-catch message
    */
   fetchDataFromDatabase(url, wrapArray, catch_err_msg) {
-    console.log("feature url : " + url);
+    // console.log("feature url : " + url);
     fetch(url)
       .then((response) => {
         if (!response.ok) {

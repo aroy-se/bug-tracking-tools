@@ -42,6 +42,6 @@ const NewFeatureRequestSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model(
-  "new_feature_request_table",
+  "new_feature_request_details",
   NewFeatureRequestSchema
 );

@@ -282,7 +282,7 @@ const UpdateBugDetails = () => {
               commentator: commentator,
               commentType: comType,
             };
-            console.log("CommentObject: " + JSON.stringify(commentObject));
+            // console.log("CommentObject: " + JSON.stringify(commentObject));
             const parameters = {
               method: "POST",
               headers: {
@@ -400,11 +400,13 @@ const UpdateBugDetails = () => {
                   onClick={handleOnClickAssignee}
                 >
                   <option>Set Assignee</option>
-                  {assigneeDetails.map((assignee, index) => (
-                    <option>
-                      {assignee.firstName} {assignee.lastName}
-                    </option>
-                  ))}
+                  {assigneeDetails.map((assignee, index) =>
+                    assignee.userRole !== Constants.END_USER ? (
+                      <option key={index}>
+                        {assignee.firstName} {assignee.lastName}
+                      </option>
+                    ) : null
+                  )}
                 </select>
               )}
               <i class="far fa-calendar-alt text-secondary" aria-hidden="true">
@@ -541,7 +543,7 @@ const UpdateBugDetails = () => {
                   </div>
                 </div>
               </div>
-              {/* Ediatable switch */}
+              {/* Editable switch */}
               <div class="custom-control custom-switch">
                 <input
                   type="checkbox"
@@ -622,9 +624,11 @@ const UpdateBugDetails = () => {
                                   onChange={handleChange}
                                   onClick={handleOnClickComponent}
                                 >
-                                  <option selected>Set Component</option>
+                                  <option>Set Component</option>
                                   {componentDetails.map((component, index) => (
-                                    <option>{component.componentName}</option>
+                                    <option key={index}>
+                                      {component.componentName}
+                                    </option>
                                   ))}
                                   <option>NA</option>
                                 </select>

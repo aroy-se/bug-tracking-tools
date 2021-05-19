@@ -21,7 +21,8 @@ const USER_ROUTE = require("./src/controllers/UserRoute");
 const COMPONENT_ROUTE = require("./src/controllers/ComponentRoute");
 const NEW_FEATURE_REQUEST_ROUTE = require("./src/controllers/NewFeatureRequestRoute");
 const BUG_ROUTE = require("./src/controllers/BugRoute");
-const COMMENT_URL = require("./src/controllers/CommentRoute");
+const COMMENT_ROUTE = require("./src/controllers/CommentRoute");
+const FAQ_ROUTE = require("./src/controllers/FaqRoute");
 
 const cors = require("cors");
 
@@ -39,7 +40,8 @@ app.use("/btt", USER_ROUTE);
 app.use("/btt", COMPONENT_ROUTE);
 app.use("/btt", NEW_FEATURE_REQUEST_ROUTE);
 app.use("/btt", BUG_ROUTE);
-app.use("/btt", COMMENT_URL);
+app.use("/btt", COMMENT_ROUTE);
+app.use("/btt", FAQ_ROUTE);
 app.listen(PORT, () => {
   console.log(`[Port: ${PORT}] - The BTT app server is up and running...`);
 });

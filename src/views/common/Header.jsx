@@ -32,7 +32,7 @@ class Header extends Component {
         });
       setInStorage("btt_current_user_role", { userRole: this.state.userRole });
     } else {
-      alert("Currently, No user logged in...");
+      // alert("Currently, No user logged in...");
       return;
     }
   }
@@ -116,7 +116,7 @@ class Header extends Component {
               <ul className="navbar-nav ">
                 <li className="nav-item">
                   <div className="nav-item">
-                    <Link className="nav-link text-danger" to="/faq">
+                    <Link className="nav-link text-danger" to="/viewFaq">
                       FAQ
                     </Link>
                   </div>
@@ -261,6 +261,26 @@ class Header extends Component {
                               <i class="fas fa-user-cog text-secondary">
                                 {" "}
                                 Feature Dashboard
+                              </i>
+                            </Link>
+                          </>
+                        ) : null
+                      ) : null}
+                      {/* Create FAQ Only for developer */}
+                      {getFromStorage("btt_local_storage") &&
+                      getFromStorage("btt_local_storage").token !== "" ? (
+                        getFromStorage("btt_current_user_role").userRole ===
+                        Constants.DEVELOPER ? (
+                          <>
+                            <Link
+                              to="/createFaq"
+                              className="text-secondary dropdown-item"
+                            >
+                              <i class="fas fa-user-cog text-secondary">
+                                {" "}
+                                <span className="text-secondary">
+                                  FAQ Panel
+                                </span>
                               </i>
                             </Link>
                           </>

@@ -439,11 +439,13 @@ const FetchBugDetailsById = (props) => {
                     onClick={handleOnClickAssignee}
                   >
                     <option>Set Assignee</option>
-                    {assigneeDetails.map((assignee, index) => (
-                      <option>
-                        {assignee.firstName} {assignee.lastName}
-                      </option>
-                    ))}
+                    {assigneeDetails.map((assignee, index) =>
+                      assignee.userRole !== Constants.END_USER ? (
+                        <option key={index}>
+                          {assignee.firstName} {assignee.lastName}
+                        </option>
+                      ) : null
+                    )}
                   </select>
                 )}
                 <i
@@ -682,7 +684,7 @@ const FetchBugDetailsById = (props) => {
                                     <option selected>Set Component</option>
                                     {componentDetails.map(
                                       (component, index) => (
-                                        <option>
+                                        <option key={index}>
                                           {component.componentName}
                                         </option>
                                       )

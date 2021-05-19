@@ -18,7 +18,8 @@ import FetchBugDetailsById from "./views/bugs/FetchBugDetailsById";
 import UpdateBugDetails from "./views/bugs/UpdateBugDetails";
 import CreateNewFeatureRequest from "./views/new_feature_request/CreateNewFeatureRequest";
 import ViewNewFeatureRequestList from "./views/new_feature_request/ViewNewFeatureRequestList";
-import Faq from "./views/misc/Faq";
+import ViewFaqDetails from "./views/misc/faq/ViewFaqDetails";
+import CreateFaqDetails from "./views/misc/faq/CreateFaqDetails";
 import About from "./views/misc/About";
 
 class App extends React.Component {
@@ -39,7 +40,8 @@ class App extends React.Component {
         <Header sendData={this.state.storeEmail} />
         <Switch>
           <Route path="/about" component={About} exact />
-          <Route path="/faq" component={Faq} />
+          <Route path="/viewFaq" component={ViewFaqDetails} />
+          <Route path="/createFaq" component={CreateFaqDetails} />
           <Route
             path="/login"
             render={() => (
