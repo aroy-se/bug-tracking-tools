@@ -134,7 +134,7 @@ class Login extends Component {
           <div className="row">
             <div className="col-xl-3"></div>
             <div className="col-xl-5 mt-5">
-              <div class="card shadow border-danger#">
+              <div class="card shadow rounded-0">
                 <span class="card-header shadow-sm mb-2">
                   <i class="fas fa-sign-in-alt text-danger">
                     {" "}
@@ -169,6 +169,7 @@ class Login extends Component {
                       type="checkbox"
                       class="custom-control-input"
                       id="remember-me"
+                      disabled
                     />
                     <label
                       class="custom-control-label font-weight-lighter mb-2"
@@ -194,7 +195,8 @@ class Login extends Component {
                     </label>
                   ) : null}
                   <button
-                    className="login-btn mb-3"
+                    // className="login-btn mb-3"
+                    className="btn btn-lg btn-danger btn-block mb-3 shadow"
                     onClick={this.onClickLogIn}
                   >
                     LOGIN
