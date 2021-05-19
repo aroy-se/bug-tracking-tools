@@ -1,7 +1,4 @@
-import { Link } from "react-router-dom";
 import React from "react";
-import * as Constants from "../../utility/Constants";
-// import reg_img from "../../assets/images/user_register.jpg";
 
 class Registration extends React.Component {
   constructor(props) {
@@ -215,7 +212,7 @@ class Registration extends React.Component {
           {/* Main single row */}
           <div class="row">
             <div class="col-xl-12">
-              <div class="card shadow">
+              <div class="card shadow rounded-0">
                 <div class="card-header text-danger shadow-sm">
                   <i class="fas fa-user-plus">
                     <span className=" text-danger lead">
@@ -242,7 +239,7 @@ class Registration extends React.Component {
                                 </h6>
                                 <input
                                   type="text"
-                                  className="user-first-name shadow-sm form-control"
+                                  className="user-first-name shadow-sm form-control rounded-0"
                                   placeholder="First Name"
                                   required
                                   autoComplete="off"
@@ -282,7 +279,7 @@ class Registration extends React.Component {
                                 </h6>
                                 <input
                                   type="text"
-                                  className="user-email shadow-sm form-control"
+                                  className="user-email shadow-sm form-control rounded-0"
                                   name="email"
                                   value={email}
                                   required
@@ -304,7 +301,7 @@ class Registration extends React.Component {
                                 </h6>
                                 <input
                                   type="password"
-                                  className="user-password shadow-sm form-control"
+                                  className="user-password shadow-sm form-control rounded-0"
                                   required
                                   autoComplete="off"
                                   name="password"
@@ -326,7 +323,7 @@ class Registration extends React.Component {
                                 </h6>
                                 <input
                                   type="text"
-                                  className="user-address1 shadow-sm form-control"
+                                  className="user-address1 shadow-sm form-control rounded-0"
                                   name="address1"
                                   value={address1}
                                   required
@@ -348,7 +345,7 @@ class Registration extends React.Component {
                                 </h6>
                                 <input
                                   type="text"
-                                  className="user-city shadow-sm form-control"
+                                  className="user-city shadow-sm form-control rounded-0"
                                   name="city"
                                   value={city}
                                   required
@@ -370,7 +367,7 @@ class Registration extends React.Component {
                                 </h6>
                                 <input
                                   type="text"
-                                  className="user-zip shadow-sm form-control"
+                                  className="user-zip shadow-sm form-control rounded-0"
                                   name="zip"
                                   value={zip}
                                   required
@@ -417,7 +414,7 @@ class Registration extends React.Component {
                                 </h6>
                                 <input
                                   type="text"
-                                  className="user-last-name shadow-sm form-control"
+                                  className="user-last-name shadow-sm form-control rounded-0"
                                   placeholder="Last Name"
                                   required
                                   autoComplete="off"
@@ -440,7 +437,7 @@ class Registration extends React.Component {
                                 </h6>
                                 <input
                                   type="text"
-                                  className="user-mobile shadow-sm form-control"
+                                  className="user-mobile shadow-sm form-control rounded-0"
                                   name="mobile"
                                   value={mobile}
                                   required
@@ -462,7 +459,7 @@ class Registration extends React.Component {
                                 </h6>
                                 <input
                                   type="password"
-                                  className="user-password shadow-sm form-control"
+                                  className="user-password shadow-sm form-control rounded-0"
                                   required
                                   autoComplete="off"
                                   name="confirmPassword"
@@ -483,7 +480,7 @@ class Registration extends React.Component {
                                 </h6>
                                 <input
                                   type="text"
-                                  className="user-address2 shadow-sm form-control"
+                                  className="user-address2 shadow-sm form-control rounded-0"
                                   name="address2"
                                   value={address2}
                                   required
@@ -505,7 +502,7 @@ class Registration extends React.Component {
                                 </h6>
                                 <select
                                   name="state"
-                                  className="custom-select user-state shadow-sm form-control"
+                                  className="custom-select user-state shadow-sm form-control rounded-0"
                                   value={state}
                                   required
                                   onChange={this.onChangeState}
@@ -571,14 +568,12 @@ class Registration extends React.Component {
                                     type="file"
                                     name="photo"
                                     id="attachment"
-                                    className="custom-file-input form-control"
-                                    required
-                                    autoComplete="off"
+                                    className="custom-file-input form-control rounded-0"
                                     value={photo}
                                     onChange={this.onChangePhoto}
                                   />
                                   <label
-                                    class="custom-file-label"
+                                    class="custom-file-label rounded-0"
                                     for="attachment"
                                   >
                                     {photo}
