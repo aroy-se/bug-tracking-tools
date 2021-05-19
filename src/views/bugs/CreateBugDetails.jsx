@@ -303,7 +303,7 @@ class CreateBugDetails extends React.Component {
         <div className="container p-0 pt-5">
           <div class="row">
             <div class="col-xl-12 p-0 mb-5">
-              <div class="card shadow">
+              <div class="card shadow rounded-0">
                 <div class="card-header text-danger form-inline d-flex justify-content-between shadow-sm">
                   <h4>REPORT A BUG</h4>
                   <img
@@ -363,7 +363,7 @@ class CreateBugDetails extends React.Component {
                               </td>
                               <td>
                                 <select
-                                  className="custom-select shadow-sm form-control"
+                                  className="custom-select shadow-sm form-control rounded-0"
                                   name="component"
                                   value={component}
                                   onChange={this.onChangeComponent}
@@ -397,7 +397,7 @@ class CreateBugDetails extends React.Component {
                               </td>
                               <td>
                                 <select
-                                  className="custom-select shadow-sm form-control"
+                                  className="custom-select shadow-sm form-control rounded-0"
                                   name="reportVersion"
                                   value={reportVersion}
                                   onChange={this.onChangeReportVersion}
@@ -421,7 +421,7 @@ class CreateBugDetails extends React.Component {
                               </td>
                               <td>
                                 <select
-                                  class="custom-select shadow-sm form-control"
+                                  class="custom-select shadow-sm form-control rounded-0"
                                   name="os"
                                   value={os}
                                   onChange={this.onChangeOs}
@@ -482,7 +482,7 @@ class CreateBugDetails extends React.Component {
                               </td>
                               <td>
                                 <select
-                                  class="custom-select shadow-sm form-control"
+                                  class="custom-select shadow-sm form-control rounded-0"
                                   name="severity"
                                   value={severity}
                                   onChange={this.onChangeSeverity}
@@ -501,7 +501,7 @@ class CreateBugDetails extends React.Component {
                               </td>
                               <td>
                                 <select
-                                  class="custom-select shadow-sm form-control"
+                                  class="custom-select shadow-sm form-control rounded-0"
                                   name="regressionVersion"
                                   value={regressionVersion}
                                   onChange={this.onChangeRegressionVersion}
@@ -524,7 +524,7 @@ class CreateBugDetails extends React.Component {
                               </td>
                               <td>
                                 <select
-                                  class="custom-select shadow-sm form-control"
+                                  class="custom-select shadow-sm form-control rounded-0"
                                   name="browser"
                                   value={browser}
                                   onChange={this.onChangeBrowser}
@@ -562,7 +562,7 @@ class CreateBugDetails extends React.Component {
                                   </h6>
                                   <input
                                     type="text"
-                                    class="form-control"
+                                    class="form-control rounded-0"
                                     name="bugTitle"
                                     value={bugTitle}
                                     onChange={this.onChangeBugTitle}
@@ -583,7 +583,7 @@ class CreateBugDetails extends React.Component {
                                   </h6>
                                   <textarea
                                     type="textarea"
-                                    class="form-control"
+                                    class="form-control rounded-0"
                                     name="bugDesc"
                                     value={bugDesc}
                                     onChange={this.onChangeBugDesc}
@@ -599,7 +599,7 @@ class CreateBugDetails extends React.Component {
                                   <h6>Reproducible Steps</h6>
                                   <textarea
                                     type="textarea"
-                                    class="form-control"
+                                    class="form-control rounded-0"
                                     name="reproducibleSteps"
                                     value={reproducibleSteps}
                                     onChange={this.onChangeReproducibleSteps}
@@ -615,7 +615,7 @@ class CreateBugDetails extends React.Component {
                                   <h6>Expected Output</h6>
                                   <textarea
                                     type="textarea"
-                                    class="form-control"
+                                    class="form-control rounded-0"
                                     name="expectedOutput"
                                     value={expectedOutput}
                                     onChange={this.onChangeExpectedOutput}
@@ -631,7 +631,7 @@ class CreateBugDetails extends React.Component {
                                   <h6>Actual Output</h6>
                                   <textarea
                                     type="textarea"
-                                    class="form-control"
+                                    class="form-control rounded-0"
                                     name="actualOutput"
                                     value={actualOutput}
                                     onChange={this.onChangeActualOutput}
@@ -647,7 +647,7 @@ class CreateBugDetails extends React.Component {
                                   <h6>Source code / Test case / Stacktrace</h6>
                                   <textarea
                                     type="textarea"
-                                    class="form-control"
+                                    class="form-control rounded-0"
                                     name="sourceCode"
                                     value={sourceCode}
                                     onChange={this.onChangeSourceCode}
@@ -664,14 +664,14 @@ class CreateBugDetails extends React.Component {
                                   <div className="custom-file">
                                     <input
                                       type="file"
-                                      class="custom-file-input form-control"
+                                      class="custom-file-input form-control rounded-0"
                                       id="attachment"
                                       name="attachment"
                                       value={attachment}
                                       onChange={this.onChangeAttachment}
                                     />
                                     <label
-                                      class="custom-file-label"
+                                      class="custom-file-label rounded-0"
                                       for="attachment"
                                       value={attachment}
                                       onChange={this.onChangeAttachment}
@@ -690,7 +690,7 @@ class CreateBugDetails extends React.Component {
                                   <h6>Workaround</h6>
                                   <textarea
                                     type="textarea"
-                                    class="form-control"
+                                    class="form-control rounded-0"
                                     name="workaround"
                                     value={workaround}
                                     onChange={this.onChangeWorkaround}
@@ -705,7 +705,7 @@ class CreateBugDetails extends React.Component {
                     </div>
                     <div class="row">
                       <div class="col-xl-12">
-                        <div class="card shadow-sm">
+                        <div class="card shadow-sm rounded-0">
                           <div class="card-header pt-1 pb-1 text-info">
                             <h5>Submitter Info.</h5>
                           </div>
@@ -721,7 +721,7 @@ class CreateBugDetails extends React.Component {
                                   </label>
                                   <input
                                     type="text"
-                                    class="form-control"
+                                    class="form-control rounded-0"
                                     name="submitterName"
                                     value={submitterName}
                                     onChange={this.onChangeSubmitterName}
@@ -739,7 +739,7 @@ class CreateBugDetails extends React.Component {
                                   </label>
                                   <input
                                     type="text"
-                                    class="form-control"
+                                    class="form-control rounded-0"
                                     name="submitterEmail"
                                     value={submitterEmail}
                                     onChange={this.onChangeSubmitterEmail}
@@ -757,7 +757,7 @@ class CreateBugDetails extends React.Component {
                                   </label>
                                   <input
                                     type="text"
-                                    class="form-control"
+                                    class="form-control rounded-0"
                                     name="submitterCompany"
                                     value={submitterCompany}
                                     onChange={this.onChangeSubmitterCompany}

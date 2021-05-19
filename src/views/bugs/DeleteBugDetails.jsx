@@ -67,7 +67,7 @@ const DeleteBugDetails = () => {
       <div class="row">
         <div class="col-xl-3"></div>
         <div class="col-xl-6">
-          <div class="card shadow">
+          <div class="card shadow mt-3 rounded-0">
             <div class="card-header text-danger shadow-sm">
               <h5>DELETE BUG</h5>
             </div>
@@ -80,7 +80,7 @@ const DeleteBugDetails = () => {
                     </label>
                     <input
                       type="text"
-                      class="form-control shadow-sm"
+                      class="form-control shadow-sm rounded-0"
                       placeholder="Provide a Bug ID"
                       name="bugId"
                       value={input.bugId}

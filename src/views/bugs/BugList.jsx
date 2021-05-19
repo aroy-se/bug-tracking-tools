@@ -12,7 +12,7 @@ class BugList extends Component {
       searchValue: "",
       searchInputText: "",
     };
-    this.fetchDatafromDatabase = this.fetchDatafromDatabase.bind(this);
+    this.fetchDataFromDatabase = this.fetchDataFromDatabase.bind(this);
   }
   //  React Life cycle method
   componentDidMount() {
@@ -28,17 +28,17 @@ class BugList extends Component {
         return;
       }
       // Calling whole bug list
-      this.fetchDatafromDatabase(target_url, false, catch_err_msg);
+      this.fetchDataFromDatabase(target_url, false, catch_err_msg);
     } else if (isNaN(searchInputText)) {
       // fetch data by bug title
       target_url = Constants.BUG_BY_TITLE_URL + searchInputText;
       catch_err_msg = searchInputText;
-      this.fetchDatafromDatabase(target_url, false, catch_err_msg);
+      this.fetchDataFromDatabase(target_url, false, catch_err_msg);
     } else {
       // fetch data by bug id
       target_url = Constants.BUG_URL + parseInt(searchInputText);
       catch_err_msg = searchInputText;
-      this.fetchDatafromDatabase(target_url, true, catch_err_msg);
+      this.fetchDataFromDatabase(target_url, true, catch_err_msg);
     }
   }
 
@@ -58,17 +58,17 @@ class BugList extends Component {
           return;
         }
         // Calling whole bug list
-        this.fetchDatafromDatabase(target_url, false, catch_err_msg);
+        this.fetchDataFromDatabase(target_url, false, catch_err_msg);
       } else if (isNaN(searchInputText)) {
         // fetch data by bug title
         target_url = Constants.BUG_BY_TITLE_URL + searchInputText;
         catch_err_msg = searchInputText;
-        this.fetchDatafromDatabase(target_url, false, catch_err_msg);
+        this.fetchDataFromDatabase(target_url, false, catch_err_msg);
       } else {
         // fetch data by bug id
         target_url = Constants.BUG_URL + parseInt(searchInputText);
         catch_err_msg = searchInputText;
-        this.fetchDatafromDatabase(target_url, true, catch_err_msg);
+        this.fetchDataFromDatabase(target_url, true, catch_err_msg);
       }
       // window.location.href = window.location.href;
     }
@@ -80,7 +80,7 @@ class BugList extends Component {
    * arg2- boolean:: wrap the data inside an array
    * arg3- var(string):: error-catch message
    */
-  fetchDatafromDatabase(url, wrapArray, catch_err_msg) {
+  fetchDataFromDatabase(url, wrapArray, catch_err_msg) {
     fetch(url)
       .then((response) => {
         if (!response.ok) {
@@ -115,7 +115,7 @@ class BugList extends Component {
       <div className="container-fluid mt-5 mb-3">
         <div className="row">
           <div className="col-xl-12 mb-3">
-            <div class="card">
+            <div class="card shadow rounded-0">
               <div class="card-header ">
                 <div className="form-inline d-flex justify-content-between">
                   <i class="fa fa-bug text-danger" aria-hidden="true">
@@ -127,7 +127,7 @@ class BugList extends Component {
                 {this.state.bugDetails.map((bug, index) => (
                   <div className="list-group p-1" key={index}>
                     <Link
-                      class="list-group-item list-group-item-action flex-column align-items-start"
+                      class="list-group-item list-group-item-action flex-column align-items-start rounded-0"
                       to={{
                         pathname: `/fetchBugDetailsById`,
                         // pathname: `/updateBugDetails`,
