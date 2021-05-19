@@ -95,7 +95,7 @@ const About = () => {
           tracker. It can manage documents and code as well, in an integrated
           distributed manner. However, its query functionality is not as
           advanced or as user-friendly as some other, non-distributed bug
-          trackers such as Bugzilla.[8] Similar statements can be made about
+          trackers such as Bugzilla. Similar statements can be made about
           org-mode, although it is not wiki software as such.
         </small>
       </p>

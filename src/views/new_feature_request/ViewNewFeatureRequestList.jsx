@@ -130,7 +130,7 @@ class ViewNewFeatureRequestList extends Component {
       <div className="container-fluid mt-5 mb-3">
         <div className="row">
           <div className="col-xl-12 mb-3">
-            <div class="card shadow">
+            <div class="card shadow rounded-0">
               <div class="card-header shadow-sm">
                 <div className="form-inline d-flex justify-content-between">
                   <i
@@ -149,7 +149,7 @@ class ViewNewFeatureRequestList extends Component {
                   (newFeatureRequest, index) => (
                     <div className="list-group p-1" key={index}>
                       <div id="accordion">
-                        <div class="card">
+                        <div class="card rounded-0">
                           <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
                               <button

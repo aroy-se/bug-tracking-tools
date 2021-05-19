@@ -33,8 +33,8 @@ class UserProfile extends React.Component {
           <div className="row">
             <div className="col-xl-2"></div>
             <div className="col-xl-8">
-              <div class="card shadow">
-                <div class="card-header lead bg-danger text-light shadow">
+              <div class="card rounded-0 shadow">
+                <div class="card-header lead bg-danger text-light shadow rounded-0">
                   User Profile
                 </div>
                 <div className="card-body text-center">
@@ -59,7 +59,7 @@ class UserProfile extends React.Component {
                             </span>
                           </div>
                           <div className="col-xl-10">
-                            <span className="badge badge-light lead text-info font-weight-bold">
+                            <span className="badge badge-light lead text-info font-weight-normal">
                               {user.firstName}
                             </span>
                           </div>
@@ -73,7 +73,7 @@ class UserProfile extends React.Component {
                             </span>
                           </div>
                           <div className="col-xl-10">
-                            <span className="badge badge-light lead text-info font-weight-bold">
+                            <span className="badge badge-light lead text-info font-weight-normal">
                               {user.lastName}
                             </span>
                           </div>
@@ -87,7 +87,7 @@ class UserProfile extends React.Component {
                             </span>
                           </div>
                           <div className="col-xl-10">
-                            <span className="badge badge-light lead text-info font-weight-bold">
+                            <span className="badge badge-light lead text-info font-weight-normal">
                               {user.userRole}
                             </span>
                           </div>
@@ -102,7 +102,7 @@ class UserProfile extends React.Component {
                           </div>
                           <div className="col-xl-10">
                             {" "}
-                            <span className="badge badge-light lead text-info font-weight-bold">
+                            <span className="badge badge-light lead text-info font-weight-normal">
                               {user.address1 +
                                 ", " +
                                 user.address2 +
@@ -124,7 +124,7 @@ class UserProfile extends React.Component {
                             </span>
                           </div>
                           <div className="col-xl-10">
-                            <span className="badge badge-light lead text-info font-weight-bold">
+                            <span className="badge badge-light lead text-info font-weight-normal">
                               {user.email}
                             </span>
                           </div>
@@ -138,7 +138,7 @@ class UserProfile extends React.Component {
                             </span>
                           </div>
                           <div className="col-xl-10">
-                            <span className="badge badge-light lead text-info font-weight-bold">
+                            <span className="badge badge-light lead text-info font-weight-normal">
                               {user.mobile}
                             </span>
                           </div>

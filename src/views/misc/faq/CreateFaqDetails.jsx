@@ -75,8 +75,8 @@ class CreateFaq extends React.Component {
           <div className="row">
             <div className="col-xl-2"></div>
             <div className="col-xl-8">
-              <div class="card shadow">
-                <div class="card-header shadow-sm">
+              <div class="card shadow rounded-0">
+                <div class="card-header shadow-sm ">
                   <span className="lead text-danger">CREATE FAQ</span>
                 </div>
                 <div class="card-body">
@@ -90,7 +90,7 @@ class CreateFaq extends React.Component {
                       </label>
                       <input
                         type="text"
-                        class="form-control shadow-sm"
+                        class="form-control shadow-sm rounded-0"
                         id="formGroupExampleInput"
                         placeholder="FAQ Title"
                         name="faqTitle"
@@ -107,7 +107,7 @@ class CreateFaq extends React.Component {
                       </label>
                       <textarea
                         type="textarea"
-                        class="form-control shadow-sm"
+                        class="form-control shadow-sm rounded-0"
                         name="faqDesc"
                         value={faqDesc}
                         onChange={this.onChangeFaqDesc}

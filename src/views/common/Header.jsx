@@ -134,7 +134,7 @@ class Header extends Component {
                   <div class="btn-group">
                     <button
                       type="button"
-                      class="btn btn-light"
+                      class="btn btn-light rounded-0"
                       onClick={this.onClickLogin}
                     >
                       {getFromStorage("btt_current_user") &&
@@ -166,7 +166,7 @@ class Header extends Component {
                     </button>
                     <button
                       type="button"
-                      class="btn btn-light dropdown-toggle dropdown-toggle-split"
+                      class="btn btn-light dropdown-toggle dropdown-toggle-split rounded-0"
                       onClick={this.onClickLogin}
                       data-toggle="dropdown"
                       aria-haspopup="true"
@@ -174,7 +174,7 @@ class Header extends Component {
                     >
                       <span class="sr-only">Toggle Dropdown</span>
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-menu dropdown-menu-right rounded-0">
                       <Link
                         to="/userProfile"
                         className="text-info dropdown-item"
