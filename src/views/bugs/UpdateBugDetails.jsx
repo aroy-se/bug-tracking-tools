@@ -1355,7 +1355,7 @@ const UpdateBugDetails = () => {
                                         ) &&
                                         getFromStorage("btt_current_user_role")
                                           .userRole ? (
-                                          // Show comemnt if submitter is a user and comments are public
+                                          // Show comment if submitter is a user and comments are public
                                           comments.commentType === "public" &&
                                           getFromStorage(
                                             "btt_current_user_role"
@@ -1479,7 +1479,7 @@ const UpdateBugDetails = () => {
                             <button
                               type="button"
                               class="btn btn-outline-danger pt-0 pb-0 pl-1 pr-1"
-                              value="Private"
+                              value="private"
                               onClick={onChangeCommentType}
                             >
                               Private

@@ -55,7 +55,10 @@ class UserDashboard extends React.Component {
               </a>
             </li>
           </ul>
-          <div class="tab-content border shadow" id="userTabContent">
+          <div
+            class="tab-content border border-top-0 shadow"
+            id="userTabContent"
+          >
             <div
               class="tab-pane fade show active"
               id="view"

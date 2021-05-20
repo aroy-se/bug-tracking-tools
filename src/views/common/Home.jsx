@@ -66,7 +66,7 @@ const Home = () => {
                 <small class="text-muted">
                   Upcoming release{" "}
                   <span className="text-danger">BTT-v2021.06</span> will be
-                  released on <span className="text-danger">18-May-2021</span>
+                  released on <span className="text-danger">21-May-2021</span>
                 </small>
               </marquee>
               {/* </footer> */}
