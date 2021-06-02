@@ -6,21 +6,14 @@ Project Name:  BTT - Bug Tracking Tools
 
 Required Skills:  HTML, CSS, JAVASCRIPT, REACTJS, EXPRESS, NODEJS, MONGODB
 
-Other Skills:  GIT, AGILE
+Other Skills:  GIT
 
 Team Size: 4
 -------------
-Team Members:
-
-Afroze Khan
-
-Elangovan Perumalsamy
-
-Seela Balaji	
+Team Member:	
 
 Abhijit Roy
-	
-	
+
 
 GIT Details
 -------------
