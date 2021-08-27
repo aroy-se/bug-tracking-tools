@@ -8,7 +8,7 @@ Required Skills:  HTML, CSS, JAVASCRIPT, REACTJS, EXPRESS, NODEJS, MONGODB
 
 Other Skills:  GIT
 
-Team Size: 4
+Team Size: 1
 -------------
 Team Member:	
 
