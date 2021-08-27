@@ -22,7 +22,7 @@ Link: https://github.com/aroy89/bug-tracking-tools
 
 WIKI
 -----
-Overview: https://github.com/aroy-se/bug-tracking-tools/wiki
+Overview: https://github.com/aroy89/bug-tracking-tools/wiki
 
 Git: https://github.com/aroy89/bug-tracking-tools/wiki/Git-Setup-Wiki
 
